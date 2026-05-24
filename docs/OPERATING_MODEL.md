@@ -40,6 +40,8 @@ Sandbox validation expectations are defined in [Sandbox Validation](SANDBOX_VALI
 
 Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). The planned CLI may validate and report task state conceptually, but it must not mutate repository or GitHub state until implementation is separately approved.
 
+Future local task representation is defined in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). It serializes the task contract conceptually, but does not replace the task contract as the policy source.
+
 ## Risk Tiering
 
 Tasks are grouped by risk:

@@ -6,6 +6,8 @@ The task contract is the source format for safe Codex execution. It turns a requ
 
 This document is policy and documentation only. It does not implement a task parser, task YAML format, CLI command, worker, publisher, automation, or cleanup routine.
 
+The future local representation of this contract is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). The task contract remains the policy source; the local format is only a future representation.
+
 ## Required Task Fields
 
 Each task should define these fields before Codex begins work:
@@ -23,6 +25,8 @@ Each task should define these fields before Codex begins work:
 - Owner decision requirements: actions that require explicit owner approval before Codex proceeds.
 
 If any required field is missing for a non-trivial task, Codex should stop with `STOPPED_TASK_CONTRACT_INCOMPLETE`.
+
+Future local task files may serialize these fields, but no task YAML files, schemas, or parsers exist yet.
 
 ## Risk Tier Mapping
 
