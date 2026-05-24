@@ -26,6 +26,19 @@ Allowed files for the first docs-only proposal:
 
 Any other changed file triggers `STOPPED_FORBIDDEN_FILE_CHANGE`.
 
+## Task Contract Check
+
+Every future task should include the required fields from [Task Contract](TASK_CONTRACT.md):
+
+- Task title and objective.
+- Source-of-truth assumptions.
+- Scope and Non-goals.
+- Allowed files and Forbidden files/actions.
+- Validation plan and Stop conditions.
+- Risk tier and Owner decision requirements.
+
+If required task metadata is missing, stop with `STOPPED_TASK_CONTRACT_INCOMPLETE`.
+
 ## No Workflow Check
 
 The proposal must not create or modify workflow files, including GitHub Actions configuration.
@@ -65,3 +78,7 @@ Sandbox validation is defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Th
 - GitHub merge state is confirmed before cleanup.
 - Remote head branch cleanup is verified through GitHub settings or a stop state is reported.
 - Local branch/worktree cleanup completes without force delete.
+
+## PR Metadata Check
+
+PR bodies should include Scope, Non-goals, Allowed files, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations. Missing metadata triggers `STOPPED_PR_METADATA_INCOMPLETE`.

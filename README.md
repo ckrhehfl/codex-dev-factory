@@ -18,6 +18,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 ## Documents
 
 - [Vision](docs/VISION.md)
+- [Task Contract](docs/TASK_CONTRACT.md)
 - [Operating Model](docs/OPERATING_MODEL.md)
 - [Risk Policy](docs/RISK_POLICY.md)
 - [Acceptance Tests](docs/ACCEPTANCE_TESTS.md)
