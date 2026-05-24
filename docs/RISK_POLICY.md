@@ -16,6 +16,7 @@ A task is low-risk docs-only when all of these are true:
 A task is high-risk if it includes any of the following:
 
 - GitHub push, PR creation, merge, or branch deletion.
+- GitHub repository settings or branch protection changes that have not been verified and approved.
 - Workflow, bot, publisher, worker, monitor, or automation implementation.
 - Credential, secret, token, account, or deployment configuration handling.
 - Trading code, trading system integration, model promotion, risk cap, or order execution behavior.
@@ -31,6 +32,7 @@ Codex must stop for owner approval before:
 - Creating or updating PRs.
 - Merging.
 - Deleting branches.
+- Changing or relying on GitHub repository settings, branch protection, required checks, or auto-merge eligibility.
 - Connecting to external repositories.
 - Adding automation or implementation files.
 - Touching credentials or secret-related material.
@@ -65,3 +67,10 @@ Codex must stop and report the matching state if one is triggered:
 - `STOPPED_CREDENTIAL_OR_SECRET_CONTENT`
 - `STOPPED_EXISTING_REPO_ASSUMED_AS_SOURCE_OF_TRUTH`
 - `STOPPED_OWNER_DECISION_REQUIRED`
+- `STOPPED_GITHUB_SETTINGS_UNVERIFIED`
+- `STOPPED_BRANCH_PROTECTION_UNVERIFIED`
+- `STOPPED_REQUIRED_CHECKS_NOT_READY`
+- `STOPPED_BRANCH_NOT_MERGED`
+- `STOPPED_BRANCH_PROTECTED`
+- `STOPPED_LOCAL_WORKTREE_DIRTY`
+- `STOPPED_CLEANUP_UNSAFE_FORCE_REQUIRED`

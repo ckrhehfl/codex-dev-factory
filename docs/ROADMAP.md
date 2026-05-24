@@ -8,6 +8,8 @@ Confirm that this repository is the local control-plane candidate for the Codex-
 
 Create the initial documentation set: vision, operating model, risk policy, acceptance tests, and roadmap. Prove that the project can stay inside explicit allowed-file boundaries.
 
+Document the GitHub operating policy before adding implementation: repository settings, branch protection, merge preferences, required-check timing, and post-merge cleanup rules.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval, design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
@@ -32,9 +34,13 @@ Add read-oriented monitoring for proposal status after publisher behavior is app
 
 Define narrow eligibility rules for any future merge automation. This phase requires owner approval and strong safeguards before implementation.
 
+Required checks should be enabled only after real checks or workflows exist and have been sandbox-proven.
+
 ## Phase 8: Branch Cleanup
 
 Design cleanup policy for stale local and remote branches. No cleanup implementation should be added before the owner approves the policy and timing.
+
+Local cleanup should remain a human-approved post-merge prompt until branch cleanup automation is separately designed, sandbox-proven, and approved.
 
 ## Phase 9: Bounded Fix Loop
 

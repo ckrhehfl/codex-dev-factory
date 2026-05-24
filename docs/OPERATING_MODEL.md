@@ -53,6 +53,8 @@ Branch creation is allowed during local setup when requested. Branch deletion is
 
 PR creation is out of scope for the docs-first initialization.
 
+GitHub repository settings and PR policy are defined in [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md). That policy governs auto-merge settings, automatic remote head branch deletion, squash-only merge preference, branch protection, and required-check timing.
+
 The intended later lifecycle is:
 
 1. Prepare scoped branch.
@@ -71,3 +73,9 @@ After a future merge, the factory should check whether the task produced reusabl
 - Should a policy or checklist be updated?
 
 Lesson capture should remain documentation-only until the owner approves stronger automation.
+
+## Post-Merge Cleanup
+
+After a PR is merged, local branch and worktree cleanup should be performed only through the approved cleanup prompt. GitHub remote head branch deletion is handled by the repository setting for Automatically delete head branches.
+
+Cleanup must never delete `main`, `master`, `develop`, or `release/*`, must never use force delete, and must stop when the worktree is dirty or the target branch is not confirmed merged.
