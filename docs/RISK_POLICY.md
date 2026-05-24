@@ -20,7 +20,7 @@ A task is high-risk if it includes any of the following:
 - Merge or branch deletion.
 - GitHub repository settings or branch protection changes that have not been verified and approved.
 - Workflow, bot, publisher, worker, monitor, or automation implementation.
-- CLI implementation, task YAML files, or schemas created before the owner approves implementation.
+- CLI implementation, plan files, task YAML files, or schemas created before the owner approves implementation.
 - Credential, secret, token, account, or deployment configuration handling.
 - Trading code, trading system integration, model promotion, risk cap, or order execution behavior.
 - Changes that depend on an existing repository being treated as source of truth without revalidation.
@@ -51,6 +51,7 @@ The docs-first phase forbids:
 - Source code.
 - Scripts.
 - CLI implementation.
+- Plan files before the approved implementation phase.
 - Task YAML files or schemas before the approved implementation phase.
 - PR publisher implementation.
 - GitHub API write automation.
@@ -80,6 +81,9 @@ Codex must stop and report the matching state if one is triggered:
 - `STOPPED_SELF_REVIEW_FAILED`
 - `STOPPED_PHASE2_SCOPE_EXPANDED`
 - `STOPPED_LOCAL_TASK_FORMAT_SCOPE_EXPANDED`
+- `STOPPED_PLAN_OUTPUT_SCOPE_EXPANDED`
+- `STOPPED_SAFETY_FIELD_DROPPED`
+- `STOPPED_PLAN_FILE_CREATED_TOO_EARLY`
 - `STOPPED_CLI_IMPLEMENTATION_INCLUDED`
 - `STOPPED_TASK_YAML_CREATED_TOO_EARLY`
 - `STOPPED_SCHEMA_CREATED_TOO_EARLY`
