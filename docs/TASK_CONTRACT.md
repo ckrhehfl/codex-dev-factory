@@ -40,6 +40,8 @@ Medium-risk tooling or planning tasks:
 - Require an approved plan before implementation.
 - Must not write to external services unless separately approved.
 
+The Phase 2 local CLI skeleton is a planning example of this tier. Its contract is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md).
+
 High-risk automation or write-action tasks:
 
 - Include GitHub write automation, PR publishing, worker execution, branch cleanup automation, auto-merge behavior, repository settings changes, or external service writes.

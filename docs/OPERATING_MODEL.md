@@ -38,6 +38,8 @@ For docs-first work, allowed files should be narrow and explicit.
 
 Sandbox validation expectations are defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Sandbox tasks must prove the factory can run low-risk docs-only loops before any trading repository integration.
 
+Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). The planned CLI may validate and report task state conceptually, but it must not mutate repository or GitHub state until implementation is separately approved.
+
 ## Risk Tiering
 
 Tasks are grouped by risk:

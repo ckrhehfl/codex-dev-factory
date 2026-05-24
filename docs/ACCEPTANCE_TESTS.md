@@ -84,3 +84,7 @@ Sandbox validation is defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Th
 ## PR Metadata Check
 
 PR bodies should include Scope, Non-goals, Allowed files, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations. Missing metadata triggers `STOPPED_PR_METADATA_INCOMPLETE`.
+
+## Phase 2 CLI Skeleton Checks
+
+Phase 2 CLI skeleton work is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). Phase 2 docs may describe future command surfaces, but must not add CLI implementation, task YAML files, schemas, workflows, source code, or automation.

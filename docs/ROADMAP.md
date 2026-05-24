@@ -20,6 +20,8 @@ After owner approval, design a local CLI skeleton. This phase should still avoid
 
 Any future CLI task format should be derived from the task contract rather than invented separately.
 
+The Phase 2 CLI skeleton contract defines future command surfaces for `factory task validate`, `factory task plan`, and `factory status`. The contract is docs-only until implementation is separately approved.
+
 ## Phase 3: Worktree Harness
 
 Design isolated worktree handling for future task execution. This phase must preserve branch safety and avoid branch deletion automation until separately approved.
