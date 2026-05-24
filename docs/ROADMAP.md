@@ -16,6 +16,8 @@ Define the sandbox validation plan before adding automation. The candidate sandb
 
 Add a docs-only Compound knowledge base for durable post-merge lessons. Lesson capture remains advisory and reviewed through normal docs-only PRs before it becomes repository guidance.
 
+Define a solution lookup protocol so future policy and documentation tasks consult `docs/solutions/**` before planning and before commit.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval, design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.

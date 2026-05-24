@@ -8,6 +8,8 @@ These notes help future Codex runs find reusable workflow, policy, safety, and d
 
 Compound output is advisory. The repository source of truth remains the reviewed documentation that is merged through a docs-only PR.
 
+The [Solution Lookup Protocol](../SOLUTION_LOOKUP_PROTOCOL.md) defines when future tasks must search this knowledge base and how applicable lessons are reported.
+
 ## When to Add a Solution
 
 Add a solution when a review-fix or post-merge lesson reveals a reusable pattern, including:

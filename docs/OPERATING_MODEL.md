@@ -36,6 +36,8 @@ Each task should define:
 
 For docs-first work, allowed files should be narrow and explicit.
 
+Solution lookup expectations are defined in [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md). Policy and documentation tasks should consult `docs/solutions/**` during intake, before planning, before commit, and during matching review-fix classification.
+
 Sandbox validation expectations are defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Sandbox tasks must prove the factory can run low-risk docs-only loops before any trading repository integration.
 
 Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). The planned CLI may validate and report task state conceptually, but it must not mutate repository or GitHub state until implementation is separately approved.
@@ -72,14 +74,17 @@ GitHub repository settings and PR policy are defined in [GitHub Operating Policy
 
 PR metadata should follow the [Task Contract](TASK_CONTRACT.md): Scope, Non-goals, Allowed files, Forbidden files/actions when present, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations.
 
+When solution lookup is required, PR metadata should also include Solution lookup result, applicable solution entries, and how each lesson was applied.
+
 The standard docs-only lifecycle is:
 
 1. Prepare scoped branch.
-2. Generate bounded diff.
-3. Run acceptance checks.
-4. Run self-review.
-5. Commit, push, and publish a PR only if the task contract permits that flow.
-6. Keep merge separate unless explicitly requested.
+2. Run solution lookup when required by the task.
+3. Generate bounded diff.
+4. Run acceptance checks.
+5. Run self-review, including a hidden Unicode check for edited docs.
+6. Commit, push, and publish a PR only if the task contract permits that flow.
+7. Keep merge separate unless explicitly requested.
 
 ## Post-Merge Lesson Check
 

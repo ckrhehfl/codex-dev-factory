@@ -25,6 +25,8 @@ A task is high-risk if it includes any of the following:
 - Credential, secret, token, account, or deployment configuration handling.
 - Trading code, trading system integration, model promotion, risk cap, or order execution behavior.
 - Changes that depend on an existing repository being treated as source of truth without revalidation.
+- Skipping required solution lookup for policy or documentation tasks.
+- Hidden or bidirectional Unicode control characters in docs when not intentional.
 - Any irreversible or externally visible action.
 
 ## Owner Decision Required Cases
@@ -41,6 +43,7 @@ Codex must stop for owner approval before:
 - Adding automation or implementation files.
 - Touching credentials or secret-related material.
 - Treating a reference repository as source of truth.
+- Expanding task scope because of a solution lesson that was not part of the approved task contract.
 
 Low-risk docs-only commit, push, and PR creation may proceed without a second approval only when the task contract explicitly allows it and self-review passes. Merge remains separately gated.
 
@@ -63,6 +66,7 @@ The docs-first phase forbids:
 - Trading code or trading system integration.
 - Credential or secret content.
 - Compound automation or unreviewed knowledge-base writes outside allowed docs paths.
+- Hidden or bidirectional Unicode control characters in docs unless explicitly required and reviewed.
 
 ## Stop States
 
@@ -98,6 +102,10 @@ Codex must stop and report the matching state if one is triggered:
 - `STOPPED_STOP_STATE_SURFACE_MISMATCH`
 - `STOPPED_COMPOUND_SCOPE_UNVERIFIED`
 - `STOPPED_COMPOUND_ATTEMPTED_UNAPPROVED_WRITE`
+- `STOPPED_SOLUTION_LOOKUP_SKIPPED`
+- `STOPPED_SOLUTION_CONFLICTS_WITH_SCOPE`
+- `STOPPED_SOLUTION_REQUIRES_OWNER_DECISION`
+- `STOPPED_HIDDEN_UNICODE_FOUND`
 - `STOPPED_GITHUB_SETTINGS_UNVERIFIED`
 - `STOPPED_BRANCH_PROTECTION_UNVERIFIED`
 - `STOPPED_REQUIRED_CHECKS_NOT_READY`
