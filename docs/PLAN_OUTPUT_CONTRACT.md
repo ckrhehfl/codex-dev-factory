@@ -10,6 +10,8 @@ This PR is docs-only. It does not create plan files, task YAML files, schemas, p
 
 A plan is derived from a valid [Task Contract](TASK_CONTRACT.md). The plan must not weaken the task contract or silently narrow the safety checks that were present in the task.
 
+Future planning should consume only successful validation results described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md).
+
 The plan must preserve:
 
 - Scope.
@@ -58,9 +60,9 @@ Dropping safety fields triggers `STOPPED_SAFETY_FIELD_DROPPED`.
 
 The [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md) defines future command surfaces that may use this contract conceptually:
 
-- `factory task validate` may later check task completeness before planning.
+- `factory task validate` may later check task completeness and produce a validation result before planning.
 - `factory task plan` may later produce plan output that follows this contract.
-- `factory status` may later report task and plan state without mutating repository or GitHub state.
+- `factory status` may later report task, validation, and plan state without mutating repository or GitHub state.
 
 None of these commands are implemented here.
 

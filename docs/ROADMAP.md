@@ -24,6 +24,8 @@ The Phase 2 CLI skeleton contract defines future command surfaces for `factory t
 
 The local task format contract defines the future serialized representation of task contract fields. It remains docs-only until schemas, parsers, and CLI commands are separately approved.
 
+The task validation result contract defines the future result of `factory task validate`. It must report task completeness, risk tier, owner gates, stop conditions, allowed files, forbidden files, and forbidden actions before any implementation is approved.
+
 The plan output contract defines the future result of `factory task plan`. It must preserve allowed files, forbidden files, forbidden actions, validation plan, stop conditions, risk tier, and owner gates before any implementation is approved.
 
 ## Phase 3: Worktree Harness

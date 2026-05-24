@@ -41,7 +41,7 @@ If the format and task contract ever conflict, the task contract governs until t
 
 The [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md) defines future command surfaces that may use this format conceptually:
 
-- `factory task validate` may later validate whether the conceptual fields are present and complete.
+- `factory task validate` may later validate whether the conceptual fields are present and complete, then report the result using the [Task Validation Result Contract](TASK_VALIDATION_RESULT.md).
 - `factory task plan` may later turn a valid task into an execution plan that follows the [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) while preserving scope, non-goals, allowed files, forbidden files, forbidden actions, validation plan, stop conditions, risk tier, and owner decision requirements.
 - `factory status` may later report current task state when a local task representation exists.
 
