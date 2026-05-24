@@ -16,7 +16,8 @@ A task is low-risk docs-only when all of these are true:
 
 A task is high-risk if it includes any of the following:
 
-- GitHub push, PR creation, merge, or branch deletion.
+- GitHub push or PR creation that is not explicitly permitted by a low-risk docs-only task contract.
+- Merge or branch deletion.
 - GitHub repository settings or branch protection changes that have not been verified and approved.
 - Workflow, bot, publisher, worker, monitor, or automation implementation.
 - Credential, secret, token, account, or deployment configuration handling.
@@ -28,9 +29,9 @@ A task is high-risk if it includes any of the following:
 
 Codex must stop for owner approval before:
 
-- Creating commits.
-- Pushing to GitHub.
-- Creating or updating PRs.
+- Creating commits, unless a low-risk docs-only task contract explicitly permits commit after self-review.
+- Pushing to GitHub, unless a low-risk docs-only task contract explicitly permits push after self-review.
+- Creating or updating PRs, unless a low-risk docs-only task contract explicitly permits PR creation after self-review.
 - Merging.
 - Deleting branches.
 - Changing or relying on GitHub repository settings, branch protection, required checks, or auto-merge eligibility.

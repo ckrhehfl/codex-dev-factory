@@ -10,7 +10,7 @@ The first proposal must pass these local checks before any commit is considered:
 - No workflow files are present.
 - No credential or secret material is present.
 - The existing `institutional-futures-trader` repository is described only as a reference and lessons candidate.
-- Commit, push, PR creation, merge, and branch deletion are not performed without explicit owner approval.
+- Commit, push, PR creation, merge, and branch deletion are not performed without explicit owner approval for the first proposal.
 
 ## Allowed-Files Check
 
@@ -38,6 +38,8 @@ Every future task should include the required fields from [Task Contract](TASK_C
 - Risk tier and Owner decision requirements.
 
 If required task metadata is missing, stop with `STOPPED_TASK_CONTRACT_INCOMPLETE`.
+
+Low-risk docs-only tasks may commit, push, and create a PR after self-review only when the task contract explicitly allows that flow. Merge and branch deletion remain separate owner-approved actions.
 
 ## No Workflow Check
 
