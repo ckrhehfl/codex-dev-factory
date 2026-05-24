@@ -42,6 +42,8 @@ Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](PHASE2_
 
 Future local task representation is defined in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). It serializes the task contract conceptually, but does not replace the task contract as the policy source.
 
+Future validation result output is defined in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). It may report task completeness conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
+
 Future plan output is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). It may organize execution steps conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
 
 ## Risk Tiering
