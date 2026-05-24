@@ -58,19 +58,20 @@ Branch creation is allowed during local setup when requested. Branch deletion is
 
 ## PR Lifecycle
 
-PR creation is out of scope for the docs-first initialization.
+PR creation follows the task contract. Low-risk docs-only tasks may publish a PR after successful self-review when the task contract explicitly allows commit, push, and PR creation. Tasks without that explicit permission must stop for owner approval before PR creation.
 
 GitHub repository settings and PR policy are defined in [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md). That policy governs auto-merge settings, automatic remote head branch deletion, squash-only merge preference, branch protection, and required-check timing.
 
 PR metadata should follow the [Task Contract](TASK_CONTRACT.md): Scope, Non-goals, Allowed files, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations.
 
-The intended later lifecycle is:
+The standard docs-only lifecycle is:
 
 1. Prepare scoped branch.
 2. Generate bounded diff.
 3. Run acceptance checks.
-4. Ask owner for approval.
-5. Only after approval, publish a PR with clear scope and validation evidence.
+4. Run self-review.
+5. Commit, push, and publish a PR only if the task contract permits that flow.
+6. Keep merge separate unless explicitly requested.
 
 ## Post-Merge Lesson Check
 
