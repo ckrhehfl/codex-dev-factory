@@ -6,7 +6,7 @@ Phase 2 is local CLI skeleton planning before implementation. It defines the int
 
 This document is policy and design only. It does not implement CLI commands, create source code, create scripts, create task YAML files, create schemas, or add automation.
 
-The future local task representation is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Phase 2 commands may use that representation conceptually, but no task files, schemas, parser, or CLI implementation exist yet.
+The future local task representation is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). The future plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). Phase 2 commands may use those contracts conceptually, but no task files, plan files, schemas, parser, or CLI implementation exist yet.
 
 ## Planned Command Surfaces
 
@@ -53,14 +53,18 @@ Conceptually, it should preserve:
 - Scope.
 - Non-goals.
 - Allowed files.
+- Forbidden files.
+- Forbidden actions.
 - Validation plan.
 - Stop conditions.
 - Risk tier.
 - Owner decision requirements.
 
+The future plan output must preserve all safety fields from the task contract, including `forbidden_files` and `forbidden_actions`.
+
 It must stop if owner decision is required.
 
-It must not create branches, commits, PRs, GitHub writes, workflows, task files, schemas, or implementation artifacts.
+It must not create branches, commits, PRs, GitHub writes, workflows, task files, plan files, schemas, or implementation artifacts.
 
 ## `factory status`
 
@@ -74,7 +78,10 @@ Conceptually, it may report:
 - Working tree cleanliness.
 - Remote presence.
 - Current task state, if a task contract is available.
+- Current plan state, if a plan output exists in a later phase.
 - Whether known stop states are active.
+
+If status reports task or plan fields, it must not omit `forbidden_files` or `forbidden_actions`.
 
 It must not clean branches, prune worktrees, modify files, create commits, push, create PRs, or otherwise mutate local or remote state.
 
@@ -104,6 +111,7 @@ The Phase 2 CLI skeleton contract is acceptable when:
 - Planned commands are described clearly.
 - Planned inputs and outputs are conceptual.
 - Forbidden behaviors are explicit.
+- No plan files are created.
 - No task YAML files are created.
 - No schemas are created.
 - No source code is added.

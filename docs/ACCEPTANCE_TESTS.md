@@ -83,7 +83,7 @@ Sandbox validation is defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Th
 
 ## PR Metadata Check
 
-PR bodies should include Scope, Non-goals, Allowed files, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations. Missing metadata triggers `STOPPED_PR_METADATA_INCOMPLETE`.
+PR bodies should include Scope, Non-goals, Allowed files, Forbidden files/actions when present, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations. Missing metadata triggers `STOPPED_PR_METADATA_INCOMPLETE`.
 
 ## Phase 2 CLI Skeleton Checks
 
@@ -92,3 +92,9 @@ Phase 2 CLI skeleton work is defined in [Phase 2 CLI Skeleton Contract](PHASE2_C
 ## Local Task Format Checks
 
 Local task format work is defined in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Format docs may describe future fields, but must not add actual task YAML files, schema files, parser code, CLI implementation, source code, workflows, or automation.
+
+## Plan Output Contract Checks
+
+Plan output work is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). Plan docs may describe future output sections, but must not add actual plan files, task YAML files, schema files, parser code, CLI implementation, source code, workflows, or automation.
+
+Plan output must preserve safety-critical task fields. If `forbidden_files` or `forbidden_actions` disappear during task validation, planning, status reporting, or PR metadata drafting, stop with `STOPPED_SAFETY_FIELD_DROPPED`.

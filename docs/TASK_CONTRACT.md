@@ -6,7 +6,7 @@ The task contract is the source format for safe Codex execution. It turns a requ
 
 This document is policy and documentation only. It does not implement a task parser, task YAML format, CLI command, worker, publisher, automation, or cleanup routine.
 
-The future local representation of this contract is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). The task contract remains the policy source; the local format is only a future representation.
+The future local representation of this contract is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Future execution plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). The task contract remains the policy source; local formats and plans are only future representations.
 
 ## Required Task Fields
 
@@ -27,6 +27,8 @@ Each task should define these fields before Codex begins work:
 If any required field is missing for a non-trivial task, Codex should stop with `STOPPED_TASK_CONTRACT_INCOMPLETE`.
 
 Future local task files may serialize these fields, but no task YAML files, schemas, or parsers exist yet.
+
+Future plan output must preserve these fields without weakening safety boundaries. In particular, forbidden files and forbidden actions must remain visible whenever a task is transformed into a plan, reported as status, or converted into PR metadata.
 
 ## Risk Tier Mapping
 
@@ -67,6 +69,7 @@ Every PR body should include:
 - Scope.
 - Non-goals.
 - Allowed files.
+- Forbidden files/actions when present in the task or plan.
 - Validation plan.
 - Stop conditions.
 - Risk tier.

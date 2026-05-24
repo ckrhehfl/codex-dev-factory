@@ -42,6 +42,8 @@ Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](PHASE2_
 
 Future local task representation is defined in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). It serializes the task contract conceptually, but does not replace the task contract as the policy source.
 
+Future plan output is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). It may organize execution steps conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
+
 ## Risk Tiering
 
 Tasks are grouped by risk:
@@ -66,7 +68,7 @@ PR creation follows the task contract. Low-risk docs-only tasks may publish a PR
 
 GitHub repository settings and PR policy are defined in [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md). That policy governs auto-merge settings, automatic remote head branch deletion, squash-only merge preference, branch protection, and required-check timing.
 
-PR metadata should follow the [Task Contract](TASK_CONTRACT.md): Scope, Non-goals, Allowed files, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations.
+PR metadata should follow the [Task Contract](TASK_CONTRACT.md): Scope, Non-goals, Allowed files, Forbidden files/actions when present, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations.
 
 The standard docs-only lifecycle is:
 
