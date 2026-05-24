@@ -85,6 +85,8 @@ Sandbox validation is defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Th
 
 PR bodies should include Scope, Non-goals, Allowed files, Forbidden files/actions when present, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations. Missing metadata triggers `STOPPED_PR_METADATA_INCOMPLETE`.
 
+When solution lookup is required, PR bodies should include Solution lookup result, applicable solution entries, and how each applicable lesson was applied, or `No applicable solution found.`
+
 ## Phase 2 CLI Skeleton Checks
 
 Phase 2 CLI skeleton work is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). Phase 2 docs may describe future command surfaces, but must not add CLI implementation, task YAML files, schemas, workflows, source code, or automation.
@@ -112,3 +114,17 @@ Compound knowledge base work is defined in [Compound Knowledge Base](solutions/R
 Compound output is advisory. New or changed lessons become repository guidance only through reviewed docs-only PRs.
 
 If a lesson introduces or references a `STOPPED_*` code, compare it against the relevant local Stop States section and [Risk Policy](RISK_POLICY.md). Missing stop-state surface coverage triggers `STOPPED_STOP_STATE_SURFACE_MISMATCH`.
+
+## Solution Lookup Checks
+
+Solution lookup is defined in [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md). Required lookup must search `docs/solutions/**`, check AGENTS.md and [Compound Knowledge Base](solutions/README.md), and translate applicable lessons into self-review checks.
+
+If solution lookup is skipped when required, stop with `STOPPED_SOLUTION_LOOKUP_SKIPPED`.
+
+If an applicable lesson conflicts with current task scope or requires owner decision, stop with `STOPPED_SOLUTION_CONFLICTS_WITH_SCOPE` or `STOPPED_SOLUTION_REQUIRES_OWNER_DECISION`.
+
+## Hidden Unicode Check
+
+Docs-only self-review should check edited files for hidden or bidirectional Unicode control characters.
+
+If suspicious hidden Unicode is found and not intentional, stop with `STOPPED_HIDDEN_UNICODE_FOUND`.

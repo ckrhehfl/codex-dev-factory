@@ -23,3 +23,11 @@ Durable post-merge lessons belong under `docs/solutions/**`.
 Compound output is advisory, not source of truth. A lesson becomes repository policy only when captured through a reviewed docs-only PR.
 
 New or changed Compound lessons must stay inside the task's allowed docs-only paths. Do not let Compound write outside the approved scope.
+
+## Solution Lookup
+
+For policy or documentation tasks, consult `docs/solutions/**` during task intake, before planning, before commit, and during review-fix classification when feedback matches a known lesson.
+
+Report applicable lessons in PR metadata, or state `No applicable solution found.`
+
+Solution lookup is defined in [Solution Lookup Protocol](docs/SOLUTION_LOOKUP_PROTOCOL.md).
