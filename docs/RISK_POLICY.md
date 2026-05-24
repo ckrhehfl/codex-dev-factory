@@ -21,6 +21,7 @@ A task is high-risk if it includes any of the following:
 - GitHub repository settings or branch protection changes that have not been verified and approved.
 - Workflow, bot, publisher, worker, monitor, or automation implementation.
 - CLI implementation, validation result files, plan files, task YAML files, or schemas created before the owner approves implementation.
+- Compound writes outside an approved docs-only lesson scope.
 - Credential, secret, token, account, or deployment configuration handling.
 - Trading code, trading system integration, model promotion, risk cap, or order execution behavior.
 - Changes that depend on an existing repository being treated as source of truth without revalidation.
@@ -61,6 +62,7 @@ The docs-first phase forbids:
 - Discord bot implementation.
 - Trading code or trading system integration.
 - Credential or secret content.
+- Compound automation or unreviewed knowledge-base writes outside allowed docs paths.
 
 ## Stop States
 
@@ -93,6 +95,9 @@ Codex must stop and report the matching state if one is triggered:
 - `STOPPED_PARSER_IMPLEMENTED_TOO_EARLY`
 - `STOPPED_CODE_INCLUDED`
 - `STOPPED_FORBIDDEN_OR_AMBIGUOUS_FIELD`
+- `STOPPED_STOP_STATE_SURFACE_MISMATCH`
+- `STOPPED_COMPOUND_SCOPE_UNVERIFIED`
+- `STOPPED_COMPOUND_ATTEMPTED_UNAPPROVED_WRITE`
 - `STOPPED_GITHUB_SETTINGS_UNVERIFIED`
 - `STOPPED_BRANCH_PROTECTION_UNVERIFIED`
 - `STOPPED_REQUIRED_CHECKS_NOT_READY`

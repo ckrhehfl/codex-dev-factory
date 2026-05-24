@@ -15,6 +15,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - Task-contract approval gates for commit, push, and PR creation.
 - Explicit owner approval before merge or branch deletion.
 - Sandbox-first validation before any connection to external repositories or higher-risk systems.
+- Durable post-merge lessons captured as docs-only knowledge base entries.
 
 ## Documents
 
@@ -28,4 +29,5 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Risk Policy](docs/RISK_POLICY.md)
 - [Acceptance Tests](docs/ACCEPTANCE_TESTS.md)
 - [Sandbox Validation](docs/SANDBOX_VALIDATION.md)
+- [Compound Knowledge Base](docs/solutions/README.md)
 - [Roadmap](docs/ROADMAP.md)

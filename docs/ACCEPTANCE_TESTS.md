@@ -104,3 +104,11 @@ Validation result output must preserve safety-critical task fields. If `forbidde
 Plan output work is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). Plan docs may describe future output sections, but must not add actual plan files, task YAML files, schema files, parser code, CLI implementation, source code, workflows, or automation.
 
 Plan output must preserve safety-critical task fields. If `forbidden_files` or `forbidden_actions` disappear during task validation, planning, status reporting, or PR metadata drafting, stop with `STOPPED_SAFETY_FIELD_DROPPED`.
+
+## Compound Knowledge Base Checks
+
+Compound knowledge base work is defined in [Compound Knowledge Base](solutions/README.md). It may add docs-only lesson files under `docs/solutions/**`, but must not add source code, scripts, workflows, automation, or files outside the task's allowed paths.
+
+Compound output is advisory. New or changed lessons become repository guidance only through reviewed docs-only PRs.
+
+If a lesson introduces or references a `STOPPED_*` code, compare it against the relevant local Stop States section and [Risk Policy](RISK_POLICY.md). Missing stop-state surface coverage triggers `STOPPED_STOP_STATE_SURFACE_MISMATCH`.

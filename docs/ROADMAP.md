@@ -14,6 +14,8 @@ Document the GitHub operating policy before adding implementation: repository se
 
 Define the sandbox validation plan before adding automation. The candidate sandbox repository is `codex-dev-factory-sandbox`, with a candidate local clone path of `C:\Dev\codex-dev-factory-sandbox`.
 
+Add a docs-only Compound knowledge base for durable post-merge lessons. Lesson capture remains advisory and reviewed through normal docs-only PRs before it becomes repository guidance.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval, design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.

@@ -92,6 +92,12 @@ After a future merge, the factory should check whether the task produced reusabl
 
 Lesson capture should remain documentation-only until the owner approves stronger automation.
 
+Durable post-merge lessons may be captured in the [Compound Knowledge Base](solutions/README.md) through a separate docs-only PR. Compound output is advisory until reviewed and merged.
+
+Review-fix lessons should identify whether the issue was missing task detail, incomplete metadata, unclear stop conditions, cross-document consistency, wording, reviewer preference, or no durable lesson.
+
+New lesson files must stay inside the task's allowed docs-only paths and must not let Compound write outside the approved scope.
+
 ## Post-Merge Cleanup
 
 After a PR is merged, local branch and worktree cleanup should be performed only through the approved cleanup prompt. GitHub remote head branch deletion is handled by the repository setting for Automatically delete head branches.
