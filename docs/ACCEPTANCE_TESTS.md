@@ -54,3 +54,14 @@ Before future publication or merge work, define a local cleanup checklist that c
 - Validation commands.
 - Diff review.
 - Owner approval record.
+
+## Sandbox Validation Checks
+
+Sandbox validation is defined in [Sandbox Validation](SANDBOX_VALIDATION.md). The first sandbox loop must stay docs-only and verify:
+
+- PR metadata includes Scope, Non-goals, Allowed files, Validation plan, and Stop conditions.
+- Changed files stay inside the allowed-file list.
+- No workflow, implementation, credential, secret, trading logic, or live trading boundary change is introduced.
+- GitHub merge state is confirmed before cleanup.
+- Remote head branch cleanup is verified through GitHub settings or a stop state is reported.
+- Local branch/worktree cleanup completes without force delete.
