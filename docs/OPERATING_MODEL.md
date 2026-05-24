@@ -33,6 +33,8 @@ Each task should define:
 
 For docs-first work, allowed files should be narrow and explicit.
 
+Sandbox validation expectations are defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Sandbox tasks must prove the factory can run low-risk docs-only loops before any trading repository integration.
+
 ## Risk Tiering
 
 Tasks are grouped by risk:
@@ -79,3 +81,5 @@ Lesson capture should remain documentation-only until the owner approves stronge
 After a PR is merged, local branch and worktree cleanup should be performed only through the approved cleanup prompt. GitHub remote head branch deletion is handled by the repository setting for Automatically delete head branches.
 
 Cleanup must never delete `main`, `master`, `develop`, or `release/*`, must never use force delete, and must stop when the worktree is dirty or the target branch is not confirmed merged.
+
+In the sandbox, cleanup verification is part of the first validation loop and must be confirmed before the loop is considered accepted.

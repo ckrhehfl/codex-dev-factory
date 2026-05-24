@@ -10,6 +10,8 @@ Create the initial documentation set: vision, operating model, risk policy, acce
 
 Document the GitHub operating policy before adding implementation: repository settings, branch protection, merge preferences, required-check timing, and post-merge cleanup rules.
 
+Define the sandbox validation plan before adding automation. The candidate sandbox repository is `codex-dev-factory-sandbox`, with a candidate local clone path of `C:\Dev\codex-dev-factory-sandbox`.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval, design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
@@ -21,6 +23,8 @@ Design isolated worktree handling for future task execution. This phase must pre
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
+
+Worker connection must wait until the sandbox validation loop has proven docs-only PR creation, merge verification, remote branch cleanup, local cleanup, and lesson-check decisions.
 
 ## Phase 5: Publisher MVP
 
@@ -53,3 +57,5 @@ Consider a read-only Discord projection for status visibility. It must not accep
 ## Phase 11: Trading Base Deep Research
 
 Research lessons from trading-related repositories and workflows without treating any existing repository as source of truth. This phase is research only until the owner explicitly approves a separate scope.
+
+Trading repository integration must not begin until sandbox validation has completed and the owner approves a separate high-risk scope.
