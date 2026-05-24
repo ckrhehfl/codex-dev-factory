@@ -88,3 +88,7 @@ PR bodies should include Scope, Non-goals, Allowed files, Validation plan, Stop 
 ## Phase 2 CLI Skeleton Checks
 
 Phase 2 CLI skeleton work is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). Phase 2 docs may describe future command surfaces, but must not add CLI implementation, task YAML files, schemas, workflows, source code, or automation.
+
+## Local Task Format Checks
+
+Local task format work is defined in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Format docs may describe future fields, but must not add actual task YAML files, schema files, parser code, CLI implementation, source code, workflows, or automation.

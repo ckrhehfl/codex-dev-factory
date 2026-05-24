@@ -20,6 +20,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 
 - [Vision](docs/VISION.md)
 - [Task Contract](docs/TASK_CONTRACT.md)
+- [Local Task Format](docs/LOCAL_TASK_FORMAT.md)
 - [Phase 2 CLI Skeleton](docs/PHASE2_CLI_SKELETON.md)
 - [Operating Model](docs/OPERATING_MODEL.md)
 - [Risk Policy](docs/RISK_POLICY.md)

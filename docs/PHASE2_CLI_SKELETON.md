@@ -6,6 +6,8 @@ Phase 2 is local CLI skeleton planning before implementation. It defines the int
 
 This document is policy and design only. It does not implement CLI commands, create source code, create scripts, create task YAML files, create schemas, or add automation.
 
+The future local task representation is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Phase 2 commands may use that representation conceptually, but no task files, schemas, parser, or CLI implementation exist yet.
+
 ## Planned Command Surfaces
 
 The first planned command surfaces are:
@@ -19,6 +21,8 @@ These names describe future local command behavior. They are not implemented in 
 ## `factory task validate`
 
 `factory task validate` is intended to validate future task contract completeness.
+
+If a local task representation exists in a later phase, this command may validate it against the conceptual fields in the local task format contract.
 
 Conceptually, it should check whether a task includes:
 
@@ -42,6 +46,8 @@ It must not execute Codex, modify files, create branches, create commits, push t
 
 `factory task plan` is intended to produce an execution plan from a valid task contract.
 
+If a local task representation exists in a later phase, this command may preserve the serialized task fields while producing the plan.
+
 Conceptually, it should preserve:
 
 - Scope.
@@ -59,6 +65,8 @@ It must not create branches, commits, PRs, GitHub writes, workflows, task files,
 ## `factory status`
 
 `factory status` is intended to summarize local repo and task state.
+
+If a local task representation exists in a later phase, this command may report whether a task is present, valid, incomplete, or blocked by a stop state.
 
 Conceptually, it may report:
 

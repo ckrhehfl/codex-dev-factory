@@ -22,6 +22,8 @@ Any future CLI task format should be derived from the task contract rather than 
 
 The Phase 2 CLI skeleton contract defines future command surfaces for `factory task validate`, `factory task plan`, and `factory status`. The contract is docs-only until implementation is separately approved.
 
+The local task format contract defines the future serialized representation of task contract fields. It remains docs-only until schemas, parsers, and CLI commands are separately approved.
+
 ## Phase 3: Worktree Harness
 
 Design isolated worktree handling for future task execution. This phase must preserve branch safety and avoid branch deletion automation until separately approved.
