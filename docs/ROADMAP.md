@@ -8,6 +8,8 @@ Confirm that this repository is the local control-plane candidate for the Codex-
 
 Create the initial documentation set: vision, operating model, risk policy, acceptance tests, and roadmap. Prove that the project can stay inside explicit allowed-file boundaries.
 
+Define the task contract and PR metadata standard so low-risk docs-only tasks can proceed after self-review without a second commit approval when explicitly allowed.
+
 Document the GitHub operating policy before adding implementation: repository settings, branch protection, merge preferences, required-check timing, and post-merge cleanup rules.
 
 Define the sandbox validation plan before adding automation. The candidate sandbox repository is `codex-dev-factory-sandbox`, with a candidate local clone path of `C:\Dev\codex-dev-factory-sandbox`.
@@ -15,6 +17,8 @@ Define the sandbox validation plan before adding automation. The candidate sandb
 ## Phase 2: Local CLI Skeleton
 
 After owner approval, design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
+
+Any future CLI task format should be derived from the task contract rather than invented separately.
 
 ## Phase 3: Worktree Harness
 

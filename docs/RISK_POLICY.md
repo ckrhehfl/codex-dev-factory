@@ -10,12 +10,14 @@ A task is low-risk docs-only when all of these are true:
 - It does not handle credentials, secrets, tokens, or account configuration.
 - It does not alter trading-related systems or decision logic.
 - It ends with visible local status and diff for owner review.
+- Its task contract explicitly permits commit, push, and PR creation after self-review if those actions are requested.
 
 ## High-Risk Criteria
 
 A task is high-risk if it includes any of the following:
 
-- GitHub push, PR creation, merge, or branch deletion.
+- GitHub push or PR creation that is not explicitly permitted by a low-risk docs-only task contract.
+- Merge or branch deletion.
 - GitHub repository settings or branch protection changes that have not been verified and approved.
 - Workflow, bot, publisher, worker, monitor, or automation implementation.
 - Credential, secret, token, account, or deployment configuration handling.
@@ -27,9 +29,9 @@ A task is high-risk if it includes any of the following:
 
 Codex must stop for owner approval before:
 
-- Creating commits.
-- Pushing to GitHub.
-- Creating or updating PRs.
+- Creating commits, unless a low-risk docs-only task contract explicitly permits commit after self-review.
+- Pushing to GitHub, unless a low-risk docs-only task contract explicitly permits push after self-review.
+- Creating or updating PRs, unless a low-risk docs-only task contract explicitly permits PR creation after self-review.
 - Merging.
 - Deleting branches.
 - Changing or relying on GitHub repository settings, branch protection, required checks, or auto-merge eligibility.
@@ -37,6 +39,8 @@ Codex must stop for owner approval before:
 - Adding automation or implementation files.
 - Touching credentials or secret-related material.
 - Treating a reference repository as source of truth.
+
+Low-risk docs-only commit, push, and PR creation may proceed without a second approval only when the task contract explicitly allows it and self-review passes. Merge remains separately gated.
 
 ## Forbidden Areas
 
@@ -67,6 +71,10 @@ Codex must stop and report the matching state if one is triggered:
 - `STOPPED_CREDENTIAL_OR_SECRET_CONTENT`
 - `STOPPED_EXISTING_REPO_ASSUMED_AS_SOURCE_OF_TRUTH`
 - `STOPPED_OWNER_DECISION_REQUIRED`
+- `STOPPED_TASK_CONTRACT_INCOMPLETE`
+- `STOPPED_SOURCE_OF_TRUTH_UNVERIFIED`
+- `STOPPED_PR_METADATA_INCOMPLETE`
+- `STOPPED_SELF_REVIEW_FAILED`
 - `STOPPED_GITHUB_SETTINGS_UNVERIFIED`
 - `STOPPED_BRANCH_PROTECTION_UNVERIFIED`
 - `STOPPED_REQUIRED_CHECKS_NOT_READY`

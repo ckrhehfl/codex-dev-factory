@@ -2,15 +2,18 @@
 
 ## Task Intake
 
-Every task starts with a short intake record:
+Every task starts with the [Task Contract](TASK_CONTRACT.md), a short intake record:
 
-- Requested outcome.
-- Current source of truth and what still needs revalidation.
+- Task title and objective.
+- Source-of-truth assumptions and what still needs revalidation.
 - Scope.
 - Non-goals.
 - Allowed files.
+- Forbidden files/actions.
 - Validation plan.
 - Stop conditions.
+- Risk tier.
+- Owner decision requirements.
 
 If any intake item is missing or ambiguous for a risky task, Codex stops for an owner decision.
 
@@ -45,6 +48,8 @@ Tasks are grouped by risk:
 
 Low-risk tasks can proceed locally when scope is clear. Medium-risk tasks need an approved plan. High-risk tasks require explicit owner decisions before execution.
 
+Low-risk docs-only tasks may proceed through commit, push, and PR creation after successful self-review when the task contract explicitly allows that flow. Merge remains separate unless explicitly requested.
+
 ## Branch Lifecycle
 
 Work should happen on a purpose-named branch. The branch name should describe the proposal and avoid implying merge readiness.
@@ -53,17 +58,20 @@ Branch creation is allowed during local setup when requested. Branch deletion is
 
 ## PR Lifecycle
 
-PR creation is out of scope for the docs-first initialization.
+PR creation follows the task contract. Low-risk docs-only tasks may publish a PR after successful self-review when the task contract explicitly allows commit, push, and PR creation. Tasks without that explicit permission must stop for owner approval before PR creation.
 
 GitHub repository settings and PR policy are defined in [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md). That policy governs auto-merge settings, automatic remote head branch deletion, squash-only merge preference, branch protection, and required-check timing.
 
-The intended later lifecycle is:
+PR metadata should follow the [Task Contract](TASK_CONTRACT.md): Scope, Non-goals, Allowed files, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations.
+
+The standard docs-only lifecycle is:
 
 1. Prepare scoped branch.
 2. Generate bounded diff.
 3. Run acceptance checks.
-4. Ask owner for approval.
-5. Only after approval, publish a PR with clear scope and validation evidence.
+4. Run self-review.
+5. Commit, push, and publish a PR only if the task contract permits that flow.
+6. Keep merge separate unless explicitly requested.
 
 ## Post-Merge Lesson Check
 

@@ -12,12 +12,14 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 
 - Docs-first local initialization.
 - Branch-based proposal workflow.
-- Explicit owner approval before commit, push, PR creation, merge, or branch deletion.
+- Task-contract approval gates for commit, push, and PR creation.
+- Explicit owner approval before merge or branch deletion.
 - Sandbox-first validation before any connection to external repositories or higher-risk systems.
 
 ## Documents
 
 - [Vision](docs/VISION.md)
+- [Task Contract](docs/TASK_CONTRACT.md)
 - [Operating Model](docs/OPERATING_MODEL.md)
 - [Risk Policy](docs/RISK_POLICY.md)
 - [Acceptance Tests](docs/ACCEPTANCE_TESTS.md)
