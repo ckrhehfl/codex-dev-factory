@@ -6,13 +6,15 @@ This document is the owner decision record and approval template for future sand
 
 It records the decisions required before any later task may create, configure, reuse, or locally clone the sandbox repository candidate.
 
-This is a documentation template only. This PR does not create or configure the sandbox repository, run actual sandbox validation, create evidence from a real sandbox run, implement CLI behavior, implement automation, perform GitHub writes, implement PR publisher behavior, implement branch cleanup automation, create workflows, add Discord integration, touch trading code, add credentials, add risk cap logic, or add model promotion logic.
+This is a documentation record only. This PR does not create or configure the sandbox repository, run actual sandbox validation, create evidence from a real sandbox run, implement CLI behavior, implement automation, perform GitHub writes, implement PR publisher behavior, implement branch cleanup automation, create workflows, add Discord integration, touch trading code, add credentials, add risk cap logic, or add model promotion logic.
 
 ## Current Decision Status
 
-Overall status: `owner_decision_required`.
+Overall status: `owner_approved_pending_creation_authorization`.
 
-This record must not be treated as `ready_to_create` until the owner supplies and approves all required decisions, and any required source-of-truth facts are verified by the future creation task.
+The owner-approved values below were supplied in the owner task prompt for this docs-only PR. They are owner decisions, not evidence that the sandbox repository exists, that GitHub settings are configured, or that a future creation task is authorized to proceed automatically.
+
+This record must not be treated as `ready_to_create` until a later task explicitly authorizes sandbox repository creation or reuse, and any required source-of-truth facts are verified by that future creation task.
 
 This record distinguishes:
 
@@ -25,74 +27,78 @@ This record distinguishes:
 
 | Field | Proposed value | Owner-approved value | Verified evidence | Remaining `확인 필요` |
 | --- | --- | --- | --- | --- |
-| Repository owner or organization | `ckrhehfl` | Owner decision required | Not verified by this document | Confirm owner/org in future creation task |
-| Repository name | `codex-dev-factory-sandbox` | Owner decision required | Not verified by this document | Confirm final name before creation |
-| Full repository identity | `ckrhehfl/codex-dev-factory-sandbox` | Owner decision required | Not verified by this document | Verify existence or non-existence with authenticated tooling |
-| Repository existence | `확인 필요` | Owner decision required if existing | Not verified by this document | Verify during future creation task |
+| Repository owner or organization | `ckrhehfl` | `ckrhehfl` | Owner-approved by this task prompt; not verified as GitHub permissions evidence | Confirm owner/org and permissions in future creation task |
+| Repository name | `codex-dev-factory-sandbox` | `codex-dev-factory-sandbox` | Owner-approved by this task prompt; not verified as repository existence evidence | Confirm final name before creation |
+| Full repository identity | `ckrhehfl/codex-dev-factory-sandbox` | `ckrhehfl/codex-dev-factory-sandbox` | Owner-approved by this task prompt; not verified as repository existence evidence | Verify existence or non-existence with authenticated tooling |
+| Repository existence | `확인 필요` | Stop and ask owner if target already exists | Not verified by this document | Verify during future creation task |
 
 Do not infer repository existence, ownership, permissions, settings, branch protection, required checks, default branch, or workflow state from the candidate identity.
 
 ## Required Owner Decisions
 
-The owner should complete this table before any future creation task creates or reuses a sandbox repository.
+This table records the owner-approved values that a future creation task may use after that later task explicitly authorizes sandbox repository creation or reuse.
 
 | Decision | Proposed safe value | Owner-approved value | Verified evidence | Remaining `확인 필요` |
 | --- | --- | --- | --- | --- |
-| Final repository owner or organization | `ckrhehfl` candidate | Owner decision required | Not verified by this document | Confirm owner/org and permissions |
-| Final repository name | `codex-dev-factory-sandbox` candidate | Owner decision required | Not verified by this document | Confirm final repo name |
-| Visibility | Owner choice | Owner decision required | Not verified by this document | Choose public or private |
-| Initialize with README or empty | Owner choice | Owner decision required | Not verified by this document | Choose README or empty initialization |
-| License choice | Owner choice | Owner decision required | Not verified by this document | Choose license or explicitly choose no license |
-| Default branch name | `main` candidate | Owner decision required | Not verified by this document | Confirm default branch |
-| Allowed merge methods | Owner choice | Owner decision required | Not verified by this document | Decide squash, merge commit, rebase, or subset |
-| Auto-merge setting | Disabled or deferred until sandbox-proven | Owner decision required | Not verified by this document | Confirm whether enabled, disabled, or deferred |
-| Automatically delete head branches | Enable if owner approves and setting is verified | Owner decision required | Not verified by this document | Confirm setting with authenticated tooling |
-| Branch protection expectation | Absent or minimal until real checks exist | Owner decision required | Not verified by this document | Confirm protection stance |
-| Required checks expectation | No required checks until real checks exist | Owner decision required | Not verified by this document | Confirm required-check stance |
-| GitHub Actions or workflow stance | Absent or disabled at first | Owner decision required | Not verified by this document | Confirm workflow boundary |
-| Initial content policy | Empty or docs-only | Owner decision required | Not verified by this document | Choose empty, docs-only, or minimal fixture |
-| Who may create/configure repo | Owner or explicitly authorized actor | Owner decision required | Not verified by this document | Confirm actor and permissions |
-| Reuse if target already exists | Stop unless reuse is explicitly approved | Owner decision required | Not verified by this document | Decide reuse or alternate identity |
-| Local clone after creation | Allowed only if explicitly approved | Owner decision required | Not verified by this document | Decide whether future creation task may clone locally |
-| Initial docs-only fixture content | Excluded unless explicitly approved | Owner decision required | Not verified by this document | Decide whether creation task may add fixture content |
-| Actual sandbox validation in creation task | Excluded by default | Owner decision required | Not verified by this document | Confirm validation is excluded or separately scoped |
+| Final repository owner or organization | `ckrhehfl` candidate | `ckrhehfl` | Owner-approved by this task prompt; permissions not verified | Confirm owner/org and permissions |
+| Final repository name | `codex-dev-factory-sandbox` candidate | `codex-dev-factory-sandbox` | Owner-approved by this task prompt; existence not verified | Confirm target repository existence or non-existence |
+| Full repository identity | `ckrhehfl/codex-dev-factory-sandbox` candidate | `ckrhehfl/codex-dev-factory-sandbox` | Owner-approved by this task prompt; existence not verified | Verify with authenticated tooling in future creation task |
+| Visibility | Owner choice | `public` | Owner-approved by this task prompt; setting not configured by this PR | Verify after creation or reuse |
+| Initialize with README or empty | Owner choice | Initialize with README | Owner-approved by this task prompt; repository not created by this PR | Verify initial files after creation |
+| License choice | Owner choice | No license for now | Owner-approved by this task prompt; repository not created by this PR | Verify license state after creation |
+| Default branch name | `main` candidate | `main` | Owner-approved by this task prompt; branch not created by this PR | Verify default branch after creation |
+| Allowed merge methods | Owner choice | Squash merge only | Owner-approved by this task prompt; setting not configured by this PR | Verify setting with authenticated tooling |
+| Auto-merge setting | Disabled or deferred until sandbox-proven | Disabled for now | Owner-approved by this task prompt; setting not configured by this PR | Verify setting with authenticated tooling |
+| Automatically delete head branches | Enable if owner approves and setting is verified | Enabled | Owner-approved by this task prompt; setting not configured by this PR | Verify setting with authenticated tooling |
+| Branch protection expectation | Absent or minimal until real checks exist | Desired, but `확인 필요` until authenticated settings check | Owner-approved expectation; not configured or verified by this PR | Verify branch protection after creation or configuration task |
+| Required checks expectation | No required checks until real checks exist | None at creation time; `확인 필요` later | Owner-approved by this task prompt; not configured or verified by this PR | Verify required checks after creation if needed |
+| GitHub Actions or workflow stance | Absent or disabled at first | Absent; do not add workflows yet | Owner-approved by this task prompt; no workflows created by this PR | Verify no workflows if future task needs that evidence |
+| Initial content policy | Empty or docs-only | Docs-only minimal fixture | Owner-approved by this task prompt; fixture not created by this PR | Verify initial files after creation |
+| Who may create/configure repo | Owner or explicitly authorized actor | Owner-approved future Codex/GitHub-authenticated task | Owner-approved by this task prompt; authentication not verified by this PR | Verify auth and permissions before creation |
+| Reuse if target already exists | Stop unless reuse is explicitly approved | Stop and ask owner if the target repo already exists | Owner-approved by this task prompt; existence not verified | Verify target existence before creation |
+| Local clone after creation | Allowed only if explicitly approved | Allowed only if necessary and freshly verified | Owner-approved by this task prompt; no clone performed by this PR | Verify local clone path only if needed in future task |
+| Initial docs-only fixture content | Excluded unless explicitly approved | Allowed as docs-only minimal fixture | Owner-approved by this task prompt; no fixture created by this PR | Verify fixture scope before adding content |
+| Actual sandbox validation in creation task | Excluded by default | Excluded unless separately approved | Owner-approved by this task prompt; no validation run by this PR | Require separate approval before validation |
+| Credentials, secrets, trading, automation, and workflows | Forbidden | Forbidden | Owner-approved by this task prompt; no such content added by this PR | Re-check in future creation and validation tasks |
 
 ## Recommended Safe Defaults
 
-Recommended defaults until the owner decides otherwise:
+Recommended defaults after this approval:
 
 - Keep actual sandbox validation out of the creation task unless separately approved.
 - Keep GitHub Actions workflows absent or disabled unless separately approved.
-- Keep initial content empty or docs-only.
+- Keep initial content docs-only and minimal.
 - Keep credentials, secrets, tokens, API keys, trading code, trading repository connections, automation implementation, PR publisher behavior, branch cleanup automation, risk cap logic, and model promotion logic out of scope.
 - Keep GitHub settings that require authenticated verification marked `확인 필요` until checked.
 - Keep required checks absent until real checks or workflows exist.
 - Stop if the target repository already exists and reuse is not explicitly approved.
 
-## Future Approval Format
+## Current Approval Record
 
-When the owner approves sandbox repository creation or reuse, use a short record like:
+The owner-approved values for this decision record are:
 
 ```text
 Owner-approved sandbox repository decisions:
-- owner/org:
-- repo name:
-- visibility:
-- initialize with README or empty:
-- license:
-- default branch:
-- allowed merge methods:
-- auto-merge:
-- automatically delete head branches:
-- branch protection:
-- required checks:
-- GitHub Actions/workflows:
-- initial content policy:
-- creator/configurer:
-- existing repo reuse:
-- local clone allowed:
-- initial docs-only fixture allowed:
-- actual sandbox validation excluded from creation task:
+- owner/org: ckrhehfl
+- repo name: codex-dev-factory-sandbox
+- full repo identity: ckrhehfl/codex-dev-factory-sandbox
+- visibility: public
+- initialize with README or empty: initialize with README
+- license: no license for now
+- default branch: main
+- allowed merge methods: squash merge only
+- auto-merge: disabled for now
+- automatically delete head branches: enabled
+- branch protection: desired, but 확인 필요 until authenticated settings check
+- required checks: none at creation time, 확인 필요 later
+- GitHub Actions/workflows: absent; do not add workflows yet
+- initial content policy: docs-only minimal fixture
+- creator/configurer: owner-approved future Codex/GitHub-authenticated task
+- existing repo reuse: stop and ask owner if the target repo already exists
+- local clone allowed: allowed only if necessary and freshly verified
+- initial docs-only fixture allowed: allowed as docs-only minimal fixture
+- actual sandbox validation excluded from creation task: excluded unless separately approved
+- credentials/secrets/trading/automation/workflows: forbidden
 ```
 
 The future task should then capture verification evidence separately. Prefer portable verification commands and source categories over machine-specific paths. If an exact local path is required, the future task must freshly verify it and mark it as environment-specific.
@@ -100,6 +106,8 @@ The future task should then capture verification evidence separately. Prefer por
 ## Relationship to Creation Runbook
 
 The [Sandbox Repository Creation Runbook](SANDBOX_REPOSITORY_CREATION_RUNBOOK.md) may be executed only after this decision record is completed and owner-approved, or after the owner supplies the equivalent decisions directly in the future creation task.
+
+This record now captures owner-approved creation decision values, but it still does not authorize creation by itself. A future sandbox repository creation task must explicitly authorize creation or reuse and must verify the required source-of-truth facts before acting.
 
 The future creation task must capture creation or reuse evidence. This decision record is not evidence that the sandbox repository exists, that settings are configured, or that validation has run.
 
@@ -173,8 +181,8 @@ Dropping safety fields is a stop condition.
 
 After this PR, the owner may either:
 
-- Fill and approve this decision record in a later docs-only PR.
-- Explicitly authorize a sandbox repository creation task with all required decisions supplied in the task.
+- Explicitly authorize a sandbox repository creation task using the owner-approved values recorded here.
+- Request a later docs-only update if any owner-approved value changes before creation.
 
 This document does not authorize creation by itself.
 
