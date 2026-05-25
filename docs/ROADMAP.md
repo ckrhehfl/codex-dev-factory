@@ -38,6 +38,8 @@ The factory status result contract defines the future result of `factory status`
 
 The PR metadata guard contract defines future checks for PR title/body completeness, required metadata sections, source-of-truth reporting, solution lookup reporting, validation reporting, risk tier, stop conditions, safety fields, and owner-controlled merge notes before any implementation is approved.
 
+The allowed-files guard contract defines future checks for changed files against allowed files, forbidden files, forbidden actions, task scope, validation plan, risk tier, stop conditions, and owner gates before any implementation is approved.
+
 ## Phase 3: Worktree Harness
 
 Design isolated worktree handling for future task execution. This phase must preserve branch safety and avoid branch deletion automation until separately approved.

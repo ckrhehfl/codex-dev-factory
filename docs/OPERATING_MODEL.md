@@ -50,6 +50,8 @@ Future plan output is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md)
 
 Future factory status output is defined in [Factory Status Result Contract](FACTORY_STATUS_RESULT.md). It may summarize local repo, task, lifecycle, PR, validation, risk, stop, unknown, and owner-action state conceptually, but it must not mutate repository or GitHub state.
 
+Future allowed-files guard output is defined in [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). It may compare changed files against task boundaries conceptually, but it must not edit files, stage changes, commit, push, create PRs, merge, or clean branches.
+
 The canonical docs-only task lifecycle is defined in [Task Lifecycle State Model](TASK_LIFECYCLE.md). It describes how a task moves from owner intent through task contract, branch work, PR creation, review-fix loop, merge, cleanup, and post-merge lesson handling.
 
 ## Risk Tiering

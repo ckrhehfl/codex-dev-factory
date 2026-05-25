@@ -52,6 +52,8 @@ Future plan output should include these sections:
 
 Future PR metadata draft checks are defined in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). Planning must preserve enough metadata for that guard to verify title/body completeness without dropping safety fields.
 
+Future changed-file boundary checks are defined in [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). Planning must preserve allowed and forbidden file boundaries so review-fix and pre-commit checks can compare actual changed files against the task contract.
+
 ## Safety Field Preservation
 
 `forbidden_files` and `forbidden_actions` are first-class safety fields. They must be preserved whenever a task is validated, planned, reported, or converted into PR metadata.
