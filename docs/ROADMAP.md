@@ -34,6 +34,8 @@ Define the [Sandbox Repository Creation Runbook](SANDBOX_REPOSITORY_CREATION_RUN
 
 Record sandbox repository owner decisions in [Sandbox Repository Owner Decisions](SANDBOX_REPOSITORY_OWNER_DECISIONS.md) before any future task creates or reuses the sandbox repository.
 
+Define the [Sandbox Repository Initial Fixture Contract](SANDBOX_REPOSITORY_INITIAL_FIXTURE.md) before any future creation task adds initial sandbox content, so the fixture remains docs-only, minimal, and separate from actual sandbox validation.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
