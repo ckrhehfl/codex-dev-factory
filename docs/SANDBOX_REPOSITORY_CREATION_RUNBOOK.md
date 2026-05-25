@@ -6,13 +6,13 @@ This runbook defines the task contract and procedure for a future owner-approved
 
 This is a documentation contract only. This PR does not create the sandbox repository, run actual sandbox validation, create evidence from a real sandbox run, implement CLI behavior, implement automation, perform GitHub writes, implement PR publisher behavior, implement branch cleanup automation, create workflows, add Discord integration, touch trading code, add credentials, add risk cap logic, or add model promotion logic.
 
-The future task may create or verify a sandbox repository only after the owner explicitly approves that action and records the required decisions from the [Sandbox Repository Creation Plan](SANDBOX_REPOSITORY_CREATION_PLAN.md).
+The future task may create or verify a sandbox repository only after the owner explicitly approves that action and records the required decisions from the [Sandbox Repository Owner Decisions](SANDBOX_REPOSITORY_OWNER_DECISIONS.md) record and [Sandbox Repository Creation Plan](SANDBOX_REPOSITORY_CREATION_PLAN.md).
 
 ## Preconditions
 
 A future sandbox repository creation task must not begin creation until these preconditions are satisfied or explicitly stopped:
 
-- Owner decisions from [Sandbox Repository Creation Plan](SANDBOX_REPOSITORY_CREATION_PLAN.md) are recorded.
+- Owner decisions from [Sandbox Repository Owner Decisions](SANDBOX_REPOSITORY_OWNER_DECISIONS.md) and [Sandbox Repository Creation Plan](SANDBOX_REPOSITORY_CREATION_PLAN.md) are recorded.
 - Target repository identity is confirmed, including owner or organization and final repository name.
 - GitHub authentication and permissions for repository creation or verification are available and approved.
 - Current control-plane repository state is revalidated locally.

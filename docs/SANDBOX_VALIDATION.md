@@ -22,6 +22,8 @@ Sandbox repository creation planning is defined in [Sandbox Repository Creation 
 
 The future creation procedure is defined in [Sandbox Repository Creation Runbook](SANDBOX_REPOSITORY_CREATION_RUNBOOK.md). Validation still begins only after repository creation is separately approved and completed.
 
+Sandbox repository owner decisions are recorded in [Sandbox Repository Owner Decisions](SANDBOX_REPOSITORY_OWNER_DECISIONS.md). Validation must not treat candidate values as owner-approved creation decisions.
+
 Future sandbox validation runs should record evidence according to the [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md). Evidence capture must make PR, review, merge, cleanup, guard, lesson-review, owner-decision, and unknown state visible before a run is accepted.
 
 The existing `ckrhehfl/institutional-futures-trader` repository must not be used as source of truth for sandbox validation. It remains a reference and lessons candidate only after explicit revalidation.

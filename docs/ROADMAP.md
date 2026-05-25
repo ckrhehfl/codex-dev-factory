@@ -32,6 +32,8 @@ Plan sandbox repository creation through the [Sandbox Repository Creation Plan](
 
 Define the [Sandbox Repository Creation Runbook](SANDBOX_REPOSITORY_CREATION_RUNBOOK.md) before any creation task so the future task has a bounded procedure, evidence requirements, result contract, and stop conditions.
 
+Record sandbox repository owner decisions in [Sandbox Repository Owner Decisions](SANDBOX_REPOSITORY_OWNER_DECISIONS.md) before any future task creates or reuses the sandbox repository.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
