@@ -50,6 +50,8 @@ Future plan output should include these sections:
 - PR metadata draft: Scope, Non-goals, Allowed files, Forbidden files, Forbidden actions, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations.
 - Merge boundary: a clear statement that merge remains separate unless explicitly requested.
 
+Future PR metadata draft checks are defined in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). Planning must preserve enough metadata for that guard to verify title/body completeness without dropping safety fields.
+
 ## Safety Field Preservation
 
 `forbidden_files` and `forbidden_actions` are first-class safety fields. They must be preserved whenever a task is validated, planned, reported, or converted into PR metadata.
