@@ -26,6 +26,8 @@ Define the Phase 1/2 readiness audit so sandbox validation and later Phase 2 CLI
 
 Maintain a documentation inventory and policy surface consistency audit before readiness, sandbox planning, or implementation work so the documentation set stays discoverable, non-duplicative, and aligned with active solution lessons.
 
+Record Phase 1/2 readiness audit results as docs-only evidence before requesting owner approval for sandbox repository creation planning or any later implementation step.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
