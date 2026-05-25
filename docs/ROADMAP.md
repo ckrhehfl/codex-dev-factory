@@ -18,6 +18,8 @@ Add a docs-only Compound knowledge base for durable post-merge lessons. Lesson c
 
 Define a solution lookup protocol so future policy and documentation tasks consult `docs/solutions/**` before planning and before commit.
 
+Define the task lifecycle state model so owner intent, task contract, branch work, PR creation, review-fix loop, merge, cleanup, and lesson handling share one canonical docs-only lifecycle.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval, design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.

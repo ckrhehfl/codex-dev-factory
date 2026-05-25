@@ -12,6 +12,8 @@ A plan is derived from a valid [Task Contract](TASK_CONTRACT.md). The plan must 
 
 Future planning should consume only successful validation results described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md).
 
+Future planning should also preserve the lifecycle gates described in [Task Lifecycle State Model](TASK_LIFECYCLE.md), including separate merge, cleanup, and lesson-capture boundaries.
+
 The plan must preserve:
 
 - Scope.

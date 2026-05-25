@@ -48,6 +48,8 @@ Future validation result output is defined in [Task Validation Result Contract](
 
 Future plan output is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). It may organize execution steps conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
 
+The canonical docs-only task lifecycle is defined in [Task Lifecycle State Model](TASK_LIFECYCLE.md). It describes how a task moves from owner intent through task contract, branch work, PR creation, review-fix loop, merge, cleanup, and post-merge lesson handling.
+
 ## Risk Tiering
 
 Tasks are grouped by risk:
@@ -76,7 +78,7 @@ PR metadata should follow the [Task Contract](TASK_CONTRACT.md): Scope, Non-goal
 
 When solution lookup is required, PR metadata should also include Solution lookup result, applicable solution entries, and how each lesson was applied.
 
-The standard docs-only lifecycle is:
+The short-form docs-only lifecycle is:
 
 1. Prepare scoped branch.
 2. Run solution lookup when required by the task.
