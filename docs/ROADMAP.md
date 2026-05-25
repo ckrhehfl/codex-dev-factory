@@ -28,6 +28,8 @@ Maintain a documentation inventory and policy surface consistency audit before r
 
 Record Phase 1/2 readiness audit results as docs-only evidence before requesting owner approval for sandbox repository creation planning or any later implementation step.
 
+Plan sandbox repository creation through the [Sandbox Repository Creation Plan](SANDBOX_REPOSITORY_CREATION_PLAN.md) as a separate docs-only owner-decision checklist before creating `codex-dev-factory-sandbox` or any sandbox repository.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
