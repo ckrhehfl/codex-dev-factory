@@ -30,6 +30,8 @@ Record Phase 1/2 readiness audit results as docs-only evidence before requesting
 
 Plan sandbox repository creation through the [Sandbox Repository Creation Plan](SANDBOX_REPOSITORY_CREATION_PLAN.md) as a separate docs-only owner-decision checklist before creating `codex-dev-factory-sandbox` or any sandbox repository.
 
+Define the [Sandbox Repository Creation Runbook](SANDBOX_REPOSITORY_CREATION_RUNBOOK.md) before any creation task so the future task has a bounded procedure, evidence requirements, result contract, and stop conditions.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
