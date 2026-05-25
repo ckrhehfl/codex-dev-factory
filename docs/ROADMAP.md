@@ -34,6 +34,8 @@ The task validation result contract defines the future result of `factory task v
 
 The plan output contract defines the future result of `factory task plan`. It must preserve allowed files, forbidden files, forbidden actions, validation plan, stop conditions, risk tier, and owner gates before any implementation is approved.
 
+The factory status result contract defines the future result of `factory status`. It must report local repo, task, lifecycle, PR, validation, unknown, stop, risk, safety-field, and owner-action state before any implementation is approved.
+
 ## Phase 3: Worktree Harness
 
 Design isolated worktree handling for future task execution. This phase must preserve branch safety and avoid branch deletion automation until separately approved.

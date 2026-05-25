@@ -6,7 +6,7 @@ Phase 2 is local CLI skeleton planning before implementation. It defines the int
 
 This document is policy and design only. It does not implement CLI commands, create source code, create scripts, create task YAML files, create schemas, or add automation.
 
-The future local task representation is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). The future validation result is described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). The future plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). Phase 2 commands may use those contracts conceptually, but no task files, validation result files, plan files, schemas, parser, or CLI implementation exist yet.
+The future local task representation is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). The future validation result is described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). The future plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). The future status result is described in [Factory Status Result Contract](FACTORY_STATUS_RESULT.md). Phase 2 commands may use those contracts conceptually, but no task files, validation result files, status result files, plan files, schemas, parser, or CLI implementation exist yet.
 
 ## Planned Command Surfaces
 
@@ -70,7 +70,7 @@ It must not create branches, commits, PRs, GitHub writes, workflows, task files,
 
 ## `factory status`
 
-`factory status` is intended to summarize local repo and task state.
+`factory status` is intended to summarize local repo and task state. Its future output contract is defined in [Factory Status Result Contract](FACTORY_STATUS_RESULT.md).
 
 If a local task representation exists in a later phase, this command may report whether a task is present, valid, incomplete, or blocked by a stop state.
 
@@ -115,6 +115,7 @@ The Phase 2 CLI skeleton contract is acceptable when:
 - Planned inputs and outputs are conceptual.
 - Forbidden behaviors are explicit.
 - No validation result files are created.
+- No status result files are created.
 - No plan files are created.
 - No task YAML files are created.
 - No schemas are created.

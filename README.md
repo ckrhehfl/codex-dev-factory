@@ -26,6 +26,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Local Task Format](docs/LOCAL_TASK_FORMAT.md)
 - [Task Validation Result](docs/TASK_VALIDATION_RESULT.md)
 - [Plan Output Contract](docs/PLAN_OUTPUT_CONTRACT.md)
+- [Factory Status Result](docs/FACTORY_STATUS_RESULT.md)
 - [Phase 2 CLI Skeleton](docs/PHASE2_CLI_SKELETON.md)
 - [Operating Model](docs/OPERATING_MODEL.md)
 - [Risk Policy](docs/RISK_POLICY.md)

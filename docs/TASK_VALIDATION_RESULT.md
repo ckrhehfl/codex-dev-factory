@@ -74,7 +74,7 @@ The [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md) defines future comma
 
 - `factory task validate` may later produce this validation result.
 - `factory task plan` may later consume only successful validation results.
-- `factory status` may later report the latest validation state.
+- `factory status` may later report the latest validation state using the [Factory Status Result Contract](FACTORY_STATUS_RESULT.md).
 
 None of these commands are implemented here.
 
