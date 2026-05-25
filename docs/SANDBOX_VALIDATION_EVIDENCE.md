@@ -307,7 +307,7 @@ guards:
 stop_state:
   code: STOPPED_FORBIDDEN_FILE_CHANGE
   reason: changed_file_outside_allowed_files
-lifecycle:
+lifecycle_trace:
   interrupted_state: SELF_REVIEW
 recommended_next_action: remove_out_of_scope_file_change_or_request_owner_decision
 ```
@@ -323,7 +323,7 @@ source_of_truth:
 stop_state:
   code: STOPPED_SOURCE_OF_TRUTH_UNCLEAR
   reason: repo_or_remote_state_not_verified
-lifecycle:
+lifecycle_trace:
   interrupted_state: LOCAL_REVALIDATION
 recommended_next_action: stop_and_revalidate_source_of_truth_before_continuing
 ```
