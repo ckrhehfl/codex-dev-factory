@@ -287,6 +287,8 @@ The [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) defines lookup timin
 
 Future PR metadata guards and allowed-files guards may consume status output conceptually, but this PR does not implement those guards.
 
+The [PR Metadata Guard Contract](PR_METADATA_GUARD.md) defines how future status reporting may include PR title/body completeness, metadata unknowns, and owner-controlled merge notes.
+
 ## Acceptance Criteria
 
 This contract is acceptable when:

@@ -68,6 +68,8 @@ Validation must not treat allow-lists as a replacement for deny-lists. A result 
 
 Dropping or ignoring deny-list fields triggers `STOPPED_SAFETY_FIELD_DROPPED`.
 
+Future PR metadata guard checks may summarize validation results, but they must preserve failed, skipped, and owner-gated validation outcomes rather than turning them into generic pass/fail text.
+
 ## Relationship to Phase 2 CLI Skeleton
 
 The [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md) defines future command surfaces that may use this contract conceptually:

@@ -80,6 +80,8 @@ PR metadata should follow the [Task Contract](TASK_CONTRACT.md): Scope, Non-goal
 
 When solution lookup is required, PR metadata should also include Solution lookup result, applicable solution entries, and how each lesson was applied.
 
+Future PR metadata guard behavior is defined in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). It may check title/body completeness conceptually, but it must not create, edit, merge, or otherwise mutate PRs.
+
 The short-form docs-only lifecycle is:
 
 1. Prepare scoped branch.
