@@ -16,6 +16,8 @@ Sandbox validation proves that the Codex-first development factory can operate s
 
 The first sandbox tests should stay low risk and docs-only. They should validate task intake, source-of-truth revalidation, scoped branches, allowed-file enforcement, PR metadata, merge verification, remote branch cleanup, local branch/worktree cleanup, and lesson capture decisions.
 
+Before sandbox repository creation or actual sandbox validation begins, the project should use the [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md) to confirm that core docs, policy surfaces, owner gates, stop states, and safety-field preservation are ready enough for that phase target.
+
 The existing `ckrhehfl/institutional-futures-trader` repository must not be used as source of truth for sandbox validation. It remains a reference and lessons candidate only after explicit revalidation.
 
 ## First Validation Loop

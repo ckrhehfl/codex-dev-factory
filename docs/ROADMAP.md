@@ -20,9 +20,11 @@ Define a solution lookup protocol so future policy and documentation tasks consu
 
 Define the task lifecycle state model so owner intent, task contract, branch work, PR creation, review-fix loop, merge, cleanup, and lesson handling share one canonical docs-only lifecycle.
 
+Define the Phase 1/2 readiness audit so sandbox validation and later Phase 2 CLI skeleton work proceed only after core docs, contracts, policy surfaces, owner gates, and safety-field preservation are evidence-checked.
+
 ## Phase 2: Local CLI Skeleton
 
-After owner approval, design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
+After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
 
 Any future CLI task format should be derived from the task contract rather than invented separately.
 

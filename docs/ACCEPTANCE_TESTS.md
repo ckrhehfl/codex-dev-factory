@@ -91,6 +91,8 @@ When solution lookup is required, PR bodies should include Solution lookup resul
 
 Phase 2 CLI skeleton work is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). Phase 2 docs may describe future command surfaces, but must not add CLI implementation, task YAML files, schemas, workflows, source code, or automation.
 
+Phase transition readiness is defined in [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md). Before sandbox repository planning, sandbox validation, or Phase 2 implementation, readiness evidence should show that core docs are discoverable, operational policy surfaces do not contradict each other, active `STOPPED_*` codes are registry-backed, safety fields are preserved, PR metadata includes Self-review result and Confirmations, and owner gates remain explicit.
+
 ## Local Task Format Checks
 
 Local task format work is defined in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Format docs may describe future fields, but must not add actual task YAML files, schema files, parser code, CLI implementation, source code, workflows, or automation.

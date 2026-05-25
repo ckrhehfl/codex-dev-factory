@@ -6,6 +6,8 @@ Phase 2 is local CLI skeleton planning before implementation. It defines the int
 
 This document is policy and design only. It does not implement CLI commands, create source code, create scripts, create task YAML files, create schemas, or add automation.
 
+Phase 2 implementation should not begin until owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md) show that the docs-first contracts, policy surfaces, owner gates, and safety-field preservation checks are ready for that phase target.
+
 The future local task representation is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). The future validation result is described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). The future plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). The future status result is described in [Factory Status Result Contract](FACTORY_STATUS_RESULT.md). Phase 2 commands may use those contracts conceptually, but no task files, validation result files, status result files, plan files, schemas, parser, or CLI implementation exist yet.
 
 ## Planned Command Surfaces
