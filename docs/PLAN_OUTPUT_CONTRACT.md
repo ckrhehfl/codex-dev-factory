@@ -82,7 +82,7 @@ This contract is acceptable when:
 
 ## Stop States
 
-Codex must stop and report the matching state when one applies:
+The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md). Codex must stop and report the matching state when one applies:
 
 - `STOPPED_PLAN_OUTPUT_SCOPE_EXPANDED`
 - `STOPPED_SAFETY_FIELD_DROPPED`

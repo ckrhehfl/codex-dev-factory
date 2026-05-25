@@ -111,7 +111,7 @@ High-risk tasks must stop for owner decision before execution. Codex may still g
 
 ## Stop States
 
-Codex must stop and report the matching state when one applies:
+The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md). Codex must stop and report the matching state when one applies:
 
 - `STOPPED_TASK_CONTRACT_INCOMPLETE`
 - `STOPPED_SOURCE_OF_TRUTH_UNVERIFIED`
