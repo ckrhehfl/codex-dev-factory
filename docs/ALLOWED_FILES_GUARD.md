@@ -260,11 +260,11 @@ stop_state:
 recommended_next_action: remove_out_of_scope_file_change
 ```
 
-### Review-Fix Adds Out-Of-Scope File And Requires Re-Check
+### Review-Fix Adds Out-Of-Scope File And Stops
 
 ```yaml
 schema_version: 1
-status: failed
+status: stopped
 source_of_truth:
   changed_files: authenticated_github_pr_diff_files
 changed_files:
@@ -275,7 +275,9 @@ changed_files:
 scope_check:
   status: failed
   reason: review_fix_added_implementation_file
-recommended_next_action: split_into_separate_pr
+stop_state:
+  code: STOPPED_FORBIDDEN_FILE_CHANGE
+recommended_next_action: remove_out_of_scope_file_change
 ```
 
 ### Changed-File Source Is Unavailable
