@@ -34,6 +34,8 @@ This planning document is ready for owner review when:
 
 This plan does not mean the sandbox repository is ready to create automatically. Creation requires a separate explicit owner approval and a later task scoped to that action.
 
+The future creation task procedure and result contract are defined in [Sandbox Repository Creation Runbook](SANDBOX_REPOSITORY_CREATION_RUNBOOK.md). The runbook also does not create the sandbox repository.
+
 ## Owner Decisions Required Before Creation
 
 The owner should decide and record:
