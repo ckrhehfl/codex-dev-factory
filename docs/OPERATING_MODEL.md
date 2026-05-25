@@ -40,6 +40,8 @@ Solution lookup expectations are defined in [Solution Lookup Protocol](SOLUTION_
 
 Sandbox validation expectations are defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Sandbox tasks must prove the factory can run low-risk docs-only loops before any trading repository integration.
 
+Sandbox validation evidence expectations are defined in [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md). Future sandbox runs should record evidence for source-of-truth, lifecycle, PR, review, merge, cleanup, guard, lesson-review, owner-decision, unknown, and stop-state outcomes before a pass/fail/blocking result is accepted.
+
 Phase transition readiness is defined in [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md). The readiness audit is a docs-only evidence check before sandbox repository planning, sandbox validation, or Phase 2 CLI skeleton implementation.
 
 Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). The planned CLI may validate and report task state conceptually, but it must not mutate repository or GitHub state until implementation is separately approved.

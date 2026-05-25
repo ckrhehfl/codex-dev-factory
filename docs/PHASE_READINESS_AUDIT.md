@@ -53,6 +53,7 @@ A readiness audit should inspect or report unavailable status for these inputs:
 - PR metadata guard contract.
 - Allowed-files guard contract.
 - Sandbox validation plan.
+- Sandbox validation evidence contract.
 - Phase 2 CLI skeleton contract.
 - Acceptance tests.
 - Risk policy.
@@ -253,6 +254,8 @@ The [Risk Policy](RISK_POLICY.md) defines risk tiers, owner gates, and forbidden
 The [Acceptance Tests](ACCEPTANCE_TESTS.md) define docs-only, sandbox, metadata, solution lookup, hidden Unicode, and no-implementation checks.
 
 The [Sandbox Validation](SANDBOX_VALIDATION.md) plan defines the first low-risk validation loop that must remain owner-approved and separate from trading repository integration.
+
+The [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md) defines what future sandbox validation runs must record before their pass, fail, blocked, unknown, owner-decision, or stopped result is accepted.
 
 The [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md) defines future local command surfaces but does not approve implementation.
 

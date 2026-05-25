@@ -18,6 +18,8 @@ The first sandbox tests should stay low risk and docs-only. They should validate
 
 Before sandbox repository creation or actual sandbox validation begins, the project should use the [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md) to confirm that core docs, policy surfaces, owner gates, stop states, and safety-field preservation are ready enough for that phase target.
 
+Future sandbox validation runs should record evidence according to the [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md). Evidence capture must make PR, review, merge, cleanup, guard, lesson-review, owner-decision, and unknown state visible before a run is accepted.
+
 The existing `ckrhehfl/institutional-futures-trader` repository must not be used as source of truth for sandbox validation. It remains a reference and lessons candidate only after explicit revalidation.
 
 ## First Validation Loop
@@ -40,6 +42,8 @@ The first safe validation loop is:
 14. Decide whether post-merge lesson capture is needed.
 
 Each loop should leave enough evidence for the owner to inspect what happened without relying on hidden automation state.
+
+The evidence packet for each future loop should record the source of truth for every important claim rather than relying on branch names, public-only pages, memory, or handoff notes.
 
 ## Sandbox Acceptance Criteria
 

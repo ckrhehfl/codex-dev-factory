@@ -14,6 +14,8 @@ Document the GitHub operating policy before adding implementation: repository se
 
 Define the sandbox validation plan before adding automation. The candidate sandbox repository is `codex-dev-factory-sandbox`, with a candidate local clone path of `C:\Dev\codex-dev-factory-sandbox`.
 
+Define the sandbox validation evidence contract before creating a sandbox repo or running validation, so future attempts record source-of-truth, PR, review, merge, cleanup, guard, lesson, owner-decision, and unknown state consistently.
+
 Add a docs-only Compound knowledge base for durable post-merge lessons. Lesson capture remains advisory and reviewed through normal docs-only PRs before it becomes repository guidance.
 
 Define a solution lookup protocol so future policy and documentation tasks consult `docs/solutions/**` before planning and before commit.
