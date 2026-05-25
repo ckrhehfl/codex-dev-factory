@@ -48,6 +48,8 @@ Future validation result output is defined in [Task Validation Result Contract](
 
 Future plan output is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). It may organize execution steps conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
 
+Future factory status output is defined in [Factory Status Result Contract](FACTORY_STATUS_RESULT.md). It may summarize local repo, task, lifecycle, PR, validation, risk, stop, unknown, and owner-action state conceptually, but it must not mutate repository or GitHub state.
+
 The canonical docs-only task lifecycle is defined in [Task Lifecycle State Model](TASK_LIFECYCLE.md). It describes how a task moves from owner intent through task contract, branch work, PR creation, review-fix loop, merge, cleanup, and post-merge lesson handling.
 
 ## Risk Tiering
