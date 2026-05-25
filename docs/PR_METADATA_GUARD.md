@@ -196,7 +196,7 @@ The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns `STOPPED_*` codes used wh
 
 The [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) defines solution lookup timing and reporting.
 
-Future allowed-files guards may provide changed-files evidence, but this PR does not implement those guards.
+The [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) may provide changed-files evidence for PR metadata checks, but this PR does not implement that guard.
 
 ## Example Results
 

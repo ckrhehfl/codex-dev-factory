@@ -6,7 +6,7 @@ The task contract is the source format for safe Codex execution. It turns a requ
 
 This document is policy and documentation only. It does not implement a task parser, task YAML format, CLI command, worker, publisher, automation, or cleanup routine.
 
-The future local representation of this contract is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Future validation result output is described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). Future execution plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). The task lifecycle is described in [Task Lifecycle State Model](TASK_LIFECYCLE.md). Future PR metadata checks are described in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). The task contract remains the policy source; local formats, validation results, plans, lifecycle states, and metadata guard results are only future representations or policy surfaces.
+The future local representation of this contract is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Future validation result output is described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). Future execution plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). The task lifecycle is described in [Task Lifecycle State Model](TASK_LIFECYCLE.md). Future PR metadata checks are described in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). Future changed-file boundary checks are described in [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). The task contract remains the policy source; local formats, validation results, plans, lifecycle states, metadata guard results, and allowed-files guard results are only future representations or policy surfaces.
 
 ## Required Task Fields
 
@@ -28,7 +28,7 @@ If any required field is missing for a non-trivial task, Codex should stop with 
 
 Future local task files may serialize these fields, but no task YAML files, schemas, or parsers exist yet.
 
-Future validation and plan output must preserve these fields without weakening safety boundaries. In particular, forbidden files and forbidden actions must remain visible whenever a task is validated, transformed into a plan, reported as status, or converted into PR metadata.
+Future validation, plan, status, PR metadata, and allowed-files guard output must preserve these fields without weakening safety boundaries. In particular, forbidden files and forbidden actions must remain visible whenever a task is validated, transformed into a plan, reported as status, checked against changed files, or converted into PR metadata.
 
 ## Risk Tier Mapping
 

@@ -70,6 +70,8 @@ Dropping or ignoring deny-list fields triggers `STOPPED_SAFETY_FIELD_DROPPED`.
 
 Future PR metadata guard checks may summarize validation results, but they must preserve failed, skipped, and owner-gated validation outcomes rather than turning them into generic pass/fail text.
 
+Future allowed-files guard checks may summarize validation results about file-boundary completeness, but they must preserve missing or ambiguous `allowed_files`, `forbidden_files`, and `forbidden_actions` outcomes rather than inferring safe defaults.
+
 ## Relationship to Phase 2 CLI Skeleton
 
 The [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md) defines future command surfaces that may use this contract conceptually:

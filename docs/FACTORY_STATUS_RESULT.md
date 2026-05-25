@@ -289,6 +289,8 @@ Future PR metadata guards and allowed-files guards may consume status output con
 
 The [PR Metadata Guard Contract](PR_METADATA_GUARD.md) defines how future status reporting may include PR title/body completeness, metadata unknowns, and owner-controlled merge notes.
 
+The [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) defines how future status reporting may include changed-file boundary checks, changed-file source unknowns, and allowed/forbidden file preservation.
+
 ## Acceptance Criteria
 
 This contract is acceptable when:
