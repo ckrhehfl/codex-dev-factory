@@ -36,6 +36,8 @@ Record sandbox repository owner decisions in [Sandbox Repository Owner Decisions
 
 Define the [Sandbox Repository Initial Fixture Contract](SANDBOX_REPOSITORY_INITIAL_FIXTURE.md) before any future creation task adds initial sandbox content, so the fixture remains docs-only, minimal, and separate from actual sandbox validation.
 
+Record sandbox repository creation evidence in [Sandbox Repository Creation Evidence](SANDBOX_REPOSITORY_CREATION_EVIDENCE.md) after an owner-authorized setup task completes, so future tasks can rely on reviewed evidence instead of chat history.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
