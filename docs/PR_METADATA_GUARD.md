@@ -52,6 +52,8 @@ Docs-only PR bodies should include these sections when relevant to the task:
 - Validation plan/results.
 - Stop conditions.
 - Risk tier.
+- Self-review result.
+- Confirmations.
 - Explicit no-implementation notes when relevant.
 - Explicit no-auto-merge or owner-controlled merge note.
 
@@ -83,6 +85,8 @@ Future title checks should verify:
 | Validation plan/results | Show evidence. | Task validation and local commands. | Required. | Missing commands/results or unexplained skips. | Re-run validation or document skipped checks. |
 | Stop conditions | Show when Codex must stop. | Task Contract and Stop-State Registry. | Required. | Missing applicable stop states. | Add existing stop conditions. |
 | Risk tier | Classify risk. | Task Contract and Risk Policy. | Required. | Missing or inconsistent with actions. | Reclassify or stop for owner decision. |
+| Self-review result | Show Codex checked the task contract before commit/push/PR. | Task Contract, Acceptance Tests, local self-review output. | Required. | Missing or does not cover changed files, forbidden implementation, validation, and owner gates. | Re-run self-review and update metadata. |
+| Confirmations | Preserve explicit safety confirmations. | Task Contract, Acceptance Tests, and task-specific non-goals. | Required. | Missing docs-only, no-workflow, no-code, no-automation, no-trading, or similar required confirmations. | Add task-specific confirmations before review. |
 | Explicit no-implementation notes | Prevent scope confusion. | Task non-goals and risk policy. | Required for docs-only planning contracts. | Missing when implementation could be inferred. | Add no-implementation confirmation. |
 | Owner-controlled merge note | Preserve merge boundary. | Task Lifecycle and GitHub Operating Policy. | Required. | Missing or implies auto-merge. | Add owner-controlled merge note. |
 
@@ -103,6 +107,8 @@ Future PR metadata guard output should include:
 - `risk_check`.
 - `safety_field_check`.
 - `stop_conditions_check`.
+- `self_review_check`.
+- `confirmations_check`.
 - `owner_gate_check`.
 - `unknowns`.
 - `warnings`.
