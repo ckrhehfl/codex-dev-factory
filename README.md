@@ -21,6 +21,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 
 - [Vision](docs/VISION.md)
 - [Task Contract](docs/TASK_CONTRACT.md)
+- [Stop-State Registry](docs/STOP_STATE_REGISTRY.md)
 - [Local Task Format](docs/LOCAL_TASK_FORMAT.md)
 - [Task Validation Result](docs/TASK_VALIDATION_RESULT.md)
 - [Plan Output Contract](docs/PLAN_OUTPUT_CONTRACT.md)

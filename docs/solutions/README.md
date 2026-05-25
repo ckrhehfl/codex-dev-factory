@@ -10,6 +10,8 @@ Compound output is advisory. The repository source of truth remains the reviewed
 
 The [Solution Lookup Protocol](../SOLUTION_LOOKUP_PROTOCOL.md) defines when future tasks must search this knowledge base and how applicable lessons are reported.
 
+Solution entries that introduce or depend on `STOPPED_*` codes should check the [Stop-State Registry](../STOP_STATE_REGISTRY.md).
+
 ## When to Add a Solution
 
 Add a solution when a review-fix or post-merge lesson reveals a reusable pattern, including:

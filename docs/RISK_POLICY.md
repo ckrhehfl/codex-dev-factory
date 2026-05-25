@@ -70,7 +70,7 @@ The docs-first phase forbids:
 
 ## Stop States
 
-Codex must stop and report the matching state if one is triggered:
+The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md). Codex must stop and report the matching state if one is triggered:
 
 - `STOPPED_FORBIDDEN_FILE_CHANGE`
 - `STOPPED_IMPLEMENTATION_INCLUDED`
@@ -81,6 +81,7 @@ Codex must stop and report the matching state if one is triggered:
 - `STOPPED_LIVE_TRADING_RELATED_CONTENT`
 - `STOPPED_CREDENTIAL_OR_SECRET_CONTENT`
 - `STOPPED_EXISTING_REPO_ASSUMED_AS_SOURCE_OF_TRUTH`
+- `STOPPED_SOURCE_OF_TRUTH_UNCLEAR`
 - `STOPPED_OWNER_DECISION_REQUIRED`
 - `STOPPED_TASK_CONTRACT_INCOMPLETE`
 - `STOPPED_SOURCE_OF_TRUTH_UNVERIFIED`

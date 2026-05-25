@@ -55,7 +55,7 @@ Do not add hidden or bidirectional Unicode control characters to docs unless the
 
 ## Stop States
 
-Codex must stop and report the matching state when one applies:
+The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md). Codex must stop and report the matching state when one applies:
 
 - `STOPPED_SOLUTION_LOOKUP_SKIPPED`
 - `STOPPED_SOLUTION_CONFLICTS_WITH_SCOPE`
