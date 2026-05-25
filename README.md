@@ -41,6 +41,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Sandbox Repository Initial Fixture](docs/SANDBOX_REPOSITORY_INITIAL_FIXTURE.md)
 - [Sandbox Repository Creation Plan](docs/SANDBOX_REPOSITORY_CREATION_PLAN.md)
 - [Sandbox Repository Creation Runbook](docs/SANDBOX_REPOSITORY_CREATION_RUNBOOK.md)
+- [Sandbox Repository Creation Evidence](docs/SANDBOX_REPOSITORY_CREATION_EVIDENCE.md)
 - [Sandbox Validation](docs/SANDBOX_VALIDATION.md)
 - [Sandbox Validation Evidence](docs/SANDBOX_VALIDATION_EVIDENCE.md)
 - [Compound Knowledge Base](docs/solutions/README.md)
