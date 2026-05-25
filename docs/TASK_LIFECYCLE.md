@@ -1,0 +1,150 @@
+# Task Lifecycle State Model
+
+## Purpose
+
+This document defines the canonical lifecycle model for docs-only factory tasks.
+
+It makes task, branch, PR, review, merge, cleanup, and post-merge lesson handling explicit so task contracts, local task formats, plan outputs, validation results, PR metadata, and solution docs do not drift into incompatible lifecycle assumptions.
+
+This model is a documentation contract only. It does not implement CLI enums, workflow automation, GitHub writes, branch cleanup automation, Discord integration, trading functionality, or runtime enforcement.
+
+## Lifecycle Principles
+
+Source-of-truth revalidation happens before task execution. Conversation memory, previous assistant answers, and handoff notes are not source of truth.
+
+Low-risk docs-only PRs may commit, push, and create a PR after self-review without separate commit approval when the task contract explicitly allows that flow.
+
+Merge remains separate unless explicitly requested.
+
+The review-fix loop is used only when review comments exist.
+
+Compound or post-merge lesson capture is skipped when there was no review and no durable lesson from another source.
+
+Durable lessons are captured through a separate docs-only PR. Compound output is advisory until reviewed and merged into repository documentation.
+
+Local cleanup is separate local state and must be verified locally.
+
+## State Model
+
+Each lifecycle state is defined by:
+
+- State: the lifecycle name.
+- Owner/source of authority: who or what authorizes the state.
+- Entry condition: what must be true before the state is active.
+- Allowed next states: where the task may move next.
+- Required checks: checks that must happen in or before the state.
+- Allowed actions: actions permitted in the state.
+- Forbidden actions: actions that remain out of scope.
+- Exit condition: what must be true to leave the state.
+- Related docs: policy surfaces that govern the state.
+
+| State | Owner/source of authority | Entry condition | Allowed next states | Required checks | Allowed actions | Forbidden actions | Exit condition | Related docs |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `INTENT_CAPTURED` | Owner request | Owner states intended work. | `TASK_DEFINED`, `STOPPED` | Identify source-of-truth assumptions and risk signals. | Ask clarifying questions only when required; summarize intent. | Treat prior conversation or external repos as source of truth. | Task can be bounded or must stop. | Task Contract, Operating Model |
+| `TASK_DEFINED` | Task contract | Objective, scope, non-goals, allowed files, forbidden files/actions, validation plan, stop conditions, risk tier, and owner gates are known enough to proceed. | `LOCAL_REVALIDATION`, `STOPPED` | Verify required task fields and owner gates. | Prepare bounded plan for docs-only work. | Start edits before revalidation when source-of-truth is unclear. | Task is complete enough for local checks. | Task Contract, Local Task Format |
+| `LOCAL_REVALIDATION` | Local repo and authenticated tooling when needed | Task is defined and local repo must be verified. | `READY_TO_BRANCH`, `STOPPED` | Verify path, remote, branch, working tree, recent log, fetch/prune, latest `main`, and clean state. | Run read-only local checks and required fetch/pull. | Branch from unclear or dirty state. | Local `main` is verified current enough for the task. | Operating Model, Risk Policy |
+| `READY_TO_BRANCH` | Verified local repo state | Local source of truth is clear and clean. | `BRANCH_ACTIVE`, `STOPPED` | Confirm branch name and protected-branch boundary. | Create the task branch. | Delete branches or force push. | Task branch exists. | Operating Model, GitHub Operating Policy |
+| `BRANCH_ACTIVE` | Task branch | Task branch is checked out. | `DOCS_EDITING`, `STOPPED` | Confirm branch is not protected. | Inspect docs, run solution lookup, narrow allowed files. | Merge, cleanup, or implementation. | Editing scope is known. | Solution Lookup Protocol, Task Contract |
+| `DOCS_EDITING` | Task contract | Allowed docs are identified. | `SELF_REVIEW`, `STOPPED` | Keep changes inside allowed files and docs-only scope. | Add or update documentation. | Add code, workflows, scripts, automation, credentials, trading behavior, or out-of-scope files. | Diff is ready for review. | Acceptance Tests, Risk Policy |
+| `SELF_REVIEW` | Task contract and local checks | Docs diff exists. | `PR_CREATED`, `STOPPED` | Check allowed files, forbidden actions, cross-document consistency, stop-state consistency, safety field preservation, hidden Unicode, and docs-safe validation. | Stage, commit, push, and create PR when explicitly allowed. | Commit if self-review fails; merge the PR. | Commit, push, and PR creation succeed, or stop condition is reported. | Task Contract, Acceptance Tests, Stop-State Registry |
+| `PR_CREATED` | GitHub PR metadata | PR exists for the task branch. | `REVIEW_PENDING`, `MERGE_READY`, `STOPPED` | Verify PR URL and required metadata. | Report PR details. | Enable auto-merge, merge, or delete branches unless explicitly requested. | Review is pending or owner marks ready. | Task Contract, GitHub Operating Policy |
+| `REVIEW_PENDING` | Owner/reviewer | PR awaits review or owner decision. | `REVIEW_FIX_REQUIRED`, `MERGE_READY`, `STOPPED` | Monitor only when requested; read comments if asked. | Summarize review state. | Apply unclassified review fixes or merge. | Review comments exist, or PR is approved/ready. | Operating Model |
+| `REVIEW_FIX_REQUIRED` | Review comments and task contract | Unresolved review comments exist. | `REVIEW_PENDING`, `MERGE_READY`, `STOPPED` | Collect unresolved comments, classify them, fix only in-scope items, self-review, commit, push, and resolve threads only after verifying fixes. | Edit allowed files for in-scope fixes; reply to clarification-only comments. | Expand scope, fix forbidden requests, resolve threads before verification, force push, or merge. | In-scope fixes are pushed and threads handled, or owner decision is required. | Task Contract, Solution Lookup Protocol |
+| `MERGE_READY` | Owner approval/review policy | PR is reviewed enough for the owner-approved merge path. | `MERGED`, `REVIEW_FIX_REQUIRED`, `STOPPED` | Confirm merge is explicitly requested or otherwise allowed by approved policy. | Wait for merge instruction or owner action. | Merge automatically from this docs-only task unless explicitly requested. | PR is merged or review changes require another loop. | GitHub Operating Policy |
+| `MERGED` | GitHub merge state | GitHub confirms PR merge. | `LOCAL_CLEANUP_PENDING`, `LESSON_REVIEW`, `DONE`, `STOPPED` | Verify merged state before cleanup or lesson decisions. | Summarize merge state when asked. | Clean up before merge is confirmed. | Cleanup or lesson handling path is selected. | GitHub Operating Policy, Operating Model |
+| `LOCAL_CLEANUP_PENDING` | Owner cleanup instruction and local git state | PR is merged and local cleanup is requested. | `LOCAL_CLEANUP_DONE`, `STOPPED` | Switch to `main`, fetch/prune, pull fast-forward, verify branch is merged, verify clean worktree. | Delete local merged task branch with non-force delete; prune stale worktrees. | Force delete, delete protected branches, delete unmerged branches, or delete remote branches manually. | Local cleanup completes or stops. | GitHub Operating Policy, Operating Model |
+| `LOCAL_CLEANUP_DONE` | Local git state | Cleanup target is removed safely and worktree is clean. | `LESSON_REVIEW`, `DONE`, `STOPPED` | Verify branch list, worktree list, and status. | Report cleanup result. | Continue editing on cleaned branch. | Lesson decision is made or no lesson path is needed. | Operating Model |
+| `LESSON_REVIEW` | Post-merge review context | PR is merged and lesson review is requested or review-fix history suggests it. | `LESSON_CAPTURE_PR_REQUIRED`, `DONE`, `STOPPED` | Inspect PR metadata, review comments, fix commits, and final state if available. | Summarize whether there is a durable lesson. | Modify files directly in the completed PR. | No durable lesson, or a follow-up lesson PR is needed. | Compound Knowledge Base, Solution Lookup Protocol |
+| `LESSON_CAPTURE_PR_REQUIRED` | Durable lesson decision | A reusable policy, workflow, safety, or developer-experience lesson exists. | `INTENT_CAPTURED`, `DONE`, `STOPPED` | Define a separate docs-only task for the lesson. | Propose or create a separate docs-only PR when requested. | Write lesson directly into the merged PR or bypass review. | Follow-up task is created or deferred. | Compound Knowledge Base, Operating Model |
+| `DONE` | Completed lifecycle | Work, cleanup, and lesson handling are complete or intentionally skipped. | `INTENT_CAPTURED` | Confirm no outstanding requested action remains. | Report final status. | Continue mutating without a new task. | A new owner intent starts another lifecycle. | Operating Model |
+| `STOPPED` | Stop-state registry and owner gates | A stop condition applies. | `INTENT_CAPTURED`, `TASK_DEFINED`, `LOCAL_REVALIDATION` | Report the specific stop reason from the stop-state registry when applicable. | Stop and ask for owner decision or corrected task input. | Continue past a stop state. | Owner resolves the stop reason or provides a new task. | Stop-State Registry, Risk Policy |
+
+## Transition Rules
+
+Allowed transitions follow the table above. A task may always enter `STOPPED` when a stop condition applies.
+
+Blocked transitions include:
+
+- No branch work before source-of-truth revalidation when local repo state is unclear.
+- No merge before PR creation.
+- No cleanup before GitHub merge state is confirmed.
+- No lesson capture write directly into the current PR after merge.
+- No implementation phase before readiness audit or explicit owner approval.
+- No trading repository connection before sandbox validation and separate trading-base Deep Research approval.
+- No branch deletion unless the owner explicitly requests cleanup and the local branch is confirmed merged.
+
+Lifecycle state names are documentation contracts only. They are not implemented CLI enums in this PR.
+
+## Review-Fix Loop Integration
+
+When review comments exist, Codex should:
+
+1. Collect unresolved comments and review threads.
+2. Classify each comment as in-scope fix, clarification only, owner decision required, out of scope, or unsafe/forbidden.
+3. Fix only in-scope items inside the PR's allowed files and risk tier.
+4. Run self-review before commit.
+5. Commit and push fixes.
+6. Resolve review threads only after the relevant fix or response is verified.
+
+When no review comments exist, skip the review-fix loop.
+
+When no review comments exist and no durable lesson exists from another source, skip Compound/post-merge lesson capture.
+
+## Post-Merge Lesson Handling
+
+No review means Compound can be skipped unless another durable lesson source exists.
+
+Review exists but no durable lesson means the result should be summarized without creating a new lesson PR.
+
+Durable lesson exists means a separate docs-only PR should capture it under `docs/solutions/**` or the related guidance docs.
+
+Compound output is advisory, not source of truth. New or changed lessons must go through normal PR review before becoming repository guidance.
+
+## Cleanup Handling
+
+Cleanup is local-only state and must be verified locally.
+
+Cleanup must never force-delete branches, delete protected branches, delete unmerged branches, or rely only on remote branch deletion.
+
+Protected branches include `main`, `master`, `develop`, and `release/*`.
+
+This PR does not implement cleanup automation.
+
+## Relationship to Contracts
+
+The [Task Contract](TASK_CONTRACT.md) defines the fields that make `TASK_DEFINED` safe enough to execute.
+
+The [Local Task Format Contract](LOCAL_TASK_FORMAT.md) may later serialize task fields, but it does not replace lifecycle gates.
+
+The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) may later report whether a task can proceed from `TASK_DEFINED` toward planning and branch work.
+
+The [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) may later describe execution steps, but it must preserve lifecycle gates, owner decisions, stop conditions, and safety fields.
+
+PR metadata should make the current lifecycle assumptions reviewable, especially scope, non-goals, allowed files, forbidden files/actions, validation plan, stop conditions, risk tier, self-review, solution lookup, and merge boundary.
+
+The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns specific `STOPPED_*` reasons.
+
+The [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) helps prevent repeat lifecycle, review-fix, and stop-state mistakes.
+
+## Stop Handling
+
+`STOPPED` is a lifecycle state.
+
+Specific stop reasons must use the central [Stop-State Registry](STOP_STATE_REGISTRY.md).
+
+If a future PR introduces or changes any `STOPPED_*` code, it must update the registry and every relevant local Stop States section in the same PR.
+
+If shared policy is affected, update [Risk Policy](RISK_POLICY.md).
+
+## Non-Goals
+
+This document does not add:
+
+- CLI implementation.
+- Workflow implementation.
+- GitHub write automation.
+- PR publisher implementation.
+- Branch cleanup automation.
+- Discord bot integration.
+- Trading functionality.
+- Real trading repository connection.

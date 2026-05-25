@@ -11,7 +11,7 @@ Solution entries are advisory until reflected in reviewed project docs or task-s
 Solution lookup is required:
 
 - During task intake for policy or documentation tasks.
-- Before planning when the task touches approval gates, stop states, task contract fields, validation result fields, plan output fields, PR metadata, review-fix process, post-merge lesson capture, risk tiers, allowed files, forbidden files, or forbidden actions.
+- Before planning when the task touches lifecycle states, approval gates, stop states, task contract fields, validation result fields, plan output fields, PR metadata, review-fix process, post-merge lesson capture, risk tiers, allowed files, forbidden files, or forbidden actions.
 - Before commit as part of self-review.
 - During review-fix classification when review feedback matches a known lesson.
 
