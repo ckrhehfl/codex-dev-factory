@@ -10,7 +10,7 @@ The audit asks whether the documentation set is ready to proceed toward the next
 
 - Audit date: 2026-05-25.
 - Repository checked: `ckrhehfl/codex-dev-factory`.
-- Local repository path verified by git: `C:\Dev\codex-dev-factory`.
+- Local repository root was verified with `git rev-parse --show-toplevel` during this audit.
 - Remote verified by git: `https://github.com/ckrhehfl/codex-dev-factory.git`.
 - Current branch before audit branch creation: `main`.
 - Baseline commit checked: `3a49aec` (`Merge pull request #22 from ckrhehfl/docs/documentation-inventory-audit`).
