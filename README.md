@@ -37,6 +37,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Risk Policy](docs/RISK_POLICY.md)
 - [Acceptance Tests](docs/ACCEPTANCE_TESTS.md)
 - [GitHub Operating Policy](docs/GITHUB_OPERATING_POLICY.md)
+- [Sandbox Repository Creation Plan](docs/SANDBOX_REPOSITORY_CREATION_PLAN.md)
 - [Sandbox Validation](docs/SANDBOX_VALIDATION.md)
 - [Sandbox Validation Evidence](docs/SANDBOX_VALIDATION_EVIDENCE.md)
 - [Compound Knowledge Base](docs/solutions/README.md)
