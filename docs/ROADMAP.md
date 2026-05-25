@@ -24,6 +24,8 @@ Define the task lifecycle state model so owner intent, task contract, branch wor
 
 Define the Phase 1/2 readiness audit so sandbox validation and later Phase 2 CLI skeleton work proceed only after core docs, contracts, policy surfaces, owner gates, and safety-field preservation are evidence-checked.
 
+Maintain a documentation inventory and policy surface consistency audit before readiness, sandbox planning, or implementation work so the documentation set stays discoverable, non-duplicative, and aligned with active solution lessons.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
