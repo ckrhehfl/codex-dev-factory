@@ -81,6 +81,8 @@ Sandbox validation is defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Th
 - Remote head branch cleanup is verified through GitHub settings or a stop state is reported.
 - Local branch/worktree cleanup completes without force delete.
 
+Sandbox validation evidence is defined in [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md). Future sandbox runs should record source-of-truth, lifecycle, PR, review, merge, cleanup, guard, lesson-review, owner-decision, unknown, and stop-state evidence before declaring a pass/fail/blocking result.
+
 ## PR Metadata Check
 
 PR bodies should include Scope, Non-goals, Allowed files, Forbidden files/actions when present, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations. Missing metadata triggers `STOPPED_PR_METADATA_INCOMPLETE`.
