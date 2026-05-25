@@ -53,6 +53,8 @@ The task must also record:
 - Initial content policy: empty, docs-only, or minimal fixture.
 - Who is allowed to create and configure the repository.
 
+If the owner-approved initial content policy is a docs-only minimal fixture, the future task should use the [Sandbox Repository Initial Fixture Contract](SANDBOX_REPOSITORY_INITIAL_FIXTURE.md) as the bounded file manifest.
+
 ## Creation Procedure
 
 The future task should follow this procedure:
@@ -206,6 +208,8 @@ If creation is stopped:
 ## Relationship to Existing Contracts
 
 The [Sandbox Repository Creation Plan](SANDBOX_REPOSITORY_CREATION_PLAN.md) defines owner decisions and prerequisites. This runbook defines the future task procedure and result contract.
+
+The [Sandbox Repository Initial Fixture Contract](SANDBOX_REPOSITORY_INITIAL_FIXTURE.md) defines the docs-only minimal initial content manifest a future creation task may apply after creation or reuse is explicitly authorized.
 
 The [Sandbox Validation](SANDBOX_VALIDATION.md) plan defines validation after the sandbox repository exists and validation is separately approved.
 
