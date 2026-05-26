@@ -106,6 +106,7 @@ Future worktree harness results should report these top-level fields in document
 
 - `result_version`.
 - `generated_at`.
+- `status`.
 - `target_repo`.
 - `local_repo`.
 - `source_of_truth`.
@@ -400,7 +401,7 @@ recommended_next_action: remove_forbidden_file_request_or_request_owner_decision
 
 ```yaml
 result_version: 1
-status: owner_decision_required
+status: stopped
 lifecycle:
   current_state: STOPPED
   interrupted_state: LOCAL_CLEANUP_PENDING
