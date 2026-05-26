@@ -393,7 +393,7 @@ Recommended follow-ups are docs-only unless the owner explicitly approves implem
 - `Docs: define publisher authority and permission model`.
 - `Docs: define branch lifecycle manager policy`.
 - `Docs: define controlled cleanup policy`.
-- `Docs: define worktree harness result validation checklist`.
+- `Docs: define worktree harness status summary format`.
 
 ## Evidence And Source Classification
 
