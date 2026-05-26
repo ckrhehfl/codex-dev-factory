@@ -30,6 +30,8 @@ The contract is intentionally report-only. No field in a future result may appro
 
 [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines future worktree retention classification, report-first stale/dirty/ambiguous worktree handling, owner-gated cleanup boundaries, and no-deletion/no-pruning defaults.
 
+[Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md) provides non-executable examples of future branch/worktree ownership reports that preserve evidence classification, stop/report behavior, owner gates, and cleanup as report-only.
+
 Related reporting and safety surfaces:
 
 - [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) defines task validation result expectations.
@@ -40,6 +42,7 @@ Related reporting and safety surfaces:
 - [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) defines changed-file boundary reporting.
 - [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) defines branch and worktree ownership policy that future results should report.
 - [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines retention state classes and report-first retention result fields.
+- [Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md) illustrates branch/worktree ownership result reporting without adding a schema or implementation.
 
 This PR does not implement the harness or any related command.
 

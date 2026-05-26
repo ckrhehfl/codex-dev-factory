@@ -28,6 +28,8 @@ This policy prevents future harness work from guessing branch ownership, overwri
 
 [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines how future active, completed, stale, dirty, ambiguous, foreign-repo, and owner-gated worktrees are classified and reported before any deletion or pruning policy exists.
 
+[Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md) provides non-executable examples for reporting valid, stopped, ambiguous, dirty, foreign-repo, protected-branch, conflict, and owner-gated cleanup ownership outcomes.
+
 This policy narrows future branch naming, ownership evidence, ambiguity handling, conflict handling, cross-repo boundaries, and cleanup boundaries. This PR does not implement branch creation, worktree creation, cleanup, deletion, or automation.
 
 ## Scope
@@ -391,7 +393,7 @@ Recommended follow-ups are docs-only unless the owner explicitly approves implem
 - `Docs: define publisher authority and permission model`.
 - `Docs: define branch lifecycle manager policy`.
 - `Docs: define controlled cleanup policy`.
-- `Docs: define worktree harness branch ownership result examples`.
+- `Docs: define worktree harness result validation checklist`.
 
 ## Evidence And Source Classification
 
