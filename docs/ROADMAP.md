@@ -64,6 +64,8 @@ The allowed-files guard contract defines future checks for changed files against
 
 Design isolated worktree handling for future task execution. This phase must preserve branch safety and avoid branch deletion automation until separately approved.
 
+Define the [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md) before implementation so repo/path verification, branch ownership, safety-field preservation, evidence capture, stop/report behavior, and owner decisions are clear.
+
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
