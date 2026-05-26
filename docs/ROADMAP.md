@@ -66,6 +66,8 @@ Design isolated worktree handling for future task execution. This phase must pre
 
 Define the [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md) before implementation so repo/path verification, branch ownership, safety-field preservation, evidence capture, stop/report behavior, and owner decisions are clear.
 
+Define the [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md) before implementation so future harness outcomes report required fields, evidence classification, stop/report behavior, safety-field preservation, validation results, owner gates, cleanup state, and remaining unknowns consistently.
+
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
