@@ -162,6 +162,8 @@ A future worktree harness result should report:
 
 The result should not approve owner-gated actions by itself.
 
+The detailed future result-reporting surface is defined in [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md). That contract remains docs-only and does not authorize harness implementation, worktree mutation, branch deletion, or cleanup automation.
+
 ## Stop Conditions
 
 Use existing registry-backed stop states when they apply, including:
