@@ -46,6 +46,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Sandbox Validation Evidence](docs/SANDBOX_VALIDATION_EVIDENCE.md)
 - [Sandbox Validation Run 001 Evidence](docs/SANDBOX_VALIDATION_RUN_001.md)
 - [Deep Research Intake and Traceability](docs/DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md)
+- [Technical Stack Decision Record](docs/TECH_STACK_DECISION_RECORD.md)
 - [Compound Knowledge Base](docs/solutions/README.md)
 - [Solution Lookup Protocol](docs/SOLUTION_LOOKUP_PROTOCOL.md)
 - [Roadmap](docs/ROADMAP.md)

@@ -104,4 +104,6 @@ Research lessons from trading-related repositories and workflows without treatin
 
 Map external Deep Research recommendations through [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md) before treating any recommendation as adopted repository policy, technical stack direction, or implementation authorization.
 
+Classify Codex automation technical-stack components through [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md) before implementation planning treats any component as adopted, deferred, reference-only, rejected, or requiring owner decision.
+
 Trading repository integration must not begin until sandbox validation has completed and the owner approves a separate high-risk scope.
