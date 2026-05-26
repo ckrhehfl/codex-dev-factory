@@ -102,4 +102,6 @@ Consider a read-only Discord projection for status visibility. It must not accep
 
 Research lessons from trading-related repositories and workflows without treating any existing repository as source of truth. This phase is research only until the owner explicitly approves a separate scope.
 
+Map external Deep Research recommendations through [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md) before treating any recommendation as adopted repository policy, technical stack direction, or implementation authorization.
+
 Trading repository integration must not begin until sandbox validation has completed and the owner approves a separate high-risk scope.
