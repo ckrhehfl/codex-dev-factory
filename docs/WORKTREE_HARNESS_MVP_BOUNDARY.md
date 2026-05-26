@@ -166,6 +166,8 @@ The detailed future result-reporting surface is defined in [Worktree Harness Res
 
 Future branch naming, branch ownership, worktree ownership, conflict handling, and cross-repo branch boundaries are defined in [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md). That policy remains docs-only and does not authorize branch or worktree mutation.
 
+Future worktree retention classification, stale/dirty/ambiguous worktree reporting, and owner-gated retention boundaries are defined in [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md). That policy remains docs-only and does not authorize worktree deletion, pruning, cleanup automation, or retention enforcement.
+
 ## Stop Conditions
 
 Use existing registry-backed stop states when they apply, including:
@@ -201,7 +203,7 @@ Codex must not decide these in this PR:
 - Branch naming convention.
 - Task id format.
 - Maximum concurrent worktrees.
-- Worktree retention policy.
+- Worktree retention duration and reporting cadence.
 - Local cleanup policy timing.
 - Controlled squash-merge cleanup policy boundary.
 - Whether a future harness can create worktrees automatically.
