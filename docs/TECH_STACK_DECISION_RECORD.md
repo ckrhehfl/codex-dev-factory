@@ -89,7 +89,7 @@ This PR does not:
 | Deterministic guards outside the model | Preserve explicit guards for metadata, allowed files, stop states, and safety fields | `adopted` | Guard contracts exist as docs-only future surfaces, and safety-field preservation is required. | [PR Metadata Guard](PR_METADATA_GUARD.md), [Allowed-Files Guard](ALLOWED_FILES_GUARD.md), [Stop-State Registry](STOP_STATE_REGISTRY.md), [Task Validation Result](TASK_VALIDATION_RESULT.md) | Owner decision before implementation | No | `Docs: define check and guard strategy` |
 | Deep Research as source input only | Research informs traceability, not source-of-truth authority | `adopted` | The intake document explicitly classifies Deep Research as input only. | [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md), [Roadmap](ROADMAP.md) | No for source-status rule | No | None |
 | Architecture A | Preferred target direction for future automation architecture | `partially_adopted` | It is represented through traceability as a candidate direction, but not formally adopted as implementation. | [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md), [Roadmap](ROADMAP.md), [Risk Policy](RISK_POLICY.md) | Yes, formal adoption and boundaries | No | `Docs: define Codex worker and harness MVP boundary` |
-| Codex CLI primary worker | Future worker runtime candidate | `partially_adopted` | Repo is Codex-first and Phase 2 describes future CLI surfaces, but no worker implementation is approved. | [README](../README.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md), [Roadmap](ROADMAP.md) | Yes, runtime and execution boundary | No | `Docs: define Codex worker and harness MVP boundary` |
+| Codex CLI primary worker | Future worker runtime candidate | `partially_adopted` | Repo is Codex-first and Phase 2 describes future CLI surfaces, but no worker implementation is approved. | [README](../README.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md), [Roadmap](ROADMAP.md), [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) | Yes, runtime and execution boundary | No | `Docs: define worker runtime strategy` |
 | Custom harness | Own clone/fetch/worktree/validation/metadata boundary | `deferred` | Harness behavior is anticipated but not designed or approved for implementation. | [Roadmap](ROADMAP.md), [Task Lifecycle](TASK_LIFECYCLE.md), [Factory Status Result](FACTORY_STATUS_RESULT.md) | Yes | No | `Docs: define Codex worker and harness MVP boundary` |
 | Custom orchestrator | Queue, retry, owner decision, and fix-loop coordinator | `deferred` | Orchestration is future implementation and high-impact automation. | [Operating Model](OPERATING_MODEL.md), [Task Lifecycle](TASK_LIFECYCLE.md), [Risk Policy](RISK_POLICY.md) | Yes | No | `Docs: define Codex worker and harness MVP boundary` |
 | Linux VPS scheduler | Persistent scheduler host option | `deferred` | No hosting model is approved. Runtime infrastructure requires owner decision. | [Roadmap](ROADMAP.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md), [Risk Policy](RISK_POLICY.md) | Yes | No | `Docs: define worker runtime strategy` |
@@ -150,7 +150,7 @@ A conservative future MVP should remain narrower than the full Architecture A re
 
 Recommended future tracks are docs-only unless separately approved for implementation:
 
-- Codex worker and harness MVP boundary.
+- Codex worker boundary and worker runtime strategy.
 - Publisher authority and permission model.
 - Check and guard strategy.
 - Branch lifecycle manager policy.

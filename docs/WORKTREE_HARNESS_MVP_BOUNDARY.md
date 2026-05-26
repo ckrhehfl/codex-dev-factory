@@ -230,7 +230,7 @@ This boundary is acceptable when:
 Recommended follow-ups are docs-only unless the owner explicitly approves implementation:
 
 - `Docs: define worktree harness result contract`.
-- `Docs: define Codex worker boundary`.
+- `Docs: define worker runtime strategy`.
 - `Docs: define publisher authority and permission model`.
 - `Docs: define branch lifecycle manager policy`.
 - `Docs: define controlled cleanup policy`.

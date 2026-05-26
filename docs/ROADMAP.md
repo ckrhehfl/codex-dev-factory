@@ -82,6 +82,8 @@ Define the [Worktree Harness Status Summary Format](WORKTREE_HARNESS_STATUS_SUMM
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
 
+Define the [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) before implementation so future worker responsibilities, non-responsibilities, source-of-truth inputs, harness relationships, result/status outputs, validation behavior, owner gates, and stop conditions are explicit.
+
 Worker connection must wait until the sandbox validation loop has proven docs-only PR creation, merge verification, remote branch cleanup, local cleanup, and lesson-check decisions.
 
 ## Phase 5: Publisher MVP
