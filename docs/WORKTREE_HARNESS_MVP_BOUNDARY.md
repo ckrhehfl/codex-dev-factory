@@ -164,6 +164,8 @@ The result should not approve owner-gated actions by itself.
 
 The detailed future result-reporting surface is defined in [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md). That contract remains docs-only and does not authorize harness implementation, worktree mutation, branch deletion, or cleanup automation.
 
+Future branch naming, branch ownership, worktree ownership, conflict handling, and cross-repo branch boundaries are defined in [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md). That policy remains docs-only and does not authorize branch or worktree mutation.
+
 ## Stop Conditions
 
 Use existing registry-backed stop states when they apply, including:
@@ -227,7 +229,6 @@ Recommended follow-ups are docs-only unless the owner explicitly approves implem
 
 - `Docs: define worktree harness result contract`.
 - `Docs: define Codex worker boundary`.
-- `Docs: define harness branch naming and ownership policy`.
 - `Docs: define publisher authority and permission model`.
 - `Docs: define branch lifecycle manager policy`.
 - `Docs: define controlled cleanup policy`.
