@@ -28,6 +28,8 @@ The contract is intentionally report-only. No field in a future result may appro
 
 [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) defines future task branch naming, branch ownership evidence, worktree ownership evidence, ambiguity handling, conflict handling, cross-repo boundaries, and cleanup boundaries.
 
+[Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines future worktree retention classification, report-first stale/dirty/ambiguous worktree handling, owner-gated cleanup boundaries, and no-deletion/no-pruning defaults.
+
 Related reporting and safety surfaces:
 
 - [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) defines task validation result expectations.
@@ -37,6 +39,7 @@ Related reporting and safety surfaces:
 - [PR Metadata Guard Contract](PR_METADATA_GUARD.md) defines required PR metadata surfaces.
 - [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) defines changed-file boundary reporting.
 - [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) defines branch and worktree ownership policy that future results should report.
+- [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines retention state classes and report-first retention result fields.
 
 This PR does not implement the harness or any related command.
 

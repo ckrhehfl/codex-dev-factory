@@ -70,6 +70,8 @@ Define the [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.m
 
 Define the [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) before implementation so future task branches, branch ownership evidence, worktree ownership evidence, ambiguity handling, conflict handling, and cleanup boundaries are explicit.
 
+Define the [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) before implementation so active, completed, stale, dirty, ambiguous, foreign-repo, and owner-gated worktrees are handled report-first without authorizing deletion, pruning, cleanup automation, or retention enforcement.
+
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
