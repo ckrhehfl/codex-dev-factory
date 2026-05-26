@@ -49,6 +49,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Technical Stack Decision Record](docs/TECH_STACK_DECISION_RECORD.md)
 - [Worktree Harness MVP Boundary](docs/WORKTREE_HARNESS_MVP_BOUNDARY.md)
 - [Worktree Harness Result Contract](docs/WORKTREE_HARNESS_RESULT_CONTRACT.md)
+- [Harness Branch Naming and Ownership Policy](docs/HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md)
 - [Compound Knowledge Base](docs/solutions/README.md)
 - [Solution Lookup Protocol](docs/SOLUTION_LOOKUP_PROTOCOL.md)
 - [Roadmap](docs/ROADMAP.md)

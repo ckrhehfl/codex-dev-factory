@@ -68,6 +68,8 @@ Define the [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md) bef
 
 Define the [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md) before implementation so future harness outcomes report required fields, evidence classification, stop/report behavior, safety-field preservation, validation results, owner gates, cleanup state, and remaining unknowns consistently.
 
+Define the [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) before implementation so future task branches, branch ownership evidence, worktree ownership evidence, ambiguity handling, conflict handling, and cleanup boundaries are explicit.
+
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
