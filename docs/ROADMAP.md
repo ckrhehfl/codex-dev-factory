@@ -38,6 +38,8 @@ Define the [Sandbox Repository Initial Fixture Contract](SANDBOX_REPOSITORY_INIT
 
 Record sandbox repository creation evidence in [Sandbox Repository Creation Evidence](SANDBOX_REPOSITORY_CREATION_EVIDENCE.md) after an owner-authorized setup task completes, so future tasks can rely on reviewed evidence instead of chat history.
 
+Record the first sandbox docs-only PR validation evidence in [Sandbox Validation Run 001 Evidence](SANDBOX_VALIDATION_RUN_001.md) after sandbox PR #1 is merged and verified, so future tasks can inspect the sandbox PR, merge, cleanup, and remaining unknowns without relying on chat history.
+
 ## Phase 2: Local CLI Skeleton
 
 After owner approval and a passed [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), design a local CLI skeleton. This phase should still avoid external writes and should begin with a plan before implementation.
