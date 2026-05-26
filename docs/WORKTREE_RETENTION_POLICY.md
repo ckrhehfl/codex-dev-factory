@@ -28,6 +28,8 @@ This policy keeps worktree retention report-first. It prevents future harness wo
 
 [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) defines future branch and worktree ownership evidence, ambiguity handling, conflict handling, cross-repo boundaries, and cleanup boundaries.
 
+[Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md) provides non-executable examples for report-first branch/worktree ownership and retention outcomes, including dirty, ambiguous, foreign-repo, protected-branch, and owner-gated cleanup cases.
+
 This policy narrows retention classification and report-first behavior. This PR does not implement retention enforcement, worktree deletion, worktree pruning, cleanup, branch deletion, branch cleanup automation, or harness automation.
 
 ## Scope
@@ -417,7 +419,7 @@ Recommended follow-ups are docs-only unless the owner explicitly approves implem
 - `Docs: define publisher authority and permission model`.
 - `Docs: define branch lifecycle manager policy`.
 - `Docs: define controlled cleanup policy`.
-- `Docs: define worktree harness branch ownership result examples`.
+- `Docs: define worktree harness result validation checklist`.
 
 ## Evidence And Source Classification
 

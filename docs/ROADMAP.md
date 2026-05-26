@@ -72,6 +72,8 @@ Define the [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AN
 
 Define the [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) before implementation so active, completed, stale, dirty, ambiguous, foreign-repo, and owner-gated worktrees are handled report-first without authorizing deletion, pruning, cleanup automation, or retention enforcement.
 
+Define the [Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md) before implementation so successful, stopped, ambiguous, dirty, foreign-repo, protected-branch, conflict, and owner-gated cleanup reports preserve ownership evidence, evidence classes, safety fields, and cleanup boundaries.
+
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
