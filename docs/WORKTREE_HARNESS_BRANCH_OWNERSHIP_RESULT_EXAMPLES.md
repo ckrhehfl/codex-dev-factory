@@ -9,7 +9,7 @@
 | Implementation status | `not_started` |
 | Scope | Docs-only illustrative result examples |
 | Source of truth after merge | This repository's merged documentation |
-| Relationship | Follows [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md), [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md), and [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) |
+| Relationship | Follows [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md), [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md), [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md), and should be checked with [Worktree Harness Result Validation Checklist](WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md) |
 | Risk tier | Low-risk docs-only examples PR |
 
 This document provides non-executable examples of future branch and worktree ownership result reporting. It does not implement a schema, command, script, harness, cleanup routine, retention enforcement, branch automation, or other automation.
@@ -27,6 +27,8 @@ These examples make those boundaries reviewable without authorizing branch creat
 [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) defines branch naming, branch ownership evidence, worktree ownership evidence, ambiguity handling, conflict handling, cross-repo boundaries, protected branch boundaries, and cleanup boundaries.
 
 [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines report-first handling for active, completed, stale, dirty, ambiguous, foreign-repo, protected/shared, and owner-gated worktrees.
+
+[Worktree Harness Result Validation Checklist](WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md) defines non-executable checks future reviewers should use to confirm examples preserve safety fields, evidence classification, stop-state alignment, owner gates, cleanup boundaries, and cross-document consistency.
 
 This examples document illustrates those contracts. It does not replace them, weaken them, or approve implementation.
 
@@ -363,7 +365,7 @@ Recommended follow-ups are docs-only unless the owner explicitly approves implem
 - `Docs: define publisher authority and permission model`.
 - `Docs: define branch lifecycle manager policy`.
 - `Docs: define controlled cleanup policy`.
-- `Docs: define worktree harness result validation checklist`.
+- `Docs: define worktree harness status summary format`.
 
 ## Validation And Evidence Classification For This PR
 

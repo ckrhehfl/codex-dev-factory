@@ -9,7 +9,7 @@
 | Implementation status | `not_started` |
 | Scope | Docs-only result contract |
 | Source of truth after merge | This repository's merged documentation |
-| Relationship | Follows [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md) |
+| Relationship | Follows [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md); future reports and examples should be checked with [Worktree Harness Result Validation Checklist](WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md) |
 | Risk tier | Low-risk docs-only contract PR |
 
 This document defines the future result object or report a worktree harness must produce. It is documentation only. It does not implement a harness, create or delete worktrees, run Codex, create executable schemas, add scripts, configure automation, grant GitHub authority, modify sandbox repositories, or perform cleanup.
@@ -31,6 +31,8 @@ The contract is intentionally report-only. No field in a future result may appro
 [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines future worktree retention classification, report-first stale/dirty/ambiguous worktree handling, owner-gated cleanup boundaries, and no-deletion/no-pruning defaults.
 
 [Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md) provides non-executable examples of future branch/worktree ownership reports that preserve evidence classification, stop/report behavior, owner gates, and cleanup as report-only.
+
+[Worktree Harness Result Validation Checklist](WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md) defines a non-executable review checklist for future results and examples that must preserve safety fields, evidence classification, lifecycle/status alignment, stop-state registry alignment, owner gates, cleanup boundaries, and cross-document consistency.
 
 Related reporting and safety surfaces:
 

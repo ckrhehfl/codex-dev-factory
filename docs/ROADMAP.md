@@ -74,6 +74,8 @@ Define the [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) before impl
 
 Define the [Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md) before implementation so successful, stopped, ambiguous, dirty, foreign-repo, protected-branch, conflict, and owner-gated cleanup reports preserve ownership evidence, evidence classes, safety fields, and cleanup boundaries.
 
+Define the [Worktree Harness Result Validation Checklist](WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md) before implementation so future result reports and examples can be reviewed for safety-field preservation, evidence classification, stop-state alignment, owner gates, cleanup boundaries, and cross-document consistency without adding executable validation.
+
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
