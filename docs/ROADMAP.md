@@ -76,6 +76,8 @@ Define the [Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_
 
 Define the [Worktree Harness Result Validation Checklist](WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md) before implementation so future result reports and examples can be reviewed for safety-field preservation, evidence classification, stop-state alignment, owner gates, cleanup boundaries, and cross-document consistency without adding executable validation.
 
+Define the [Worktree Harness Status Summary Format](WORKTREE_HARNESS_STATUS_SUMMARY_FORMAT.md) before implementation so future harness runs can report repo identity, branch/worktree ownership, lifecycle/status, validation checklist outcome, cleanup boundaries, owner gates, and remaining `확인 필요` without adding executable status tooling.
+
 ## Phase 4: Codex Worker Connection
 
 Connect Codex execution only after the docs-first and local harness phases are accepted. The worker should inherit the risk policy, allowed-file checks, and owner gates.
