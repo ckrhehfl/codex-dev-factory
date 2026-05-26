@@ -15,7 +15,7 @@ This lesson captures reusable review-fix guidance from PR #35.
 
 It is docs-only post-merge lesson capture. It does not implement a harness, create or delete worktrees, mutate branches, perform cleanup, run Codex workers, modify the sandbox repository, or change any GitHub settings.
 
-## Review Finding Summary
+## Problem
 
 PR #35 review found two result-contract consistency issues:
 
@@ -24,7 +24,17 @@ PR #35 review found two result-contract consistency issues:
 
 The first finding overlaps existing stop-state and stopped-example lessons. The second finding adds a durable check for result contracts: required field lists must include every field that normative text and examples rely on.
 
-## Durable Lesson
+## Cause
+
+The first draft checked the conceptual content of the result contract but did not fully compare three contract surfaces against each other:
+
+- The required top-level field list.
+- The normative status and stop/report rules.
+- The example result shapes.
+
+That allowed the examples and rules to rely on `status` while the required field list omitted it, and allowed one stopped example to use a non-stopped top-level status while emitting a registry-backed stop code.
+
+## Solution
 
 When a docs-only result, evidence, guard, validation, status, or harness contract defines a required result shape, the declared required fields, normative rules, and examples must agree.
 
@@ -34,6 +44,18 @@ Future contract authors should check both directions:
 - Every field that normative text or examples require, such as `status`, should appear in the required field list or result shape.
 
 For stopped or owner-gated examples, an active `STOPPED_*` code means the top-level result status should be `stopped` unless the document explicitly describes a non-stop owner-decision status that does not emit a stop-state code.
+
+## Prevention
+
+Before committing result-contract or evidence-contract docs, self-review should check:
+
+- Does the required top-level field list include every field used by normative text and examples?
+- Does every example use only declared fields, unless clearly marked as illustrative and intentionally partial?
+- If an example includes a registry-backed `STOPPED_*` code, does top-level `status` equal `stopped`?
+- Are `status`, `stop_state.code`, `stop_state.reason`, interrupted lifecycle state, owner gate, cleanup state, and `recommended_next_action` aligned?
+- Are owner-gated non-stop statuses kept distinct from stopped statuses?
+- Are safety fields preserved: scope, non-goals, allowed files, forbidden files, forbidden actions, validation plan, stop conditions, risk tier, and owner gates?
+- Were relevant existing lessons consulted before planning and before commit?
 
 ## When Future PRs Must Apply This
 
@@ -61,18 +83,6 @@ Apply this lesson when adding or changing:
 - [Allowed-Files Review Lessons](workflow/allowed-files-review-lessons.md).
 - [Sandbox Evidence Review Lessons](workflow/sandbox-evidence-review-lessons.md).
 - [Stop-State Consistency](workflow/stop-state-consistency.md).
-
-## Required Future Checks
-
-Before committing result-contract or evidence-contract docs, self-review should check:
-
-- Does the required top-level field list include every field used by normative text and examples?
-- Does every example use only declared fields, unless clearly marked as illustrative and intentionally partial?
-- If an example includes a registry-backed `STOPPED_*` code, does top-level `status` equal `stopped`?
-- Are `status`, `stop_state.code`, `stop_state.reason`, interrupted lifecycle state, owner gate, cleanup state, and `recommended_next_action` aligned?
-- Are owner-gated non-stop statuses kept distinct from stopped statuses?
-- Are safety fields preserved: scope, non-goals, allowed files, forbidden files, forbidden actions, validation plan, stop conditions, risk tier, and owner gates?
-- Were relevant existing lessons consulted before planning and before commit?
 
 ## Non-Goals
 
@@ -135,6 +145,11 @@ This lesson PR should run docs-safe validation before commit:
 - Forbidden-files/actions check.
 - Relative link check.
 - `STOPPED_*` registry check for referenced codes.
+
+## Related PRs
+
+- PR #35: [Docs: define worktree harness result contract](https://github.com/ckrhehfl/codex-dev-factory/pull/35).
+- PR #36: [Docs: capture PR 35 worktree result review lessons](https://github.com/ckrhehfl/codex-dev-factory/pull/36).
 
 ## Follow-Up Status
 
