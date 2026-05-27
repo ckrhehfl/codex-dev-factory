@@ -46,7 +46,7 @@ Every evidence item must be classified as one of:
 - `local-verified`.
 - `authenticated/tool-reported`.
 - `public/web-verified`.
-- `Deep Research/input-derived`.
+- `Deep Research input`.
 - `user-reported`.
 - `확인 필요`.
 
@@ -253,7 +253,7 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 
 - TBD
 
-### Deep Research/input-derived
+### Deep Research input
 
 - TBD
 
