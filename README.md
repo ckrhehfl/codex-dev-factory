@@ -2,6 +2,8 @@
 
 This repository is the control-plane candidate for a Codex-first, autonomous-by-default development factory.
 
+Current strategic direction: Codex-primary multi-agent completion is the primary completion path. The Hermes/Ollama local-model evaluation path is retired unless explicitly reopened by the owner; the Hermes documents linked below are historical/superseded planning artifacts, not active next-step instructions. Ollama cleanup, if any, remains a separate owner-gated task.
+
 The initial phase is docs-first only. The goal is to validate local, docs-only operating discipline before connecting the factory to any implementation repository, automation system, or publishing path.
 
 Early validation will focus on low-risk documentation changes: clear scope, allowed files, validation checks, owner decision points, and stop states. No workflow, worker, publisher, bot, branch cleanup automation, or product implementation belongs in this phase.
