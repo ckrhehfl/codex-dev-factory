@@ -135,7 +135,7 @@ Each worker or coordinator handoff should report:
 - Validation commands and outcomes.
 - Evidence class classification.
 - Forbidden action confirmation.
-- Remaining confirm-needed items.
+- Remaining `확인 필요` items.
 - Stop state, if any.
 - Owner action required.
 - Recommended next action.
@@ -148,7 +148,7 @@ Evidence classes remain claim-specific:
 | `authenticated/tool-reported` | Reported by authenticated tooling, such as GitHub CLI or an approved connector. |
 | `public/web-verified` | Observed through public web surfaces only. |
 | `user-reported` | Stated by the owner or prompt but not independently revalidated in the current run. |
-| `confirm_needed` | Unknown, unavailable, stale, blocked, ambiguous, or requiring future verification. |
+| `확인 필요` | Unknown, unavailable, stale, blocked, ambiguous, or requiring future verification. |
 
 ## Credit/Cost Control
 
@@ -252,7 +252,7 @@ This architecture does not authorize:
 - Prior architecture planning packet content from the owner prompt until represented in merged repository docs.
 - Prior cleanup or installed-state facts unless revalidated in a separately approved task.
 
-### Confirm Needed
+### 확인 필요
 
 - Final Codex runtime choice: Codex app, Codex CLI, Codex SDK, or future Codex-native runtime.
 - Worker implementation design.
