@@ -339,14 +339,14 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 
 ## Sandbox Boundary Evidence
 
-| Check | Result | Evidence class |
-| --- | --- | --- |
-| sandbox repo touched | not_approved | 확인 필요 |
-| sandbox repo path verified | 확인 필요 | 확인 필요 |
-| sandbox mutation approved | not_approved | 확인 필요 |
-| control-plane modified | 확인 필요 | 확인 필요 |
-| correct repo boundary preserved | 확인 필요 | 확인 필요 |
-| before/after repo state | not_run | 확인 필요 |
+| Check | Observed state | Approval state | Evidence class |
+| --- | --- | --- | --- |
+| sandbox repo touched | not_touched | not_approved | 확인 필요 |
+| sandbox repo path verified | 확인 필요 | not_applicable | 확인 필요 |
+| sandbox mutation | not_touched | not_approved | 확인 필요 |
+| control-plane modified | 확인 필요 | not_applicable | 확인 필요 |
+| correct repo boundary preserved | 확인 필요 | not_applicable | 확인 필요 |
+| before/after repo state | not_run | not_applicable | 확인 필요 |
 
 ## Worktree And Branch Evidence
 
