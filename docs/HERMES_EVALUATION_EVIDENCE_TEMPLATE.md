@@ -350,15 +350,15 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 
 ## Worktree And Branch Evidence
 
-| Check | Result | Evidence class |
-| --- | --- | --- |
-| worktree mutation attempted | not_approved | 확인 필요 |
-| branch cleanup/deletion attempted | not_approved | 확인 필요 |
-| cleanup report-only or approved | not_approved | 확인 필요 |
-| branch state before/after | 확인 필요 | 확인 필요 |
-| worktree state before/after | 확인 필요 | 확인 필요 |
-| force delete used | not_approved | 확인 필요 |
-| ownership verified | 확인 필요 | 확인 필요 |
+| Check | Observed state | Approval state | Evidence class |
+| --- | --- | --- | --- |
+| worktree mutation attempted | not_attempted | not_approved | 확인 필요 |
+| branch cleanup/deletion attempted | not_attempted | not_approved | 확인 필요 |
+| cleanup report-only or approved | report_only | not_approved | 확인 필요 |
+| branch state before/after | 확인 필요 | not_applicable | 확인 필요 |
+| worktree state before/after | 확인 필요 | not_applicable | 확인 필요 |
+| force delete used | not_used | not_approved | 확인 필요 |
+| ownership verified | 확인 필요 | not_applicable | 확인 필요 |
 
 ## Credential And Security Evidence
 
