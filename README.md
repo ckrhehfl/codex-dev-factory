@@ -4,6 +4,8 @@ This repository is the control-plane candidate for a Codex-first, autonomous-by-
 
 Current strategic direction: Codex-primary multi-agent completion is the primary completion path. The Hermes/Ollama local-model evaluation path is retired unless explicitly reopened by the owner; the Hermes documents linked below are historical/superseded planning artifacts, not active next-step instructions. Ollama cleanup, if any, remains a separate owner-gated task.
 
+The [Codex Multi-Agent Architecture](docs/CODEX_MULTI_AGENT_ARCHITECTURE.md) records the planning/control-plane guidance for future multi-agent coordination. It does not approve worker execution, implementation, merge, cleanup, rollback, credentials, providers, workflow changes, or sandbox mutation.
+
 The initial phase is docs-first only. The goal is to validate local, docs-only operating discipline before connecting the factory to any implementation repository, automation system, or publishing path.
 
 Early validation will focus on low-risk documentation changes: clear scope, allowed files, validation checks, owner decision points, and stop states. No workflow, worker, publisher, bot, branch cleanup automation, or product implementation belongs in this phase.
@@ -49,6 +51,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Sandbox Validation Run 001 Evidence](docs/SANDBOX_VALIDATION_RUN_001.md)
 - [Deep Research Intake and Traceability](docs/DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md)
 - [Technical Stack Decision Record](docs/TECH_STACK_DECISION_RECORD.md)
+- [Codex Multi-Agent Architecture](docs/CODEX_MULTI_AGENT_ARCHITECTURE.md)
 - [Worktree Harness MVP Boundary](docs/WORKTREE_HARNESS_MVP_BOUNDARY.md)
 - [Worktree Harness Result Contract](docs/WORKTREE_HARNESS_RESULT_CONTRACT.md)
 - [Harness Branch Naming and Ownership Policy](docs/HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md)

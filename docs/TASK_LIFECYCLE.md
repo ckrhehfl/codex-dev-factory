@@ -24,6 +24,8 @@ Durable lessons are captured through a separate docs-only PR. Compound output is
 
 Local cleanup is separate local state and must be verified locally.
 
+Codex multi-agent architecture work follows the same lifecycle. Read-only agents may run in parallel only when the task contract allows independent analysis and evidence collection. Mutation workers remain sequential by default and require owner-approved branch/worktree ownership, allowed-file boundaries, validation, review, and reconciliation before commit, push, or PR creation. Parallel mutation requires a later owner-approved dispatcher and reconciliation boundary; this lifecycle does not authorize it by default.
+
 ## State Model
 
 Each lifecycle state is defined by:
@@ -123,6 +125,8 @@ The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) may later repor
 The [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) may later describe execution steps, but it must preserve lifecycle gates, owner decisions, stop conditions, and safety fields.
 
 PR metadata should make the current lifecycle assumptions reviewable, especially scope, non-goals, allowed files, forbidden files/actions, validation plan, stop conditions, risk tier, self-review, solution lookup, and merge boundary.
+
+When a future PR used multiple Codex workers, PR metadata should also make role assignment, worker count, evidence packets, credit/cost class, sequential versus parallel assumptions, and dispatcher reconciliation reviewable. This is metadata guidance only and does not authorize worker execution or PR creation.
 
 The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns specific `STOPPED_*` reasons.
 

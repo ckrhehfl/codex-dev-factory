@@ -30,6 +30,17 @@ Future local task files may serialize these fields, but no task YAML files, sche
 
 Future validation, plan, status, PR metadata, and allowed-files guard output must preserve these fields without weakening safety boundaries. In particular, forbidden files and forbidden actions must remain visible whenever a task is validated, transformed into a plan, reported as status, checked against changed files, or converted into PR metadata.
 
+## Optional Codex Multi-Agent Planning Fields
+
+Future Codex multi-agent architecture tasks may include these optional planning fields:
+
+- `worker_role`: the intended role, such as intake, repo scout, planner, mutation worker, validation worker, review agent, review-fix agent, PR publisher, cleanup coordinator, or rollback planner.
+- `worker_count`: the number of Codex workers expected for the task, including whether they are sequential or parallel.
+- `credit_cost_class`: the expected Codex credit/cost class, such as small, medium, high, or owner-decision-required.
+- `evidence_packet_required`: whether each worker must produce a structured evidence packet before the task can proceed.
+
+These fields are planning contract fields only. They are not an executable schema, automation trigger, dispatcher configuration, or approval to run workers. Worker execution, mutation, PR creation, merge, cleanup, rollback, credentials, providers, workflows, settings, and sandbox mutation remain owner-gated.
+
 ## Risk Tier Mapping
 
 Low-risk docs-only tasks:
