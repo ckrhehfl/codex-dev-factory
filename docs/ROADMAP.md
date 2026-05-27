@@ -84,7 +84,9 @@ Connect Codex execution only after the docs-first and local harness phases are a
 
 Define the [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) before implementation so future worker responsibilities, non-responsibilities, source-of-truth inputs, harness relationships, result/status outputs, validation behavior, owner gates, and stop conditions are explicit.
 
-Plan Codex-primary multi-agent completion architecture as the active next architecture track before any worker execution, runtime implementation, publisher behavior, or automation exists. This planning must keep Codex-primary status separate from implementation authority: no worker execution, automation, GitHub settings change, credential handling, provider setup, model download, or cleanup is approved by the strategic direction alone.
+Use the [Codex Multi-Agent Architecture](CODEX_MULTI_AGENT_ARCHITECTURE.md) as the active next architecture track before any worker execution, runtime implementation, publisher behavior, or automation exists. This planning keeps Codex-primary status separate from implementation authority: no worker execution, automation, GitHub settings change, credential handling, provider setup, model download, or cleanup is approved by the strategic direction alone.
+
+Worker execution remains blocked until worker role contracts, evidence packet expectations, and sandbox dry-run planning are separately approved. Parallel mutation remains blocked until a later owner-approved dispatcher and reconciliation boundary defines separate branch/worktree ownership and non-overlapping file rules.
 
 The Hermes/Ollama local-model path is retired unless the owner explicitly reopens it. The [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md), [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md), [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md), and [Hermes Sandbox Validation Runbook](HERMES_SANDBOX_VALIDATION_RUNBOOK.md) are historical/superseded planning artifacts, not active next-step instructions.
 

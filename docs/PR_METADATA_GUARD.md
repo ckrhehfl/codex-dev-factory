@@ -57,6 +57,18 @@ Docs-only PR bodies should include these sections when relevant to the task:
 - Explicit no-implementation notes when relevant.
 - Explicit no-auto-merge or owner-controlled merge note.
 
+When a PR used Codex multi-agent architecture, the PR body should also include multi-agent evidence when relevant:
+
+- Worker roles used.
+- Worker count.
+- Read-only versus mutation role classification.
+- Evidence packets produced.
+- Credit/cost class, if the task contract defined one.
+- Sequential versus parallel workflow summary.
+- Dispatcher reconciliation result when parallel work was approved.
+
+This metadata is required only for PRs that actually used multiple workers. It does not approve worker execution, PR creation, PR update, review-thread resolution, merge, cleanup, rollback, or GitHub write automation by itself.
+
 If a task or plan includes forbidden files/actions, the PR metadata must preserve them rather than reporting only allowed files.
 
 ## Required Title Checks
