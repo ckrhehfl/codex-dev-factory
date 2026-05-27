@@ -237,7 +237,7 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 | run_started_at | 확인 필요 |
 | run_completed_at | 확인 필요 |
 | actor_tooling_summary | TBD |
-| evaluation_status | not_run |
+| evaluation_status | inconclusive |
 
 ## Source-Of-Truth Classification
 
@@ -374,7 +374,7 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 
 | Field | Value |
 | --- | --- |
-| evaluation_status | not_run |
+| evaluation_status | inconclusive |
 | stop_code | not_applicable |
 | stop_reason | not_applicable |
 | interrupted_lifecycle_context | not_applicable |
