@@ -64,6 +64,7 @@ This PR does not:
 | Classification | Meaning |
 | --- | --- |
 | `adopted` | A decision-level principle is already supported by current repo docs and safety boundaries. This does not imply implementation unless the repo explicitly implements it. |
+| `primary_strategic_direction` | The owner-selected primary planning direction. This does not imply implementation, runtime execution, automation authority, credentials, billing, cleanup, or external writes. |
 | `partially_adopted` | The direction or principle is represented, but implementation details, verification, or owner approval remain incomplete. |
 | `deferred` | A valuable future component that requires separate design, owner decision, environment setup, permissions, or implementation. |
 | `reference_only` | Useful as a pattern, example, comparison, or fallback candidate, but not adopted as the primary stack. |
