@@ -88,6 +88,8 @@ Define the [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md) b
 
 Define the [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md) before any sandbox runtime evaluation, so pass/fail/stopped/inconclusive outcomes, evidence requirements, owner gates, and authority boundaries are explicit.
 
+Define the [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md) before any owner-approved sandbox runtime evaluation, so evidence packets preserve source-of-truth classification, approval scope, owner gates, stop conditions, sandbox boundaries, and authority boundaries.
+
 Worker connection must wait until the sandbox validation loop has proven docs-only PR creation, merge verification, remote branch cleanup, local cleanup, and lesson-check decisions.
 
 ## Phase 5: Publisher MVP

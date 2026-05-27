@@ -170,24 +170,25 @@ The runtime/orchestrator path should proceed through gated docs-first steps:
 
 1. Hermes runtime evaluation plan.
 2. [Hermes evaluation acceptance criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md).
-3. Owner-approved sandbox-only evaluation task.
-4. Runtime adoption decision gate.
-5. Publisher authority gate.
-6. Cleanup and branch deletion authority gate.
-7. Auto-merge eligibility gate.
-8. Implementation-gated phases for any approved runtime, worker, publisher, cleanup, or GitHub settings work.
+3. [Hermes evaluation evidence template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md).
+4. Owner-approved sandbox-only evaluation task.
+5. Runtime adoption decision gate.
+6. Publisher authority gate.
+7. Cleanup and branch deletion authority gate.
+8. Auto-merge eligibility gate.
+9. Implementation-gated phases for any approved runtime, worker, publisher, cleanup, or GitHub settings work.
 
 The plan keeps `Option 2 — Conditional Hermes-first` as an evaluation direction. It does not rename the PR to adoption, does not declare production adoption, and does not claim that Hermes replaces the control-plane.
 
 ## Recommended Next Action
 
-Recommended next action after this plan and acceptance criteria exist:
+Recommended next action after this plan, acceptance criteria, and evidence template exist:
 
-- Create `Docs: define Hermes evaluation evidence template`.
+- Create `Docs: define Hermes sandbox validation runbook`.
 
 Alternative safe next action:
 
-- Create `Docs: define Hermes sandbox validation runbook`.
+- Create `Docs: define Hermes evaluation status summary example`.
 
 Neither follow-up should install, run, configure, or connect Hermes until the owner separately approves an execution task.
 
