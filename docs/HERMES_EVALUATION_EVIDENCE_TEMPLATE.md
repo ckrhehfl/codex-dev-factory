@@ -1,5 +1,11 @@
 # Hermes Evaluation Evidence Template
 
+## Superseded Status
+
+This template is historical/superseded unless the owner explicitly reopens Hermes evaluation. It must not be used to initiate Hermes execution, Ollama execution, provider/model setup, local-model download, sandbox validation, or runtime connection.
+
+Future use requires a new owner-approved reopen gate. The evidence-class structure remains useful reference material for separating observed state, approval state, and evidence class.
+
 ## Status
 
 | Field | Value |

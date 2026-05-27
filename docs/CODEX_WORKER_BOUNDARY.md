@@ -37,7 +37,7 @@ A future worker may consume:
 
 The worker does not become source of truth by itself. It must not override local-verified, authenticated/tool-reported, public/web-verified, user-reported, or `확인 필요` classifications.
 
-[Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md) may evaluate Hermes as a future runtime/orchestrator wrapper around Codex, but it does not replace Codex as the primary patch-producing worker candidate or authorize worker execution.
+The [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md) now records Codex-primary multi-agent completion as the primary strategic completion path. The [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md) is historical/superseded; Hermes is no longer the active wrapper or evaluation path unless the owner explicitly reopens it. This does not authorize worker execution.
 
 ## Relationship To The Worktree Harness
 
@@ -299,7 +299,7 @@ This example does not authorize PR publisher behavior, cleanup, branch deletion,
 ## Cross-Document References
 
 - [Roadmap](ROADMAP.md) defines Phase 4 ordering for Codex worker connection.
-- [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md) classifies Codex worker direction as partially adopted and implementation as not approved.
+- [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md) classifies Codex-primary multi-agent completion as the primary strategic direction, while keeping worker implementation and execution unapproved.
 - [Risk Policy](RISK_POLICY.md) defines docs-only and high-risk boundaries.
 - [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) defines GitHub settings, branch protection, PR lifecycle, and cleanup boundaries.
 - [Task Contract](TASK_CONTRACT.md) defines required task fields and owner gates.

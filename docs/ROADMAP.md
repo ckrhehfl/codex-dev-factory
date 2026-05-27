@@ -84,13 +84,13 @@ Connect Codex execution only after the docs-first and local harness phases are a
 
 Define the [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) before implementation so future worker responsibilities, non-responsibilities, source-of-truth inputs, harness relationships, result/status outputs, validation behavior, owner gates, and stop conditions are explicit.
 
-Define the [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md) before any runtime/orchestrator installation or execution, so Hermes remains a conditional sandbox-only evaluation track, Codex remains the primary coding worker candidate, and the control-plane retains governance and authority boundaries.
+Plan Codex-primary multi-agent completion architecture as the active next architecture track before any worker execution, runtime implementation, publisher behavior, or automation exists. This planning must keep Codex-primary status separate from implementation authority: no worker execution, automation, GitHub settings change, credential handling, provider setup, model download, or cleanup is approved by the strategic direction alone.
 
-Define the [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md) before any sandbox runtime evaluation, so pass/fail/stopped/inconclusive outcomes, evidence requirements, owner gates, and authority boundaries are explicit.
+The Hermes/Ollama local-model path is retired unless the owner explicitly reopens it. The [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md), [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md), [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md), and [Hermes Sandbox Validation Runbook](HERMES_SANDBOX_VALIDATION_RUNBOOK.md) are historical/superseded planning artifacts, not active next-step instructions.
 
-Define the [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md) before any owner-approved sandbox runtime evaluation, so evidence packets preserve source-of-truth classification, approval scope, owner gates, stop conditions, sandbox boundaries, and authority boundaries.
+If the owner later reopens Hermes or Ollama, that requires a new owner-approved reopen gate before any install, run, configuration, provider/model setup, local-model download, sandbox validation, or runtime connection.
 
-Define the [Hermes Sandbox Validation Runbook](HERMES_SANDBOX_VALIDATION_RUNBOOK.md) before any owner-approved Hermes sandbox validation, so future validation has ordered preflight, approval, evidence, stop, handoff, cleanup-boundary, and pause requirements without installing, running, or configuring Hermes.
+Treat any installed Ollama state as user-reported legacy cleanup context unless revalidated in a separate owner-approved cleanup inventory gate. Cleanup inventory remains separate from cleanup execution; uninstall, service stop, WSL mutation, config deletion, and model deletion require explicit future approval.
 
 Worker connection must wait until the sandbox validation loop has proven docs-only PR creation, merge verification, remote branch cleanup, local cleanup, and lesson-check decisions.
 

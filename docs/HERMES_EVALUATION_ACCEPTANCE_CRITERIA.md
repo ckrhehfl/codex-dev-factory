@@ -1,5 +1,11 @@
 # Hermes Evaluation Acceptance Criteria
 
+## Superseded Status
+
+These criteria are historical/superseded unless the owner explicitly reopens Hermes evaluation. They remain useful as acceptance and evidence-discipline reference material, but they are not active approval to install, run, configure, or evaluate Hermes.
+
+The active strategic direction is Codex-primary multi-agent completion, recorded in [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md). Future Hermes or Ollama use requires a new owner-approved reopen gate.
+
 ## Status
 
 | Field | Value |

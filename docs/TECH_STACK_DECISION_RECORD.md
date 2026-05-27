@@ -64,8 +64,10 @@ This PR does not:
 | Classification | Meaning |
 | --- | --- |
 | `adopted` | A decision-level principle is already supported by current repo docs and safety boundaries. This does not imply implementation unless the repo explicitly implements it. |
+| `primary_strategic_direction` | The owner-selected primary planning direction. This does not imply implementation, runtime execution, automation authority, credentials, billing, cleanup, or external writes. |
 | `partially_adopted` | The direction or principle is represented, but implementation details, verification, or owner approval remain incomplete. |
 | `deferred` | A valuable future component that requires separate design, owner decision, environment setup, permissions, or implementation. |
+| `retired_unless_reopened` | A previous planning path is no longer active and must not proceed unless the owner explicitly reopens it with a new approved scope. |
 | `reference_only` | Useful as a pattern, example, comparison, or fallback candidate, but not adopted as the primary stack. |
 | `rejected` | Conflicts with current safety policy, current scope, or explicit prohibitions. |
 | `확인 필요` | Cannot be classified beyond an unknown without fresh verification, owner decision, or missing source-of-truth docs. |
@@ -75,8 +77,10 @@ This PR does not:
 | Area | Current decision state |
 | --- | --- |
 | Source of truth, docs-first control plane, owner gates, and deterministic guard principles | `adopted` |
+| Codex-primary multi-agent completion as the strategic completion path | `primary_strategic_direction` |
 | Architecture A, Codex CLI worker direction, `gh`/REST evidence and publishing path, isolated workspace policy, controlled cleanup policy, bounded fix-loop discipline, and secret-handling boundaries | `partially_adopted` |
 | Custom harness, orchestrator, VPS/Docker runtime, GitHub App publisher, checks/rulesets, auto-merge, Continue checks, scanner stack, branch lifecycle manager, cost accounting, and redacted projection | `deferred` |
+| Hermes runtime/orchestrator evaluation track and Ollama/local-model smoke-test path | `retired_unless_reopened` |
 | OpenHands, Codex Action, `peter-evans/create-pull-request`, mini-SWE-agent, SWE-ReX, Aider, Cline, Goose, PR-Agent, managed cloud agents, GitHub MCP Server, and Roo Code | `reference_only` |
 | Live trading, credentials/secrets in repo docs or automation, risk cap logic, model promotion logic, broad PAT as primary publisher credential, direct push to `main`, branch protection bypass, and closed-but-unmerged cleanup automation | `rejected` |
 
@@ -89,10 +93,12 @@ This PR does not:
 | Deterministic guards outside the model | Preserve explicit guards for metadata, allowed files, stop states, and safety fields | `adopted` | Guard contracts exist as docs-only future surfaces, and safety-field preservation is required. | [PR Metadata Guard](PR_METADATA_GUARD.md), [Allowed-Files Guard](ALLOWED_FILES_GUARD.md), [Stop-State Registry](STOP_STATE_REGISTRY.md), [Task Validation Result](TASK_VALIDATION_RESULT.md) | Owner decision before implementation | No | `Docs: define check and guard strategy` |
 | Deep Research as source input only | Research informs traceability, not source-of-truth authority | `adopted` | The intake document explicitly classifies Deep Research as input only. | [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md), [Roadmap](ROADMAP.md) | No for source-status rule | No | None |
 | Architecture A | Preferred target direction for future automation architecture | `partially_adopted` | It is represented through traceability as a candidate direction, but not formally adopted as implementation. | [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md), [Roadmap](ROADMAP.md), [Risk Policy](RISK_POLICY.md) | Yes, formal adoption and boundaries | No | `Docs: define Codex worker and harness MVP boundary` |
+| Codex-primary multi-agent completion architecture | Primary strategic completion path for future planning | `primary_strategic_direction` | The owner decided Codex multi-agent completion is the primary path and that Codex credit usage is acceptable within the current plan/credit boundary. This is a strategic direction, not worker execution or runtime implementation authority. | [Roadmap](ROADMAP.md), [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md), [Risk Policy](RISK_POLICY.md) | Yes, before implementation, worker execution, automation, publisher behavior, or runtime setup | No | `Docs: define Codex multi-agent completion architecture` |
 | Codex CLI primary worker | Future worker runtime candidate | `partially_adopted` | Repo is Codex-first and Phase 2 describes future CLI surfaces, but no worker implementation is approved. | [README](../README.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md), [Roadmap](ROADMAP.md), [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) | Yes, runtime and execution boundary | No | `Docs: define worker runtime strategy` |
 | Custom harness | Own clone/fetch/worktree/validation/metadata boundary | `deferred` | Harness behavior is anticipated but not designed or approved for implementation. | [Roadmap](ROADMAP.md), [Task Lifecycle](TASK_LIFECYCLE.md), [Factory Status Result](FACTORY_STATUS_RESULT.md) | Yes | No | `Docs: define Codex worker and harness MVP boundary` |
-| Hermes runtime/orchestrator evaluation track | Candidate scheduler, kanban, subagent, worktree/session, profile, memory/skills, terminal backend, API/gateway, runtime wrapper, and status aggregation layer | `deferred` | Deep Research input supports `Option 2 — Conditional Hermes-first`, but repo policy has not approved Hermes installation, execution, authority delegation, or production adoption. | [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md), [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md), [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md), [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md), [Risk Policy](RISK_POLICY.md), [Roadmap](ROADMAP.md) | Yes, before any install, execution, sandbox validation, runtime connection, authority delegation, or adoption | No | `Docs: define Hermes sandbox validation runbook` |
-| Custom orchestrator | Queue, retry, owner decision, and fix-loop coordinator | `deferred` | Orchestration is future implementation and high-impact automation; Hermes may be evaluated as the first runtime/orchestrator track, but authority remains with the control-plane. | [Operating Model](OPERATING_MODEL.md), [Task Lifecycle](TASK_LIFECYCLE.md), [Risk Policy](RISK_POLICY.md), [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md), [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md), [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md) | Yes | No | `Docs: define Hermes sandbox validation runbook` |
+| Hermes runtime/orchestrator evaluation track | Historical/superseded runtime evaluation planning artifact | `retired_unless_reopened` | The owner pivoted away from Hermes-first evaluation to Codex-primary multi-agent completion. Hermes is not invalidated globally, but it is no longer the active control-plane runtime/orchestrator path unless the owner explicitly reopens it. | [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md), [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md), [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md), [Hermes Sandbox Validation Runbook](HERMES_SANDBOX_VALIDATION_RUNBOOK.md), [Roadmap](ROADMAP.md) | Yes, before any reopen, install, execution, sandbox validation, runtime connection, authority delegation, or adoption | No | Optional Hermes reopen gate only if owner explicitly reopens it |
+| Ollama/local-model smoke-test path | Historical smoke-test path and legacy cleanup context only | `retired_unless_reopened` | The owner decided no local model download will be performed and no Hermes provider/model/config work for Ollama will be performed. Installed Ollama facts are user-reported cleanup context only unless revalidated in a separate cleanup inventory gate. | [Roadmap](ROADMAP.md), [Risk Policy](RISK_POLICY.md) | Yes, before any reopen, model download, provider/auth setup, cleanup inventory, or cleanup execution | No | `Ollama cleanup inventory only` |
+| Custom orchestrator | Queue, retry, owner decision, and fix-loop coordinator | `deferred` | Orchestration is future implementation and high-impact automation; Codex-primary multi-agent architecture planning should define whether a custom orchestrator is needed while authority remains with the control-plane. | [Operating Model](OPERATING_MODEL.md), [Task Lifecycle](TASK_LIFECYCLE.md), [Risk Policy](RISK_POLICY.md), [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) | Yes | No | `Docs: define Codex multi-agent completion architecture` |
 | Linux VPS scheduler | Persistent scheduler host option | `deferred` | No hosting model is approved. Runtime infrastructure requires owner decision. | [Roadmap](ROADMAP.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md), [Risk Policy](RISK_POLICY.md) | Yes | No | `Docs: define worker runtime strategy` |
 | Dockerized worker | Isolated worker runtime candidate | `deferred` | Plausible boundary mechanism, but no Docker setup or policy is approved. | [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md), [Sandbox Validation](SANDBOX_VALIDATION.md), [Risk Policy](RISK_POLICY.md) | Yes | No | `Docs: define worker runtime strategy` |
 | Git worktree / isolated workspace | Isolation pattern for future task execution | `partially_adopted` | Isolation and worktree cleanup are policy concepts, but no automated worktree harness exists. | [Roadmap](ROADMAP.md), [Task Lifecycle](TASK_LIFECYCLE.md), [Sandbox Validation](SANDBOX_VALIDATION.md), [Factory Status Result](FACTORY_STATUS_RESULT.md) | Yes for automation | No | `Docs: define branch lifecycle manager policy` |
@@ -134,6 +140,22 @@ This PR does not:
 
 Any Architecture A component that requires credentials, GitHub settings, runner setup, automation, external writes, or implementation requires a separate owner-approved PR or task.
 
+## Codex-Primary Pivot Boundary
+
+Codex-primary multi-agent completion is the primary strategic completion path.
+
+This decision does not:
+
+- Select Codex CLI, Codex app-server, Codex SDK, or any other specific runtime implementation.
+- Implement or execute a Codex worker.
+- Approve automation, publisher behavior, GitHub writes, workflow changes, or settings changes.
+- Approve additional provider subscriptions, new API keys, OAuth setup, third-party model billing, credential inspection, or credential handling.
+- Approve Ollama cleanup, uninstall, service stop, WSL mutation, configuration deletion, model deletion, local model download, or Hermes provider/model/config work.
+
+Codex credit usage is acceptable within the current owner plan/credit boundary. Any additional provider, credential, billing, or runtime authority remains owner-gated.
+
+The Hermes/Ollama path is retired unless explicitly reopened by the owner. Any installed Ollama state is user-reported legacy cleanup context unless a separate owner-approved cleanup inventory task revalidates it.
+
 ## MVP Direction
 
 A conservative future MVP should remain narrower than the full Architecture A research direction:
@@ -152,7 +174,7 @@ A conservative future MVP should remain narrower than the full Architecture A re
 Recommended future tracks are docs-only unless separately approved for implementation:
 
 - Codex worker boundary and worker runtime strategy.
-- Hermes sandbox validation runbook.
+- Codex multi-agent completion architecture.
 - Publisher authority and permission model.
 - Check and guard strategy.
 - Branch lifecycle manager policy.
@@ -161,6 +183,7 @@ Recommended future tracks are docs-only unless separately approved for implement
 - Secret scanning strategy.
 - VPS/Docker runtime strategy.
 - Cost accounting policy.
+- Ollama cleanup inventory, if the owner opens a separate cleanup inventory gate.
 
 ## Explicit Rejections And Forbidden Paths
 

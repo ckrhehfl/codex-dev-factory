@@ -1,5 +1,11 @@
 # Hermes Sandbox Validation Runbook
 
+## Superseded Status
+
+This runbook is historical/superseded unless the owner explicitly reopens Hermes sandbox validation. No Hermes sandbox validation is currently approved.
+
+The install, configuration, run, provider/model setup, local-model download, sandbox validation, and runtime-connection phases described below are not active next steps. Future Hermes or Ollama work requires a new owner-approved reopen gate.
+
 ## Status
 
 | Field | Value |

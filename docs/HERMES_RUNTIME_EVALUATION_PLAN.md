@@ -1,5 +1,13 @@
 # Hermes Runtime Evaluation Plan
 
+## Superseded Status
+
+This document is a historical/superseded planning artifact. `Option 2 - Conditional Hermes-first` is no longer the active control-plane strategy.
+
+The active strategic direction is Codex-primary multi-agent completion, recorded in [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md). The Hermes/Ollama local-model path is retired unless explicitly reopened by the owner.
+
+Future Hermes or Ollama work requires a new owner-approved reopen gate before any install, run, configuration, provider/model setup, local-model download, sandbox validation, runtime connection, cleanup inventory, or cleanup execution. This document must not be used as active approval to initiate Hermes/Ollama execution.
+
 ## Status
 
 | Field | Value |
