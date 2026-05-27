@@ -299,13 +299,15 @@ This document introduces no new `STOPPED_*` code.
 
 Recommended follow-up:
 
-- `Docs: define Hermes evaluation evidence template`.
+- `Docs: define Hermes sandbox validation runbook`.
 
 Alternative follow-up:
 
-- `Docs: define Hermes sandbox validation runbook`.
+- `Docs: define Hermes evaluation status summary example`.
 
 Neither follow-up should install, run, configure, or connect Hermes unless the owner separately approves a sandbox evaluation task.
+
+Future evaluation evidence should use [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md) before any sandbox runtime evaluation records results.
 
 ## Solution Lookup Result
 

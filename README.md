@@ -57,6 +57,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Codex Worker Boundary](docs/CODEX_WORKER_BOUNDARY.md)
 - [Hermes Runtime Evaluation Plan](docs/HERMES_RUNTIME_EVALUATION_PLAN.md)
 - [Hermes Evaluation Acceptance Criteria](docs/HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md)
+- [Hermes Evaluation Evidence Template](docs/HERMES_EVALUATION_EVIDENCE_TEMPLATE.md)
 - [Compound Knowledge Base](docs/solutions/README.md)
 - [Solution Lookup Protocol](docs/SOLUTION_LOOKUP_PROTOCOL.md)
 - [Roadmap](docs/ROADMAP.md)
