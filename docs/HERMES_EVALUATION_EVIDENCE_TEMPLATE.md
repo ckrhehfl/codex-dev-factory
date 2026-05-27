@@ -325,17 +325,17 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 
 ## GitHub Authority Evidence
 
-| Authority surface | Result | Evidence class |
-| --- | --- | --- |
-| PR creation/update | not_approved | 확인 필요 |
-| merge | not_approved | 확인 필요 |
-| auto-merge | not_approved | 확인 필요 |
-| branch deletion | not_approved | 확인 필요 |
-| cleanup | not_approved | 확인 필요 |
-| settings/rulesets/checks | not_approved | 확인 필요 |
-| Actions/workflows | not_approved | 확인 필요 |
-| secrets/credentials | not_approved | 확인 필요 |
-| publisher authority | not_approved | 확인 필요 |
+| Authority surface | Touched state | Approval state | Evidence class |
+| --- | --- | --- | --- |
+| PR creation/update | not_touched | not_approved | 확인 필요 |
+| merge | not_touched | not_approved | 확인 필요 |
+| auto-merge | not_touched | not_approved | 확인 필요 |
+| branch deletion | not_touched | not_approved | 확인 필요 |
+| cleanup | not_touched | not_approved | 확인 필요 |
+| settings/rulesets/checks | not_touched | not_approved | 확인 필요 |
+| Actions/workflows | not_touched | not_approved | 확인 필요 |
+| secrets/credentials | not_touched | not_approved | 확인 필요 |
+| publisher authority | not_touched | not_approved | 확인 필요 |
 
 ## Sandbox Boundary Evidence
 
