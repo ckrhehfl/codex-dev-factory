@@ -90,6 +90,8 @@ Define the [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_
 
 Define the [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md) before any owner-approved sandbox runtime evaluation, so evidence packets preserve source-of-truth classification, approval scope, owner gates, stop conditions, sandbox boundaries, and authority boundaries.
 
+Define the [Hermes Sandbox Validation Runbook](HERMES_SANDBOX_VALIDATION_RUNBOOK.md) before any owner-approved Hermes sandbox validation, so future validation has ordered preflight, approval, evidence, stop, handoff, cleanup-boundary, and pause requirements without installing, running, or configuring Hermes.
+
 Worker connection must wait until the sandbox validation loop has proven docs-only PR creation, merge verification, remote branch cleanup, local cleanup, and lesson-check decisions.
 
 ## Phase 5: Publisher MVP
