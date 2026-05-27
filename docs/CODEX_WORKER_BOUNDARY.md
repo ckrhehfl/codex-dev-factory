@@ -37,6 +37,8 @@ A future worker may consume:
 
 The worker does not become source of truth by itself. It must not override local-verified, authenticated/tool-reported, public/web-verified, user-reported, or `확인 필요` classifications.
 
+[Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md) may evaluate Hermes as a future runtime/orchestrator wrapper around Codex, but it does not replace Codex as the primary patch-producing worker candidate or authorize worker execution.
+
 ## Relationship To The Worktree Harness
 
 The worktree harness verifies repo, path, remote, branch, worktree, lifecycle, status, cleanup, and report-only boundaries before worker execution can be considered.
