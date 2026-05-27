@@ -261,7 +261,7 @@ Explicit owner approval is required before:
 
 ## Stop Conditions
 
-Stop and report if a task using these criteria requires:
+Stop and report if a task using these criteria requires any of the following without explicit owner approval or outside the approved scope:
 
 - Hermes installation, execution, or configuration.
 - Codex runtime connection or worker execution.
@@ -276,7 +276,7 @@ Stop and report if a task using these criteria requires:
 - Trading repository design, trading implementation, live trading, risk cap logic, exchange credential handling, or model promotion logic.
 - Treating Hermes as production-adopted before evidence satisfies acceptance criteria and an owner approves adoption.
 - Expanding GitHub authority because Hermes evaluation exists.
-- Proceeding when repo, path, remote, branch, worktree, or source-of-truth classification is ambiguous.
+- Proceeding when repo, path, remote, branch, worktree, approval boundary, or source-of-truth classification is ambiguous.
 
 Use existing registry-backed stop states when they fit, including `STOPPED_SOURCE_OF_TRUTH_UNCLEAR`, `STOPPED_OWNER_DECISION_REQUIRED`, `STOPPED_IMPLEMENTATION_INCLUDED`, `STOPPED_WORKFLOW_INCLUDED`, `STOPPED_GITHUB_WRITE_AUTOMATION_INCLUDED`, `STOPPED_BRANCH_CLEANUP_IMPLEMENTED_TOO_EARLY`, `STOPPED_CREDENTIAL_OR_SECRET_CONTENT`, `STOPPED_TRADING_CODE_INCLUDED`, `STOPPED_LIVE_TRADING_RELATED_CONTENT`, `STOPPED_SAFETY_FIELD_DROPPED`, and `STOPPED_STOP_STATE_SURFACE_MISMATCH`.
 
