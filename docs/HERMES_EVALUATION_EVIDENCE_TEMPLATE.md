@@ -232,6 +232,7 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 | target_github_repo | TBD |
 | target_local_path | 확인 필요 |
 | evaluation_repo_scope | 확인 필요 |
+| base_branch | 확인 필요 |
 | related_docs | TBD |
 | related_prs | TBD |
 | run_started_at | 확인 필요 |
@@ -271,6 +272,7 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 | --- | --- | --- | --- |
 | repo path verification | 확인 필요 | 확인 필요 | TBD |
 | remote URL verification | 확인 필요 | 확인 필요 | TBD |
+| base branch | 확인 필요 | 확인 필요 | TBD |
 | current branch | 확인 필요 | 확인 필요 | TBD |
 | local HEAD | 확인 필요 | 확인 필요 | TBD |
 | worktree list | 확인 필요 | 확인 필요 | TBD |
@@ -377,9 +379,9 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 | Field | Value |
 | --- | --- |
 | evaluation_status | inconclusive |
-| stop_code | not_applicable |
-| stop_reason | not_applicable |
-| interrupted_lifecycle_context | not_applicable |
+| stop_state.code | not_applicable |
+| stop_state.reason | not_applicable |
+| lifecycle_trace | not_applicable |
 | owner_action_required | TBD |
 | recommended_next_action | TBD |
 
