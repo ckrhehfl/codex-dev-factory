@@ -67,6 +67,7 @@ This PR does not:
 | `primary_strategic_direction` | The owner-selected primary planning direction. This does not imply implementation, runtime execution, automation authority, credentials, billing, cleanup, or external writes. |
 | `partially_adopted` | The direction or principle is represented, but implementation details, verification, or owner approval remain incomplete. |
 | `deferred` | A valuable future component that requires separate design, owner decision, environment setup, permissions, or implementation. |
+| `retired_unless_reopened` | A previous planning path is no longer active and must not proceed unless the owner explicitly reopens it with a new approved scope. |
 | `reference_only` | Useful as a pattern, example, comparison, or fallback candidate, but not adopted as the primary stack. |
 | `rejected` | Conflicts with current safety policy, current scope, or explicit prohibitions. |
 | `확인 필요` | Cannot be classified beyond an unknown without fresh verification, owner decision, or missing source-of-truth docs. |
