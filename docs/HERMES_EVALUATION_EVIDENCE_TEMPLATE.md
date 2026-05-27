@@ -292,6 +292,8 @@ Future evaluation evidence packets may copy this non-executable Markdown skeleto
 | owner_gates_not_satisfied | TBD |
 | actions_explicitly_approved | TBD |
 | actions_explicitly_not_approved | TBD |
+| approval_source | 확인 필요 |
+| approval_evidence_class | 확인 필요 |
 | approval_boundary_status | 확인 필요 |
 
 ## Hermes Evaluation Evidence
