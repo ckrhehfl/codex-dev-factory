@@ -169,7 +169,7 @@ Future Hermes evaluation must not over-promote public-only evidence, user-report
 The runtime/orchestrator path should proceed through gated docs-first steps:
 
 1. Hermes runtime evaluation plan.
-2. Hermes sandbox validation criteria or acceptance criteria PR.
+2. [Hermes evaluation acceptance criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md).
 3. Owner-approved sandbox-only evaluation task.
 4. Runtime adoption decision gate.
 5. Publisher authority gate.
@@ -181,13 +181,13 @@ The plan keeps `Option 2 — Conditional Hermes-first` as an evaluation directio
 
 ## Recommended Next Action
 
-Recommended next action after this PR:
+Recommended next action after this plan and acceptance criteria exist:
 
-- Create a control-plane acceptance criteria PR for Hermes evaluation.
+- Create `Docs: define Hermes evaluation evidence template`.
 
 Alternative safe next action:
 
-- Create a sandbox-only Hermes evaluation planning PR.
+- Create `Docs: define Hermes sandbox validation runbook`.
 
 Neither follow-up should install, run, configure, or connect Hermes until the owner separately approves an execution task.
 
