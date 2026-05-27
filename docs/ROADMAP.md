@@ -84,6 +84,8 @@ Connect Codex execution only after the docs-first and local harness phases are a
 
 Define the [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) before implementation so future worker responsibilities, non-responsibilities, source-of-truth inputs, harness relationships, result/status outputs, validation behavior, owner gates, and stop conditions are explicit.
 
+Define the [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md) before any runtime/orchestrator installation or execution, so Hermes remains a conditional sandbox-only evaluation track, Codex remains the primary coding worker candidate, and the control-plane retains governance and authority boundaries.
+
 Worker connection must wait until the sandbox validation loop has proven docs-only PR creation, merge verification, remote branch cleanup, local cleanup, and lesson-check decisions.
 
 ## Phase 5: Publisher MVP
