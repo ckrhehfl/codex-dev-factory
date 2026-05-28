@@ -122,6 +122,27 @@ Merge remains separate unless explicitly requested.
 
 High-risk tasks must stop for owner decision before execution. Codex may still gather context, draft a plan, or summarize options, but it must not perform the high-risk action without approval.
 
+## Strong Bounded Codex Operating Policy
+
+PM/ChatGPT must always give the owner the exact WSL launch command for the intended Codex session.
+
+Use `cdfcheck` for read-only readiness or status checks. Use `cdfcodex` for normal bounded Codex work after readiness has passed. Default Codex Intelligence remains `medium/default`.
+
+When the task contract explicitly authorizes a low-risk docs-only bounded task, `cdfcodex` may run the full safe task loop in one run:
+
+- Create the task branch.
+- Edit only scoped files.
+- Run local validation, status, and diff checks.
+- Commit the in-scope result.
+- Push the branch.
+- Open a PR when appropriate.
+
+Codex should not stop after local edits by default when the owner has authorized the full bounded task loop.
+
+Strong or no-prompt mode is not a blank check. High or xhigh intelligence, API keys, GitHub secrets, GitHub settings changes, auto-merge, branch cleanup automation, Full Access, `danger-full-access`, `--yolo`, and broad unmanaged changes require separate explicit owner approval.
+
+Ordinary project progress belongs in handoff notes, not durable memory. Durable memory should store policy, reviewed lessons, or owner-approved long-lived facts rather than temporary session progress, local sync status, or handoff-style flow state.
+
 ## Stop States
 
 The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md). Codex must stop and report the matching state when one applies:
