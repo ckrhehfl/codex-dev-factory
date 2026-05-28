@@ -21,6 +21,14 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - Sandbox-first validation before any connection to external repositories or higher-risk systems.
 - Durable post-merge lessons captured as docs-only knowledge base entries.
 
+## Codex CLI Launch Rule
+
+- Use `cdfcheck` for read-only readiness or status checks.
+- Use `cdfcodex` for normal bounded Codex work after readiness passes.
+- Default Codex Intelligence is `medium/default`.
+- PM/ChatGPT must explicitly tell the owner which command to run.
+- High or xhigh intelligence, API keys, GitHub secrets, Full Access, `danger-full-access`, `--yolo`, auto-merge, and branch cleanup automation require separate explicit owner approval.
+
 ## Documents
 
 - [Vision](docs/VISION.md)
