@@ -132,6 +132,31 @@ The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns specific `STOPPED_*` reas
 
 The [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) helps prevent repeat lifecycle, review-fix, and stop-state mistakes.
 
+## PR-Producing Final Response Contract
+
+For any task that creates or updates a PR, the final response must begin with:
+
+```text
+PR: <url>
+PR number: <number>
+Branch: <branch>
+```
+
+The same final response must also include:
+
+- Commit hash.
+- Files changed.
+- Validation commands and outcomes.
+- Forbidden actions not performed.
+- Source-of-truth classification.
+- Recommended next action.
+
+This contract applies to docs-only PRs, Compound/post-merge lesson PRs, sandbox/control-plane PR-producing tasks, review-fix PR updates when a new commit is pushed, and any future Codex task that creates or updates a PR.
+
+This reporting contract does not authorize merge, branch deletion or cleanup, GitHub settings changes, workflow changes, ruleset/secret/permission changes, extra PR writes beyond the approved task scope, or Hermes GitHub/control-plane authority.
+
+Final response formatting does not replace PR body metadata, validation evidence, source-of-truth checks, or owner gates. PR body text, chat, handoff text, and prior assistant output are not repository source of truth by themselves.
+
 ## Stop Handling
 
 `STOPPED` is a lifecycle state.
