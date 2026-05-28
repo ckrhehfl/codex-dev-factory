@@ -40,4 +40,4 @@ jobs:
 
       - name: Run guard checks for push
         if: github.event_name == 'push'
-        run: python scripts/guard_checks.py --head-ref HEAD --branch "${HEAD_BRANCH}"
+        run: python scripts/guard_checks.py --base-ref "${{ github.event.before }}" --head-ref HEAD --branch "${HEAD_BRANCH}"

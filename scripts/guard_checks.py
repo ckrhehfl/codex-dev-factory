@@ -34,9 +34,9 @@ FORBIDDEN_EXECUTABLE_PATTERNS = (
     ("wsl_execution", re.compile(r"\bwsl(\.exe)?\b", re.I)),
     ("api_key_reference", re.compile(r"\b(" + "OPENAI" + r"_API_KEY|secrets\." + "OPENAI" + r"_API_KEY)\b", re.I)),
     ("github_secret_reference", re.compile(r"\bsecrets\." + r"[A-Z0-9_]+\b")),
-    ("auto_merge_command", re.compile(r"\bgh\s+pr\s+merge\b.*\b(--auto|--merge|--squash|--rebase)\b", re.I)),
-    ("force_delete_branch", re.compile(r"\bgit\s+branch\s+-D\b", re.I)),
-    ("force_push", re.compile(r"\bgit\s+push\b.*\b(--force|-f)\b", re.I)),
+    ("auto_merge_command", re.compile(r"\bgh\s+pr\s+merge\b.*(?<!\S)(--auto|--merge|--squash|--rebase)(?=\s|$)", re.I)),
+    ("force_delete_branch", re.compile(r"\bgit\s+branch\s+-D(?=\s|$)", re.I)),
+    ("force_push", re.compile(r"\bgit\s+push\b.*(?<!\S)(--force|-f)(?=\s|$)", re.I)),
 )
 
 MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
