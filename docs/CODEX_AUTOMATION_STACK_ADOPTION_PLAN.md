@@ -45,7 +45,7 @@ The current repository is a docs-first control plane. The preflight found:
 
 - No tracked `.github/workflows/**` files.
 - No tracked `scripts/**` files.
-- PR #58 was canceled and branch-cleaned; its unmerged workflow and script changes are not source of truth for this plan.
+- PR #58 was canceled. Its local work branch was deleted in this checkout, but any remote branch state remains `확인 필요`; its unmerged workflow and script changes are not source of truth for this plan.
 - Existing policy and contract docs for task intake, lifecycle, stop states, risk, PR metadata, allowed-files reporting, worker boundaries, GitHub operating policy, result packets, and solution lookup.
 - Existing result-packet vocabulary including `stop_state`, `lifecycle_trace`, `recommended_next_action`, source-of-truth classes, owner gates, forbidden actions, and remaining `확인 필요`.
 - Existing GitHub policy that prefers native auto-merge and automatic remote head branch deletion later, while requiring settings verification before relying on them.
