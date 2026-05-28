@@ -13,7 +13,7 @@ from pathlib import Path
 from urllib.parse import unquote
 
 
-TEXT_SUFFIXES = {".md", ".py", ".ps1", ".yml", ".yaml", ".txt"}
+TEXT_SUFFIXES = {".md", ".py", ".ps1", ".sh", ".bash", ".zsh", ".cmd", ".bat", ".yml", ".yaml", ".txt", ""}
 MARKDOWN_SUFFIXES = {".md"}
 WORKFLOW_SUFFIXES = {".yml", ".yaml"}
 PROTECTED_BRANCHES = {"main", "master", "develop"}
@@ -36,7 +36,7 @@ FORBIDDEN_EXECUTABLE_PATTERNS = (
     ("github_secret_reference", re.compile(r"\bsecrets\." + r"[A-Z0-9_]+\b")),
     ("auto_merge_command", re.compile(r"\bgh\s+pr\s+merge\b.*(?<!\S)(--auto|--merge|--squash|--rebase)(?=\s|$)", re.I)),
     ("force_delete_branch", re.compile(r"\bgit\s+branch\s+-D(?=\s|$)", re.I)),
-    ("force_push", re.compile(r"\bgit\s+push\b.*(?<!\S)(--force|-f)(?=\s|$)", re.I)),
+    ("force_push", re.compile(r"\bgit\s+push\b.*(?<!\S)(--force(?:-with-lease(?:=\S+)?)?|-f)(?=\s|$)", re.I)),
 )
 
 MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
