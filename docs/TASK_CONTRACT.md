@@ -128,7 +128,7 @@ PM/ChatGPT must always give the owner the exact WSL launch command for the inten
 
 Use `cdfcheck` for read-only readiness or status checks. Use `cdfcodex` for normal bounded Codex work after readiness has passed. Default Codex Intelligence remains `medium/default`.
 
-When the task contract explicitly authorizes a bounded task, `cdfcodex` may run the full safe task loop in one run:
+When the task contract explicitly authorizes a low-risk docs-only bounded task, `cdfcodex` may run the full safe task loop in one run:
 
 - Create the task branch.
 - Edit only scoped files.
@@ -139,7 +139,7 @@ When the task contract explicitly authorizes a bounded task, `cdfcodex` may run 
 
 Codex should not stop after local edits by default when the owner has authorized the full bounded task loop.
 
-Strong or no-prompt mode is not a blank check. High or xhigh intelligence, API keys, GitHub secrets, GitHub settings changes, auto-merge, branch cleanup automation, Full Access expansion, `danger-full-access` usage changes, `--yolo`, and broad unmanaged changes require separate explicit owner approval.
+Strong or no-prompt mode is not a blank check. High or xhigh intelligence, API keys, GitHub secrets, GitHub settings changes, auto-merge, branch cleanup automation, Full Access, `danger-full-access`, `--yolo`, and broad unmanaged changes require separate explicit owner approval.
 
 Ordinary project progress belongs in handoff notes, not durable memory. Durable memory should store policy, reviewed lessons, or owner-approved long-lived facts rather than temporary session progress, local sync status, or handoff-style flow state.
 
