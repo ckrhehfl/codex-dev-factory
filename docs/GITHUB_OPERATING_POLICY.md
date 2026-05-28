@@ -40,6 +40,25 @@ Merge is allowed only after owner approval until auto-merge eligibility is imple
 
 Auto-merge eligibility is a future policy and implementation phase. It must not be assumed from the repository setting alone.
 
+## GitHub UI Warning Handling
+
+Public or GitHub UI hidden/bidirectional Unicode warnings are signals, not repository source of truth by themselves.
+
+Before cleanup work is proposed or performed, affected files must be checked by a local scan or approved authenticated/tooling scan. At minimum, the scan should check:
+
+- `U+202A`, `U+202B`, `U+202C`, `U+202D`, `U+202E`
+- `U+2066`, `U+2067`, `U+2068`, `U+2069`
+- `U+200E`, `U+200F`, `U+061C`
+- `U+200B`, `U+200C`, `U+200D`, `U+2060`, `U+FEFF`
+- Unicode tag characters from `U+E0000` through `U+E007F`
+- Other non-whitespace Unicode control or format characters identified by the warning or scan tooling
+
+If target characters are found, evidence should report exact file, line, column, codepoint, Unicode name, and safe minimal context. Fixes should remove or justify only the specific character or characters in a narrow cleanup PR.
+
+If no target characters, tag characters, or warning-class hidden controls are found, classify the warning as `not locally reproduced` and do not create cleanup work from the UI warning alone.
+
+Do not normalize or rewrite whole files as part of warning handling. Do not broaden targeted warning handling into unrelated cleanup. Merge and branch cleanup remain owner-gated unless separately approved.
+
 ## Branch Cleanup
 
 GitHub remote head branch deletion is handled by the Automatically delete head branches setting.
