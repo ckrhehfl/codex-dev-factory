@@ -50,10 +50,12 @@ Before cleanup work is proposed or performed, affected files must be checked by 
 - `U+2066`, `U+2067`, `U+2068`, `U+2069`
 - `U+200E`, `U+200F`, `U+061C`
 - `U+200B`, `U+200C`, `U+200D`, `U+2060`, `U+FEFF`
+- Unicode tag characters from `U+E0000` through `U+E007F`
+- Other non-whitespace Unicode control or format characters identified by the warning or scan tooling
 
 If target characters are found, evidence should report exact file, line, column, codepoint, Unicode name, and safe minimal context. Fixes should remove or justify only the specific character or characters in a narrow cleanup PR.
 
-If no target characters are found, classify the warning as `not locally reproduced` and do not create cleanup work from the UI warning alone.
+If no target characters, tag characters, or warning-class hidden controls are found, classify the warning as `not locally reproduced` and do not create cleanup work from the UI warning alone.
 
 Do not normalize or rewrite whole files as part of warning handling. Do not broaden targeted warning handling into unrelated cleanup. Merge and branch cleanup remain owner-gated unless separately approved.
 
