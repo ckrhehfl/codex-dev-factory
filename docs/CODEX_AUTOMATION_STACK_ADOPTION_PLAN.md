@@ -169,6 +169,22 @@ The next thin control-plane work should be limited to:
 - A read-only Codex CLI availability/auth-path preflight gate that does not inspect credentials.
 - A read-only GitHub settings capability check before any reliance on auto-merge or automatic head branch deletion.
 
+## Guard/Check MVP
+
+The first thin guard/check MVP may add repository-native validation infrastructure only:
+
+- `scripts/guard_checks.py` for deterministic changed-file checks.
+- One GitHub Actions workflow that runs the guard script on pull requests and `main` pushes touching docs, guard scripts, or workflow files.
+
+The MVP guard surface should check:
+
+- Automation branch changed files stay inside docs, guard script, workflow, README, or AGENTS paths.
+- Warning-class hidden or bidirectional Unicode is absent from changed text files.
+- Changed Markdown local relative links resolve inside the repository.
+- Guard scripts and workflow files do not introduce executable surfaces for Codex, OMX, Hermes, WSL, API keys, GitHub secrets, force push, force branch deletion, or auto-merge commands.
+
+This MVP does not change GitHub settings, required checks, rulesets, permissions, secrets, auto-merge, automatic branch deletion, Codex GitHub Action usage, runtime execution, sandbox validation, or branch cleanup behavior.
+
 ## Minimum First PR Scope
 
 This adoption-plan PR should include only:

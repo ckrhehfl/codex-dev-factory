@@ -1,0 +1,43 @@
+name: Codex Guard Checks
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "scripts/**"
+      - "docs/**"
+      - "README.md"
+      - "AGENTS.md"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/**"
+      - "scripts/**"
+      - "docs/**"
+      - "README.md"
+      - "AGENTS.md"
+
+permissions:
+  contents: read
+
+jobs:
+  guard-checks:
+    name: Guard checks
+    runs-on: ubuntu-latest
+    env:
+      BASE_REF: ${{ github.base_ref || 'main' }}
+      HEAD_BRANCH: ${{ github.head_ref || github.ref_name }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run guard checks for pull request
+        if: github.event_name == 'pull_request'
+        run: python scripts/guard_checks.py --base-ref "origin/${BASE_REF}" --head-ref HEAD --branch "${HEAD_BRANCH}"
+
+      - name: Run guard checks for push
+        if: github.event_name == 'push'
+        run: python scripts/guard_checks.py --head-ref HEAD --branch "${HEAD_BRANCH}"
