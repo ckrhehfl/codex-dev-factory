@@ -4,11 +4,11 @@
 
 The repository had active planning surfaces for `Option 2 - Conditional Hermes-first` and future Hermes sandbox evaluation, while the owner later decided that Codex-primary multi-agent completion is the primary completion path.
 
-Without a narrow docs update, future agents could keep treating Hermes/Ollama local-model work as the active next path, or could promote user-reported installed Ollama state into repository source of truth without revalidation.
+Without a narrow docs update, future agents could keep treating the Ollama/local-model provider path as the active next path, or could promote user-reported installed Ollama state into repository source of truth without revalidation.
 
 ## Cause
 
-The Hermes documents were correct for their original owner-approved planning scope, but they remained discoverable as active roadmap and runtime-evaluation guidance after the strategic pivot.
+The Hermes documents were correct for their original owner-approved planning scope, but the initial pivot correction over-bundled Hermes tooling/orchestration with the retired Ollama/local-model provider path.
 
 The pivot also introduced new boundaries that were not yet represented in repo docs:
 
@@ -20,9 +20,9 @@ The pivot also introduced new boundaries that were not yet represented in repo d
 
 ## Solution
 
-When a strategic pivot supersedes an earlier runtime path, update active planning surfaces without erasing the historical documents.
+When a strategic pivot supersedes an earlier provider/model path, update active planning surfaces without erasing the historical documents.
 
-Use `superseded` for affected historical documents, and use `retired unless explicitly reopened` for the path itself. This preserves the evidence and review lessons while preventing future agents from reading older runbooks as active approval.
+Use `retired unless explicitly reopened` for the provider/model path itself. If a runtime/tooling/orchestration candidate remains active, label it separately instead of bundling it with the retired provider/model path.
 
 Record the new direction in the main decision surface, then add small cross-links from affected docs. For this pivot, the main decision surface is [Technical Stack Decision Record](../../TECH_STACK_DECISION_RECORD.md), with supporting updates in [Roadmap](../../ROADMAP.md), [Codex Worker Boundary](../../CODEX_WORKER_BOUNDARY.md), and the Hermes planning documents.
 
@@ -30,9 +30,9 @@ Record the new direction in the main decision surface, then add small cross-link
 
 The active strategic completion path is Codex-primary multi-agent completion.
 
-The Hermes/Ollama local-model path is retired unless explicitly reopened by the owner.
+The Ollama/local-model provider path is retired unless explicitly reopened by the owner.
 
-The prior Hermes documents remain historical/superseded planning artifacts. They are not deleted, and they do not approve Hermes installation, Hermes execution, Ollama execution, provider/model setup, local-model download, sandbox validation, runtime connection, cleanup inventory, or cleanup execution.
+Hermes remains an active conditional runtime/tooling/orchestration evaluation candidate for Codex-primary workflows. The prior Hermes documents do not approve Hermes installation, Hermes execution, Ollama execution, provider/model setup, local-model download, sandbox validation, runtime connection, cleanup inventory, or cleanup execution.
 
 ## What Remains Owner-Gated
 
@@ -42,7 +42,7 @@ Separate owner approval remains required for:
 - Codex multi-agent runtime implementation.
 - Automation, publisher behavior, GitHub writes, workflows, settings, rulesets, secrets, or permission changes.
 - Additional provider subscriptions, new API keys, OAuth setup, third-party model billing, credential inspection, or credential handling.
-- Hermes reopen, install, run, configuration, provider/model setup, or runtime connection.
+- Hermes install, run, configuration, authentication, provider/model setup, or runtime connection.
 - Ollama reopen, model download, provider setup, local model use, cleanup inventory, or cleanup execution.
 - Uninstall, service stop, WSL mutation, config deletion, or model deletion.
 - Sandbox mutation.
@@ -59,7 +59,7 @@ Future docs must not claim Ollama installed state is local-verified unless the t
 
 Before committing a docs update that changes architecture direction, self-review should check:
 
-- Are superseded documents clearly marked at the top?
+- Are retired provider/model paths clearly distinguished from active conditional runtime/tooling candidates?
 - Does the active roadmap point to the new path?
 - Does the main decision surface record the pivot without granting implementation authority?
 - Are user-reported facts separated from local-verified facts?
@@ -71,7 +71,7 @@ Before committing a docs update that changes architecture direction, self-review
 
 Apply this lesson when:
 
-- A previously active runtime, provider, model, or orchestrator path is superseded.
+- A previously active provider or model path is retired while a runtime/tooling/orchestrator candidate remains under evaluation.
 - A local installed state becomes cleanup context rather than active architecture.
 - A planning document should remain available for history but must not act as current authorization.
 - A strategic direction is adopted without implementation authority.
@@ -86,7 +86,21 @@ Apply this lesson when:
 
 Captured in the docs-only PR that records the Codex-primary pivot and Ollama retirement.
 
-No implementation follow-up is approved by this lesson. Future Codex multi-agent architecture planning, Ollama cleanup inventory, cleanup execution, Hermes reopen, provider/model setup, local-model download, credential handling, GitHub settings changes, sandbox mutation, and runtime implementation remain owner-gated.
+No implementation follow-up is approved by this lesson. Future Codex multi-agent architecture planning, Ollama cleanup inventory, cleanup execution, Hermes setup/config/auth/execution, provider/model setup, local-model download, credential handling, GitHub settings changes, sandbox mutation, and runtime implementation remain owner-gated.
+
+## Addendum: Hermes-Codex Correction
+
+A later owner correction clarified that this lesson over-bundled Hermes with Ollama/local-model retirement.
+
+The corrected strategy is:
+
+- Codex remains the primary coding worker and cost/credit path.
+- Hermes remains an active conditional runtime/tooling/orchestration evaluation candidate for Codex-primary workflows.
+- Ollama/local-model provider path is retired unless explicitly reopened.
+- Hermes-Codex integration requires a separate official-docs feasibility gate and later sandbox validation before setup, configuration, authentication, execution, provider/model work, or runtime connection.
+- GitHub/control-plane authority remains outside Hermes by default.
+
+Future pivots must separate runtime/tooling retirement from provider/model retirement. Ollama/local-model retirement does not imply Hermes runtime/tooling retirement. User-reported Ollama cleanup state remains user-reported unless revalidated in an approved task.
 
 ## Non-Goals
 

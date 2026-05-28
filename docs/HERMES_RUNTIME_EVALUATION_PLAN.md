@@ -1,12 +1,12 @@
 # Hermes Runtime Evaluation Plan
 
-## Superseded Status
+## Active Conditional Evaluation Status
 
-This document is a historical/superseded planning artifact. `Option 2 - Conditional Hermes-first` is no longer the active control-plane strategy.
+This document remains relevant as active conditional Hermes runtime/tooling/orchestration evaluation planning for Codex-primary workflows. Codex remains the primary coding worker and cost/credit path.
 
-The active strategic direction is Codex-primary multi-agent completion, recorded in [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md). The Hermes/Ollama local-model path is retired unless explicitly reopened by the owner.
+The Ollama/local-model provider path is retired unless explicitly reopened by the owner. No local LLM, local model download, Ollama reinstall, or local-model provider setup is approved.
 
-Future Hermes or Ollama work requires a new owner-approved reopen gate before any install, run, configuration, provider/model setup, local-model download, sandbox validation, runtime connection, cleanup inventory, or cleanup execution. This document must not be used as active approval to initiate Hermes/Ollama execution.
+Hermes-Codex integration requires a separate official-docs feasibility gate and later sandbox validation before setup, configuration, authentication, execution, provider/model work, or runtime connection. This document must not be used as active approval to initiate Hermes execution or delegate GitHub/control-plane authority to Hermes.
 
 ## Status
 
