@@ -43,6 +43,7 @@ It does not move files or change policy. Point-in-time evidence and audit docs a
 ## Architecture and Boundaries
 
 - [Codex Multi-Agent Architecture](CODEX_MULTI_AGENT_ARCHITECTURE.md)
+- [Codex Automation Stack Adoption Plan](CODEX_AUTOMATION_STACK_ADOPTION_PLAN.md)
 - [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md)
 - [Hermes-Codex Compatibility Matrix](HERMES_CODEX_COMPATIBILITY_MATRIX.md)
 - [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md)
