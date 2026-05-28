@@ -1,10 +1,10 @@
 # Hermes Sandbox Validation Runbook
 
-## Superseded Status
+## Active Conditional Validation Status
 
-This runbook is historical/superseded unless the owner explicitly reopens Hermes sandbox validation. No Hermes sandbox validation is currently approved.
+This runbook is not retired. It remains relevant if an owner-approved Hermes-Codex official-docs feasibility gate supports later sandbox validation planning. No Hermes sandbox validation is currently approved to run.
 
-The install, configuration, run, provider/model setup, local-model download, sandbox validation, and runtime-connection phases described below are not active next steps. Future Hermes or Ollama work requires a new owner-approved reopen gate.
+The install, configuration, run, provider/model setup, authentication, local-model download, sandbox validation, and runtime-connection phases described below are not active next steps. The Ollama/local-model provider path remains retired unless explicitly reopened.
 
 ## Status
 

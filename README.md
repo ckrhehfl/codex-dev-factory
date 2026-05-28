@@ -2,7 +2,7 @@
 
 This repository is the control-plane candidate for a Codex-first, autonomous-by-default development factory.
 
-Current strategic direction: Codex-primary multi-agent completion is the primary completion path. The Hermes/Ollama local-model evaluation path is retired unless explicitly reopened by the owner; the Hermes documents linked below are historical/superseded planning artifacts, not active next-step instructions. Ollama cleanup, if any, remains a separate owner-gated task.
+Current strategic direction: Codex-primary multi-agent completion is the primary completion path. The Ollama/local-model provider path is retired unless explicitly reopened by the owner. Hermes remains an active conditional runtime/tooling/orchestration evaluation candidate for Codex-primary workflows, but Hermes setup, configuration, authentication, execution, and sandbox validation still require future owner-approved gates. Ollama cleanup state, if referenced, remains user-reported unless revalidated in a separate approved task.
 
 The [Codex Multi-Agent Architecture](docs/CODEX_MULTI_AGENT_ARCHITECTURE.md) records the planning/control-plane guidance for future multi-agent coordination. It does not approve worker execution, implementation, merge, cleanup, rollback, credentials, providers, workflow changes, or sandbox mutation.
 

@@ -29,7 +29,8 @@ This document does not:
 - Create branches, PRs, commits, merges, cleanup, rollback, or GitHub write automation.
 - Mutate the sandbox repository or input folder.
 - Handle credentials, secrets, API keys, OAuth, tokens, provider setup, or billing setup.
-- Reopen Hermes, Ollama, local-model downloads, provider/model configuration, or local runtime evaluation.
+- Reopen Ollama, local-model downloads, provider/model configuration, or local runtime evaluation.
+- Set up, configure, authenticate, execute, or connect Hermes without a separate official-docs feasibility gate and later sandbox validation approval.
 - Authorize production, trading, live-boundary, risk cap, or model-promotion work.
 
 ## Architecture Overview
@@ -102,7 +103,8 @@ Owner approval is required for:
 - Merge or auto-merge.
 - Cleanup, branch deletion, worktree deletion, pruning, uninstall, service stop, or rollback.
 - Workflow, settings, ruleset, secret, permission, or required-check changes.
-- Credential inspection, credential handling, provider setup, OAuth, API keys, subscriptions, billing, local model downloads, Hermes, or Ollama.
+- Credential inspection, credential handling, provider setup, OAuth, API keys, subscriptions, billing, local model downloads, Ollama, or local-model provider use.
+- Hermes setup, configuration, authentication, execution, provider/model work, or runtime connection.
 - Sandbox mutation.
 - Production, trading, live-boundary, risk cap, or model-promotion work.
 
@@ -161,7 +163,7 @@ Codex credit usage is acceptable within the current owner plan/credit boundary. 
 - Stopping early on owner gates, dirty worktrees, duplicate PRs, or ambiguous scope.
 - Recording `credit_cost_class` in future task contracts when useful.
 
-This document does not approve additional provider subscriptions, new API keys, OAuth setup, third-party model billing, local model downloads, Hermes, Ollama, or external runtime spend.
+This document does not approve additional provider subscriptions, new API keys, OAuth setup, third-party model billing, local model downloads, Ollama, local-model provider use, Hermes setup/config/auth/execution, or external runtime spend. Hermes remains an active conditional runtime/tooling/orchestration evaluation candidate for Codex-primary workflows, subject to a separate official-docs feasibility gate and later sandbox validation.
 
 ## PR/Review/Merge Model
 
@@ -236,7 +238,8 @@ This architecture does not authorize:
 - Sandbox mutation.
 - GitHub settings, rulesets, required checks, secrets, permissions, or workflow changes.
 - Credentials, secrets, tokens, API keys, OAuth, external provider setup, subscriptions, or third-party billing.
-- Local model download, Hermes, Ollama, provider/model setup, or local runtime evaluation.
+- Local model download, Ollama, provider/model setup, or local runtime evaluation.
+- Hermes setup, configuration, authentication, execution, provider/model work, or runtime connection without separate approval.
 - PR creation, PR update, review-thread resolution, merge, cleanup, or rollback unless separately approved.
 - Production, trading, live-boundary, risk cap, or model-promotion work.
 

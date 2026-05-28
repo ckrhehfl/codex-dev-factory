@@ -88,9 +88,11 @@ Use the [Codex Multi-Agent Architecture](CODEX_MULTI_AGENT_ARCHITECTURE.md) as t
 
 Worker execution remains blocked until worker role contracts, evidence packet expectations, and sandbox dry-run planning are separately approved. Parallel mutation remains blocked until a later owner-approved dispatcher and reconciliation boundary defines separate branch/worktree ownership and non-overlapping file rules.
 
-The Hermes/Ollama local-model path is retired unless the owner explicitly reopens it. The [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md), [Hermes Evaluation Acceptance Criteria](HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md), [Hermes Evaluation Evidence Template](HERMES_EVALUATION_EVIDENCE_TEMPLATE.md), and [Hermes Sandbox Validation Runbook](HERMES_SANDBOX_VALIDATION_RUNBOOK.md) are historical/superseded planning artifacts, not active next-step instructions.
+Hermes remains an active conditional runtime/tooling/orchestration evaluation candidate for Codex-primary workflows. The next Hermes path is an official-docs feasibility gate for Hermes-Codex provider/runtime/auth boundaries, followed by sandbox validation planning only if feasibility supports it.
 
-If the owner later reopens Hermes or Ollama, that requires a new owner-approved reopen gate before any install, run, configuration, provider/model setup, local-model download, sandbox validation, or runtime connection.
+The Ollama/local-model provider path is retired unless the owner explicitly reopens it. No local LLM, local model download, Ollama reinstall, or local-model provider setup is approved by this roadmap.
+
+Hermes setup, configuration, authentication, execution, provider/model work, Codex runtime connection, and sandbox validation remain unapproved until separate owner-gated tasks. GitHub/control-plane authority remains outside Hermes by default.
 
 Treat any installed Ollama state as user-reported legacy cleanup context unless revalidated in a separate owner-approved cleanup inventory gate. Cleanup inventory remains separate from cleanup execution; uninstall, service stop, WSL mutation, config deletion, and model deletion require explicit future approval.
 

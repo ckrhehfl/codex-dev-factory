@@ -1,10 +1,10 @@
 # Hermes Evaluation Acceptance Criteria
 
-## Superseded Status
+## Active Conditional Evaluation Status
 
-These criteria are historical/superseded unless the owner explicitly reopens Hermes evaluation. They remain useful as acceptance and evidence-discipline reference material, but they are not active approval to install, run, configure, or evaluate Hermes.
+These criteria remain relevant for active conditional Hermes runtime/tooling/orchestration evaluation for Codex-primary workflows. They are not active approval to install, run, configure, authenticate, connect, or evaluate Hermes in a live task.
 
-The active strategic direction is Codex-primary multi-agent completion, recorded in [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md). Future Hermes or Ollama use requires a new owner-approved reopen gate.
+Future use requires an owner-approved Hermes-Codex feasibility or sandbox validation gate. The Ollama/local-model provider path remains retired unless explicitly reopened.
 
 ## Status
 

@@ -37,7 +37,7 @@ A future worker may consume:
 
 The worker does not become source of truth by itself. It must not override local-verified, authenticated/tool-reported, public/web-verified, user-reported, or `확인 필요` classifications.
 
-The [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md) now records Codex-primary multi-agent completion as the primary strategic completion path. The [Codex Multi-Agent Architecture](CODEX_MULTI_AGENT_ARCHITECTURE.md) covers future multi-agent coordination, while this document remains the per-worker boundary. The [Hermes Runtime Evaluation Plan](HERMES_RUNTIME_EVALUATION_PLAN.md) is historical/superseded; Hermes is no longer the active wrapper or evaluation path unless the owner explicitly reopens it. This does not authorize worker execution.
+The [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md) now records Codex-primary multi-agent completion as the primary strategic completion path. The [Codex Multi-Agent Architecture](CODEX_MULTI_AGENT_ARCHITECTURE.md) covers future multi-agent coordination, while this document remains the per-worker boundary. Hermes remains an active conditional wrapper/orchestration candidate for Codex-primary workflows only after official-docs feasibility and later sandbox validation. This does not authorize worker execution, Hermes setup/config/auth/execution, or GitHub/control-plane authority delegation.
 
 ## Relationship To The Worktree Harness
 
