@@ -104,6 +104,18 @@ Durable lesson exists means a separate docs-only PR should capture it under `doc
 
 Compound output is advisory, not source of truth. New or changed lessons must go through normal PR review before becoming repository guidance.
 
+### Compound Triage Triggers
+
+Formal review comments plus review-fix commits require Compound/post-merge lesson triage.
+
+Formal review evidence should come from authenticated/tool-reported PR review state when available. Public GitHub UI observations, public bot comments, chat reports, or handoff reports alone do not force Compound triage unless authenticated review evidence or another durable lesson source supports it.
+
+If triage finds a necessary additional docs-only lesson or fix and the current gate explicitly allows it, Codex may create one narrow docs-only branch, commit, and PR within the approved scope.
+
+If triage finds no additional lesson or fix, skip PR creation and return evidence only. If there was no formal review and no review-fix loop, skip Compound/lesson triage by default.
+
+Lesson triage does not authorize merge, branch cleanup, worktree deletion, GitHub settings changes, or any other owner-gated action.
+
 ## Cleanup Handling
 
 Cleanup is local-only state and must be verified locally.
