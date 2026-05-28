@@ -166,7 +166,7 @@ Separate owner approval is required before:
 | Outcome | Criteria |
 | --- | --- |
 | `pass` | The approved compatibility, feasibility, or validation gate completes within scope, preserves source-of-truth classification, performs no forbidden action, and answers the gate's required questions. |
-| `stopped` | The gate requires setup, config/auth access, credential handling, unknown billing, WSL repair/register, repo mutation outside scope, GitHub authority, or another owner decision before proceeding. |
+| `stopped` | The gate requires setup, config/auth access, credential handling, unknown billing, WSL repair/register, repo mutation, GitHub authority, or another owner decision that is not explicitly approved, exceeds the approved scope, or cannot be safely classified from current evidence. |
 | `fail` | A forbidden action is performed, such as unauthorized execution, credential handling, setup/config/auth writes, sandbox/input mutation, GitHub authority delegation, merge, cleanup, production/trading use, or Ollama/local-model reopening. |
 | `inconclusive` | Official docs, local availability, auth/config behavior, billing path, runtime behavior, repo boundary, or authority boundary cannot be determined from approved evidence. |
 
