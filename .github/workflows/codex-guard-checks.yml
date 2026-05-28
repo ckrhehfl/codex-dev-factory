@@ -2,12 +2,6 @@ name: Codex Guard Checks
 
 on:
   pull_request:
-    paths:
-      - ".github/workflows/**"
-      - "scripts/**"
-      - "docs/**"
-      - "README.md"
-      - "AGENTS.md"
   push:
     branches:
       - main
