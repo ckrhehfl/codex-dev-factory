@@ -62,6 +62,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Deep Research Intake and Traceability](docs/DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md)
 - [Technical Stack Decision Record](docs/TECH_STACK_DECISION_RECORD.md)
 - [Codex Multi-Agent Architecture](docs/CODEX_MULTI_AGENT_ARCHITECTURE.md)
+- [Codex Task Automation](docs/automation/CODEX_TASK_AUTOMATION.md)
 - [Worktree Harness MVP Boundary](docs/WORKTREE_HARNESS_MVP_BOUNDARY.md)
 - [Worktree Harness Result Contract](docs/WORKTREE_HARNESS_RESULT_CONTRACT.md)
 - [Harness Branch Naming and Ownership Policy](docs/HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md)
