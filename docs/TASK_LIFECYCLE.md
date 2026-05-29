@@ -82,7 +82,7 @@ PR body should include at minimum:
 
 Use the [Task Contract](TASK_CONTRACT.md) and [PR Metadata Guard](PR_METADATA_GUARD.md) as the canonical PR metadata contracts. This lifecycle checklist is a runbook reminder, not a replacement for the complete metadata contract.
 
-The required status check `Repo guard` is expected to protect `main`, but exact GitHub settings are owner-reported or manual unless authenticated settings are directly queried.
+Treat `Repo guard` protection on `main`, branch protection, required checks, and related GitHub settings as `확인 필요` unless authenticated settings are directly queried or the owner reports them from the GitHub UI.
 
 Conversation resolution may block merge.
 
