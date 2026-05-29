@@ -203,7 +203,7 @@ Owner actions are recommendations, not automation.
 
 ## Relationship to Existing Contracts
 
-The [Task Contract](TASK_CONTRACT.md) defines the source task fields that the guard checks.
+The [Task Contract](operations/TASK_CONTRACT.md) defines the source task fields that the guard checks.
 
 The [Local Task Format Contract](LOCAL_TASK_FORMAT.md) may later serialize `allowed_files`, `forbidden_files`, and `forbidden_actions`.
 
@@ -213,9 +213,9 @@ The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) defines validat
 
 The [Factory Status Result Contract](FACTORY_STATUS_RESULT.md) may later report allowed-files guard state and changed-file unknowns.
 
-The [PR Metadata Guard Contract](PR_METADATA_GUARD.md) may later consume allowed-files guard results for PR body completeness checks.
+The [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md) may later consume allowed-files guard results for PR body completeness checks.
 
-The [Task Lifecycle State Model](TASK_LIFECYCLE.md) defines when self-review, review-fix, merge-readiness, and stopped-state recovery happen.
+The [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) defines when self-review, review-fix, merge-readiness, and stopped-state recovery happen.
 
 The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns `STOPPED_*` codes used when the guard finds a blocking condition.
 

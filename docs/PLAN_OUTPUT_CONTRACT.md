@@ -8,11 +8,11 @@ This PR is docs-only. It does not create plan files, task YAML files, schemas, p
 
 ## Relationship to Task Contract
 
-A plan is derived from a valid [Task Contract](TASK_CONTRACT.md). The plan must not weaken the task contract or silently narrow the safety checks that were present in the task.
+A plan is derived from a valid [Task Contract](operations/TASK_CONTRACT.md). The plan must not weaken the task contract or silently narrow the safety checks that were present in the task.
 
 Future planning should consume only successful validation results described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md).
 
-Future planning should also preserve the lifecycle gates described in [Task Lifecycle State Model](TASK_LIFECYCLE.md), including separate merge, cleanup, and lesson-capture boundaries.
+Future planning should also preserve the lifecycle gates described in [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), including separate merge, cleanup, and lesson-capture boundaries.
 
 The plan must preserve:
 
@@ -50,7 +50,7 @@ Future plan output should include these sections:
 - PR metadata draft: Scope, Non-goals, Allowed files, Forbidden files, Forbidden actions, Validation plan, Stop conditions, Risk tier, Self-review result, and Confirmations.
 - Merge boundary: a clear statement that merge remains separate unless explicitly requested.
 
-Future PR metadata draft checks are defined in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). Planning must preserve enough metadata for that guard to verify title/body completeness without dropping safety fields.
+Future PR metadata draft checks are defined in [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md). Planning must preserve enough metadata for that guard to verify title/body completeness without dropping safety fields.
 
 Future changed-file boundary checks are defined in [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). Planning must preserve allowed and forbidden file boundaries so review-fix and pre-commit checks can compare actual changed files against the task contract.
 

@@ -48,7 +48,7 @@ When a new `STOPPED_*` code is added, update this registry first or in the same 
 
 Then update every relevant local Stop States section.
 
-If shared policy is affected, update [Risk Policy](RISK_POLICY.md).
+If shared policy is affected, update [Risk Policy](operations/RISK_POLICY.md).
 
 Recommended next actions and enum-like statuses must match declared stop states.
 

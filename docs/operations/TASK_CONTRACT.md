@@ -6,7 +6,7 @@ The task contract is the source format for safe Codex execution. It turns a requ
 
 This document is policy and documentation only. It does not implement a task parser, task YAML format, CLI command, worker, publisher, automation, or cleanup routine.
 
-The future local representation of this contract is described in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). Future validation result output is described in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). Future execution plan output is described in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). The task lifecycle is described in [Task Lifecycle State Model](TASK_LIFECYCLE.md). Future PR metadata checks are described in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). Future changed-file boundary checks are described in [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). The task contract remains the policy source; local formats, validation results, plans, lifecycle states, metadata guard results, and allowed-files guard results are only future representations or policy surfaces.
+The future local representation of this contract is described in [Local Task Format Contract](../LOCAL_TASK_FORMAT.md). Future validation result output is described in [Task Validation Result Contract](../TASK_VALIDATION_RESULT.md). Future execution plan output is described in [Plan Output Contract](../PLAN_OUTPUT_CONTRACT.md). The task lifecycle is described in [Task Lifecycle State Model](TASK_LIFECYCLE.md). Future PR metadata checks are described in [PR Metadata Guard Contract](PR_METADATA_GUARD.md). Future changed-file boundary checks are described in [Allowed-Files Guard Result Contract](../ALLOWED_FILES_GUARD.md). The task contract remains the policy source; local formats, validation results, plans, lifecycle states, metadata guard results, and allowed-files guard results are only future representations or policy surfaces.
 
 ## Required Task Fields
 
@@ -57,7 +57,7 @@ Medium-risk tooling or planning tasks:
 - Require an approved plan before implementation.
 - Must not write to external services unless separately approved.
 
-The Phase 2 local CLI skeleton is a planning example of this tier. Its contract is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md).
+The Phase 2 local CLI skeleton is a planning example of this tier. Its contract is defined in [Phase 2 CLI Skeleton Contract](../PHASE2_CLI_SKELETON.md).
 
 High-risk automation or write-action tasks:
 
@@ -155,7 +155,7 @@ Ordinary project progress belongs in handoff notes, not durable memory. Durable 
 
 ## Stop States
 
-The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md). Codex must stop and report the matching state when one applies:
+The canonical stop-state surface is [Stop-State Registry](../STOP_STATE_REGISTRY.md). Codex must stop and report the matching state when one applies:
 
 - `STOPPED_TASK_CONTRACT_INCOMPLETE`
 - `STOPPED_SOURCE_OF_TRUTH_UNVERIFIED`

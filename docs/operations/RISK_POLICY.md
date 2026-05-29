@@ -70,7 +70,7 @@ The docs-first phase forbids:
 
 ## Stop States
 
-The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md). Codex must stop and report the matching state if one is triggered:
+The canonical stop-state surface is [Stop-State Registry](../STOP_STATE_REGISTRY.md). Codex must stop and report the matching state if one is triggered:
 
 - `STOPPED_FORBIDDEN_FILE_CHANGE`
 - `STOPPED_IMPLEMENTATION_INCLUDED`

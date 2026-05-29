@@ -300,16 +300,16 @@ This example does not authorize PR publisher behavior, cleanup, branch deletion,
 
 - [Roadmap](ROADMAP.md) defines Phase 4 ordering for Codex worker connection.
 - [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md) classifies Codex-primary multi-agent completion as the primary strategic direction, while keeping worker implementation and execution unapproved.
-- [Risk Policy](RISK_POLICY.md) defines docs-only and high-risk boundaries.
-- [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) defines GitHub settings, branch protection, PR lifecycle, and cleanup boundaries.
-- [Task Contract](TASK_CONTRACT.md) defines required task fields and owner gates.
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md) defines lifecycle states, stopped-state recovery, merge, cleanup, and lesson boundaries.
+- [Risk Policy](operations/RISK_POLICY.md) defines docs-only and high-risk boundaries.
+- [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md) defines GitHub settings, branch protection, PR lifecycle, and cleanup boundaries.
+- [Task Contract](operations/TASK_CONTRACT.md) defines required task fields and owner gates.
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) defines lifecycle states, stopped-state recovery, merge, cleanup, and lesson boundaries.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md) owns `STOPPED_*` codes.
 - [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md) defines future harness responsibilities before implementation.
 - [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md) defines future harness result reporting.
 - [Worktree Harness Result Validation Checklist](WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md) defines non-executable validation checks for future results and examples.
 - [Worktree Harness Status Summary Format](WORKTREE_HARNESS_STATUS_SUMMARY_FORMAT.md) defines future status summary reporting.
-- [PR Metadata Guard](PR_METADATA_GUARD.md) defines PR metadata completeness and safety-field checks.
+- [PR Metadata Guard](operations/PR_METADATA_GUARD.md) defines PR metadata completeness and safety-field checks.
 - [Allowed-Files Guard](ALLOWED_FILES_GUARD.md) defines changed-file boundary reporting.
 
 ## Evidence Classification For This PR

@@ -34,7 +34,7 @@ Future `factory status` output should be structured enough for humans and later 
 - `local_git`: local repository and worktree state.
 - `remote_git`: remote branch and fetch state.
 - `task`: active task identity and contract summary when available.
-- `lifecycle`: task lifecycle state from the [Task Lifecycle State Model](TASK_LIFECYCLE.md).
+- `lifecycle`: task lifecycle state from the [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md).
 - `pr`: pull request state when available.
 - `validation`: validation summary and command results.
 - `risk`: risk tier and owner gates.
@@ -79,7 +79,7 @@ Local cleanup state must remain local-verified. A deleted remote branch does not
 
 ## Task and Lifecycle Reporting
 
-The `lifecycle` section should integrate with the [Task Lifecycle State Model](TASK_LIFECYCLE.md).
+The `lifecycle` section should integrate with the [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md).
 
 It should include:
 
@@ -271,7 +271,7 @@ next_recommended_action: revalidate_source_of_truth
 
 ## Relationship to Existing Contracts
 
-The [Task Contract](TASK_CONTRACT.md) defines task fields that status may summarize.
+The [Task Contract](operations/TASK_CONTRACT.md) defines task fields that status may summarize.
 
 The [Local Task Format Contract](LOCAL_TASK_FORMAT.md) may later provide serialized task data, but status must still preserve owner gates and safety fields.
 
@@ -279,7 +279,7 @@ The [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) defines planned execution ou
 
 The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) defines validation result details that status may summarize.
 
-The [Task Lifecycle State Model](TASK_LIFECYCLE.md) defines lifecycle states, interrupted-state recovery, merge boundaries, cleanup boundaries, and lesson-capture boundaries.
+The [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) defines lifecycle states, interrupted-state recovery, merge boundaries, cleanup boundaries, and lesson-capture boundaries.
 
 The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns specific stop codes. Status reports those codes; it does not invent replacements.
 
@@ -287,7 +287,7 @@ The [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) defines lookup timin
 
 Future PR metadata guards and allowed-files guards may consume status output conceptually, but this PR does not implement those guards.
 
-The [PR Metadata Guard Contract](PR_METADATA_GUARD.md) defines how future status reporting may include PR title/body completeness, metadata unknowns, and owner-controlled merge notes.
+The [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md) defines how future status reporting may include PR title/body completeness, metadata unknowns, and owner-controlled merge notes.
 
 The [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) defines how future status reporting may include changed-file boundary checks, changed-file source unknowns, and allowed/forbidden file preservation.
 

@@ -36,25 +36,25 @@ Each task should define:
 
 For docs-first work, allowed files should be narrow and explicit.
 
-Solution lookup expectations are defined in [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md). Policy and documentation tasks should consult `docs/solutions/**` during intake, before planning, before commit, and during matching review-fix classification.
+Solution lookup expectations are defined in [Solution Lookup Protocol](../SOLUTION_LOOKUP_PROTOCOL.md). Policy and documentation tasks should consult `docs/solutions/**` during intake, before planning, before commit, and during matching review-fix classification.
 
-Sandbox validation expectations are defined in [Sandbox Validation](SANDBOX_VALIDATION.md). Sandbox tasks must prove the factory can run low-risk docs-only loops before any trading repository integration.
+Sandbox validation expectations are defined in [Sandbox Validation](../SANDBOX_VALIDATION.md). Sandbox tasks must prove the factory can run low-risk docs-only loops before any trading repository integration.
 
-Sandbox validation evidence expectations are defined in [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md). Future sandbox runs should record evidence for source-of-truth, lifecycle, PR, review, merge, cleanup, guard, lesson-review, owner-decision, unknown, and stop-state outcomes before a pass/fail/blocking result is accepted.
+Sandbox validation evidence expectations are defined in [Sandbox Validation Evidence Contract](../SANDBOX_VALIDATION_EVIDENCE.md). Future sandbox runs should record evidence for source-of-truth, lifecycle, PR, review, merge, cleanup, guard, lesson-review, owner-decision, unknown, and stop-state outcomes before a pass/fail/blocking result is accepted.
 
-Phase transition readiness is defined in [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md). The readiness audit is a docs-only evidence check before sandbox repository planning, sandbox validation, or Phase 2 CLI skeleton implementation.
+Phase transition readiness is defined in [Phase 1/2 Readiness Audit](../PHASE_READINESS_AUDIT.md). The readiness audit is a docs-only evidence check before sandbox repository planning, sandbox validation, or Phase 2 CLI skeleton implementation.
 
-Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md). The planned CLI may validate and report task state conceptually, but it must not mutate repository or GitHub state until implementation is separately approved.
+Phase 2 local CLI planning is defined in [Phase 2 CLI Skeleton Contract](../PHASE2_CLI_SKELETON.md). The planned CLI may validate and report task state conceptually, but it must not mutate repository or GitHub state until implementation is separately approved.
 
-Future local task representation is defined in [Local Task Format Contract](LOCAL_TASK_FORMAT.md). It serializes the task contract conceptually, but does not replace the task contract as the policy source.
+Future local task representation is defined in [Local Task Format Contract](../LOCAL_TASK_FORMAT.md). It serializes the task contract conceptually, but does not replace the task contract as the policy source.
 
-Future validation result output is defined in [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). It may report task completeness conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
+Future validation result output is defined in [Task Validation Result Contract](../TASK_VALIDATION_RESULT.md). It may report task completeness conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
 
-Future plan output is defined in [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md). It may organize execution steps conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
+Future plan output is defined in [Plan Output Contract](../PLAN_OUTPUT_CONTRACT.md). It may organize execution steps conceptually, but it must preserve safety-critical task fields, including forbidden files and forbidden actions.
 
-Future factory status output is defined in [Factory Status Result Contract](FACTORY_STATUS_RESULT.md). It may summarize local repo, task, lifecycle, PR, validation, risk, stop, unknown, and owner-action state conceptually, but it must not mutate repository or GitHub state.
+Future factory status output is defined in [Factory Status Result Contract](../FACTORY_STATUS_RESULT.md). It may summarize local repo, task, lifecycle, PR, validation, risk, stop, unknown, and owner-action state conceptually, but it must not mutate repository or GitHub state.
 
-Future allowed-files guard output is defined in [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). It may compare changed files against task boundaries conceptually, but it must not edit files, stage changes, commit, push, create PRs, merge, or clean branches.
+Future allowed-files guard output is defined in [Allowed-Files Guard Result Contract](../ALLOWED_FILES_GUARD.md). It may compare changed files against task boundaries conceptually, but it must not edit files, stage changes, commit, push, create PRs, merge, or clean branches.
 
 The canonical docs-only task lifecycle is defined in [Task Lifecycle State Model](TASK_LIFECYCLE.md). It describes how a task moves from owner intent through task contract, branch work, PR creation, review-fix loop, merge, cleanup, and post-merge lesson handling.
 
@@ -109,7 +109,7 @@ After a future merge, the factory should check whether the task produced reusabl
 
 Lesson capture should remain documentation-only until the owner approves stronger automation.
 
-Durable post-merge lessons may be captured in the [Compound Knowledge Base](solutions/README.md) through a separate docs-only PR. Compound output is advisory until reviewed and merged.
+Durable post-merge lessons may be captured in the [Compound Knowledge Base](../solutions/README.md) through a separate docs-only PR. Compound output is advisory until reviewed and merged.
 
 Review-fix lessons should identify whether the issue was missing task detail, incomplete metadata, unclear stop conditions, cross-document consistency, wording, reviewer preference, or no durable lesson.
 

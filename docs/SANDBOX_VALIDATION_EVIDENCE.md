@@ -96,7 +96,7 @@ A future evidence packet should be structured enough for humans and later toolin
 
 ## Lifecycle Trace
 
-The evidence packet should integrate with the [Task Lifecycle State Model](TASK_LIFECYCLE.md).
+The evidence packet should integrate with the [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md).
 
 The trace should record:
 
@@ -134,7 +134,7 @@ If review occurred, post-merge lesson review should be recorded as performed, sk
 
 Evidence should integrate with:
 
-- [PR Metadata Guard Contract](PR_METADATA_GUARD.md).
+- [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md).
 - [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md).
 - [Task Validation Result Contract](TASK_VALIDATION_RESULT.md).
 - [Factory Status Result Contract](FACTORY_STATUS_RESULT.md).
@@ -338,13 +338,13 @@ The [Acceptance Tests](ACCEPTANCE_TESTS.md) define docs-only, sandbox, metadata,
 
 The [Roadmap](ROADMAP.md) defines phase ordering and implementation boundaries.
 
-The [Operating Model](OPERATING_MODEL.md) defines task intake, source-of-truth revalidation, owner gates, PR lifecycle, cleanup, and lesson handling.
+The [Operating Model](operations/OPERATING_MODEL.md) defines task intake, source-of-truth revalidation, owner gates, PR lifecycle, cleanup, and lesson handling.
 
-The [Task Lifecycle State Model](TASK_LIFECYCLE.md) defines lifecycle states, stopped-state recovery, merge boundaries, cleanup boundaries, and lesson-capture boundaries.
+The [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) defines lifecycle states, stopped-state recovery, merge boundaries, cleanup boundaries, and lesson-capture boundaries.
 
-The [Task Contract](TASK_CONTRACT.md), [Local Task Format Contract](LOCAL_TASK_FORMAT.md), and [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) define task and planning fields that evidence packets may summarize.
+The [Task Contract](operations/TASK_CONTRACT.md), [Local Task Format Contract](LOCAL_TASK_FORMAT.md), and [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) define task and planning fields that evidence packets may summarize.
 
-The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) define validation, status, PR metadata, and changed-file guard surfaces that evidence packets may report.
+The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) define validation, status, PR metadata, and changed-file guard surfaces that evidence packets may report.
 
 The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns active `STOPPED_*` codes.
 

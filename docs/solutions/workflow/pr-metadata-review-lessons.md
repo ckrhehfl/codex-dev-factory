@@ -9,13 +9,13 @@ PR #15 metadata review lesson: self-review evidence and confirmations are requir
 - PR #15: [Docs: define PR metadata guard contract](https://github.com/ckrhehfl/codex-dev-factory/pull/15)
 - Original commit: `a47d09d` (`Docs: define PR metadata guard contract`)
 - Review-fix commit: `0cf5822` (`Docs: address review comments`)
-- Changed file: [PR Metadata Guard Contract](../../PR_METADATA_GUARD.md)
+- Changed file: [PR Metadata Guard Contract](../../operations/PR_METADATA_GUARD.md)
 
 ## Problem Observed
 
 PR #15 introduced the PR metadata guard contract, but the first version omitted `Self-review result` and `Confirmations` from the guard's required metadata sections.
 
-Those fields were already required by the [Task Contract](../../TASK_CONTRACT.md) and [Acceptance Tests](../../ACCEPTANCE_TESTS.md). Because the new guard was positioned as the canonical completeness check, the omission could allow PR metadata to pass even when self-review evidence or task-specific safety confirmations were absent.
+Those fields were already required by the [Task Contract](../../operations/TASK_CONTRACT.md) and [Acceptance Tests](../../ACCEPTANCE_TESTS.md). Because the new guard was positioned as the canonical completeness check, the omission could allow PR metadata to pass even when self-review evidence or task-specific safety confirmations were absent.
 
 ## Root Cause
 
@@ -51,20 +51,20 @@ For PR metadata, task contract, plan output, validation result, factory status, 
 
 ## Affected Policy Surfaces
 
-- [PR Metadata Guard Contract](../../PR_METADATA_GUARD.md)
-- [Task Contract](../../TASK_CONTRACT.md)
+- [PR Metadata Guard Contract](../../operations/PR_METADATA_GUARD.md)
+- [Task Contract](../../operations/TASK_CONTRACT.md)
 - [Acceptance Tests](../../ACCEPTANCE_TESTS.md)
 - [Plan Output Contract](../../PLAN_OUTPUT_CONTRACT.md)
 - [Task Validation Result Contract](../../TASK_VALIDATION_RESULT.md)
 - [Factory Status Result Contract](../../FACTORY_STATUS_RESULT.md)
-- [Task Lifecycle State Model](../../TASK_LIFECYCLE.md)
+- [Task Lifecycle State Model](../../operations/TASK_LIFECYCLE.md)
 - [Solution Lookup Protocol](../../SOLUTION_LOOKUP_PROTOCOL.md)
 
 ## Example Application in Future Tasks
 
 If a future docs task defines or changes a PR metadata guard, PR publisher contract, plan-to-PR metadata transformation, status reporting contract, or validation reporting contract:
 
-1. Compare required PR metadata sections against the [Task Contract](../../TASK_CONTRACT.md) and [Acceptance Tests](../../ACCEPTANCE_TESTS.md).
+1. Compare required PR metadata sections against the [Task Contract](../../operations/TASK_CONTRACT.md) and [Acceptance Tests](../../ACCEPTANCE_TESTS.md).
 2. Preserve `Self-review result` as separate evidence when self-review gates commit, push, or PR creation.
 3. Preserve `Confirmations` as separate evidence when the task requires explicit safety statements.
 4. Keep task-specific confirmations visible in PR metadata rather than relying only on broad non-goals.

@@ -2,7 +2,7 @@
 
 ## Problem
 
-PR #8 introduced or used `STOPPED_FORBIDDEN_OR_AMBIGUOUS_FIELD` as a recommended next action, but the stop state needed to be reflected consistently in the local Stop States section and the shared [Risk Policy](../../RISK_POLICY.md) surface.
+PR #8 introduced or used `STOPPED_FORBIDDEN_OR_AMBIGUOUS_FIELD` as a recommended next action, but the stop state needed to be reflected consistently in the local Stop States section and the shared [Risk Policy](../../operations/RISK_POLICY.md) surface.
 
 ## Cause
 
@@ -14,7 +14,7 @@ That left an enum-like policy value visible in one section before it was declare
 
 When adding any `STOPPED_*` code, update every relevant local Stop States section.
 
-If the stop state is a shared policy state, update [Risk Policy](../../RISK_POLICY.md).
+If the stop state is a shared policy state, update [Risk Policy](../../operations/RISK_POLICY.md).
 
 When a `STOPPED_*` code appears as a recommended next action, status, or enum-like output value, treat it as a stop state unless the document clearly frames it as non-stop status.
 

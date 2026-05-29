@@ -8,9 +8,9 @@ This PR is docs-only. It does not create validation result files, task YAML file
 
 ## Relationship to Task Contract
 
-Validation checks whether a [Task Contract](TASK_CONTRACT.md) is complete enough for planning. It must not weaken the task contract, infer missing safety fields, or drop fields that were present in the task.
+Validation checks whether a [Task Contract](operations/TASK_CONTRACT.md) is complete enough for planning. It must not weaken the task contract, infer missing safety fields, or drop fields that were present in the task.
 
-Validation may report whether a task is ready to move through the lifecycle described in [Task Lifecycle State Model](TASK_LIFECYCLE.md), but it must not skip source-of-truth revalidation, owner gates, merge boundaries, cleanup checks, or lesson-capture boundaries.
+Validation may report whether a task is ready to move through the lifecycle described in [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), but it must not skip source-of-truth revalidation, owner gates, merge boundaries, cleanup checks, or lesson-capture boundaries.
 
 Validation must preserve:
 

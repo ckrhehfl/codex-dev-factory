@@ -38,9 +38,9 @@ Related reporting and safety surfaces:
 
 - [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) defines task validation result expectations.
 - [Factory Status Result Contract](FACTORY_STATUS_RESULT.md) defines broader status reporting expectations.
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md) defines lifecycle states, stopped handling, cleanup boundaries, and lesson-review boundaries.
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) defines lifecycle states, stopped handling, cleanup boundaries, and lesson-review boundaries.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md) owns `STOPPED_*` codes.
-- [PR Metadata Guard Contract](PR_METADATA_GUARD.md) defines required PR metadata surfaces.
+- [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md) defines required PR metadata surfaces.
 - [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) defines changed-file boundary reporting.
 - [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md) defines branch and worktree ownership policy that future results should report.
 - [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md) defines retention state classes and report-first retention result fields.
@@ -434,11 +434,11 @@ recommended_next_action: define_controlled_cleanup_policy_before_automation
 
 Future worktree harness results must align with:
 
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md).
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md).
 - [Stop-State Registry](STOP_STATE_REGISTRY.md).
 - [Task Validation Result Contract](TASK_VALIDATION_RESULT.md).
 - [Factory Status Result Contract](FACTORY_STATUS_RESULT.md).
-- [PR Metadata Guard Contract](PR_METADATA_GUARD.md).
+- [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md).
 - [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md).
 - [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md).
 

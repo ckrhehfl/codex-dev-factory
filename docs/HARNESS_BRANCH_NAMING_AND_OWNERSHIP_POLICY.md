@@ -366,9 +366,9 @@ This policy aligns with:
 
 - [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md), which keeps worktree harness design docs-only and excludes cleanup automation.
 - [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md), which requires branch/worktree ownership evidence, cleanup as report-only, evidence classification, and safety-field preservation.
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md), which separates branch work, review, merge, cleanup, and lesson capture.
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), which separates branch work, review, merge, cleanup, and lesson capture.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md), which owns `STOPPED_*` codes.
-- [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md), which require source-of-truth reporting and safety-field preservation.
+- [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md), which require source-of-truth reporting and safety-field preservation.
 
 If future policy adds new stop codes, cleanup permissions, lifecycle behavior, or owner gates, it must update every relevant policy surface in the same approved PR.
 

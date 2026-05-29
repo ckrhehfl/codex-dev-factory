@@ -296,8 +296,8 @@ This document introduces no new `STOPPED_*` code.
 - [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) preserves Codex as the primary patch-producing worker candidate and keeps worker execution owner-gated.
 - [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md) keeps worktree behavior bounded before implementation.
 - [Worktree Harness Status Summary Format](WORKTREE_HARNESS_STATUS_SUMMARY_FORMAT.md) defines status summary fields that future Hermes outputs should map to.
-- [Risk Policy](RISK_POLICY.md) distinguishes low-risk docs-only work from high-risk implementation and authority changes.
-- [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) keeps GitHub settings, merge, auto-merge, and authority changes gated.
+- [Risk Policy](operations/RISK_POLICY.md) distinguishes low-risk docs-only work from high-risk implementation and authority changes.
+- [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md) keeps GitHub settings, merge, auto-merge, and authority changes gated.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md) owns registry-backed stop codes.
 - [Deep Research Intake and Traceability](DEEP_RESEARCH_INTAKE_AND_TRACEABILITY.md) keeps Deep Research as source input, not repo source of truth by itself.
 

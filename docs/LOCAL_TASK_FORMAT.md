@@ -31,13 +31,13 @@ These fields are descriptive only. This document intentionally avoids a real `.y
 
 ## Relationship to Task Contract
 
-The local task format is a serialized form of the [Task Contract](TASK_CONTRACT.md).
+The local task format is a serialized form of the [Task Contract](operations/TASK_CONTRACT.md).
 
 The task contract remains the policy source. The local task format is only a future representation that may help local tooling read, validate, and plan from the same policy fields.
 
 Future allowed-files guard results may consume the local task format conceptually, but they must preserve `allowed_files`, `forbidden_files`, and `forbidden_actions` rather than treating the allow-list as the whole boundary.
 
-The [Task Lifecycle State Model](TASK_LIFECYCLE.md) describes how a task moves through owner intent, validation, branch work, PR review, merge, cleanup, and lesson handling. A future serialized task may report lifecycle state, but it must not bypass lifecycle gates or owner decisions.
+The [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) describes how a task moves through owner intent, validation, branch work, PR review, merge, cleanup, and lesson handling. A future serialized task may report lifecycle state, but it must not bypass lifecycle gates or owner decisions.
 
 If the format and task contract ever conflict, the task contract governs until the owner approves an update.
 
