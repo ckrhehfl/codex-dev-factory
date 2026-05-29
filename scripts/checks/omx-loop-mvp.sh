@@ -66,9 +66,9 @@ printf '\n'
 
 printf 'Stop instead of continuing when:\n'
 print_stage "High or xhigh Codex Intelligence appears necessary."
-print_stage "GitHub settings, rulesets, secrets, API keys, or Actions permissions are required."
-print_stage "An OMX command would mutate setup, state, config, tasks, teams, or runtime behavior."
-print_stage "The task asks for Zeroshot, Hermes, docs folderization, auto-merge, or branch cleanup automation."
+print_stage "GitHub settings, rulesets, required checks, Actions permissions, secrets, API keys, or repository permissions are required."
+print_stage "An OMX command would mutate setup, state, config, tasks, teams, plans, logs, or runtime behavior."
+print_stage "The task asks for Zeroshot, Hermes, docs folderization, auto-merge, branch cleanup automation, sandbox/runtime changes, or a broad automation engine."
 print_stage "Scope requires more than the approved files, risk tier, or owner gates."
 printf '\n'
 
