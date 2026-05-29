@@ -32,7 +32,7 @@ bash scripts/checks/omx-loop-mvp.sh
 The helper verifies or reports:
 
 - The repository root resolves to `codex-dev-factory`.
-- `origin` is `git@github.com:ckrhehfl/codex-dev-factory.git`.
+- `origin` is `git@github.com:ckrhehfl/codex-dev-factory.git` or `https://github.com/ckrhehfl/codex-dev-factory.git`.
 - Whether the working tree is clean.
 - `omx --version` is available.
 
