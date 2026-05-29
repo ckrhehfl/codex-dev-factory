@@ -97,7 +97,8 @@ elif [[ -z "$working_tree_lines" ]]; then
   working_tree_status="clean"
 else
   working_tree_status="dirty"
-  add_warning "working tree has local changes; reported as status only"
+  add_warning "working tree has local changes"
+  set_stop "STOPPED_LOCAL_WORKTREE_DIRTY"
 fi
 
 case "$repo_path" in
