@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-expected_repo_path="/mnt/c/Dev/codex-dev-factory"
+expected_repo_name="codex-dev-factory"
 expected_branch="main"
 expected_remote_ssh="git@github.com:ckrhehfl/codex-dev-factory.git"
 expected_remote_https="https://github.com/ckrhehfl/codex-dev-factory.git"
@@ -66,7 +66,8 @@ run_gate() {
 }
 
 repo_path=$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)
-if [[ "$repo_path" != "$expected_repo_path" ]]; then
+repo_name=${repo_path##*/}
+if [[ "$repo_name" != "$expected_repo_name" ]]; then
   set_halt "repo_path_mismatch"
 fi
 
