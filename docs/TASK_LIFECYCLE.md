@@ -66,7 +66,11 @@ PR body should include at minimum:
 
 - Summary of the lifecycle or runbook update.
 - Scope confirmation.
+- Non-goals.
+- Allowed files.
 - Validation results.
+- Stop conditions.
+- Risk tier.
 - Self-review result.
 - Confirmations.
 - Solution lookup result, including applicable lessons or `No applicable solution found.`.
