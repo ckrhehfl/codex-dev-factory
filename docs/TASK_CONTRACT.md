@@ -122,6 +122,16 @@ Merge remains separate unless explicitly requested.
 
 High-risk tasks must stop for owner decision before execution. Codex may still gather context, draft a plan, or summarize options, but it must not perform the high-risk action without approval.
 
+## Manual PR Merge Gate
+
+PM/ChatGPT must continue to give the owner the exact WSL launch command for the intended Codex session, usually `cdfcodex` for bounded work after readiness has passed.
+
+For PRs, `Repo guard` must pass before owner merge. Unresolved review comments or conversations must be resolved before owner merge. Codex Review or review comments should be checked manually before owner merge.
+
+Passing checks do not mean automatic merge. Auto-merge remains disabled or not the default unless the owner separately approves it for a later task.
+
+API-based merge readiness checks and automated merge loops are future work. For now, the owner remains the final merge gate.
+
 ## Strong Bounded Codex Operating Policy
 
 PM/ChatGPT must always give the owner the exact WSL launch command for the intended Codex session.
