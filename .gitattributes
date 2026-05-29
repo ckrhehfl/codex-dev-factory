@@ -1,0 +1,2 @@
+# Keep shell scripts runnable in WSL/Windows shared checkouts.
+*.sh text eol=lf
