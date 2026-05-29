@@ -31,6 +31,15 @@ case "$repo_root" in
   *) report_failure "repository root must end with $expected_path_suffix; got ${repo_root:-unknown}" ;;
 esac
 
+if [[ "$branch_name" != "main" ]]; then
+  report_failure "current branch must be main before starting a new local loop; got ${branch_name:-unknown}"
+fi
+
+if (( failures > 0 )); then
+  printf '\nomx-loop-mvp: failed with %d violation(s)\n' "$failures" >&2
+  exit 1
+fi
+
 printf 'OMX local loop MVP checklist gate\n'
 printf 'repo_path: %s\n' "${repo_root:-$current_path}"
 printf 'current_branch: %s\n' "${branch_name:-unknown}"
