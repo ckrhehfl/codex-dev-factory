@@ -4,7 +4,7 @@ set -euo pipefail
 packet_type="omx_loop_status"
 packet_version="1"
 status_source="omx-status-adapter"
-evidence_class="local-verified"
+evidence_class="unknown"
 no_mutations_performed="unknown"
 
 warnings="[]"
@@ -67,6 +67,7 @@ remote_url_sanitized=$(adapter_field "remote_url")
 branch=$(adapter_field "branch")
 working_tree_status=$(adapter_field "working_tree_status")
 omx_version=$(adapter_field "omx_version")
+adapter_evidence_class=$(adapter_field "evidence_class")
 adapter_warnings=$(adapter_field "warnings")
 adapter_stop=$(adapter_field "stop_condition")
 adapter_no_mutations=$(adapter_field "no_mutations_performed")
@@ -75,6 +76,7 @@ repo_path=${repo_path:-$repo_root}
 branch=${branch:-unknown}
 working_tree_status=${working_tree_status:-unknown}
 omx_version=${omx_version:-unavailable}
+evidence_class=${adapter_evidence_class:-unknown}
 
 warnings=$(normalize_warnings "$adapter_warnings")
 stop_condition=$(normalize_stop_condition "$adapter_stop")
