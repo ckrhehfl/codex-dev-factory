@@ -143,7 +143,7 @@ def line_column(text, index):
 failures = 0
 
 for mode, path in tracked_entries():
-    if mode == "120000":
+    if not mode.startswith("100"):
         continue
 
     if is_credential_like(path):
