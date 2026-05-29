@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-packet_emitter="scripts/checks/omx-loop-packet.sh"
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)
+packet_emitter="$repo_root/scripts/checks/omx-loop-packet.sh"
 
 packet_output=""
 packet_exit=0
