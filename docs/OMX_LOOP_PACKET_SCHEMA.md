@@ -22,6 +22,7 @@ PM/Codex should treat this schema as the stable normalized consumption contract 
 - `detected_omx_mode_scope` into `status_source` evidence when safely available.
 - helper pass/stop output into `checklist_gate_result`.
 - adapter warnings and stop state into `warnings`, `stop_condition`, and `next_safe_action`.
+- helper gate failure or unknown gate state into `checklist_gate_result`, `warnings`, and a non-empty `stop_condition` when the helper failure means normal loop progression is unsafe.
 
 The only approved OMX command remains:
 
@@ -76,15 +77,15 @@ Every normalized OMX loop packet consumed by PM/Codex must include these fields:
 
 `no_mutations_performed` must be `true` for this packet. A packet that required mutation is invalid for this schema.
 
-`checklist_gate_result` reports whether the loop checklist gate is safe to present or continue from. Use concise values such as `passed`, `stopped`, or `확인 필요`.
+`checklist_gate_result` reports whether the loop checklist gate is safe to present or continue from. Use concise values such as `passed`, `stopped`, or `확인 필요`. Any value other than `passed` is a halt signal unless a separately reviewed contract defines a narrower non-blocking meaning.
 
-`next_safe_action` is the conservative next action PM/Codex may report. It must not authorize mutating OMX commands, merge, auto-merge, branch cleanup automation, GitHub settings changes, or scope expansion.
+`next_safe_action` is the conservative next action PM/Codex may report. It must not authorize mutating OMX commands, merge, auto-merge, branch cleanup automation, GitHub settings changes, or scope expansion. When `checklist_gate_result` is not `passed`, this field should tell PM/Codex to report the gate failure and stop until the failing precondition is resolved.
 
 ## Stop-Condition Handling
 
-Any non-empty `stop_condition` stops normal progression. PM/Codex must report the stop condition and only ask the owner when owner input is actually needed to resolve it.
+Any non-empty `stop_condition` stops normal progression. A `checklist_gate_result` other than `passed` also stops normal progression, even when the adapter did not emit a stop condition. PM/Codex must report the stop condition or checklist gate failure and only ask the owner when owner input is actually needed to resolve it.
 
-When `stop_condition` is present, PM/Codex must not continue into:
+When `stop_condition` is present or `checklist_gate_result` is not `passed`, PM/Codex must not continue into:
 
 - branch creation
 - document edits
