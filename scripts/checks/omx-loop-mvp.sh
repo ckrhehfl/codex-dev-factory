@@ -17,14 +17,43 @@ print_stage() {
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null || true)
 current_path=$(pwd -P)
 branch_name=$(git branch --show-current 2>/dev/null || true)
-status_adapter="${repo_root:-$current_path}/scripts/checks/omx-status-adapter.sh"
+packet_emitter="${repo_root:-$current_path}/scripts/checks/omx-loop-packet.sh"
 
-printf 'OMX status adapter preflight\n'
-if ! bash "$status_adapter"; then
-  printf '\nomx-loop-mvp: ERROR: status adapter failed\n' >&2
+packet_field() {
+  local key=$1
+  printf '%s\n' "$packet_output" | awk -v key="$key" '
+    index($0, key ": ") == 1 {
+      print substr($0, length(key) + 3)
+      exit
+    }
+  '
+}
+
+normalize_packet_stop_condition() {
+  local value=$1
+  case "$value" in
+    '""'|""|"none") printf '' ;;
+    \"*) printf '%s' "${value#\"}" | sed 's/"$//' ;;
+    *) printf '%s' "$value" ;;
+  esac
+}
+
+printf 'OMX loop packet preflight\n'
+packet_output=""
+packet_exit=0
+set +e
+packet_output=$(bash "$packet_emitter" 2>&1)
+packet_exit=$?
+set -e
+printf '%s\n\n' "$packet_output"
+
+packet_stop_condition=$(normalize_packet_stop_condition "$(packet_field "stop_condition")")
+packet_gate_result=$(packet_field "checklist_gate_result")
+
+if (( packet_exit != 0 )); then
+  printf 'omx-loop-mvp: ERROR: loop packet emitter failed; stop_condition=%s checklist_gate_result=%s\n' "${packet_stop_condition:-unknown}" "${packet_gate_result:-unknown}" >&2
   exit 1
 fi
-printf '\n'
 
 case "$repo_root" in
   *"$expected_path_suffix") ;;
@@ -33,6 +62,16 @@ esac
 
 if [[ "$branch_name" != "main" ]]; then
   report_failure "current branch must be main before starting a new local loop; got ${branch_name:-unknown}"
+fi
+
+if [[ -n "$packet_stop_condition" ]]; then
+  report_failure "loop packet stop_condition must be empty before printing the checklist; got $packet_stop_condition"
+fi
+
+if [[ "$packet_gate_result" == "halt" ]]; then
+  report_failure "loop packet checklist_gate_result halted before printing the checklist"
+elif [[ "$packet_gate_result" != "pass" ]]; then
+  report_failure "loop packet checklist_gate_result must be pass before printing the checklist; got ${packet_gate_result:-unknown}"
 fi
 
 if (( failures > 0 )); then
@@ -73,7 +112,7 @@ printf '\n'
 printf 'Current MVP boundary:\n'
 print_stage "This script is a dry-run/checklist helper only."
 print_stage "It does not run omx setup, omx doctor, omx explore, omx sparkshell, Codex, git writes, GitHub writes, or cleanup."
-print_stage "Status is sourced from the reviewed, read-only OMX status adapter."
+print_stage "Status is sourced from the normalized OMX loop packet emitter, which uses the reviewed, read-only OMX status adapter."
 
 if (( failures > 0 )); then
   printf '\nomx-loop-mvp: failed with %d violation(s)\n' "$failures" >&2
