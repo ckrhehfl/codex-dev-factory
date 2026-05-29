@@ -5,7 +5,7 @@ packet_type="omx_loop_status"
 packet_version="1"
 status_source="omx-status-adapter"
 evidence_class="local-verified"
-no_mutations_performed="true"
+no_mutations_performed="unknown"
 
 warnings="[]"
 stop_condition=""
@@ -93,7 +93,9 @@ case "$remote_url_sanitized" in
     ;;
 esac
 
-if [[ "$adapter_no_mutations" != "true" ]]; then
+if [[ "$adapter_no_mutations" == "true" ]]; then
+  no_mutations_performed="true"
+else
   warnings="[adapter did not confirm no_mutations_performed=true]"
   stop_condition=${stop_condition:-STOPPED_VALIDATION_FAILED}
 fi
