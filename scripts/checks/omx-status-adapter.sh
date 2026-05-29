@@ -46,6 +46,12 @@ sanitize_remote_url() {
       set_stop "STOPPED_CREDENTIAL_OR_SECRET_CONTENT"
       return 0
       ;;
+    *\?access_token=*|*\&access_token=*|*\?token=*|*\&token=*|*\?api_key=*|*\&api_key=*|*\?apikey=*|*\&apikey=*|*\?password=*|*\&password=*|*\?secret=*|*\&secret=*)
+      remote_url="<redacted-remote-url>"
+      add_warning "origin URL contains secret-looking query material and was redacted"
+      set_stop "STOPPED_CREDENTIAL_OR_SECRET_CONTENT"
+      return 0
+      ;;
     git@github.com:ckrhehfl/codex-dev-factory.git)
       remote_url="$raw_remote_url"
       return 0
@@ -111,7 +117,7 @@ esac
 
 case "$remote_url_raw" in
   "$expected_remote_ssh"|"$expected_remote_https") ;;
-  *://*:*@*|https://*@*) ;;
+  *://*:*@*|https://*@*|*\?access_token=*|*\&access_token=*|*\?token=*|*\&token=*|*\?api_key=*|*\&api_key=*|*\?apikey=*|*\&apikey=*|*\?password=*|*\&password=*|*\?secret=*|*\&secret=*) ;;
   *) set_stop "STOPPED_SOURCE_OF_TRUTH_UNCLEAR" ;;
 esac
 
