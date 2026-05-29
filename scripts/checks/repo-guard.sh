@@ -153,9 +153,17 @@ for mode, path in tracked_entries():
     if not is_text_candidate(path, data):
         continue
 
+    pure_path = pathlib.PurePosixPath(path)
     crlf_count = data.count(b"\r\n")
     bare_lf_count = data.replace(b"\r\n", b"").count(b"\n")
-    if crlf_count and bare_lf_count:
+    if pure_path.suffix.lower() == ".sh" and crlf_count:
+        print(
+            "repo-guard: ERROR: CRLF line endings in shell script "
+            f"{path}: {crlf_count} CRLF line ending(s)",
+            file=sys.stderr,
+        )
+        failures += 1
+    elif crlf_count and bare_lf_count:
         print(
             "repo-guard: ERROR: mixed line endings in "
             f"{path}: {crlf_count} CRLF line ending(s), "
@@ -184,7 +192,7 @@ if failures:
     sys.exit(1)
 PY
   then
-    report_failure "tracked text files must not contain hidden Unicode or mixed line endings"
+    report_failure "tracked text files must not contain hidden Unicode, mixed line endings, or CRLF shell scripts"
   fi
 fi
 
