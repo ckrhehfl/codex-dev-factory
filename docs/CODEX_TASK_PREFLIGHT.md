@@ -1,5 +1,7 @@
 # Codex Task Preflight
 
+The standard task lifecycle that uses this helper is defined in [Task Lifecycle](TASK_LIFECYCLE.md).
+
 Run the repo-local Codex task preflight before normal `cdfcodex` work and during read-only checks with `cdfcheck`:
 
 ```bash

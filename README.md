@@ -41,6 +41,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Factory Status Result](docs/FACTORY_STATUS_RESULT.md)
 - [PR Metadata Guard](docs/PR_METADATA_GUARD.md)
 - [Allowed-Files Guard](docs/ALLOWED_FILES_GUARD.md)
+- [Codex Task Preflight](docs/CODEX_TASK_PREFLIGHT.md)
 - [Codex Fixed Loop Contracts](docs/CODEX_FIXED_LOOP_CONTRACTS.md)
 - [Documentation Inventory Audit](docs/DOCUMENTATION_INVENTORY_AUDIT.md)
 - [Phase 1/2 Readiness Audit](docs/PHASE_READINESS_AUDIT.md)
