@@ -31,7 +31,7 @@ Required shared rules:
 - If high/xhigh appears needed, stop and request owner approval before continuing.
 - Run `bash scripts/checks/codex-task-preflight.sh` before normal bounded work when available.
 - When a loop intentionally starts from the current PR branch, treat a clean `branch_not_main` preflight halt as an expected feature-branch readiness signal, not as a review-fix or PR-validation failure.
-- Treat any non-empty `stop_condition` as blocking normal progression.
+- Treat any `stop_condition` other than `none` or a documented expected exception as blocking normal progression.
 - PR merge remains owner-gated/manual.
 - Branch cleanup remains owner-gated/manual unless separately authorized for a specific branch cleanup task.
 - Do not use API keys, GitHub secrets, GitHub settings changes, auto-merge, Full Access or `danger-full-access` changes, `--yolo`, Zeroshot install/run/adoption, Hermes, sandbox/runtime changes, docs folderization, or mutating OMX commands without a separate owner gate.
