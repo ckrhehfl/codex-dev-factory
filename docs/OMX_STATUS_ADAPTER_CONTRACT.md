@@ -34,7 +34,7 @@ If command behavior is unclear, the adapter must stop instead of running it.
 A future adapter should return a stable status packet with these fields:
 
 - `repo_path`: resolved repository path.
-- `remote_url`: repository origin URL.
+- `remote_url`: sanitized repository origin URL, with credentials redacted before reporting.
 - `branch`: current branch name.
 - `working_tree_status`: clean, dirty, or unknown with evidence.
 - `omx_version`: output from `omx --version` when safely available.
@@ -45,7 +45,7 @@ A future adapter should return a stable status packet with these fields:
 - `stop_condition`: matching stop condition when the adapter refuses to continue.
 - `no_mutations_performed`: explicit confirmation that no mutation was performed.
 
-Unknown or unavailable values must be reported as unknown or unavailable rather than inferred from unsafe commands.
+Unknown or unavailable values must be reported as unknown or unavailable rather than inferred from unsafe commands. If the origin URL appears to contain credentials, tokens, or other secret material, the adapter must not report the raw URL; it must report `remote_url` as unavailable or redacted and stop with `STOPPED_CREDENTIAL_OR_SECRET_CONTENT`.
 
 ## Stop Conditions
 
