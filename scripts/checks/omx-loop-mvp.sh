@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-expected_remote="git@github.com:ckrhehfl/codex-dev-factory.git"
+expected_remote_ssh="git@github.com:ckrhehfl/codex-dev-factory.git"
+expected_remote_https="https://github.com/ckrhehfl/codex-dev-factory.git"
 expected_path_suffix="/codex-dev-factory"
 
 failures=0
@@ -27,9 +28,10 @@ case "$repo_root" in
   *) report_failure "repository root must end with $expected_path_suffix; got ${repo_root:-unknown}" ;;
 esac
 
-if [[ "$remote_url" != "$expected_remote" ]]; then
-  report_failure "origin must be $expected_remote; got ${remote_url:-unknown}"
-fi
+case "$remote_url" in
+  "$expected_remote_ssh"|"$expected_remote_https") ;;
+  *) report_failure "origin must be $expected_remote_ssh or $expected_remote_https; got ${remote_url:-unknown}" ;;
+esac
 
 if [[ "$branch_name" != "main" ]]; then
   report_failure "current branch must be main before starting a new local loop; got ${branch_name:-unknown}"
