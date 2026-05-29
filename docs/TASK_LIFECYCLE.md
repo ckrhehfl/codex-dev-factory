@@ -61,13 +61,18 @@ The normal PM/Codex sequence is:
 
 ## PR Phase
 
-PR body should include:
+PR body should include at minimum:
 
 - Summary of the lifecycle or runbook update.
 - Scope confirmation.
 - Validation results.
+- Self-review result.
+- Confirmations.
+- Solution lookup result, including applicable lessons or `No applicable solution found.`.
 - Owner gates.
 - Forbidden-action confirmation.
+
+Use the [Task Contract](TASK_CONTRACT.md) and [PR Metadata Guard](PR_METADATA_GUARD.md) as the canonical PR metadata contracts. This lifecycle checklist is a runbook reminder, not a replacement for the complete metadata contract.
 
 The required status check `Repo guard` is expected to protect `main`, but exact GitHub settings are owner-reported or manual unless authenticated settings are directly queried.
 
