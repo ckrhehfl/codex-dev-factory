@@ -85,7 +85,7 @@ Every normalized OMX loop packet consumed by PM/Codex must include these fields:
 
 Any non-empty `stop_condition` stops normal progression. A `checklist_gate_result` other than `passed` also stops normal progression, even when the adapter did not emit a stop condition. PM/Codex must report the stop condition or checklist gate failure and only ask the owner when owner input is actually needed to resolve it.
 
-When `stop_condition` is present or `checklist_gate_result` is not `passed`, PM/Codex must not continue into:
+When `stop_condition` is non-empty or `checklist_gate_result` is not `passed`, PM/Codex must not continue into:
 
 - branch creation
 - document edits
