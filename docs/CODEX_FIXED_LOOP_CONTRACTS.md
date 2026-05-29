@@ -82,8 +82,8 @@ Forbidden actions:
 Stop conditions:
 
 - Review request is unclear.
-- Review item is out of scope.
-- Review item requires owner decision.
+- Requested fix cannot proceed safely because it is out of scope.
+- Requested fix cannot proceed safely because it requires owner decision.
 - Fix requires high/xhigh intelligence.
 - Fix requires secret, API key, or GitHub settings access.
 - Validation failure is not caused by the scoped fix.
