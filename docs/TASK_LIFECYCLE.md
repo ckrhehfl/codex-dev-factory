@@ -33,7 +33,7 @@ Run:
 bash scripts/checks/codex-task-preflight.sh
 ```
 
-A pass means local readiness is satisfied for normal bounded progression.
+A pass means local readiness is satisfied for normal bounded progression against the current local refs. It does not prove that cached remote refs are current with GitHub.
 
 `stop_condition: none` is non-blocking.
 
@@ -41,7 +41,7 @@ A non-`none` stop condition blocks normal branch, edit, commit, push, and PR pro
 
 `branch_not_main` can be expected only during feature-branch PR validation or loops intentionally operating on a current PR branch. It is not a normal starting state for new tasks from `main`.
 
-The helper is read-only. It does not verify GitHub branch protection, rulesets, permissions, or other GitHub settings. GitHub settings remain owner-gated and manual.
+The helper is read-only. It does not fetch or prune remote refs, and it does not verify GitHub branch protection, rulesets, permissions, or other GitHub settings. GitHub settings remain owner-gated and manual.
 
 ## Normal Bounded Task Lifecycle
 
@@ -49,15 +49,16 @@ The normal PM/Codex sequence is:
 
 1. PM defines a bounded task, allowed files, forbidden files/actions, validation expectations, owner gates, and stop conditions.
 2. Codex revalidates local readiness with `bash scripts/checks/codex-task-preflight.sh`.
-3. Codex creates a scoped branch only after readiness passes.
-4. Codex edits only allowed files.
-5. Codex runs local validation.
-6. Codex commits scoped changes.
-7. Codex pushes the branch.
-8. Codex opens a PR when appropriate and authorized by the task contract.
-9. PR merge remains owner-gated and manual.
-10. Branch cleanup remains owner-gated and manual.
-11. Compound is run only when appropriate under the fixed loop contract.
+3. Codex refreshes remote refs when the task gate requires latest `main`, then verifies `main` is current enough for the task.
+4. Codex creates a scoped branch only after readiness and required remote-refresh gates pass.
+5. Codex edits only allowed files.
+6. Codex runs local validation.
+7. Codex commits scoped changes.
+8. Codex pushes the branch.
+9. Codex opens a PR when appropriate and authorized by the task contract.
+10. PR merge remains owner-gated and manual.
+11. Branch cleanup remains owner-gated and manual.
+12. Compound is run only when appropriate under the fixed loop contract.
 
 ## PR Phase
 
