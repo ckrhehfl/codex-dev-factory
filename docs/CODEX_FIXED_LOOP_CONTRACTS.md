@@ -131,7 +131,7 @@ Allowed actions:
 
 Forbidden actions:
 
-- Force delete unless the exact owner-authorized historical exception is explicitly restated in the current task.
+- Force delete; stop and report when cleanup would require force deletion.
 - Delete `main`, the default branch, or protected branches.
 - Delete open or unmerged branches.
 - Delete multiple branches.
