@@ -30,6 +30,7 @@ Required shared rules:
 - Codex Intelligence must be `medium/default`.
 - If high/xhigh appears needed, stop and request owner approval before continuing.
 - Run `bash scripts/checks/codex-task-preflight.sh` before normal bounded work when available.
+- When a loop intentionally starts from the current PR branch, treat a clean `branch_not_main` preflight halt as an expected feature-branch readiness signal, not as a review-fix or PR-validation failure.
 - Treat any non-empty `stop_condition` as blocking normal progression.
 - PR merge remains owner-gated/manual.
 - Branch cleanup remains owner-gated/manual unless separately authorized for a specific branch cleanup task.
