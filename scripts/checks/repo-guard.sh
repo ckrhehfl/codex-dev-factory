@@ -93,13 +93,20 @@ CREDENTIAL_PATTERNS = (
 )
 
 
-def tracked_paths():
+def tracked_entries():
     result = subprocess.run(
-        ["git", "ls-files", "-z"],
+        ["git", "ls-files", "-z", "-s"],
         check=True,
         stdout=subprocess.PIPE,
     )
-    return [path for path in result.stdout.decode("utf-8").split("\0") if path]
+    entries = []
+    for record in result.stdout.decode("utf-8").split("\0"):
+        if not record:
+            continue
+        metadata, path = record.split("\t", 1)
+        mode = metadata.split(" ", 1)[0]
+        entries.append((mode, path))
+    return entries
 
 
 def is_credential_like(path):
@@ -135,7 +142,10 @@ def line_column(text, index):
 
 failures = 0
 
-for path in tracked_paths():
+for mode, path in tracked_entries():
+    if mode == "120000":
+        continue
+
     if is_credential_like(path):
         continue
 
