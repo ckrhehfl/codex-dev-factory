@@ -31,6 +31,10 @@ if [[ "$remote_url" != "$expected_remote" ]]; then
   report_failure "origin must be $expected_remote; got ${remote_url:-unknown}"
 fi
 
+if [[ -n "$status_short" ]]; then
+  report_failure "working tree must be clean before starting a new local loop"
+fi
+
 if [[ -z "$omx_version" ]]; then
   report_failure "omx must be available for the OMX-backed loop contract"
 fi
