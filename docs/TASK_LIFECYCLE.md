@@ -50,8 +50,8 @@ The normal PM/Codex sequence is:
 1. PM defines a bounded task, allowed files, forbidden files/actions, validation expectations, owner gates, and stop conditions.
 2. Codex runs required solution lookup during intake and before planning when the task touches policy, lifecycle, workflow, or documentation surfaces.
 3. Codex revalidates local readiness with `bash scripts/checks/codex-task-preflight.sh`.
-4. Codex refreshes remote refs when the task gate requires latest `main`, then verifies `main` is current enough for the task.
-5. Codex creates a scoped branch only after solution lookup, readiness, and required remote-refresh gates pass.
+4. Codex refreshes remote refs with fetch/prune and verifies `main` is current enough for the task before branch creation.
+5. Codex creates a scoped branch only after solution lookup, readiness, remote-refresh, and latest-`main` gates pass.
 6. Codex edits only allowed files.
 7. Codex runs local validation.
 8. Codex commits scoped changes.
