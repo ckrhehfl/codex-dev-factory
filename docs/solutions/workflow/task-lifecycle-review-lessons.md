@@ -8,7 +8,7 @@ PR #12 lifecycle review lessons: pre-planning solution lookup and interrupted-st
 
 - PR #12: [Docs: define task lifecycle state model](https://github.com/ckrhehfl/codex-dev-factory/pull/12)
 - Review-fix commit: `41e2468` (`Docs: address review comments`)
-- Changed file: [Task Lifecycle State Model](../../TASK_LIFECYCLE.md)
+- Changed file: [Task Lifecycle State Model](../../operations/TASK_LIFECYCLE.md)
 
 ## Problem Observed
 
@@ -43,11 +43,11 @@ For lifecycle, task contract, validation result, plan output, solution lookup, o
 
 ## Affected Policy Surfaces
 
-- [Task Lifecycle State Model](../../TASK_LIFECYCLE.md)
+- [Task Lifecycle State Model](../../operations/TASK_LIFECYCLE.md)
 - [Solution Lookup Protocol](../../SOLUTION_LOOKUP_PROTOCOL.md)
 - [Stop-State Registry](../../STOP_STATE_REGISTRY.md)
-- [Risk Policy](../../RISK_POLICY.md)
-- [Task Contract](../../TASK_CONTRACT.md)
+- [Risk Policy](../../operations/RISK_POLICY.md)
+- [Task Contract](../../operations/TASK_CONTRACT.md)
 - [Plan Output Contract](../../PLAN_OUTPUT_CONTRACT.md)
 - [Task Validation Result Contract](../../TASK_VALIDATION_RESULT.md)
 

@@ -140,7 +140,7 @@ Conceptual status values are:
 - `owner_decision_required`: the guard found a gate that requires owner decision.
 - `stopped`: an existing stop state applies.
 
-These values are not new `STOPPED_*` codes. If a specific stop reason is needed, use the [Stop-State Registry](STOP_STATE_REGISTRY.md).
+These values are not new `STOPPED_*` codes. If a specific stop reason is needed, use the [Stop-State Registry](../STOP_STATE_REGISTRY.md).
 
 ## Source-of-Truth Reporting
 
@@ -194,21 +194,21 @@ When the failure indicates unsafe scope, owner gating, missing source-of-truth v
 
 The [Task Contract](TASK_CONTRACT.md) defines task fields that PR metadata must preserve.
 
-The [Local Task Format Contract](LOCAL_TASK_FORMAT.md) may later serialize task fields that feed metadata drafts.
+The [Local Task Format Contract](../LOCAL_TASK_FORMAT.md) may later serialize task fields that feed metadata drafts.
 
-The [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) defines PR metadata draft fields and merge boundary expectations.
+The [Plan Output Contract](../PLAN_OUTPUT_CONTRACT.md) defines PR metadata draft fields and merge boundary expectations.
 
-The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) provides validation status and safety-field checks that metadata should report.
+The [Task Validation Result Contract](../TASK_VALIDATION_RESULT.md) provides validation status and safety-field checks that metadata should report.
 
-The [Factory Status Result Contract](FACTORY_STATUS_RESULT.md) may later report PR metadata guard status and unknowns.
+The [Factory Status Result Contract](../FACTORY_STATUS_RESULT.md) may later report PR metadata guard status and unknowns.
 
 The [Task Lifecycle State Model](TASK_LIFECYCLE.md) defines PR-created, review-pending, review-fix, merge-ready, stopped, and owner-gated lifecycle behavior.
 
-The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns `STOPPED_*` codes used when the guard finds a blocking condition.
+The [Stop-State Registry](../STOP_STATE_REGISTRY.md) owns `STOPPED_*` codes used when the guard finds a blocking condition.
 
-The [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) defines solution lookup timing and reporting.
+The [Solution Lookup Protocol](../SOLUTION_LOOKUP_PROTOCOL.md) defines solution lookup timing and reporting.
 
-The [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) may provide changed-files evidence for PR metadata checks, but this PR does not implement that guard.
+The [Allowed-Files Guard Result Contract](../ALLOWED_FILES_GUARD.md) may provide changed-files evidence for PR metadata checks, but this PR does not implement that guard.
 
 ## Example Results
 
@@ -279,7 +279,7 @@ recommended_next_action: reconcile_scope_or_stop
 
 ## Stop Conditions
 
-The canonical stop-state surface is [Stop-State Registry](STOP_STATE_REGISTRY.md).
+The canonical stop-state surface is [Stop-State Registry](../STOP_STATE_REGISTRY.md).
 
 Use existing stop states when a blocking condition applies, including:
 

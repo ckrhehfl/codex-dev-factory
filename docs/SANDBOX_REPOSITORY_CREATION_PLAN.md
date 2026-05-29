@@ -51,7 +51,7 @@ The owner should decide and record:
 | License | Owner decision required | Choose a license or explicitly choose no license. |
 | Default branch name | Owner decision required | Usually `main`, but do not assume. |
 | Allowed merge methods | Owner decision required | Decide squash, merge commit, rebase, or a subset. |
-| Automatically delete head branches | Owner decision required | Recommended by [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) for this control-plane repo; sandbox setting still requires explicit decision and verification. |
+| Automatically delete head branches | Owner decision required | Recommended by [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md) for this control-plane repo; sandbox setting still requires explicit decision and verification. |
 | Auto-merge | Owner decision required | Do not rely on auto-merge until policy and checks are sandbox-proven. |
 | Branch protection expectations | Owner decision required | Required checks should not be enabled until real checks exist. |
 | Required checks | Owner decision required | If no real checks exist, keep required checks absent or stop with the existing required-check stop guidance. |
@@ -187,9 +187,9 @@ After repository creation is separately approved and completed, a later sandbox 
 
 - [Sandbox Validation](SANDBOX_VALIDATION.md) for the validation loop.
 - [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md) for the evidence packet.
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md) for lifecycle state transitions.
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) for lifecycle state transitions.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md) for stop codes.
-- [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) for settings and branch safety.
+- [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md) for settings and branch safety.
 
 The future validation task should not treat this planning document as proof that the sandbox repository exists, that settings are configured, or that validation already passed.
 

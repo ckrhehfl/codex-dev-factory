@@ -215,9 +215,9 @@ The [Sandbox Validation](SANDBOX_VALIDATION.md) plan defines validation after th
 
 The [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md) defines evidence for future sandbox validation runs. This runbook captures creation evidence only.
 
-The [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) defines repository settings, branch protection, merge-method expectations, required-check timing, and cleanup boundaries.
+The [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md) defines repository settings, branch protection, merge-method expectations, required-check timing, and cleanup boundaries.
 
-The [Task Contract](TASK_CONTRACT.md), [Local Task Format Contract](LOCAL_TASK_FORMAT.md), [Task Lifecycle State Model](TASK_LIFECYCLE.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), and [Stop-State Registry](STOP_STATE_REGISTRY.md) define task fields, lifecycle state, status reporting, and stop-state behavior that future creation tasks must preserve.
+The [Task Contract](operations/TASK_CONTRACT.md), [Local Task Format Contract](LOCAL_TASK_FORMAT.md), [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), and [Stop-State Registry](STOP_STATE_REGISTRY.md) define task fields, lifecycle state, status reporting, and stop-state behavior that future creation tasks must preserve.
 
 ## Source-of-Truth Handling
 

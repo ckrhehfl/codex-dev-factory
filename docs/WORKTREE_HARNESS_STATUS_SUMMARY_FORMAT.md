@@ -64,7 +64,7 @@ Future status summaries should include these fields or explicitly mark them `확
 | `worktree_path` | Worktree path or `not_run` when no worktree was created or inspected. |
 | `worktree_owner` | Ownership evidence, cleanliness, and retention posture for the worktree. |
 | `branch_owner` | Ownership evidence, PR linkage, branch HEAD, and ambiguity state for the branch. |
-| `lifecycle_status` | Current lifecycle state aligned with [Task Lifecycle State Model](TASK_LIFECYCLE.md). |
+| `lifecycle_status` | Current lifecycle state aligned with [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md). |
 | `factory_status` | Higher-level status aligned with [Factory Status Result Contract](FACTORY_STATUS_RESULT.md). |
 | `validation_result` | Summary of docs-safe validation, skipped checks, failures, and checklist outcome. |
 | `evidence_classes` | Separate evidence buckets for verified, reported, and unknown claims. |
@@ -95,7 +95,7 @@ The summary must not infer GitHub settings, branch protection, rulesets, require
 
 ## Lifecycle And Status Alignment
 
-`lifecycle_status` should use states from [Task Lifecycle State Model](TASK_LIFECYCLE.md), including states such as `LOCAL_REVALIDATION`, `READY_TO_BRANCH`, `BRANCH_ACTIVE`, `DOCS_EDITING`, `SELF_REVIEW`, `PR_CREATED`, `REVIEW_PENDING`, `MERGE_READY`, `MERGED`, `LOCAL_CLEANUP_PENDING`, `LOCAL_CLEANUP_DONE`, `LESSON_REVIEW`, `DONE`, and `STOPPED`.
+`lifecycle_status` should use states from [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), including states such as `LOCAL_REVALIDATION`, `READY_TO_BRANCH`, `BRANCH_ACTIVE`, `DOCS_EDITING`, `SELF_REVIEW`, `PR_CREATED`, `REVIEW_PENDING`, `MERGE_READY`, `MERGED`, `LOCAL_CLEANUP_PENDING`, `LOCAL_CLEANUP_DONE`, `LESSON_REVIEW`, `DONE`, and `STOPPED`.
 
 `factory_status` and `validation_result` should align with [Factory Status Result Contract](FACTORY_STATUS_RESULT.md) and [Task Validation Result Contract](TASK_VALIDATION_RESULT.md). Useful report statuses include `passed`, `failed`, `not_checked`, `unknown`, `owner_decision_required`, and `stopped` when those meanings match the existing docs.
 
@@ -300,12 +300,12 @@ This format aligns with:
 - [Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md).
 - [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md).
 - [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md).
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md).
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md).
 - [Stop-State Registry](STOP_STATE_REGISTRY.md).
 - [Factory Status Result Contract](FACTORY_STATUS_RESULT.md).
 - [Task Validation Result Contract](TASK_VALIDATION_RESULT.md).
-- [Task Contract](TASK_CONTRACT.md).
-- [PR Metadata Guard Contract](PR_METADATA_GUARD.md).
+- [Task Contract](operations/TASK_CONTRACT.md).
+- [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md).
 - [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md).
 
 If future policy adds cleanup permissions, branch/worktree mutation authority, lifecycle states, result statuses, owner gates, or stop codes, it must update every relevant policy surface in the same approved PR.

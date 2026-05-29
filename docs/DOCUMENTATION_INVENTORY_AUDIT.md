@@ -56,18 +56,18 @@ This audit records consistency findings. It does not certify implementation read
 | [AGENTS](../AGENTS.md) | Agent operating instructions and source-of-truth reminders | Yes |
 | [Vision](VISION.md) | Product direction and intent | Partial |
 | [Roadmap](ROADMAP.md) | Phase sequencing and implementation boundaries | Yes |
-| [Operating Model](OPERATING_MODEL.md) | Task intake, source-of-truth checks, owner gates, PR flow, cleanup, lessons | Yes |
-| [Risk Policy](RISK_POLICY.md) | Risk tiers, prohibited actions, stop-state policy | Yes |
+| [Operating Model](operations/OPERATING_MODEL.md) | Task intake, source-of-truth checks, owner gates, PR flow, cleanup, lessons | Yes |
+| [Risk Policy](operations/RISK_POLICY.md) | Risk tiers, prohibited actions, stop-state policy | Yes |
 | [Acceptance Tests](ACCEPTANCE_TESTS.md) | Docs-first acceptance and guard expectations | Yes |
-| [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) | Repository settings and GitHub operation boundaries | Yes |
-| [Task Contract](TASK_CONTRACT.md) | Canonical task fields, PR metadata expectations, stop conditions | Yes |
+| [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md) | Repository settings and GitHub operation boundaries | Yes |
+| [Task Contract](operations/TASK_CONTRACT.md) | Canonical task fields, PR metadata expectations, stop conditions | Yes |
 | [Local Task Format](LOCAL_TASK_FORMAT.md) | Future serialized task representation | Yes |
 | [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) | Future plan-result fields and safety preservation | Yes |
 | [Task Validation Result](TASK_VALIDATION_RESULT.md) | Future task validation result contract | Yes |
 | [Factory Status Result](FACTORY_STATUS_RESULT.md) | Future status output contract | Yes |
-| [PR Metadata Guard](PR_METADATA_GUARD.md) | Future PR title/body metadata completeness contract | Yes |
+| [PR Metadata Guard](operations/PR_METADATA_GUARD.md) | Future PR title/body metadata completeness contract | Yes |
 | [Allowed-Files Guard](ALLOWED_FILES_GUARD.md) | Future changed-file boundary result contract | Yes |
-| [Task Lifecycle](TASK_LIFECYCLE.md) | Canonical lifecycle states and transitions | Yes |
+| [Task Lifecycle](operations/TASK_LIFECYCLE.md) | Canonical lifecycle states and transitions | Yes |
 | [Stop-State Registry](STOP_STATE_REGISTRY.md) | Canonical `STOPPED_*` registry | Yes |
 | [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) | Required `docs/solutions/**` lookup timing and reporting | Yes |
 | [Compound Knowledge Base](solutions/README.md) | Durable post-merge lessons index | Yes |
@@ -116,7 +116,7 @@ Consistency expectations found across the docs:
 
 - New or changed `STOPPED_*` codes must be added to the registry first or in the same PR.
 - Relevant local Stop States sections must match the registry when they list active stop codes.
-- Shared risk or policy stop states must remain reflected in [Risk Policy](RISK_POLICY.md).
+- Shared risk or policy stop states must remain reflected in [Risk Policy](operations/RISK_POLICY.md).
 - Stop-state examples should align `status`, `stop_state`, reason, interrupted lifecycle context when present, and `recommended_next_action`.
 
 No registry-backed stop-state drift was found in the repository-wide `STOPPED_*` comparison run for this audit. Repository-wide comparison should remain part of future readiness and validation tasks.
@@ -177,9 +177,9 @@ This audit does not create evidence from a real sandbox run and does not run san
 
 The active solution lessons are reflected in operational policy surfaces:
 
-- Pre-planning solution lookup is reflected in [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md), [Task Lifecycle](TASK_LIFECYCLE.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), and [Operating Model](OPERATING_MODEL.md).
-- Stop-state consistency is reflected in [Stop-State Registry](STOP_STATE_REGISTRY.md), [Risk Policy](RISK_POLICY.md), and local Stop States sections.
-- PR metadata completeness is reflected in [Task Contract](TASK_CONTRACT.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), and [PR Metadata Guard](PR_METADATA_GUARD.md).
+- Pre-planning solution lookup is reflected in [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md), [Task Lifecycle](operations/TASK_LIFECYCLE.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), and [Operating Model](operations/OPERATING_MODEL.md).
+- Stop-state consistency is reflected in [Stop-State Registry](STOP_STATE_REGISTRY.md), [Risk Policy](operations/RISK_POLICY.md), and local Stop States sections.
+- PR metadata completeness is reflected in [Task Contract](operations/TASK_CONTRACT.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), and [PR Metadata Guard](operations/PR_METADATA_GUARD.md).
 - Allowed-files stopped semantics are reflected in [Allowed-Files Guard](ALLOWED_FILES_GUARD.md), [Stop-State Registry](STOP_STATE_REGISTRY.md), and [Acceptance Tests](ACCEPTANCE_TESTS.md).
 - Sandbox evidence lifecycle trace structure is reflected in [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md) and related guard/result contracts.
 

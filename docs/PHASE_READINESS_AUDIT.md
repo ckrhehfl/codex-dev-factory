@@ -174,7 +174,7 @@ Owner decisions must remain visible in the audit result. Codex must not convert 
 
 `STOPPED` is a lifecycle interruption. Specific stop reasons must use the [Stop-State Registry](STOP_STATE_REGISTRY.md).
 
-Do not introduce new `STOPPED_*` codes unless necessary. If a new stop code is unavoidable, update the registry and every relevant local Stop States section in the same PR. If shared policy is affected, update [Risk Policy](RISK_POLICY.md).
+Do not introduce new `STOPPED_*` codes unless necessary. If a new stop code is unavoidable, update the registry and every relevant local Stop States section in the same PR. If shared policy is affected, update [Risk Policy](operations/RISK_POLICY.md).
 
 If the readiness audit is stopped, preserve the interrupted lifecycle state when known. After the stop reason is resolved, return to the interrupted state only if that state remains valid and required checks still pass. If not, return to the earliest lifecycle state needed to revalidate changed assumptions.
 
@@ -247,9 +247,9 @@ recommended_next_action: stop_and_revalidate_local_repo_remote_branch_and_main_s
 
 The [Roadmap](ROADMAP.md) defines phase ordering and implementation boundaries.
 
-The [Operating Model](OPERATING_MODEL.md) defines task intake, source-of-truth revalidation, owner gates, PR lifecycle, and cleanup rules.
+The [Operating Model](operations/OPERATING_MODEL.md) defines task intake, source-of-truth revalidation, owner gates, PR lifecycle, and cleanup rules.
 
-The [Risk Policy](RISK_POLICY.md) defines risk tiers, owner gates, and forbidden actions.
+The [Risk Policy](operations/RISK_POLICY.md) defines risk tiers, owner gates, and forbidden actions.
 
 The [Acceptance Tests](ACCEPTANCE_TESTS.md) define docs-only, sandbox, metadata, solution lookup, hidden Unicode, and no-implementation checks.
 
@@ -259,13 +259,13 @@ The [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md) defin
 
 The [Phase 2 CLI Skeleton Contract](PHASE2_CLI_SKELETON.md) defines future local command surfaces but does not approve implementation.
 
-The [Task Contract](TASK_CONTRACT.md) and [Local Task Format Contract](LOCAL_TASK_FORMAT.md) define the task fields the audit may inspect.
+The [Task Contract](operations/TASK_CONTRACT.md) and [Local Task Format Contract](LOCAL_TASK_FORMAT.md) define the task fields the audit may inspect.
 
 The [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md), [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), and [Factory Status Result Contract](FACTORY_STATUS_RESULT.md) define future planning, validation, and status result surfaces the audit may summarize.
 
-The [PR Metadata Guard Contract](PR_METADATA_GUARD.md) and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) define metadata and changed-file boundary checks that feed readiness.
+The [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md) and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md) define metadata and changed-file boundary checks that feed readiness.
 
-The [Task Lifecycle State Model](TASK_LIFECYCLE.md) defines lifecycle states, stopped-state recovery, merge boundaries, cleanup boundaries, and lesson-capture boundaries.
+The [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md) defines lifecycle states, stopped-state recovery, merge boundaries, cleanup boundaries, and lesson-capture boundaries.
 
 The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns active `STOPPED_*` codes.
 

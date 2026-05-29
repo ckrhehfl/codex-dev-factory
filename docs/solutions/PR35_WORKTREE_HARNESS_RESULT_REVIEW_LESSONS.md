@@ -74,11 +74,11 @@ Apply this lesson when adding or changing:
 
 - [Worktree Harness Result Contract](../WORKTREE_HARNESS_RESULT_CONTRACT.md).
 - [Worktree Harness MVP Boundary](../WORKTREE_HARNESS_MVP_BOUNDARY.md).
-- [Task Lifecycle State Model](../TASK_LIFECYCLE.md).
+- [Task Lifecycle State Model](../operations/TASK_LIFECYCLE.md).
 - [Stop-State Registry](../STOP_STATE_REGISTRY.md).
 - [Task Validation Result Contract](../TASK_VALIDATION_RESULT.md).
 - [Factory Status Result Contract](../FACTORY_STATUS_RESULT.md).
-- [PR Metadata Guard Contract](../PR_METADATA_GUARD.md).
+- [PR Metadata Guard Contract](../operations/PR_METADATA_GUARD.md).
 - [Allowed-Files Guard Result Contract](../ALLOWED_FILES_GUARD.md).
 - [Allowed-Files Review Lessons](workflow/allowed-files-review-lessons.md).
 - [Sandbox Evidence Review Lessons](workflow/sandbox-evidence-review-lessons.md).

@@ -180,7 +180,7 @@ This evidence record follows the owner decisions in [Sandbox Repository Owner De
 
 Actual sandbox validation remains governed by [Sandbox Validation](SANDBOX_VALIDATION.md) and [Sandbox Validation Evidence Contract](SANDBOX_VALIDATION_EVIDENCE.md).
 
-Stop-state and source-of-truth handling remain governed by [Stop-State Registry](STOP_STATE_REGISTRY.md), [Task Lifecycle State Model](TASK_LIFECYCLE.md), [Risk Policy](RISK_POLICY.md), and [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md).
+Stop-state and source-of-truth handling remain governed by [Stop-State Registry](STOP_STATE_REGISTRY.md), [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), [Risk Policy](operations/RISK_POLICY.md), and [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md).
 
 ## Safety Field Preservation
 

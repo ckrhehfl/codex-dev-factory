@@ -43,7 +43,7 @@ The Codex-first baseline remains preserved:
 - Sandbox validation remains required before any runtime or worker execution path is treated as ready.
 - Trading repository, live trading, risk cap, exchange credential, and model promotion boundaries remain forbidden unless a separate high-risk owner-approved task changes that scope.
 
-This plan does not weaken [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md), [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md), [Risk Policy](RISK_POLICY.md), or [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md).
+This plan does not weaken [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md), [Technical Stack Decision Record](TECH_STACK_DECISION_RECORD.md), [Risk Policy](operations/RISK_POLICY.md), or [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md).
 
 ## Hermes Responsibility Candidates For Evaluation Only
 
@@ -208,8 +208,8 @@ Neither follow-up should install, run, configure, or connect Hermes until the ow
 - [Codex Worker Boundary](CODEX_WORKER_BOUNDARY.md) preserves Codex as a future worker boundary and keeps worker execution owner-gated.
 - [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md) preserves worktree and branch safety before implementation.
 - [Worktree Harness Status Summary Format](WORKTREE_HARNESS_STATUS_SUMMARY_FORMAT.md) defines future status summary reporting.
-- [Risk Policy](RISK_POLICY.md) defines low-risk docs-only and high-risk implementation boundaries.
-- [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md) defines GitHub authority, settings, branch protection, PR lifecycle, and cleanup boundaries.
+- [Risk Policy](operations/RISK_POLICY.md) defines low-risk docs-only and high-risk implementation boundaries.
+- [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md) defines GitHub authority, settings, branch protection, PR lifecycle, and cleanup boundaries.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md) owns `STOPPED_*` codes.
 
 ## Source Input Handling For This PR

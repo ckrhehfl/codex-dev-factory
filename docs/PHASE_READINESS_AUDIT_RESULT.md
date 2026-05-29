@@ -26,23 +26,23 @@ Required audit inputs reviewed:
 - [AGENTS.md](../AGENTS.md).
 - [README](../README.md).
 - [Roadmap](ROADMAP.md).
-- [Operating Model](OPERATING_MODEL.md).
-- [Risk Policy](RISK_POLICY.md).
+- [Operating Model](operations/OPERATING_MODEL.md).
+- [Risk Policy](operations/RISK_POLICY.md).
 - [Acceptance Tests](ACCEPTANCE_TESTS.md).
 - [Documentation Inventory Audit](DOCUMENTATION_INVENTORY_AUDIT.md).
 - [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md).
 - [Sandbox Validation](SANDBOX_VALIDATION.md).
 - [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md).
-- [Task Contract](TASK_CONTRACT.md).
+- [Task Contract](operations/TASK_CONTRACT.md).
 - [Local Task Format](LOCAL_TASK_FORMAT.md).
 - [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md).
 - [Task Validation Result](TASK_VALIDATION_RESULT.md).
 - [Factory Status Result](FACTORY_STATUS_RESULT.md).
-- [PR Metadata Guard](PR_METADATA_GUARD.md).
+- [PR Metadata Guard](operations/PR_METADATA_GUARD.md).
 - [Allowed-Files Guard](ALLOWED_FILES_GUARD.md).
-- [Task Lifecycle](TASK_LIFECYCLE.md).
+- [Task Lifecycle](operations/TASK_LIFECYCLE.md).
 - [Stop-State Registry](STOP_STATE_REGISTRY.md).
-- [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md).
+- [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md).
 - [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md).
 - [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md).
 - [Compound Knowledge Base](solutions/README.md) and relevant `docs/solutions/**` entries.
@@ -82,13 +82,13 @@ This result supports moving to the next docs-only planning step. It does not app
 | Criterion from readiness contract | Result | Evidence | Gap / action |
 | --- | --- | --- | --- |
 | Core docs exist and are linked or discoverable. | pass | [README](../README.md), [Documentation Inventory Audit](DOCUMENTATION_INVENTORY_AUDIT.md). | None blocking. |
-| No unresolved contradictions across operational policy surfaces. | pass | [Documentation Inventory Audit](DOCUMENTATION_INVENTORY_AUDIT.md), [Operating Model](OPERATING_MODEL.md), [Risk Policy](RISK_POLICY.md), [Acceptance Tests](ACCEPTANCE_TESTS.md). | Continue consistency checks in future PRs. |
-| Solution lookup protocol exists and is referenced where required. | pass | [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md), [Operating Model](OPERATING_MODEL.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), active solution lessons. | None blocking. |
+| No unresolved contradictions across operational policy surfaces. | pass | [Documentation Inventory Audit](DOCUMENTATION_INVENTORY_AUDIT.md), [Operating Model](operations/OPERATING_MODEL.md), [Risk Policy](operations/RISK_POLICY.md), [Acceptance Tests](ACCEPTANCE_TESTS.md). | Continue consistency checks in future PRs. |
+| Solution lookup protocol exists and is referenced where required. | pass | [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md), [Operating Model](operations/OPERATING_MODEL.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), active solution lessons. | None blocking. |
 | Stop-state registry covers active `STOPPED_*` references. | pass | [Stop-State Registry](STOP_STATE_REGISTRY.md), registry comparison run for this audit. | None blocking. |
-| Task, plan, validation, status, PR metadata, and allowed-files contracts preserve safety fields. | pass | [Task Contract](TASK_CONTRACT.md), [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md), [Task Validation Result](TASK_VALIDATION_RESULT.md), [Factory Status Result](FACTORY_STATUS_RESULT.md), [PR Metadata Guard](PR_METADATA_GUARD.md), [Allowed-Files Guard](ALLOWED_FILES_GUARD.md). | None blocking. |
+| Task, plan, validation, status, PR metadata, and allowed-files contracts preserve safety fields. | pass | [Task Contract](operations/TASK_CONTRACT.md), [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md), [Task Validation Result](TASK_VALIDATION_RESULT.md), [Factory Status Result](FACTORY_STATUS_RESULT.md), [PR Metadata Guard](operations/PR_METADATA_GUARD.md), [Allowed-Files Guard](ALLOWED_FILES_GUARD.md). | None blocking. |
 | Sandbox validation criteria are clear before sandbox repository creation. | pass for planning | [Sandbox Validation](SANDBOX_VALIDATION.md), [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md). | Actual sandbox repo identity and settings remain `확인 필요`. |
-| Owner gates are explicit. | conditional | [Operating Model](OPERATING_MODEL.md), [Risk Policy](RISK_POLICY.md), [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md). | Owner decision is required before sandbox repo creation planning proceeds. |
-| Prohibited implementation, workflow, automation, GitHub write, branch cleanup, sandbox creation, trading, credential, risk cap, and model promotion actions remain blocked until explicitly in scope. | pass | [Risk Policy](RISK_POLICY.md), [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md). | None blocking. |
+| Owner gates are explicit. | conditional | [Operating Model](operations/OPERATING_MODEL.md), [Risk Policy](operations/RISK_POLICY.md), [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md). | Owner decision is required before sandbox repo creation planning proceeds. |
+| Prohibited implementation, workflow, automation, GitHub write, branch cleanup, sandbox creation, trading, credential, risk cap, and model promotion actions remain blocked until explicitly in scope. | pass | [Risk Policy](operations/RISK_POLICY.md), [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md), [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md). | None blocking. |
 
 Phase 1 conclusion: documentation is ready enough to recommend the next docs-only planning step, provided the owner explicitly approves sandbox repository creation planning and keeps actual creation/validation separate.
 
@@ -99,7 +99,7 @@ Phase 1 conclusion: documentation is ready enough to recommend the next docs-onl
 | Phase 2 CLI skeleton contract is clear before implementation. | pass for contract clarity | [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md). | Implementation remains blocked. |
 | Future local task, validation, plan, and status surfaces exist. | pass | [Local Task Format](LOCAL_TASK_FORMAT.md), [Task Validation Result](TASK_VALIDATION_RESULT.md), [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md), [Factory Status Result](FACTORY_STATUS_RESULT.md). | None blocking for planning. |
 | Phase 2 work preserves safety fields and owner gates. | pass | Phase 2 and related contracts preserve `scope`, `allowed_files`, `forbidden_files`, `forbidden_actions`, `validation_plan`, stop states, risk tier, and owner gates. | Continue safety-field checks before any implementation PR. |
-| CLI implementation is owner-approved and justified by prior evidence. | fail for implementation readiness | [Risk Policy](RISK_POLICY.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md), [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md). | Do not implement CLI behavior in this phase. |
+| CLI implementation is owner-approved and justified by prior evidence. | fail for implementation readiness | [Risk Policy](operations/RISK_POLICY.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md), [Phase 1/2 Readiness Audit](PHASE_READINESS_AUDIT.md). | Do not implement CLI behavior in this phase. |
 | Sandbox validation evidence supports moving from docs-first planning into implementation. | `확인 필요` | [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md) exists, but no real sandbox validation run has occurred in this audit. | Produce real evidence only in a later approved sandbox validation task. |
 
 Phase 2 conclusion: Phase 2 planning surfaces are coherent, but Phase 2 implementation is not ready. Implementation remains blocked until owner approval and later sandbox evidence support it.
@@ -113,17 +113,17 @@ Phase 2 conclusion: Phase 2 planning surfaces are coherent, but Phase 2 implemen
 | Cross-document consistency readiness | pass | Repository search across readiness, sandbox, lifecycle, stop, validation, metadata, allowed-files, and solution surfaces. | No broad contradiction requiring rewrite was found. |
 | Solution lookup readiness | pass | [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md), active `docs/solutions/**` lessons. | Lookup was completed before planning/editing. |
 | Stop-state registry readiness | pass | [Stop-State Registry](STOP_STATE_REGISTRY.md). | No new stop codes introduced. |
-| Lifecycle readiness | pass | [Task Lifecycle](TASK_LIFECYCLE.md), lifecycle solution lesson. | `STOPPED` interruption/resumption rule is present. |
-| Task contract readiness | pass | [Task Contract](TASK_CONTRACT.md). | Required fields and owner gates are explicit. |
+| Lifecycle readiness | pass | [Task Lifecycle](operations/TASK_LIFECYCLE.md), lifecycle solution lesson. | `STOPPED` interruption/resumption rule is present. |
+| Task contract readiness | pass | [Task Contract](operations/TASK_CONTRACT.md). | Required fields and owner gates are explicit. |
 | Validation contract readiness | pass | [Task Validation Result](TASK_VALIDATION_RESULT.md). | Safety fields are preserved. |
 | Status/result contract readiness | pass | [Factory Status Result](FACTORY_STATUS_RESULT.md). | Unknown handling and interrupted state reporting are explicit. |
-| PR metadata readiness | pass | [PR Metadata Guard](PR_METADATA_GUARD.md), PR metadata solution lesson. | `Self-review result` and `Confirmations` remain distinct. |
+| PR metadata readiness | pass | [PR Metadata Guard](operations/PR_METADATA_GUARD.md), PR metadata solution lesson. | `Self-review result` and `Confirmations` remain distinct. |
 | Allowed-files guard readiness | pass | [Allowed-Files Guard](ALLOWED_FILES_GUARD.md), allowed-files solution lesson. | Stop-state semantics are aligned for forbidden/out-of-scope files. |
 | Sandbox validation readiness | conditional | [Sandbox Validation](SANDBOX_VALIDATION.md), [Sandbox Validation Evidence](SANDBOX_VALIDATION_EVIDENCE.md). | Ready for owner-approved planning; actual repo creation and validation remain separate. |
 | Phase 2 CLI skeleton readiness | conditional | [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md). | Planning is coherent; implementation is blocked. |
 | Safety field preservation readiness | pass | Task, local task, plan, validation, status, metadata, allowed-files, readiness, and evidence contracts. | No dropped safety fields found. |
-| Owner gate readiness | conditional | [Operating Model](OPERATING_MODEL.md), [Risk Policy](RISK_POLICY.md), [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md). | Owner decisions are explicit and still required. |
-| Implementation prohibition readiness | pass | [Risk Policy](RISK_POLICY.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md). | Prohibited implementation remains blocked. |
+| Owner gate readiness | conditional | [Operating Model](operations/OPERATING_MODEL.md), [Risk Policy](operations/RISK_POLICY.md), [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md). | Owner decisions are explicit and still required. |
+| Implementation prohibition readiness | pass | [Risk Policy](operations/RISK_POLICY.md), [Acceptance Tests](ACCEPTANCE_TESTS.md), [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md). | Prohibited implementation remains blocked. |
 
 ## PR #22 Inventory Impact
 

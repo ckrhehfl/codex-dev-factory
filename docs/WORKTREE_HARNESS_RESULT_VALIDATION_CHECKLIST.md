@@ -226,10 +226,10 @@ This PR does not:
 | Aligns with [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md). | Branch naming, ownership evidence, conflicts, and ambiguity handling remain consistent. |
 | Aligns with [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md). | Retention stays report-first and owner-gated. |
 | Aligns with [Worktree Harness Branch Ownership Result Examples](WORKTREE_HARNESS_BRANCH_OWNERSHIP_RESULT_EXAMPLES.md). | Examples preserve safety fields, evidence classes, stop semantics, and cleanup boundaries. |
-| Aligns with [Task Lifecycle State Model](TASK_LIFECYCLE.md). | Lifecycle states, stopped recovery, merge boundary, cleanup boundary, and lesson handling remain consistent. |
+| Aligns with [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md). | Lifecycle states, stopped recovery, merge boundary, cleanup boundary, and lesson handling remain consistent. |
 | Aligns with [Stop-State Registry](STOP_STATE_REGISTRY.md). | Stop codes are registry-backed. |
 | Aligns with [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) and [Factory Status Result Contract](FACTORY_STATUS_RESULT.md). | Validation/status summaries preserve unknowns, safety fields, owner gates, and stop state. |
-| Aligns with [PR Metadata Guard Contract](PR_METADATA_GUARD.md) and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). | PR metadata and changed-file checks preserve forbidden files/actions and evidence class separation. |
+| Aligns with [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md) and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md). | PR metadata and changed-file checks preserve forbidden files/actions and evidence class separation. |
 
 ## Checklist Result Template
 

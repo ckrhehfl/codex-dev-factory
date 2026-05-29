@@ -103,7 +103,7 @@ Future retention reports may use these documentation-level classifications. They
 | `protected_or_shared_worktree` | Worktree is associated with protected, shared, open-PR, unmerged, or owner-gated state. | Stop/report or retain as owner-gated. |
 | `unknown_status_worktree` | Worktree state cannot be classified with current evidence. | Stop/report or mark 확인 필요. |
 
-These classes should align with [Task Lifecycle State Model](TASK_LIFECYCLE.md), [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md), and [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md). If future lifecycle or result docs introduce stronger canonical terms, future retention docs should reconcile with them before implementation.
+These classes should align with [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md), and [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md). If future lifecycle or result docs introduce stronger canonical terms, future retention docs should reconcile with them before implementation.
 
 ## Retention Principles
 
@@ -392,9 +392,9 @@ This policy aligns with:
 - [Worktree Harness MVP Boundary](WORKTREE_HARNESS_MVP_BOUNDARY.md), which keeps worktree harness design docs-only and excludes worktree mutation, branch deletion, and cleanup automation.
 - [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md), which requires branch/worktree state, cleanup as report-only, evidence classification, stop/report details, owner gates, and safety-field preservation.
 - [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md), which requires ownership evidence before branch or worktree mutation and keeps cleanup separate.
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md), which separates branch work, review, merge, cleanup, stopped-state recovery, and lesson capture.
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), which separates branch work, review, merge, cleanup, stopped-state recovery, and lesson capture.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md), which owns `STOPPED_*` codes.
-- [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md), which require source-of-truth reporting and safety-field preservation.
+- [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md), which require source-of-truth reporting and safety-field preservation.
 
 If future policy adds cleanup permissions, worktree deletion authority, branch lifecycle automation, new lifecycle behavior, owner gates, or new stop codes, it must update every relevant policy surface in the same approved PR.
 

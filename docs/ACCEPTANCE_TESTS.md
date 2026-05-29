@@ -18,8 +18,8 @@ Allowed files for the first docs-only proposal:
 
 - `README.md`
 - `docs/VISION.md`
-- `docs/OPERATING_MODEL.md`
-- `docs/RISK_POLICY.md`
+- `docs/operations/OPERATING_MODEL.md`
+- `docs/operations/RISK_POLICY.md`
 - `docs/ACCEPTANCE_TESTS.md`
 - `docs/ROADMAP.md`
 - `.gitignore`
@@ -28,7 +28,7 @@ Any other changed file triggers `STOPPED_FORBIDDEN_FILE_CHANGE`.
 
 ## Task Contract Check
 
-Every future task should include the required fields from [Task Contract](TASK_CONTRACT.md):
+Every future task should include the required fields from [Task Contract](operations/TASK_CONTRACT.md):
 
 - Task title and objective.
 - Source-of-truth assumptions.
@@ -117,7 +117,7 @@ Compound knowledge base work is defined in [Compound Knowledge Base](solutions/R
 
 Compound output is advisory. New or changed lessons become repository guidance only through reviewed docs-only PRs.
 
-If a lesson introduces or references a `STOPPED_*` code, compare it against the relevant local Stop States section and [Risk Policy](RISK_POLICY.md). Missing stop-state surface coverage triggers `STOPPED_STOP_STATE_SURFACE_MISMATCH`.
+If a lesson introduces or references a `STOPPED_*` code, compare it against the relevant local Stop States section and [Risk Policy](operations/RISK_POLICY.md). Missing stop-state surface coverage triggers `STOPPED_STOP_STATE_SURFACE_MISMATCH`.
 
 ## Solution Lookup Checks
 

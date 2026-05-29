@@ -21,24 +21,25 @@ It does not move files or change policy. Point-in-time evidence and audit docs a
 
 ## Operating Policies
 
-- [Operating Model](OPERATING_MODEL.md)
-- [Risk Policy](RISK_POLICY.md)
-- [GitHub Operating Policy](GITHUB_OPERATING_POLICY.md)
+- [Operations Documentation](operations/README.md)
+- [Operating Model](operations/OPERATING_MODEL.md)
+- [Risk Policy](operations/RISK_POLICY.md)
+- [GitHub Operating Policy](operations/GITHUB_OPERATING_POLICY.md)
 - [Stop-State Registry](STOP_STATE_REGISTRY.md)
 - [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md)
 
 ## Task Contracts and Result Schemas
 
-- [Task Contract](TASK_CONTRACT.md)
-- [Task Lifecycle](TASK_LIFECYCLE.md)
+- [Task Contract](operations/TASK_CONTRACT.md)
+- [Task Lifecycle](operations/TASK_LIFECYCLE.md)
 - [Local Task Format](LOCAL_TASK_FORMAT.md)
 - [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md)
 - [Task Validation Result](TASK_VALIDATION_RESULT.md)
 - [Factory Status Result](FACTORY_STATUS_RESULT.md)
-- [PR Metadata Guard](PR_METADATA_GUARD.md)
+- [PR Metadata Guard](operations/PR_METADATA_GUARD.md)
 - [Allowed-Files Guard](ALLOWED_FILES_GUARD.md)
-- [Codex Task Preflight](CODEX_TASK_PREFLIGHT.md)
-- [Codex Fixed Loop Contracts](CODEX_FIXED_LOOP_CONTRACTS.md)
+- [Codex Task Preflight](operations/CODEX_TASK_PREFLIGHT.md)
+- [Codex Fixed Loop Contracts](operations/CODEX_FIXED_LOOP_CONTRACTS.md)
 - [Acceptance Tests](ACCEPTANCE_TESTS.md)
 - [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md)
 
@@ -95,14 +96,14 @@ Repeated owner-gate, credential, source-of-truth, merge/cleanup, sandbox/input, 
 
 ## Folderization Guidance
 
-Do not move root-level docs yet.
+This repository has started a conservative folderization pass with operational docs under `operations/`.
 
 Future folderization requires link-impact planning before files move. Candidate future folders may include:
 
 - `strategy/`
 - `architecture/`
-- `policies/`
-- `contracts/`
+- `automation/`
+- `evaluation/`
 - `runbooks/`
 - `evidence/`
 - `audits/`
@@ -112,8 +113,8 @@ Future folderization requires link-impact planning before files move. Candidate 
 
 ## Current Placement Rule
 
-New docs may still be added at root when they are active policy, architecture, contract, runbook, or evidence-map surfaces and no folderization plan has been approved.
+New docs may still be added at root when they are active policy, architecture, contract, runbook, or evidence-map surfaces and no folderization plan has been approved for that surface.
 
 Do not move [Hermes-Codex Compatibility Matrix](HERMES_CODEX_COMPATIBILITY_MATRIX.md) yet.
 
-Do not move root-level docs until a separate migration plan is approved.
+Do not move additional root-level docs until a separate migration plan is approved.

@@ -337,9 +337,9 @@ These examples align with:
 - [Worktree Harness Result Contract](WORKTREE_HARNESS_RESULT_CONTRACT.md), which requires branch/worktree result fields, evidence classification, stopped semantics, owner gates, cleanup as report-only, and safety-field preservation.
 - [Harness Branch Naming and Ownership Policy](HARNESS_BRANCH_NAMING_AND_OWNERSHIP_POLICY.md), which requires ownership evidence before branch or worktree mutation and stops on ambiguity.
 - [Worktree Retention Policy](WORKTREE_RETENTION_POLICY.md), which keeps active, stale, dirty, ambiguous, foreign-repo, completed, and cleanup-pending worktrees report-first.
-- [Task Lifecycle State Model](TASK_LIFECYCLE.md), which separates branch work, review, merge, cleanup, stopped-state recovery, and lesson capture.
+- [Task Lifecycle State Model](operations/TASK_LIFECYCLE.md), which separates branch work, review, merge, cleanup, stopped-state recovery, and lesson capture.
 - [Stop-State Registry](STOP_STATE_REGISTRY.md), which owns `STOPPED_*` codes.
-- [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md), which require source-of-truth reporting and safety-field preservation.
+- [Task Validation Result Contract](TASK_VALIDATION_RESULT.md), [Factory Status Result Contract](FACTORY_STATUS_RESULT.md), [PR Metadata Guard Contract](operations/PR_METADATA_GUARD.md), and [Allowed-Files Guard Result Contract](ALLOWED_FILES_GUARD.md), which require source-of-truth reporting and safety-field preservation.
 
 If future policy adds cleanup permissions, branch/worktree mutation authority, lifecycle behavior, owner gates, result statuses, or new stop codes, it must update every relevant policy surface in the same approved PR.
 

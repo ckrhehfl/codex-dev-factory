@@ -61,13 +61,13 @@ For allowed-files guard, validation result, factory status, PR metadata, plan ou
 
 - [Allowed-Files Guard Result Contract](../../ALLOWED_FILES_GUARD.md)
 - [Stop-State Registry](../../STOP_STATE_REGISTRY.md)
-- [Risk Policy](../../RISK_POLICY.md)
+- [Risk Policy](../../operations/RISK_POLICY.md)
 - [Acceptance Tests](../../ACCEPTANCE_TESTS.md)
-- [Task Contract](../../TASK_CONTRACT.md)
+- [Task Contract](../../operations/TASK_CONTRACT.md)
 - [Task Validation Result Contract](../../TASK_VALIDATION_RESULT.md)
 - [Factory Status Result Contract](../../FACTORY_STATUS_RESULT.md)
-- [PR Metadata Guard Contract](../../PR_METADATA_GUARD.md)
-- [Task Lifecycle State Model](../../TASK_LIFECYCLE.md)
+- [PR Metadata Guard Contract](../../operations/PR_METADATA_GUARD.md)
+- [Task Lifecycle State Model](../../operations/TASK_LIFECYCLE.md)
 
 ## Example Application in Future Tasks
 

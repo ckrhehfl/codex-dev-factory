@@ -287,19 +287,19 @@ This PR does not implement cleanup automation.
 
 The [Task Contract](TASK_CONTRACT.md) defines the fields that make `TASK_DEFINED` safe enough to execute.
 
-The [Local Task Format Contract](LOCAL_TASK_FORMAT.md) may later serialize task fields, but it does not replace lifecycle gates.
+The [Local Task Format Contract](../LOCAL_TASK_FORMAT.md) may later serialize task fields, but it does not replace lifecycle gates.
 
-The [Task Validation Result Contract](TASK_VALIDATION_RESULT.md) may later report whether a task can proceed from `TASK_DEFINED` toward planning and branch work.
+The [Task Validation Result Contract](../TASK_VALIDATION_RESULT.md) may later report whether a task can proceed from `TASK_DEFINED` toward planning and branch work.
 
-The [Plan Output Contract](PLAN_OUTPUT_CONTRACT.md) may later describe execution steps, but it must preserve lifecycle gates, owner decisions, stop conditions, and safety fields.
+The [Plan Output Contract](../PLAN_OUTPUT_CONTRACT.md) may later describe execution steps, but it must preserve lifecycle gates, owner decisions, stop conditions, and safety fields.
 
 PR metadata should make the current lifecycle assumptions reviewable, especially scope, non-goals, allowed files, forbidden files/actions, validation plan, stop conditions, risk tier, self-review, solution lookup, and merge boundary.
 
 When a future PR used multiple Codex workers, PR metadata should also make role assignment, worker count, evidence packets, credit/cost class, sequential versus parallel assumptions, and dispatcher reconciliation reviewable. This is metadata guidance only and does not authorize worker execution or PR creation.
 
-The [Stop-State Registry](STOP_STATE_REGISTRY.md) owns specific `STOPPED_*` reasons.
+The [Stop-State Registry](../STOP_STATE_REGISTRY.md) owns specific `STOPPED_*` reasons.
 
-The [Solution Lookup Protocol](SOLUTION_LOOKUP_PROTOCOL.md) helps prevent repeat lifecycle, review-fix, and stop-state mistakes.
+The [Solution Lookup Protocol](../SOLUTION_LOOKUP_PROTOCOL.md) helps prevent repeat lifecycle, review-fix, and stop-state mistakes.
 
 ## PR-Producing Final Response Contract
 
@@ -330,7 +330,7 @@ Final response formatting does not replace PR body metadata, validation evidence
 
 `STOPPED` is a lifecycle state.
 
-Specific stop reasons must use the central [Stop-State Registry](STOP_STATE_REGISTRY.md).
+Specific stop reasons must use the central [Stop-State Registry](../STOP_STATE_REGISTRY.md).
 
 If a future PR introduces or changes any `STOPPED_*` code, it must update the registry and every relevant local Stop States section in the same PR.
 

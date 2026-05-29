@@ -54,11 +54,11 @@ For sandbox validation evidence, factory status, task validation result, PR meta
 ## Affected Policy Surfaces
 
 - [Sandbox Validation Evidence Contract](../../SANDBOX_VALIDATION_EVIDENCE.md)
-- [Task Lifecycle State Model](../../TASK_LIFECYCLE.md)
+- [Task Lifecycle State Model](../../operations/TASK_LIFECYCLE.md)
 - [Stop-State Registry](../../STOP_STATE_REGISTRY.md)
 - [Factory Status Result Contract](../../FACTORY_STATUS_RESULT.md)
 - [Task Validation Result Contract](../../TASK_VALIDATION_RESULT.md)
-- [PR Metadata Guard Contract](../../PR_METADATA_GUARD.md)
+- [PR Metadata Guard Contract](../../operations/PR_METADATA_GUARD.md)
 - [Allowed-Files Guard Result Contract](../../ALLOWED_FILES_GUARD.md)
 - [Solution Lookup Protocol](../../SOLUTION_LOOKUP_PROTOCOL.md)
 

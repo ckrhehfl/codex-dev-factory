@@ -64,10 +64,10 @@ For readiness, inventory, evidence, source-of-truth, or audit result docs, self-
 - [Documentation Inventory Audit](../../DOCUMENTATION_INVENTORY_AUDIT.md)
 - [Factory Status Result Contract](../../FACTORY_STATUS_RESULT.md)
 - [Sandbox Validation Evidence Contract](../../SANDBOX_VALIDATION_EVIDENCE.md)
-- [Task Lifecycle State Model](../../TASK_LIFECYCLE.md)
+- [Task Lifecycle State Model](../../operations/TASK_LIFECYCLE.md)
 - [Solution Lookup Protocol](../../SOLUTION_LOOKUP_PROTOCOL.md)
 - [Stop-State Registry](../../STOP_STATE_REGISTRY.md)
-- [Risk Policy](../../RISK_POLICY.md)
+- [Risk Policy](../../operations/RISK_POLICY.md)
 
 ## Example Application in Future Tasks
 
