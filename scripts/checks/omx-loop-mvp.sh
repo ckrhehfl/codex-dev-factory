@@ -20,10 +20,7 @@ current_path=$(pwd -P)
 remote_url=$(git remote get-url origin 2>/dev/null || true)
 branch_name=$(git branch --show-current 2>/dev/null || true)
 status_short=$(git --no-optional-locks status --short 2>/dev/null || true)
-omx_version=$(omx version 2>/dev/null | head -n 1 || true)
-if [[ -z "$omx_version" ]]; then
-  omx_version=$(omx --version 2>/dev/null | head -n 1 || true)
-fi
+omx_version=$(omx --version 2>/dev/null | head -n 1 || true)
 
 case "$repo_root" in
   *"$expected_path_suffix") ;;
