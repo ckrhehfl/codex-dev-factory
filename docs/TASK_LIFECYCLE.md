@@ -68,6 +68,8 @@ PR body should include at minimum:
 - Scope confirmation.
 - Non-goals.
 - Allowed files.
+- Forbidden files/actions.
+- Validation plan.
 - Validation results.
 - Stop conditions.
 - Risk tier.
