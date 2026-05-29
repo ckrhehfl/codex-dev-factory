@@ -68,6 +68,7 @@ The existing `ckrhehfl/institutional-futures-trader` repository is only a refere
 - [Worktree Harness Result Validation Checklist](docs/WORKTREE_HARNESS_RESULT_VALIDATION_CHECKLIST.md)
 - [Worktree Harness Status Summary Format](docs/WORKTREE_HARNESS_STATUS_SUMMARY_FORMAT.md)
 - [Codex Worker Boundary](docs/CODEX_WORKER_BOUNDARY.md)
+- [OMX Local Loop MVP](docs/OMX_LOCAL_LOOP_MVP.md)
 - [Hermes Runtime Evaluation Plan](docs/HERMES_RUNTIME_EVALUATION_PLAN.md)
 - [Hermes Evaluation Acceptance Criteria](docs/HERMES_EVALUATION_ACCEPTANCE_CRITERIA.md)
 - [Hermes Evaluation Evidence Template](docs/HERMES_EVALUATION_EVIDENCE_TEMPLATE.md)
