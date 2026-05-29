@@ -31,6 +31,10 @@ if [[ "$remote_url" != "$expected_remote" ]]; then
   report_failure "origin must be $expected_remote; got ${remote_url:-unknown}"
 fi
 
+if [[ "$branch_name" != "main" ]]; then
+  report_failure "current branch must be main before starting a new local loop; got ${branch_name:-unknown}"
+fi
+
 if [[ -n "$status_short" ]]; then
   report_failure "working tree must be clean before starting a new local loop"
 fi
