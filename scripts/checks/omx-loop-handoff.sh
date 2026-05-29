@@ -56,7 +56,7 @@ case "$remote_url_sanitized" in
   *://*:*@*|https://*@*|*\?access_token=*|*\&access_token=*|*\?token=*|*\&token=*|*\?api_key=*|*\&api_key=*|*\?apikey=*|*\&apikey=*|*\?password=*|*\&password=*|*\?secret=*|*\&secret=*)
     remote_url_sanitized="<redacted-remote-url>"
     warnings="[handoff redacted credential-like remote URL]"
-    stop_condition=${stop_condition:-STOPPED_SECRET_OR_CREDENTIAL_RISK}
+    stop_condition=${stop_condition:-STOPPED_CREDENTIAL_OR_SECRET_CONTENT}
     packet_status="halt"
     next_safe_action="report_stop_condition"
     ;;
