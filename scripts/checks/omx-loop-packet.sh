@@ -54,6 +54,14 @@ normalize_warnings() {
   esac
 }
 
+add_warning() {
+  local message=$1
+  case "$warnings" in
+    "[]") warnings="[$message]" ;;
+    *) warnings="${warnings%]} ; $message]" ;;
+  esac
+}
+
 repo_path=$(adapter_field "repo_path")
 remote_url_sanitized=$(adapter_field "remote_url")
 branch=$(adapter_field "branch")
@@ -92,6 +100,11 @@ fi
 
 if (( adapter_exit != 0 )) && [[ -z "$stop_condition" ]]; then
   stop_condition="STOPPED_VALIDATION_FAILED"
+fi
+
+if [[ "$branch" != "main" ]]; then
+  add_warning "current branch is not main; MVP checklist gate would halt"
+  stop_condition=${stop_condition:-STOPPED_VALIDATION_FAILED}
 fi
 
 if [[ -z "$stop_condition" ]]; then
