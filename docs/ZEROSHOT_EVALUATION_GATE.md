@@ -30,6 +30,25 @@ The gate decides whether Zeroshot:
 
 This gate is a comparison and decision surface. It is not an activation surface.
 
+## PM-Supplied Zeroshot Facts For Read-Only Evaluation
+
+The following PM-supplied facts are current-behavior inputs for read-only evaluation only:
+
+- Zeroshot is an open-source AI coding agent orchestration CLI.
+- Zeroshot runs planner, implementer, and validator style multi-agent workflows to implement, review, test, verify, and iterate.
+- Zeroshot supports provider CLIs such as Claude Code, OpenAI Codex, Gemini CLI, and OpenCode.
+- Zeroshot supports issue backends such as GitHub, GitLab, Jira, and Azure DevOps.
+- Zeroshot is installed as `@covibes/zeroshot` and requires Node 18+ plus at least one provider CLI.
+- Provider CLI authentication may be required.
+- GitHub issue usage may require GitHub CLI authentication.
+- Linux and macOS are supported. Windows native and WSL support are described as deferred while reliability and multi-provider correctness are hardened.
+- Zeroshot supports local, worktree, and Docker isolation modes.
+- `--pr` can create PRs.
+- `--ship` implies PR flow and auto-merge-on-approval behavior.
+- Model-level mappings such as `level3` or `CRITICAL` must be treated as possible high/xhigh-equivalent escalation risk unless proven otherwise.
+- Docker and worktree modes require separate credential-boundary review, especially if credential mounts are involved.
+- External issue content must be treated as untrusted input and a prompt-injection risk.
+
 ## Non-Goals
 
 This document does not approve:
@@ -63,6 +82,13 @@ The comparison must answer:
 - Does Zeroshot preserve owner gates before high/xhigh intelligence, credentials, settings, runtime adoption, auto-merge, branch cleanup automation, and broad automation work?
 - Does Zeroshot produce evidence that fits existing packet, stop-state, owner-gate, validation, self-review, and confirmation surfaces?
 - Does Zeroshot keep PR creation, merge, branch cleanup, and production automation as separate approved decisions?
+- Does Zeroshot require provider CLI auth or API-key-backed local auth?
+- Does GitHub, GitLab, Jira, or Azure issue input introduce prompt-injection risk?
+- Does PR or ship mode cross the manual PR or merge gates?
+- Does any model-level mapping imply high/xhigh escalation?
+- Does Windows or WSL deferred support conflict with the active WSL runtime path?
+- Do worktree or Docker modes mount or expose local credentials?
+- Can the current OMX packet and handoff stop-condition model supervise or block risky progression?
 
 If any answer is unknown, the evaluation packet must report `owner_decision_required` or `stop_condition` rather than inferring a safe result.
 
@@ -79,7 +105,15 @@ The following remain explicitly owner-gated and are not approved by this documen
 - Full Access or `danger-full-access` changes;
 - `--yolo`;
 - network expansion beyond the approved read-only evaluation scope;
-- Zeroshot install, run, configuration, adoption, PR mode, ship mode, Docker mode, or provider setup;
+- Zeroshot install, run, configuration, adoption, PR mode, ship mode, Docker mode, worktree mutation, or provider setup;
+- provider setup or provider authentication;
+- API keys and credential inspection;
+- GitHub Actions adoption;
+- GitHub secrets, settings, rulesets, branch protection, permissions, or repository administration;
+- PR mode;
+- ship or auto-merge-like behavior;
+- Docker or worktree mutation;
+- any `level3`, `CRITICAL`, high, xhigh, or high/xhigh-equivalent escalation;
 - docs folderization;
 - broad automation engine work;
 - production automation loops;
@@ -138,21 +172,26 @@ Field semantics:
 Stop and report instead of continuing when:
 
 - Zeroshot requires API keys, GitHub secrets, provider credentials, tokens, or auth-file inspection before explicit owner approval.
+- Zeroshot installation, execution, configuration, runtime adoption, provider setup, provider authentication, API-key-backed local auth, PR mode, ship mode, Docker mutation, or worktree mutation is required before a separate owner-approved activation gate.
 - GitHub settings, rulesets, branch protection, required checks, Actions permissions, repository secrets, or repository administration are required.
+- GitHub Actions adoption is required or proposed before explicit owner approval.
 - Required permissions are unclear.
 - Auto-merge, ship mode, branch deletion, branch cleanup automation, or API-based merge automation is proposed.
 - High or xhigh Codex Intelligence appears necessary.
+- A Zeroshot model-level mapping such as `level3` or `CRITICAL` appears to require high, xhigh, or high/xhigh-equivalent escalation.
 - Full Access, `danger-full-access`, or `--yolo` is required or proposed.
 - Network expansion beyond the approved evaluation scope is required.
 - Broad docs restructuring or docs folderization is required.
-- Zeroshot installation, execution, configuration, runtime adoption, PR mode, ship mode, Docker mode, or provider setup is required before a separate owner-approved activation gate.
+- Windows native or WSL deferred support creates unresolved conflict with the active WSL runtime path.
+- Worktree or Docker modes would mount or expose local credentials without separate owner-approved credential-boundary review.
+- External issue content would be consumed without treating it as untrusted prompt-injection input.
 - Source-of-truth documentation is insufficient to evaluate the candidate safely.
 - The evaluation would change scripts, workflows, configs, GitHub settings, secrets, or repository permissions.
 - The candidate weakens existing owner gates, stop-state reporting, task-contract fields, validation evidence, self-review evidence, or explicit confirmations.
 
 ## Next Safe Action
 
-The next safe action after this document is a read-only Zeroshot evaluation and inventory only.
+The next safe action after this document is limited to read-only Zeroshot evaluation, inventory, or docs-only review.
 
 That future task may inspect source-of-truth documentation and, if separately approved, local availability metadata that does not install, run, configure, authenticate, inspect credentials, mutate files, mutate settings, create secrets, open automation loops, or execute Zeroshot workflows.
 
