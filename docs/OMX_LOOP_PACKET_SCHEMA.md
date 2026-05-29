@@ -12,10 +12,11 @@ The current status source is the read-only OMX status adapter, with checklist co
 
 - `scripts/checks/omx-status-adapter.sh`
 - `scripts/checks/omx-loop-mvp.sh`
+- `scripts/checks/omx-loop-packet.sh`
 
-Those scripts do not yet emit this normalized packet shape directly. The adapter currently emits raw status fields such as `adapter_name`, `adapter_version`, `repo_path`, `remote_url`, `branch`, `working_tree_status`, `omx_version`, `detected_omx_mode_scope`, `status_source`, `evidence_class`, `warnings`, `stop_condition`, and `no_mutations_performed`. The helper prints a checklist gate around that status instead of filling packet fields.
+The packet emitter emits this normalized packet shape directly. The adapter currently emits raw status fields such as `adapter_name`, `adapter_version`, `repo_path`, `remote_url`, `branch`, `working_tree_status`, `omx_version`, `detected_omx_mode_scope`, `status_source`, `evidence_class`, `warnings`, `stop_condition`, and `no_mutations_performed`. The helper prints a checklist gate around that status instead of filling packet fields.
 
-PM/Codex should treat this schema as the stable normalized consumption contract over the adapter-backed loop, not as a byte-for-byte copy of current script output. Until the scripts are separately approved to emit this packet directly, the consuming layer maps:
+PM/Codex should treat this schema as the stable normalized consumption contract over the adapter-backed loop, not as a byte-for-byte copy of raw adapter output. The packet emitter maps:
 
 - `adapter_name` and `adapter_version` into `status_source` evidence.
 - `remote_url` into `remote_url_sanitized` after preserving redaction.
@@ -53,9 +54,9 @@ Every normalized OMX loop packet consumed by PM/Codex must include these fields:
 
 ## Field Semantics
 
-`packet_type` identifies this packet shape. Use `omx_loop_status_packet`.
+`packet_type` identifies this packet shape. Use `omx_loop_status`.
 
-`packet_version` identifies the schema version consumed by PM/Codex. Start with `1.0.0`; incompatible field changes require a new version.
+`packet_version` identifies the schema version consumed by PM/Codex. Start with `1`; incompatible field changes require a new version.
 
 `repo_path` is the resolved local repository path used for the status check.
 
@@ -77,15 +78,15 @@ Every normalized OMX loop packet consumed by PM/Codex must include these fields:
 
 `no_mutations_performed` must be `true` for this packet. A packet that required mutation is invalid for this schema.
 
-`checklist_gate_result` reports whether the loop checklist gate is safe to present or continue from. Use concise values such as `passed`, `stopped`, or `확인 필요`. Any value other than `passed` is a halt signal unless a separately reviewed contract defines a narrower non-blocking meaning.
+`checklist_gate_result` reports whether the loop checklist gate is safe to present or continue from. Use concise values such as `pass`, `halt`, or `확인 필요`. Any value other than `pass` is a halt signal unless a separately reviewed contract defines a narrower non-blocking meaning.
 
-`next_safe_action` is the conservative next action PM/Codex may report. It must not authorize mutating OMX commands, merge, auto-merge, branch cleanup automation, GitHub settings changes, or scope expansion. When `checklist_gate_result` is not `passed`, this field should tell PM/Codex to report the gate failure and stop until the failing precondition is resolved.
+`next_safe_action` is the conservative next action PM/Codex may report. It must not authorize mutating OMX commands, merge, auto-merge, branch cleanup automation, GitHub settings changes, or scope expansion. When `checklist_gate_result` is not `pass`, this field should tell PM/Codex to report the gate failure and stop until the failing precondition is resolved.
 
 ## Stop-Condition Handling
 
-Any non-empty `stop_condition` stops normal progression. A `checklist_gate_result` other than `passed` also stops normal progression, even when the adapter did not emit a stop condition. PM/Codex must report the stop condition or checklist gate failure and only ask the owner when owner input is actually needed to resolve it.
+Any non-empty `stop_condition` stops normal progression. A `checklist_gate_result` other than `pass` also stops normal progression, even when the adapter did not emit a stop condition. PM/Codex must report the stop condition or checklist gate failure and only ask the owner when owner input is actually needed to resolve it.
 
-When `stop_condition` is non-empty or `checklist_gate_result` is not `passed`, PM/Codex must not continue into:
+When `stop_condition` is non-empty or `checklist_gate_result` is not `pass`, PM/Codex must not continue into:
 
 - branch creation
 - document edits
@@ -131,8 +132,8 @@ This schema does not approve scripts, workflows, config changes, GitHub settings
 ## Example Packet
 
 ```text
-packet_type: omx_loop_status_packet
-packet_version: 1.0.0
+packet_type: omx_loop_status
+packet_version: 1
 repo_path: /mnt/c/Dev/codex-dev-factory
 remote_url_sanitized: git@github.com:ckrhehfl/codex-dev-factory.git
 branch: main
@@ -148,6 +149,6 @@ evidence_class: local-verified
 warnings: []
 stop_condition: ""
 no_mutations_performed: true
-checklist_gate_result: passed
-next_safe_action: create the approved bounded task branch from clean current main
+checklist_gate_result: pass
+next_safe_action: continue_bounded_pm_loop
 ```
