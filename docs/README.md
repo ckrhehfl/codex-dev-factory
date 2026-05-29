@@ -37,6 +37,7 @@ It does not move files or change policy. Point-in-time evidence and audit docs a
 - [Factory Status Result](FACTORY_STATUS_RESULT.md)
 - [PR Metadata Guard](PR_METADATA_GUARD.md)
 - [Allowed-Files Guard](ALLOWED_FILES_GUARD.md)
+- [Codex Fixed Loop Contracts](CODEX_FIXED_LOOP_CONTRACTS.md)
 - [Acceptance Tests](ACCEPTANCE_TESTS.md)
 - [Phase 2 CLI Skeleton](PHASE2_CLI_SKELETON.md)
 
