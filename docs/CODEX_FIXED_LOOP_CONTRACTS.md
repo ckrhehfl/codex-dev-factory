@@ -8,6 +8,8 @@ These are the fixed PM/Codex loop contracts for:
 - Owner-authorized branch cleanup after a merged pull request.
 - Compound post-merge triage after review-fix or nontrivial review activity.
 
+The standard preflight-first task lifecycle that calls these loops is defined in [Task Lifecycle](TASK_LIFECYCLE.md).
+
 The contracts reduce chat and handoff dependence by making discovery, gates, allowed actions, stop conditions, and output packets explicit. They do not remove repo or task revalidation, and they do not override owner gates, current task scope, repository policy, or GitHub state.
 
 ## Shared gates for every loop

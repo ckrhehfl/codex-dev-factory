@@ -2,11 +2,155 @@
 
 ## Purpose
 
-This document defines the canonical lifecycle model for docs-only factory tasks.
+This document defines the standard Codex task lifecycle for normal PM/Codex work.
 
-It makes task, branch, PR, review, merge, cleanup, and post-merge lesson handling explicit so task contracts, local task formats, plan outputs, validation results, PR metadata, and solution docs do not drift into incompatible lifecycle assumptions.
+It connects `scripts/checks/codex-task-preflight.sh`, the fixed loop contracts, `repo-guard`, and owner gates so task, branch, PR, review, merge, cleanup, and post-merge lesson handling do not drift into incompatible lifecycle assumptions.
+
+The runbook reduces prompt and handoff dependence by making normal progression explicit. It does not remove owner gates, GitHub settings boundaries, review requirements, merge authority, cleanup authority, or task-specific forbidden actions.
 
 This model is a documentation contract only. It does not implement CLI enums, workflow automation, GitHub writes, branch cleanup automation, Discord integration, trading functionality, or runtime enforcement.
+
+## Launch Aliases
+
+Use these aliases for normal task execution:
+
+- `cdfcheck`: read-only readiness, status, and inspection checks.
+- `cdfcodex`: normal bounded Codex work after readiness passes.
+
+Default Codex Intelligence is `medium/default`.
+
+If high or xhigh intelligence appears necessary, stop and request owner approval before continuing.
+
+Do not use Full Access, `danger-full-access`, `--yolo`, API keys, GitHub secrets, GitHub settings changes, auto-merge, branch cleanup automation, Zeroshot, Hermes, sandbox/runtime changes, docs folderization, or mutating OMX commands without a separate owner gate.
+
+## Preflight-First Start
+
+Normal tasks start from `main`.
+
+Run:
+
+```bash
+bash scripts/checks/codex-task-preflight.sh
+```
+
+A pass means local readiness is satisfied for normal bounded progression.
+
+`stop_condition: none` is non-blocking.
+
+A non-`none` stop condition blocks normal branch, edit, commit, push, and PR progression unless a documented loop-specific exception applies.
+
+`branch_not_main` can be expected only during feature-branch PR validation or loops intentionally operating on a current PR branch. It is not a normal starting state for new tasks from `main`.
+
+The helper is read-only. It does not verify GitHub branch protection, rulesets, permissions, or other GitHub settings. GitHub settings remain owner-gated and manual.
+
+## Normal Bounded Task Lifecycle
+
+The normal PM/Codex sequence is:
+
+1. PM defines a bounded task, allowed files, forbidden files/actions, validation expectations, owner gates, and stop conditions.
+2. Codex revalidates local readiness with `bash scripts/checks/codex-task-preflight.sh`.
+3. Codex creates a scoped branch only after readiness passes.
+4. Codex edits only allowed files.
+5. Codex runs local validation.
+6. Codex commits scoped changes.
+7. Codex pushes the branch.
+8. Codex opens a PR when appropriate and authorized by the task contract.
+9. PR merge remains owner-gated and manual.
+10. Branch cleanup remains owner-gated and manual.
+11. Compound is run only when appropriate under the fixed loop contract.
+
+## PR Phase
+
+PR body should include:
+
+- Summary of the lifecycle or runbook update.
+- Scope confirmation.
+- Validation results.
+- Owner gates.
+- Forbidden-action confirmation.
+
+The required status check `Repo guard` is expected to protect `main`, but exact GitHub settings are owner-reported or manual unless authenticated settings are directly queried.
+
+Conversation resolution may block merge.
+
+Do not auto-merge. Do not mark branch cleanup as automatic.
+
+## Review-Fix Phase
+
+Use the fixed review-fix loop contract in [Codex Fixed Loop Contracts](CODEX_FIXED_LOOP_CONTRACTS.md).
+
+Review-fix is used when actionable review comments exist.
+
+Mixed review batches should fix safe in-scope comments and leave out-of-scope or owner-decision comments unresolved for owner decision.
+
+Review-fix must not merge, force push, delete branches, inspect secrets, or change GitHub settings.
+
+After review-fix, rerun appropriate validation and push scoped commits.
+
+## Owner Merge and Branch Cleanup Phase
+
+The owner manually reviews and merges the PR.
+
+Branch cleanup is owner-gated and manual.
+
+The cleanup loop must never force-delete branches.
+
+When authorized, the cleanup loop should clean exactly one safe already-merged branch.
+
+There is no standing branch cleanup automation.
+
+## Compound Phase
+
+Use the fixed Compound contract in [Codex Fixed Loop Contracts](CODEX_FIXED_LOOP_CONTRACTS.md).
+
+Run Compound after review-fix or nontrivial review comments.
+
+Skip Compound when there were no actionable review comments and no review-fix commits.
+
+Compound may create a follow-up PR only for a concrete narrow issue caused by the latest merged PR or its review-fix drift.
+
+Stop for owner decision if a follow-up requires GitHub settings, workflow permissions, repo policy, broad EOL/config/environment changes, high/xhigh intelligence, Zeroshot/Hermes/sandbox/runtime adoption, or docs folderization.
+
+## Evidence and Reporting
+
+Use these evidence classes:
+
+- `local-verified`: output from local commands run by the active worker.
+- `authenticated/tool-reported`: GitHub connector, GitHub API, or other authenticated tool output.
+- `public/web-verified`: public web or unauthenticated public UI evidence checked by the active worker.
+- `user-reported`: owner-pasted terminal output or UI observations that the active worker did not rerun.
+- `확인 필요`: not directly checked by the active worker or authenticated tooling.
+
+Owner-pasted terminal output is `user-reported` unless the active worker reruns it.
+
+GitHub connector/API output is `authenticated/tool-reported`.
+
+Local command output from the active worker is `local-verified`.
+
+GitHub settings are `확인 필요` unless directly queried or owner-reported from the UI.
+
+## Stop Conditions
+
+Hard stops include:
+
+- Failed preflight from `main`.
+- Dirty worktree.
+- Ambiguous branch or PR.
+- Required high/xhigh intelligence.
+- Secret, API key, or GitHub settings need.
+- GitHub auth setup need.
+- Forbidden action needed.
+- Validation failure outside the scoped fix.
+- Owner decision needed.
+- Broad docs folderization needed.
+
+## Next Planned Docs Folderization
+
+Docs folderization is intentionally deferred until this lifecycle/runbook and fixed contracts are stable.
+
+Folderization requires a separate owner-authorized task.
+
+Do not include a folderization plan or perform file moves in a lifecycle/runbook PR.
 
 ## Lifecycle Principles
 
