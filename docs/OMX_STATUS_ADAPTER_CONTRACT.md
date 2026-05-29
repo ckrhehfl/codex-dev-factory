@@ -49,17 +49,17 @@ Unknown or unavailable values must be reported as unknown or unavailable rather 
 
 ## Stop Conditions
 
-The adapter must stop and report when any of these conditions apply:
+The adapter must stop and report with registered stop-state codes when any of these conditions apply:
 
-- `STOPPED_WRONG_REPO`: repository path or remote does not match the approved task context.
-- `STOPPED_WORKTREE_DIRTY`: the working tree is dirty when a clean tree is required for the status request.
-- `STOPPED_OMX_COMMAND_BEYOND_VERSION_REQUIRED`: the requested status requires an OMX command beyond `omx --version`.
-- `STOPPED_FORBIDDEN_ACTION_BLOCKED`: an OMX command would mutate repository files, OMX state, Codex config, GitHub state, tasks, teams, plans, logs, or runtime behavior.
-- `STOPPED_SCOPE_UNCLEAR`: command behavior, status source, or read-only boundary is unclear.
-- `STOPPED_SECRET_OR_CREDENTIAL_RISK`: credentials, secrets, API keys, tokens, auth files, env files, or secret-looking content would be involved.
-- `STOPPED_GITHUB_SETTINGS_REQUIRED`: GitHub settings, secrets, rulesets, permissions, or repository administration would be required.
-- `STOPPED_MODEL_ESCALATION_NEEDED`: high or xhigh Codex Intelligence appears necessary.
-- `STOPPED_FORBIDDEN_ACTION_BLOCKED`: network access is required without an owner gate.
+- `STOPPED_SOURCE_OF_TRUTH_UNCLEAR`: repository path or remote does not match the approved task context.
+- `STOPPED_LOCAL_WORKTREE_DIRTY`: the working tree is dirty when a clean tree is required for the status request.
+- `STOPPED_OWNER_DECISION_REQUIRED`: the requested status requires an OMX command beyond `omx --version`.
+- `STOPPED_OWNER_DECISION_REQUIRED`: an OMX command would mutate repository files, OMX state, Codex config, GitHub state, tasks, teams, plans, logs, or runtime behavior.
+- `STOPPED_FORBIDDEN_OR_AMBIGUOUS_FIELD`: command behavior, status source, or read-only boundary is unclear.
+- `STOPPED_CREDENTIAL_OR_SECRET_CONTENT`: credentials, secrets, API keys, tokens, auth files, env files, or secret-looking content would be involved.
+- `STOPPED_GITHUB_SETTINGS_UNVERIFIED`: GitHub settings, secrets, rulesets, permissions, or repository administration would be required.
+- `STOPPED_OWNER_DECISION_REQUIRED`: high or xhigh Codex Intelligence appears necessary.
+- `STOPPED_OWNER_DECISION_REQUIRED`: network access is required without an owner gate.
 
 ## Owner Gates
 
