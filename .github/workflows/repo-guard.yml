@@ -1,0 +1,16 @@
+name: Repo Guard
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  repo-guard:
+    name: Repo guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run repo guard
+        run: bash scripts/checks/repo-guard.sh
