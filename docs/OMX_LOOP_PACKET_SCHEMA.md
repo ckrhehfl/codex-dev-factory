@@ -76,7 +76,7 @@ Every normalized OMX loop packet consumed by PM/Codex must include these fields:
 
 `stop_condition` is the active stop code when normal progression must stop. Use an empty string when no stop condition exists. For compatibility with older adapter output, PM/Codex may treat legacy `none` as empty only when all other fields are safe.
 
-`no_mutations_performed` must be `true` only when the status adapter explicitly confirms `no_mutations_performed: true`. If adapter confirmation is missing or not `true`, the packet must report `unknown`, include a non-empty `stop_condition`, and halt normal progression. A packet that required mutation is invalid for this schema.
+`no_mutations_performed` must be `true` for any version `1` packet that can pass normal progression. If adapter confirmation is missing or not `true`, the packet must report `unknown` only in a halted packet with a non-empty `stop_condition`; consumers must not treat that halted packet as a passing version `1` status. A packet that required mutation is invalid for this schema.
 
 `checklist_gate_result` reports whether the loop checklist gate is safe to present or continue from. Use concise values such as `pass`, `halt`, or `확인 필요`. Any value other than `pass` is a halt signal unless a separately reviewed contract defines a narrower non-blocking meaning.
 
