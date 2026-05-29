@@ -34,6 +34,12 @@ sanitize_remote_url() {
       remote_url="$raw_remote_url"
       return 0
       ;;
+    *://*:*@*)
+      remote_url="<redacted-remote-url>"
+      add_warning "origin URL contains credential-like userinfo and was redacted"
+      set_stop "STOPPED_CREDENTIAL_OR_SECRET_CONTENT"
+      return 0
+      ;;
     https://*@*)
       remote_url="<redacted-remote-url>"
       add_warning "origin URL contains HTTPS userinfo and was redacted"
@@ -104,7 +110,7 @@ esac
 
 case "$remote_url_raw" in
   "$expected_remote_ssh"|"$expected_remote_https") ;;
-  https://*@*) ;;
+  *://*:*@*|https://*@*) ;;
   *) set_stop "STOPPED_SOURCE_OF_TRUTH_UNCLEAR" ;;
 esac
 
