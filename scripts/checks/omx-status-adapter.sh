@@ -3,7 +3,7 @@ set -euo pipefail
 
 adapter_name="omx-status-adapter"
 adapter_version="0.1.0"
-expected_repo_path="/mnt/c/Dev/codex-dev-factory"
+expected_repo_path_suffix="/codex-dev-factory"
 expected_remote_ssh="git@github.com:ckrhehfl/codex-dev-factory.git"
 expected_remote_https="https://github.com/ckrhehfl/codex-dev-factory.git"
 
@@ -27,35 +27,35 @@ set_stop() {
 }
 
 sanitize_remote_url() {
-  local remote_url=$1
+  local raw_remote_url=$1
 
-  case "$remote_url" in
+  case "$raw_remote_url" in
     "$expected_remote_ssh"|"$expected_remote_https")
-      remote_url_sanitized="$remote_url"
+      remote_url="$raw_remote_url"
       return 0
       ;;
     https://*@*)
-      remote_url_sanitized="<redacted-remote-url>"
+      remote_url="<redacted-remote-url>"
       add_warning "origin URL contains HTTPS userinfo and was redacted"
       set_stop "STOPPED_CREDENTIAL_OR_SECRET_CONTENT"
       return 0
       ;;
     git@github.com:ckrhehfl/codex-dev-factory.git)
-      remote_url_sanitized="$remote_url"
+      remote_url="$raw_remote_url"
       return 0
       ;;
     https://github.com/ckrhehfl/codex-dev-factory.git)
-      remote_url_sanitized="$remote_url"
+      remote_url="$raw_remote_url"
       return 0
       ;;
     "")
-      remote_url_sanitized="unknown"
+      remote_url="unknown"
       add_warning "origin URL is unavailable"
       set_stop "STOPPED_SOURCE_OF_TRUTH_UNCLEAR"
       return 0
       ;;
     *)
-      remote_url_sanitized="<redacted-remote-url>"
+      remote_url="<redacted-remote-url>"
       add_warning "origin URL is not an approved canonical repository URL"
       set_stop "STOPPED_SOURCE_OF_TRUTH_UNCLEAR"
       return 0
@@ -71,7 +71,7 @@ if [[ -z "$repo_path" ]]; then
 fi
 
 remote_url_raw=$(git remote get-url origin 2>/dev/null || true)
-remote_url_sanitized="unknown"
+remote_url="unknown"
 sanitize_remote_url "$remote_url_raw"
 
 branch=$(git branch --show-current 2>/dev/null || true)
@@ -94,10 +94,13 @@ else
   add_warning "working tree has local changes; reported as status only"
 fi
 
-if [[ "$repo_path" != "$expected_repo_path" ]]; then
-  add_warning "repository path does not match approved task path"
-  set_stop "STOPPED_SOURCE_OF_TRUTH_UNCLEAR"
-fi
+case "$repo_path" in
+  *"$expected_repo_path_suffix") ;;
+  *)
+    add_warning "repository path does not resolve to codex-dev-factory"
+    set_stop "STOPPED_SOURCE_OF_TRUTH_UNCLEAR"
+    ;;
+esac
 
 case "$remote_url_raw" in
   "$expected_remote_ssh"|"$expected_remote_https") ;;
@@ -112,6 +115,8 @@ if [[ -z "$omx_version" ]]; then
   set_stop "STOPPED_OWNER_DECISION_REQUIRED"
 fi
 
+detected_omx_mode_scope="unavailable"
+
 if [[ "$stop_condition" == "none" && "$working_tree_status" == "clean" ]]; then
   evidence_class="local-verified"
 elif [[ "$stop_condition" == "none" ]]; then
@@ -124,10 +129,11 @@ cat <<EOF
 adapter_name: $adapter_name
 adapter_version: $adapter_version
 repo_path: $repo_path
-remote_url_sanitized: $remote_url_sanitized
+remote_url: $remote_url
 branch: $branch
 working_tree_status: $working_tree_status
 omx_version: $omx_version
+detected_omx_mode_scope: $detected_omx_mode_scope
 status_source: git rev-parse --show-toplevel; git remote get-url origin; git branch --show-current; git --no-optional-locks status --short --branch --untracked-files=all; omx --version
 evidence_class: $evidence_class
 warnings: $warnings
