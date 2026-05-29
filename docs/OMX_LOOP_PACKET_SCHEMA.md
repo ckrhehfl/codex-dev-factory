@@ -6,12 +6,22 @@ The OMX loop packet is the stable status packet that PM/Codex should consume whe
 
 The packet is status and reporting only. It is not an execution instruction, approval, or automation trigger. Consumers must not treat it as permission to merge, enable auto-merge, clean branches, change GitHub settings, run mutating OMX commands, or continue past an active stop condition.
 
-## Packet Source
+## Packet Source And Normalization
 
-The current packet source is the read-only OMX status adapter and the local loop helper:
+The current status source is the read-only OMX status adapter, with checklist context from the local loop helper:
 
 - `scripts/checks/omx-status-adapter.sh`
 - `scripts/checks/omx-loop-mvp.sh`
+
+Those scripts do not yet emit this normalized packet shape directly. The adapter currently emits raw status fields such as `adapter_name`, `adapter_version`, `repo_path`, `remote_url`, `branch`, `working_tree_status`, `omx_version`, `detected_omx_mode_scope`, `status_source`, `evidence_class`, `warnings`, `stop_condition`, and `no_mutations_performed`. The helper prints a checklist gate around that status instead of filling packet fields.
+
+PM/Codex should treat this schema as the stable normalized consumption contract over the adapter-backed loop, not as a byte-for-byte copy of current script output. Until the scripts are separately approved to emit this packet directly, the consuming layer maps:
+
+- `adapter_name` and `adapter_version` into `status_source` evidence.
+- `remote_url` into `remote_url_sanitized` after preserving redaction.
+- `detected_omx_mode_scope` into `status_source` evidence when safely available.
+- helper pass/stop output into `checklist_gate_result`.
+- adapter warnings and stop state into `warnings`, `stop_condition`, and `next_safe_action`.
 
 The only approved OMX command remains:
 
@@ -21,9 +31,9 @@ omx --version
 
 Any future OMX command beyond `omx --version` requires a separate reviewed contract and owner gate before implementation or use. Unknown values must be reported as unknown, unavailable, or `확인 필요`; they must not be inferred through unsafe commands.
 
-## Required Fields
+## Required Normalized Fields
 
-Every OMX loop packet must include these fields:
+Every normalized OMX loop packet consumed by PM/Codex must include these fields:
 
 - `packet_type`
 - `packet_version`
