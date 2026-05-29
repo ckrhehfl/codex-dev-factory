@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-expected_remote_ssh="git@github.com:ckrhehfl/codex-dev-factory.git"
-expected_remote_https="https://github.com/ckrhehfl/codex-dev-factory.git"
 expected_path_suffix="/codex-dev-factory"
 
 failures=0
@@ -18,43 +16,33 @@ print_stage() {
 
 repo_root=$(git rev-parse --show-toplevel 2>/dev/null || true)
 current_path=$(pwd -P)
-remote_url=$(git remote get-url origin 2>/dev/null || true)
 branch_name=$(git branch --show-current 2>/dev/null || true)
-status_short=$(git --no-optional-locks status --short --untracked-files=all 2>/dev/null || true)
-omx_version=$(omx --version 2>/dev/null | head -n 1 || true)
+status_adapter="${repo_root:-$current_path}/scripts/checks/omx-status-adapter.sh"
+
+printf 'OMX status adapter preflight\n'
+if ! bash "$status_adapter"; then
+  printf '\nomx-loop-mvp: ERROR: status adapter failed\n' >&2
+  exit 1
+fi
+printf '\n'
 
 case "$repo_root" in
   *"$expected_path_suffix") ;;
   *) report_failure "repository root must end with $expected_path_suffix; got ${repo_root:-unknown}" ;;
 esac
 
-case "$remote_url" in
-  "$expected_remote_ssh"|"$expected_remote_https") ;;
-  *) report_failure "origin must be $expected_remote_ssh or $expected_remote_https; got ${remote_url:-unknown}" ;;
-esac
-
 if [[ "$branch_name" != "main" ]]; then
   report_failure "current branch must be main before starting a new local loop; got ${branch_name:-unknown}"
 fi
 
-if [[ -n "$status_short" ]]; then
-  report_failure "working tree must be clean before starting a new local loop"
+if (( failures > 0 )); then
+  printf '\nomx-loop-mvp: failed with %d violation(s)\n' "$failures" >&2
+  exit 1
 fi
 
-if [[ -z "$omx_version" ]]; then
-  report_failure "omx must be available for the OMX-backed loop contract"
-fi
-
-printf 'OMX local loop MVP preflight\n'
+printf 'OMX local loop MVP checklist gate\n'
 printf 'repo_path: %s\n' "${repo_root:-$current_path}"
-printf 'remote_url: %s\n' "${remote_url:-unknown}"
 printf 'current_branch: %s\n' "${branch_name:-unknown}"
-if [[ -z "$status_short" ]]; then
-  printf 'working_tree: clean\n'
-else
-  printf 'working_tree: dirty\n'
-fi
-printf 'omx_version: %s\n' "${omx_version:-unknown}"
 printf 'codex_launch_readiness: cdfcheck\n'
 printf 'codex_launch_bounded_work: cdfcodex\n'
 printf 'codex_intelligence_default: medium/default\n'
@@ -85,7 +73,7 @@ printf '\n'
 printf 'Current MVP boundary:\n'
 print_stage "This script is a dry-run/checklist helper only."
 print_stage "It does not run omx setup, omx doctor, omx explore, omx sparkshell, Codex, git writes, GitHub writes, or cleanup."
-print_stage "Future safe integration point: replace checklist-only status with a reviewed, read-only OMX status adapter once its command contract is approved."
+print_stage "Status is sourced from the reviewed, read-only OMX status adapter."
 
 if (( failures > 0 )); then
   printf '\nomx-loop-mvp: failed with %d violation(s)\n' "$failures" >&2
