@@ -85,9 +85,13 @@ copy_to_clipboard_if_available() {
   local prompt_file=$1
 
   if command -v clip.exe >/dev/null 2>&1; then
-    clip.exe <"$prompt_file"
-    printf 'clipboard_status: copied_with_clip.exe\n'
-    return 0
+    if clip.exe <"$prompt_file"; then
+      printf 'clipboard_status: copied_with_clip.exe\n'
+      return 0
+    fi
+
+    printf 'clipboard_status: copy_failed\n'
+    return 1
   fi
 
   printf 'clipboard_status: unavailable\n'
