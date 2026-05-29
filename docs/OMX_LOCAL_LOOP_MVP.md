@@ -4,7 +4,7 @@
 
 This MVP gives the owner and PM a repeatable local checklist for bounded Codex tasks while keeping existing owner gates intact.
 
-It is OMX-backed by contract only: local OMX availability is checked with `omx --version`, but this MVP does not run OMX setup, doctor, explore, sparkshell, task, team, or runtime commands.
+It is OMX-backed by the read-only status adapter: local OMX availability is checked through `scripts/checks/omx-status-adapter.sh`, whose only approved OMX discovery command is `omx --version`. This MVP does not run OMX setup, doctor, explore, sparkshell, task, team, or runtime commands.
 
 ## Operator Flow
 
@@ -29,14 +29,22 @@ Run:
 bash scripts/checks/omx-loop-mvp.sh
 ```
 
-The helper verifies or reports:
+The helper first runs:
+
+```bash
+bash scripts/checks/omx-status-adapter.sh
+```
+
+If the status adapter reports a stop condition or fails, the helper stops before printing the checklist.
+
+The adapter verifies or reports:
 
 - The repository root resolves to `codex-dev-factory`.
 - `origin` is `git@github.com:ckrhehfl/codex-dev-factory.git` or `https://github.com/ckrhehfl/codex-dev-factory.git`.
 - Whether the working tree is clean.
 - `omx --version` is available.
 
-It then prints the safe loop checklist. It does not create branches, modify files, commit, push, open PRs, run Codex, run OMX workflows, merge, auto-merge, or clean branches.
+The helper then prints the safe loop checklist. It does not create branches, modify files, commit, push, open PRs, run Codex, run OMX workflows, merge, auto-merge, or clean branches.
 
 ## Stop Conditions
 
@@ -52,4 +60,4 @@ Stop and report instead of continuing when:
 
 This MVP is a small dry-run/checklist scaffold. It is not a scheduler, autonomous merge loop, branch cleanup tool, Zeroshot integration, Hermes integration, docs folderization step, or custom automation engine.
 
-The next safe OMX integration point is a separate reviewed task that defines an approved read-only OMX status adapter command contract before any command beyond `omx --version` is used.
+Any future OMX integration point still requires a separate reviewed task and an approved read-only command contract before any command beyond `omx --version` is used.
