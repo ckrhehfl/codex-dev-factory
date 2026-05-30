@@ -378,12 +378,13 @@ print("true" if allowed else "false")
 
 repo_guard_success_for_head() {
   local sha=$1
-  local status_json check_json status_state status_contexts check_result
+  local status_json check_json required_json status_state status_contexts check_result required_result
 
   status_json=$(safe_gh api "repos/$repo/commits/$sha/status" 2>/dev/null || printf '{}')
   status_state=$(printf '%s' "$status_json" | json_get state 2>/dev/null || printf 'unknown')
   status_contexts=$(printf '%s' "$status_json" | json_get statuses 2>/dev/null | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))' 2>/dev/null || printf '0')
   check_json=$(safe_gh api "repos/$repo/commits/$sha/check-runs" 2>/dev/null || printf '{"check_runs":[]}')
+  required_json=$(safe_gh api "repos/$repo/branches/$default_branch/protection/required_status_checks" 2>/dev/null || printf '{}')
   check_result=$(python3 -c '
 import json
 import sys
@@ -403,9 +404,40 @@ for run in data.get("check_runs", []):
 print("{}|{}|{}".format(len(data.get("check_runs", [])), len(failed), len(pending)))
 ' <<<"$check_json"
 )
+  required_result=$(python3 -c '
+import json
+import sys
+
+status_data = json.loads(sys.argv[1])
+check_data = json.loads(sys.argv[2])
+required_data = json.loads(sys.argv[3])
+
+successful = set()
+for status in status_data.get("statuses", []):
+    if status.get("state") == "success":
+        context = status.get("context")
+        if context:
+            successful.add(context)
+for run in check_data.get("check_runs", []):
+    if run.get("status") == "completed" and run.get("conclusion") in ("success", "neutral", "skipped"):
+        name = run.get("name")
+        if name:
+            successful.add(name)
+
+required = set(required_data.get("contexts") or [])
+for item in required_data.get("checks") or []:
+    context = item.get("context")
+    if context:
+        required.add(context)
+
+missing = sorted(required - successful)
+print("{}|{}".format(len(required), len(missing)))
+' "$status_json" "$check_json" "$required_json")
 
   IFS='|' read -r check_count check_failures check_pending <<<"$check_result"
+  IFS='|' read -r required_count required_missing <<<"$required_result"
   if (( check_count > 0 && check_failures == 0 && check_pending == 0 )) &&
+    (( required_count > 0 && required_missing == 0 )) &&
     [[ "$status_state" == "success" || "$status_contexts" == "0" ]]; then
     printf 'true'
   else
