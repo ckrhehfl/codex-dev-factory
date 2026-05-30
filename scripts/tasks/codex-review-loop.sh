@@ -550,7 +550,7 @@ commit_changes() {
   local pr_number=$1
   local allowed_json=$2
   if worktree_clean; then
-    return 0
+    return 1
   fi
 
   stage_allowed_files "$allowed_json"
@@ -883,6 +883,10 @@ EOF
 
     codex exec "$(cat "$prompt_file")"
     rm -f "$prompt_file"
+
+    if worktree_clean; then
+      stop "STOPPED_VALIDATION_FAILED" "in-scope fixes were requested, but the authorized edit step produced no file changes"
+    fi
 
     forbidden_changes=$(validate_changed_files_within_scope "$allowed_json")
     if [[ -n "$forbidden_changes" ]]; then
