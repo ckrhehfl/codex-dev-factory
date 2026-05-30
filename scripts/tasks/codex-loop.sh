@@ -376,7 +376,7 @@ allowed_scope_for_task() {
       printf 'docs/**, README.md'
       ;;
     review-fix)
-      printf 'existing PR changed files only'
+      printf 'scripts/tasks/codex-loop.sh for this runner MVP; otherwise original task allowed-file evidence required'
       ;;
     compound)
       printf 'docs/solutions/** and PR metadata only'
@@ -417,8 +417,8 @@ for path in paths:
         if path.startswith("docs/solutions/"):
             continue
     elif task_id == "review-fix":
-        # Review-fix work is limited by the existing PR file set.
-        continue
+        if path == "scripts/tasks/codex-loop.sh":
+            continue
     elif task_id in ("current-pr", "latest-merged-pr"):
         if path in ("README.md", "scripts/tasks/codex-loop.sh") or path.startswith("docs/"):
             continue
