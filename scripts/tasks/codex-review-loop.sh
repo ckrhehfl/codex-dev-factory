@@ -322,10 +322,11 @@ allowed = set(allowed_data.get("paths") or [])
 threads = json.load(sys.stdin)
 
 unsafe_re = re.compile(
-    r"\b(secret|api key|credential|cookie|auth file|env file|branch protection|"
-    r"ruleset|permission|workflow permission|github setting|merge|auto-merge|"
+    r"\b(secret(?:s)?|api key(?:s)?|credential(?:s)?|cookie(?:s)?|auth file(?:s)?|"
+    r"env file(?:s)?|branch protection(?:s)?|ruleset(?:s)?|permission(?:s)?|"
+    r"workflow permission(?:s)?|github setting(?:s)?|merge|auto-merge|"
     r"force push|force-push|force delete|delete branch|zeroshot|hermes|omx|yolo|"
-    r"full access|danger-full-access|production|inspect token|read token)\b",
+    r"full access|danger-full-access|production|inspect token(?:s)?|read token(?:s)?)\b",
     re.I,
 )
 dot_env_re = re.compile(r"(^|[^\w/.-])\.env(?:[.\w-]*)?(?=$|[^\w.-])", re.I)
@@ -908,6 +909,27 @@ EOF
         stop "STOPPED_GH_NOT_READY" "failed to post @codex review"
       fi
       if poll_codex_review "$pr_number" "$head_sha" "$since_epoch"; then
+        if ! threads=$(review_threads_json "$pr_number"); then
+          stop "STOPPED_REVIEW_COMMENTS_UNAVAILABLE" "gh failed to re-read review threads before completion"
+        fi
+        classified=$(printf '%s' "$threads" | classified_threads_json "$allowed_json")
+        print_classification_summary "$classified"
+        unsafe=$(count_classification "$classified" "UNSAFE_OR_FORBIDDEN")
+        owner=$(count_classification "$classified" "OWNER_DECISION_REQUIRED")
+        out_scope=$(count_classification "$classified" "OUT_OF_SCOPE")
+        in_scope=$(count_classification "$classified" "IN_SCOPE_FIX")
+        if (( unsafe > 0 )); then
+          stop "STOPPED_UNSAFE_OR_FORBIDDEN_REVIEW_REQUEST" "unresolved review comments request forbidden or unsafe action"
+        fi
+        if (( owner > 0 )); then
+          stop "STOPPED_OWNER_DECISION_REQUIRED" "unresolved review comments require owner decision"
+        fi
+        if (( out_scope > 0 )); then
+          stop "STOPPED_OUT_OF_SCOPE_REVIEW_REQUEST" "unresolved review comments are outside current PR scope"
+        fi
+        if (( in_scope > 0 )); then
+          continue
+        fi
         complete
       else
         poll_status=$?
