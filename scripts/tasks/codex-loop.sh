@@ -310,51 +310,68 @@ allowed_scope_for_task() {
 }
 
 files_within_initial_safe_scope() {
-  local pr_json=$1
+  local task_id=$1
+  local pr_json=$2
   python3 -c '
 import json
 import sys
 
+task_id = sys.argv[1]
 data = json.load(sys.stdin)
 files = data.get("files") or []
 paths = [f.get("path", "") for f in files]
 allowed = True
 for path in paths:
-    if path == "README.md":
+    if task_id == "docs-folderize-operations":
+        if path == "README.md" or path.startswith("docs/"):
+            continue
+    elif task_id == "compound":
+        if path.startswith("docs/solutions/"):
+            continue
+    elif task_id == "review-fix":
+        # Review-fix work is limited by the existing PR file set.
         continue
-    if path.startswith("docs/"):
-        continue
-    if path == "scripts/tasks/codex-loop.sh":
-        continue
+    elif task_id in ("current-pr", "latest-merged-pr"):
+        if path in ("README.md", "scripts/tasks/codex-loop.sh") or path.startswith("docs/"):
+            continue
+    elif task_id == "branch-cleanup":
+        pass
     allowed = False
 print("true" if allowed else "false")
-' <<<"$pr_json"
+' "$task_id" <<<"$pr_json"
 }
 
 repo_guard_success_for_head() {
   local sha=$1
-  local status_json check_json status_state check_failures
+  local status_json check_json status_state status_contexts check_result
 
   status_json=$(safe_gh api "repos/$repo/commits/$sha/status" 2>/dev/null || printf '{}')
   status_state=$(printf '%s' "$status_json" | json_get state 2>/dev/null || printf 'unknown')
+  status_contexts=$(printf '%s' "$status_json" | json_get statuses 2>/dev/null | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))' 2>/dev/null || printf '0')
   check_json=$(safe_gh api "repos/$repo/commits/$sha/check-runs" 2>/dev/null || printf '{"check_runs":[]}')
-  check_failures=$(python3 -c '
+  check_result=$(python3 -c '
 import json
 import sys
 
 data = json.load(sys.stdin)
 failed = []
+pending = []
 for run in data.get("check_runs", []):
     name = run.get("name") or ""
     conclusion = run.get("conclusion")
     status = run.get("status")
+    if status != "completed":
+        pending.append(f"{name}:{status}/{conclusion}")
+        continue
     if conclusion not in ("success", "neutral", "skipped"):
         failed.append(f"{name}:{status}/{conclusion}")
-print(",".join(failed))
+print("{}|{}|{}".format(len(data.get("check_runs", [])), len(failed), len(pending)))
 ' <<<"$check_json"
 )
 
-  if [[ "$status_state" == "success" && -z "$check_failures" ]]; then
+  IFS='|' read -r check_count check_failures check_pending <<<"$check_result"
+  if (( check_count > 0 && check_failures == 0 && check_pending == 0 )) &&
+    [[ "$status_state" == "success" || "$status_contexts" == "0" ]]; then
     printf 'true'
   else
     printf 'false'
@@ -414,7 +431,7 @@ decide_merge_safety() {
   head=$(printf '%s' "$pr_json" | json_get headRefName 2>/dev/null || true)
   owner=$(printf '%s' "$pr_json" | json_get headRepositoryOwner.login 2>/dev/null || true)
   head_sha=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || true)
-  scope_ok=$(files_within_initial_safe_scope "$pr_json")
+  scope_ok=$(files_within_initial_safe_scope "$task_id" "$pr_json")
   guard_ok="확인 필요"
   if [[ -n "$head_sha" ]]; then
     guard_ok=$(repo_guard_success_for_head "$head_sha")
