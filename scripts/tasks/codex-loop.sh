@@ -105,8 +105,11 @@ items = json.load(sys.stdin)
 matches = []
 for item in items:
     body = item.get("body") or ""
-    author = ((item.get("user") or {}).get("login") or "").lower()
-    created = item.get("created_at") or item.get("submitted_at") or ""
+    author = (
+        ((item.get("user") or {}).get("login") or "")
+        or ((item.get("author") or {}).get("login") or "")
+    ).lower()
+    created = item.get("created_at") or item.get("submitted_at") or item.get("submittedAt") or ""
     created_date = parse_time(created)
     body_lower = body.lower()
     if "codex" not in author:
@@ -320,6 +323,10 @@ task_id = sys.argv[1]
 data = json.load(sys.stdin)
 files = data.get("files") or []
 paths = [f.get("path", "") for f in files]
+changed_files = data.get("changedFiles")
+if isinstance(changed_files, int) and changed_files != len(paths):
+    print("false")
+    sys.exit(0)
 allowed = True
 for path in paths:
     if task_id == "docs-folderize-operations":
@@ -398,7 +405,16 @@ query($owner:String!, $name:String!, $number:Int!) {
   }
 }' -F owner=ckrhehfl -F name=codex-dev-factory -F number="$pr_number" 2>/dev/null || printf '{}')
 
-  no_major=$(printf '%s' "$comments" | json_get comments 2>/dev/null | json_codex_no_major_summary "$head_sha" "$head_date" || printf '{"matches":[],"fresh_match_count":0}')
+  no_major=$(
+    python3 -c '
+import json
+import sys
+
+comments = json.loads(sys.argv[1]).get("comments", [])
+reviews = json.loads(sys.argv[2]).get("reviews", [])
+print(json.dumps(comments + reviews, separators=(",", ":")))
+' "$comments" "$reviews" | json_codex_no_major_summary "$head_sha" "$head_date" || printf '{"matches":[],"fresh_match_count":0}'
+  )
   unresolved=$(python3 -c '
 import json
 import sys
