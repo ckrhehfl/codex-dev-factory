@@ -342,7 +342,7 @@ counts = {
 }
 
 for thread in threads:
-    if thread.get("isResolved") or thread.get("isOutdated"):
+    if thread.get("isResolved"):
         continue
     comments = (((thread.get("comments") or {}).get("nodes")) or [])
     actionable = []
@@ -378,6 +378,7 @@ for thread in threads:
             "path": path,
             "line": comment.get("line") or thread.get("line"),
             "url": comment.get("url"),
+            "is_outdated": bool(thread.get("isOutdated")),
             "body": body,
             "classification": classification,
             "reason": reason,
@@ -700,6 +701,9 @@ poll_codex_review() {
     if [[ "$(printf '%s' "$result" | json_get success 2>/dev/null || printf false)" == "true" ]]; then
       return 0
     fi
+    if [[ "$(printf '%s' "$result" | json_get blocking 2>/dev/null || printf false)" == "true" ]]; then
+      return 3
+    fi
     if [[ "$(printf '%s' "$result" | json_get acknowledged 2>/dev/null || printf false)" == "true" ]]; then
       acknowledged=true
     fi
@@ -829,7 +833,7 @@ EOF
     classified=$(printf '%s' "$threads" | classified_threads_json "$allowed_json")
     print_classification_summary "$classified"
 
-    local unsafe owner out_scope in_scope clarification forbidden_changes prompt_file since_epoch head_sha
+    local unsafe owner out_scope in_scope clarification forbidden_changes prompt_file since_epoch head_sha poll_status
     unsafe=$(count_classification "$classified" "UNSAFE_OR_FORBIDDEN")
     owner=$(count_classification "$classified" "OWNER_DECISION_REQUIRED")
     out_scope=$(count_classification "$classified" "OUT_OF_SCOPE")
@@ -860,7 +864,14 @@ EOF
       head_sha=$(git rev-parse HEAD)
       since_epoch=$(date +%s)
       post_codex_review "$pr_number"
-      poll_codex_review "$pr_number" "$head_sha" "$since_epoch"
+      if poll_codex_review "$pr_number" "$head_sha" "$since_epoch"; then
+        complete
+      else
+        poll_status=$?
+        if [[ "$poll_status" -eq 3 ]]; then
+          continue
+        fi
+      fi
       complete
     fi
 
@@ -915,7 +926,14 @@ EOF
     head_sha=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || git rev-parse HEAD)
     since_epoch=$(date +%s)
     post_codex_review "$pr_number"
-    poll_codex_review "$pr_number" "$head_sha" "$since_epoch"
+    if poll_codex_review "$pr_number" "$head_sha" "$since_epoch"; then
+      :
+    else
+      poll_status=$?
+      if [[ "$poll_status" -eq 3 ]]; then
+        continue
+      fi
+    fi
   done
 
   stop "STOPPED_LOOP_LIMIT_REACHED" "maximum review-fix loops reached"
