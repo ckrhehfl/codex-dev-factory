@@ -129,7 +129,7 @@ for item in items:
         "created_at": created,
         "explicit_head": bool(explicit_head),
         "after_latest_head": after_head,
-        "fresh_for_latest_head": bool(explicit_head or after_head),
+        "fresh_for_latest_head": bool(explicit_head),
         "body": body[:120],
     })
 print(json.dumps({
@@ -440,9 +440,13 @@ repo_guard_evidence_for_head() {
   status_contexts=$(printf '%s' "$status_json" | json_get statuses 2>/dev/null | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))' 2>/dev/null || printf '0')
   check_json=$(check_runs_json_for_head "$sha")
   required_query_status="available"
-  if ! required_json=$(safe_gh api "repos/$repo/branches/$default_branch/protection/required_status_checks" 2>/dev/null); then
-    required_query_status="확인 필요"
-    required_json='{}'
+  if ! required_json=$(safe_gh api "repos/$repo/branches/$default_branch/protection/required_status_checks" 2>&1); then
+    if printf '%s' "$required_json" | grep -Eq 'HTTP 404|404 Not Found|Resource not found'; then
+      required_json='{}'
+    else
+      required_query_status="확인 필요"
+      required_json='{}'
+    fi
   fi
   check_result=$(python3 -c '
 import json
