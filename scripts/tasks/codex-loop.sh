@@ -177,6 +177,31 @@ branch: $(current_branch)
 EOF
 }
 
+print_execution_contract() {
+  local autopilot_ready="false"
+  local autopilot_blocker="mode_is_assisted"
+  local assisted_next_action="inspect_reported_stop_conditions"
+
+  if [[ "$mode" == "autopilot" ]]; then
+    autopilot_blocker="autopilot_execution_not_implemented_in_pr_85"
+    assisted_next_action="request_fresh_codex_review_after_latest_head_validation"
+  fi
+  if [[ "$dry_run" == "true" ]]; then
+    autopilot_blocker="${autopilot_blocker};dry_run_never_mutates"
+  fi
+
+  cat <<EOF
+execution_contract:
+  assisted_mode_reports_next_actions: $([[ "$mode" == "assisted" ]] && printf true || printf false)
+  autopilot_mode_requested: $([[ "$mode" == "autopilot" ]] && printf true || printf false)
+  dry_run_never_mutates: $dry_run
+  autopilot_execution_ready: $autopilot_ready
+  autopilot_blocked_by: $autopilot_blocker
+  assisted_next_action: $assisted_next_action
+  first_end_to_end_autopilot_proof: PR_86_or_later
+EOF
+}
+
 print_capability_inventory() {
   local gh_installed="false"
   local gh_auth="false"
@@ -399,13 +424,25 @@ print("true" if allowed else "false")
 
 repo_guard_success_for_head() {
   local sha=$1
-  local status_json check_json required_json status_state status_contexts check_result required_result
+  local evidence
+
+  evidence=$(repo_guard_evidence_for_head "$sha")
+  printf '%s' "$evidence" | json_get ready 2>/dev/null || printf '확인 필요'
+}
+
+repo_guard_evidence_for_head() {
+  local sha=$1
+  local status_json check_json required_json status_state status_contexts check_result required_result required_query_status
 
   status_json=$(safe_gh api "repos/$repo/commits/$sha/status" 2>/dev/null || printf '{}')
   status_state=$(printf '%s' "$status_json" | json_get state 2>/dev/null || printf 'unknown')
   status_contexts=$(printf '%s' "$status_json" | json_get statuses 2>/dev/null | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))' 2>/dev/null || printf '0')
   check_json=$(check_runs_json_for_head "$sha")
-  required_json=$(safe_gh api "repos/$repo/branches/$default_branch/protection/required_status_checks" 2>/dev/null || printf '{}')
+  required_query_status="available"
+  if ! required_json=$(safe_gh api "repos/$repo/branches/$default_branch/protection/required_status_checks" 2>/dev/null); then
+    required_query_status="확인 필요"
+    required_json='{}'
+  fi
   check_result=$(python3 -c '
 import json
 import sys
@@ -458,14 +495,47 @@ print("{}|{}".format(len(required), len(missing)))
 
   IFS='|' read -r check_complete check_count check_failures check_pending <<<"$check_result"
   IFS='|' read -r required_count required_missing <<<"$required_result"
-  if [[ "$check_complete" == "true" ]] &&
-    (( check_count > 0 && check_failures == 0 && check_pending == 0 )) &&
-    (( required_count > 0 && required_missing == 0 )) &&
-    [[ "$status_state" == "success" || "$status_contexts" == "0" ]]; then
-    printf 'true'
-  else
-    printf 'false'
-  fi
+  python3 -c '
+import json
+import sys
+
+status_state = sys.argv[1]
+status_contexts = int(sys.argv[2])
+check_complete = sys.argv[3] == "true"
+check_count = int(sys.argv[4])
+check_failures = int(sys.argv[5])
+check_pending = int(sys.argv[6])
+required_query_status = sys.argv[7]
+required_count = int(sys.argv[8])
+required_missing = int(sys.argv[9])
+
+statuses_ok = status_state == "success" or status_contexts == 0
+checks_ok = check_complete and check_count > 0 and check_failures == 0 and check_pending == 0
+required_known = required_query_status == "available"
+required_ok = required_known and (required_count == 0 or required_missing == 0)
+ready = statuses_ok and checks_ok and required_ok
+
+if not required_known:
+    stop_condition = "github_evidence_unavailable"
+elif not checks_ok or not statuses_ok or not required_ok:
+    stop_condition = "blocked_by_validation"
+else:
+    stop_condition = "checks_ready"
+
+print(json.dumps({
+    "ready": ready,
+    "status_state": status_state,
+    "status_context_count": status_contexts,
+    "check_runs_complete": check_complete,
+    "check_run_count": check_count,
+    "check_run_failures": check_failures,
+    "check_run_pending": check_pending,
+    "branch_protection_required_checks": required_query_status if not required_known else ("none_configured" if required_count == 0 else "configured"),
+    "required_count": required_count,
+    "required_missing": required_missing,
+    "stop_condition": stop_condition,
+}, separators=(",", ":")))
+' "$status_state" "$status_contexts" "$check_complete" "$check_count" "$check_failures" "$check_pending" "$required_query_status" "$required_count" "$required_missing"
 }
 
 check_runs_json_for_head() {
@@ -571,10 +641,27 @@ print(json.dumps({
 review_evidence_for_pr() {
   local pr_number=$1
   local head_sha=$2
-  local comments reviews threads no_major unresolved commit_json head_date
+  local evidence
 
-  comments=$(safe_gh pr view "$pr_number" --repo "$repo" --comments --json comments 2>/dev/null || printf '{"comments":[]}')
-  reviews=$(safe_gh pr view "$pr_number" --repo "$repo" --json reviews 2>/dev/null || printf '{"reviews":[]}')
+  evidence=$(review_evidence_json_for_pr "$pr_number" "$head_sha")
+  print_review_evidence "$evidence"
+}
+
+review_evidence_json_for_pr() {
+  local pr_number=$1
+  local head_sha=$2
+  local comments reviews threads no_major unresolved commit_json head_date
+  local comments_read="true"
+  local reviews_read="true"
+
+  if ! comments=$(safe_gh pr view "$pr_number" --repo "$repo" --comments --json comments 2>/dev/null); then
+    comments='{"comments":[]}'
+    comments_read="false"
+  fi
+  if ! reviews=$(safe_gh pr view "$pr_number" --repo "$repo" --json reviews 2>/dev/null); then
+    reviews='{"reviews":[]}'
+    reviews_read="false"
+  fi
   commit_json=$(safe_gh api "repos/$repo/commits/$head_sha" 2>/dev/null || printf '{}')
   head_date=$(printf '%s' "$commit_json" | json_get commit.committer.date 2>/dev/null || true)
   threads=$(review_threads_json_for_pr "$pr_number")
@@ -602,21 +689,80 @@ print(sum(1 for node in nodes if not node.get("isResolved", False)))
 ' <<<"$threads"
   )
 
+  python3 -c '
+import json
+import sys
+
+threads = json.loads(sys.argv[1])
+no_major = json.loads(sys.argv[2])
+unresolved_raw = sys.argv[3]
+comments_read = sys.argv[4] == "true"
+reviews_read = sys.argv[5] == "true"
+head_date = sys.argv[6]
+
+threads_read = bool(threads.get("complete", False))
+try:
+    unresolved = int(unresolved_raw)
+except ValueError:
+    unresolved = None
+fresh_count = int(no_major.get("fresh_match_count") or 0)
+fresh = fresh_count > 0
+evidence_available = comments_read and reviews_read and threads_read
+
+if not evidence_available:
+    readiness = "github_evidence_unavailable"
+elif unresolved and unresolved > 0:
+    readiness = "unresolved_review_threads_remain"
+elif not fresh:
+    readiness = "stale_or_missing_final_codex_no_major_issues"
+else:
+    readiness = "review_ready"
+
+print(json.dumps({
+    "comments_read": comments_read,
+    "reviews_read": reviews_read,
+    "review_threads_read": threads_read,
+    "latest_head_committer_date": head_date or "확인 필요",
+    "unresolved_review_threads": unresolved if unresolved is not None else "확인 필요",
+    "final_codex_no_major_issues_fresh_for_latest_head": fresh if evidence_available else "확인 필요",
+    "final_codex_no_major_issues_freshness": no_major,
+    "review_readiness": readiness,
+}, separators=(",", ":")))
+' "$threads" "$no_major" "${unresolved:-확인 필요}" "$comments_read" "$reviews_read" "${head_date:-}"
+}
+
+print_review_evidence() {
+  local evidence=$1
+  local comments_read reviews_read threads_read head_date unresolved fresh readiness freshness
+  comments_read=$(printf '%s' "$evidence" | json_get comments_read 2>/dev/null || printf 'false')
+  reviews_read=$(printf '%s' "$evidence" | json_get reviews_read 2>/dev/null || printf 'false')
+  threads_read=$(printf '%s' "$evidence" | json_get review_threads_read 2>/dev/null || printf 'false')
+  head_date=$(printf '%s' "$evidence" | json_get latest_head_committer_date 2>/dev/null || printf '확인 필요')
+  unresolved=$(printf '%s' "$evidence" | json_get unresolved_review_threads 2>/dev/null || printf '확인 필요')
+  fresh=$(printf '%s' "$evidence" | json_get final_codex_no_major_issues_fresh_for_latest_head 2>/dev/null || printf '확인 필요')
+  readiness=$(printf '%s' "$evidence" | json_get review_readiness 2>/dev/null || printf 'github_evidence_unavailable')
+  freshness=$(printf '%s' "$evidence" | json_get final_codex_no_major_issues_freshness 2>/dev/null || printf '{"matches":[],"fresh_match_count":0}')
+
   cat <<EOF
 review_evidence:
-  comments_read: true
-  reviews_read: true
-  review_threads_read: true
-  latest_head_committer_date: ${head_date:-확인 필요}
-  unresolved_review_threads: ${unresolved:-확인 필요}
-  final_codex_no_major_issues_freshness: $no_major
+  comments_read: $comments_read
+  reviews_read: $reviews_read
+  review_threads_read: $threads_read
+  latest_head_committer_date: $head_date
+  unresolved_review_threads: $unresolved
+  final_codex_no_major_issues_fresh_for_latest_head: $fresh
+  review_readiness: $readiness
+  final_codex_no_major_issues_freshness: $freshness
 EOF
 }
 
 decide_merge_safety() {
   local task_id=$1
   local pr_json=$2
-  local number state draft base head owner head_sha scope_ok guard_ok clean branch_safe
+  local number state draft base head owner head_sha scope_ok clean branch_safe
+  local guard_evidence guard_ok branch_protection_required_checks required_count required_missing guard_stop
+  local review_evidence unresolved_reviews final_codex_fresh review_readiness
+  local pr_open not_draft base_main owner_ok merge_ready stop_condition owner_items
   number=$(printf '%s' "$pr_json" | json_get number 2>/dev/null || true)
   state=$(printf '%s' "$pr_json" | json_get state 2>/dev/null || true)
   draft=$(printf '%s' "$pr_json" | json_get isDraft 2>/dev/null || true)
@@ -625,9 +771,29 @@ decide_merge_safety() {
   owner=$(printf '%s' "$pr_json" | json_get headRepositoryOwner.login 2>/dev/null || true)
   head_sha=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || true)
   scope_ok=$(files_within_initial_safe_scope "$task_id" "$pr_json")
+  guard_evidence='{}'
   guard_ok="확인 필요"
+  branch_protection_required_checks="확인 필요"
+  required_count="확인 필요"
+  required_missing="확인 필요"
+  guard_stop="github_evidence_unavailable"
   if [[ -n "$head_sha" ]]; then
-    guard_ok=$(repo_guard_success_for_head "$head_sha")
+    guard_evidence=$(repo_guard_evidence_for_head "$head_sha")
+    guard_ok=$(printf '%s' "$guard_evidence" | json_get ready 2>/dev/null || printf '확인 필요')
+    branch_protection_required_checks=$(printf '%s' "$guard_evidence" | json_get branch_protection_required_checks 2>/dev/null || printf '확인 필요')
+    required_count=$(printf '%s' "$guard_evidence" | json_get required_count 2>/dev/null || printf '확인 필요')
+    required_missing=$(printf '%s' "$guard_evidence" | json_get required_missing 2>/dev/null || printf '확인 필요')
+    guard_stop=$(printf '%s' "$guard_evidence" | json_get stop_condition 2>/dev/null || printf 'github_evidence_unavailable')
+  fi
+  review_evidence='{}'
+  unresolved_reviews="확인 필요"
+  final_codex_fresh="확인 필요"
+  review_readiness="github_evidence_unavailable"
+  if [[ -n "$number" && -n "$head_sha" ]]; then
+    review_evidence=$(review_evidence_json_for_pr "$number" "$head_sha")
+    unresolved_reviews=$(printf '%s' "$review_evidence" | json_get unresolved_review_threads 2>/dev/null || printf '확인 필요')
+    final_codex_fresh=$(printf '%s' "$review_evidence" | json_get final_codex_no_major_issues_fresh_for_latest_head 2>/dev/null || printf '확인 필요')
+    review_readiness=$(printf '%s' "$review_evidence" | json_get review_readiness 2>/dev/null || printf 'github_evidence_unavailable')
   fi
   clean="false"
   if worktree_clean; then
@@ -637,30 +803,55 @@ decide_merge_safety() {
   if [[ -n "$head" && "$head" != "$default_branch" && "$head" != "main" && "$head" != "master" ]]; then
     branch_safe="true"
   fi
+  pr_open=$([[ "$state" == "OPEN" ]] && printf true || printf false)
+  not_draft=$([[ "$draft" == "false" ]] && printf true || printf false)
+  base_main=$([[ "$base" == "$default_branch" ]] && printf true || printf false)
+  owner_ok=$([[ "$owner" == "$expected_owner" ]] && printf true || printf false)
+  merge_ready="false"
+  stop_condition="blocked_by_validation"
+  owner_items="none"
+  if [[ "$guard_stop" == "github_evidence_unavailable" || "$review_readiness" == "github_evidence_unavailable" ]]; then
+    stop_condition="github_evidence_unavailable"
+  elif [[ "$review_readiness" == "unresolved_review_threads_remain" ]]; then
+    stop_condition="blocked_by_review_threads"
+  elif [[ "$review_readiness" == "stale_or_missing_final_codex_no_major_issues" ]]; then
+    stop_condition="blocked_by_stale_or_missing_codex_review"
+  elif [[ "$pr_open" == "true" && "$not_draft" == "true" && "$base_main" == "true" &&
+    "$owner_ok" == "true" && "$branch_safe" == "true" && "$scope_ok" == "true" &&
+    "$clean" == "true" && "$guard_ok" == "true" && "$review_readiness" == "review_ready" ]]; then
+    merge_ready="true"
+    stop_condition="owner_decision_required"
+    owner_items="owner_gated_merge_decision"
+  fi
 
   cat <<EOF
 merge_safety:
   allowed_scope: $(allowed_scope_for_task "$task_id")
-  pr_open: $([[ "$state" == "OPEN" ]] && printf true || printf false)
-  not_draft: $([[ "$draft" == "false" ]] && printf true || printf false)
-  base_is_main: $([[ "$base" == "$default_branch" ]] && printf true || printf false)
-  head_owner_expected_repo: $([[ "$owner" == "$expected_owner" ]] && printf true || printf false)
+  pr_open: $pr_open
+  not_draft: $not_draft
+  base_is_main: $base_main
+  head_owner_expected_repo: $owner_ok
   exact_safe_branch_identified: $branch_safe
   changed_files_within_allowed_scope: $scope_ok
   worktree_clean: $clean
   repo_guard_and_required_checks_success_latest_head: $guard_ok
-  unresolved_review_threads: 확인 필요
-  final_codex_no_major_issues_fresh_for_latest_head: 확인 필요
-  owner_decision_required_items: 확인 필요
+  branch_protection_required_checks: $branch_protection_required_checks
+  branch_protection_required_check_count: $required_count
+  branch_protection_required_checks_missing: $required_missing
+  unresolved_review_threads: $unresolved_reviews
+  final_codex_no_major_issues_fresh_for_latest_head: $final_codex_fresh
+  review_readiness: $review_readiness
+  merge_ready_for_owner_gate: $merge_ready
+  owner_decision_required_items: $owner_items
   forbidden_capability_needed: false
   merge_conflicts: 확인 필요
   merge_permitted: false
-  stop_condition: blocked_by_validation
+  stop_condition: $stop_condition
   note: MVP evaluates merge gates but does not invoke merge; PR #85 must not auto-merge itself.
 EOF
 
-  if [[ -n "$number" && -n "$head_sha" ]]; then
-    review_evidence_for_pr "$number" "$head_sha"
+  if [[ "$review_evidence" != "{}" ]]; then
+    print_review_evidence "$review_evidence"
   fi
 }
 
@@ -764,6 +955,7 @@ EOF
 run_task() {
   local task_id=$1
   print_header
+  print_execution_contract
   run_preflight
   print_capability_inventory
 
@@ -773,7 +965,7 @@ runner_result:
   status: stopped
   stop_condition: owner_action_required
   evidence_class: local-verified
-  reason: gh CLI/API capability is unavailable in this WSL environment.
+  reason: no runner-integrated GitHub evidence adapter is available in this local script path; existing external approved connectors may still handle PR metadata outside the runner.
 EOF
     return 0
   fi
