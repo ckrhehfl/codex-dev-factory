@@ -9,6 +9,7 @@ expected_owner="ckrhehfl"
 default_branch="main"
 dry_run=false
 mode="assisted"
+latest_merged_pr_limit=200
 
 usage() {
   cat <<'EOF'
@@ -245,36 +246,56 @@ EOF
 
 find_current_pr_json() {
   local branch=$1
-  safe_gh pr list --repo "$repo" --head "$branch" --state all --limit 1 \
+  safe_gh pr list --repo "$repo" --head "$branch" --state all --limit 100 \
     --json number,state,isDraft,baseRefName,headRefName,headRepositoryOwner,headRepository,headRefOid,mergeable,reviewDecision,url,changedFiles,files,author,createdAt,updatedAt
 }
 
 find_latest_merged_pr_json() {
-  safe_gh pr list --repo "$repo" --state merged --limit 20 \
+  safe_gh pr list --repo "$repo" --state merged --limit "$latest_merged_pr_limit" \
     --json number,state,isDraft,baseRefName,headRefName,headRepositoryOwner,headRepository,headRefOid,mergeCommit,url,changedFiles,files,author,createdAt,updatedAt,mergedAt
 }
 
-first_pr_or_empty() {
+current_pr_or_empty() {
+  local branch=$1
+  local owner=$2
   python3 -c '
 import json
 import sys
 
+branch = sys.argv[1]
+owner = sys.argv[2]
 items = json.load(sys.stdin)
-if not items:
+
+def owner_login(item):
+    return ((item.get("headRepositoryOwner") or {}).get("login") or "")
+
+candidates = [
+    item for item in items
+    if item.get("headRefName") == branch and owner_login(item) == owner
+]
+open_candidates = [item for item in candidates if item.get("state") == "OPEN"]
+if len(open_candidates) == 1:
+    print(json.dumps(open_candidates[0], separators=(",", ":")))
+elif len(open_candidates) > 1:
     print("{}")
 else:
-    print(json.dumps(items[0], separators=(",", ":")))
-'
+    if len(candidates) == 1:
+        print(json.dumps(candidates[0], separators=(",", ":")))
+    else:
+        print("{}")
+' "$branch" "$owner"
 }
 
 latest_merged_pr_or_empty() {
+  local limit=$1
   python3 -c '
 from datetime import datetime
 import json
 import sys
 
+limit = int(sys.argv[1])
 items = json.load(sys.stdin)
-if not items:
+if not items or len(items) >= limit:
     print("{}")
     sys.exit(0)
 
@@ -286,7 +307,7 @@ def merged_at(item):
         return datetime.min
 
 print(json.dumps(max(items, key=merged_at), separators=(",", ":")))
-'
+' "$limit"
 }
 
 print_pr_summary() {
@@ -666,12 +687,12 @@ EOF
     current-pr|docs-folderize-operations|review-fix|compound|branch-cleanup)
       branch=$(current_branch)
       pr_list=$(find_current_pr_json "$branch")
-      pr_json=$(printf '%s' "$pr_list" | first_pr_or_empty)
+      pr_json=$(printf '%s' "$pr_list" | current_pr_or_empty "$branch" "$expected_owner")
       run_with_pr_json "$task_id" "$pr_json"
       ;;
     latest-merged-pr)
       pr_list=$(find_latest_merged_pr_json)
-      pr_json=$(printf '%s' "$pr_list" | latest_merged_pr_or_empty)
+      pr_json=$(printf '%s' "$pr_list" | latest_merged_pr_or_empty "$latest_merged_pr_limit")
       run_with_pr_json "$task_id" "$pr_json"
       ;;
     *)
