@@ -521,6 +521,7 @@ validate_lightweight() {
   elif ! git diff --check; then
     return 1
   fi
+  git diff --check HEAD || return 1
 
   changed_shell=$(
     {
