@@ -12,7 +12,8 @@ runtime configuration.
 
 ## Proof Boundary
 
-The proof PR may:
+When the specific task contract explicitly approves the required GitHub writes,
+the proof PR may:
 
 - create and update a docs-only branch;
 - open a pull request with `gh`;
