@@ -930,7 +930,7 @@ EOF
     since_epoch=$(date +%s)
     post_codex_review "$pr_number"
     if poll_codex_review "$pr_number" "$head_sha" "$since_epoch"; then
-      :
+      complete
     else
       poll_status=$?
       if [[ "$poll_status" -eq 3 ]]; then
