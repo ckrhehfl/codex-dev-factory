@@ -691,7 +691,7 @@ for item in items:
     if "codex" not in author or created_epoch < since_epoch:
         continue
     lower = body.lower()
-    commit_oid = ((item.get("commit") or {}).get("oid") or "")
+    commit_oid = item.get("commit_id") or ((item.get("commit") or {}).get("oid") or "")
     explicit_head = bool(head and (head in body or head[:10] in body or commit_oid == head))
     acknowledged_fresh = explicit_head or item.get("_kind") == "issue_comment"
     result_fresh = explicit_head
