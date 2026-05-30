@@ -572,6 +572,36 @@ push_current_branch() {
   git push -u origin "$branch" >/dev/null
 }
 
+validate_outgoing_range_within_scope() {
+  local base_sha=$1
+  local allowed_json=$2
+  python3 -c '
+import json
+import subprocess
+import sys
+
+base = sys.argv[1]
+allowed = set((json.loads(sys.argv[2]).get("paths")) or [])
+
+ancestor = subprocess.run(
+    ["git", "merge-base", "--is-ancestor", base, "HEAD"],
+)
+if ancestor.returncode != 0:
+    print("HEAD is not a descendant of the PR head before this loop")
+    sys.exit(0)
+
+result = subprocess.run(
+    ["git", "diff", "--name-only", f"{base}..HEAD"],
+    check=True,
+    stdout=subprocess.PIPE,
+    text=True,
+)
+for path in result.stdout.splitlines():
+    if path and path not in allowed:
+        print(path)
+' "$base_sha" "$allowed_json"
+}
+
 resolve_threads() {
   local classified=$1
   python3 -c '
@@ -775,7 +805,7 @@ main() {
   parse_args "$@"
   cd "$repo_root"
 
-  local branch pr_json pr_number pr_state allowed_json allowed_clear loop threads classified
+  local branch pr_json pr_number pr_state pr_head_sha local_head allowed_json allowed_clear loop threads classified
   branch=$(current_branch)
 
   cat <<EOF
@@ -818,6 +848,11 @@ EOF
   if [[ -z "$pr_number" || "$pr_state" != "OPEN" ]]; then
     stop "STOPPED_PR_METADATA_UNAVAILABLE" "current branch PR metadata is incomplete or PR is not open"
   fi
+  local_head=$(git rev-parse HEAD)
+  pr_head_sha=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || true)
+  if [[ -z "$pr_head_sha" || "$local_head" != "$pr_head_sha" ]]; then
+    stop "STOPPED_PR_METADATA_UNAVAILABLE" "local HEAD must match the current PR head before starting the loop"
+  fi
 
   allowed_json=$(printf '%s' "$pr_json" | allowed_files_json)
   allowed_clear=$(printf '%s' "$allowed_json" | json_get clear 2>/dev/null || printf false)
@@ -834,7 +869,7 @@ EOF
     classified=$(printf '%s' "$threads" | classified_threads_json "$allowed_json")
     print_classification_summary "$classified"
 
-    local unsafe owner out_scope in_scope clarification forbidden_changes prompt_file since_epoch head_sha poll_status
+    local unsafe owner out_scope in_scope clarification forbidden_changes prompt_file since_epoch head_sha poll_status pre_push_head outgoing_violations
     unsafe=$(count_classification "$classified" "UNSAFE_OR_FORBIDDEN")
     owner=$(count_classification "$classified" "OWNER_DECISION_REQUIRED")
     out_scope=$(count_classification "$classified" "OUT_OF_SCOPE")
@@ -919,12 +954,17 @@ EOF
     if ! commit_changes "$pr_number" "$allowed_json"; then
       stop "STOPPED_COMMIT_FAILED" "git commit failed"
     fi
+    pre_push_head=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || true)
+    outgoing_violations=$(validate_outgoing_range_within_scope "$pre_push_head" "$allowed_json")
+    if [[ -n "$outgoing_violations" ]]; then
+      printf 'forbidden_outgoing_changes:\n%s\n' "$outgoing_violations"
+      stop "STOPPED_FORBIDDEN_FILE_CHANGE" "outgoing commits contain files outside the PR changed-file scope"
+    fi
     if ! push_current_branch "$branch"; then
       stop "STOPPED_PUSH_FAILED" "git push failed"
     fi
-    if ! resolve_threads "$classified"; then
-      stop "STOPPED_REVIEW_THREAD_RESOLVE_FAILED" "failed to resolve one or more review threads"
-    fi
+    printf 'review_thread_resolution_status: skipped\n'
+    printf 'review_thread_resolution_reason: runner leaves threads for fresh Codex review after validated fixes\n'
 
     pr_json=$(pr_json_for_branch "$branch")
     head_sha=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || git rev-parse HEAD)
