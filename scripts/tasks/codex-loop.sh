@@ -109,7 +109,13 @@ for item in items:
         ((item.get("user") or {}).get("login") or "")
         or ((item.get("author") or {}).get("login") or "")
     ).lower()
-    created = item.get("created_at") or item.get("submitted_at") or item.get("submittedAt") or ""
+    created = (
+        item.get("created_at")
+        or item.get("createdAt")
+        or item.get("submitted_at")
+        or item.get("submittedAt")
+        or ""
+    )
     created_date = parse_time(created)
     body_lower = body.lower()
     if "codex" not in author:
@@ -244,7 +250,7 @@ find_current_pr_json() {
 }
 
 find_latest_merged_pr_json() {
-  safe_gh pr list --repo "$repo" --state merged --limit 1 \
+  safe_gh pr list --repo "$repo" --state merged --limit 20 \
     --json number,state,isDraft,baseRefName,headRefName,headRepositoryOwner,headRepository,headRefOid,mergeCommit,url,changedFiles,files,author,createdAt,updatedAt,mergedAt
 }
 
@@ -258,6 +264,28 @@ if not items:
     print("{}")
 else:
     print(json.dumps(items[0], separators=(",", ":")))
+'
+}
+
+latest_merged_pr_or_empty() {
+  python3 -c '
+from datetime import datetime
+import json
+import sys
+
+items = json.load(sys.stdin)
+if not items:
+    print("{}")
+    sys.exit(0)
+
+def merged_at(item):
+    raw = item.get("mergedAt") or ""
+    try:
+        return datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        return datetime.min
+
+print(json.dumps(max(items, key=merged_at), separators=(",", ":")))
 '
 }
 
@@ -611,7 +639,7 @@ EOF
       ;;
     latest-merged-pr)
       pr_list=$(find_latest_merged_pr_json)
-      pr_json=$(printf '%s' "$pr_list" | first_pr_or_empty)
+      pr_json=$(printf '%s' "$pr_list" | latest_merged_pr_or_empty)
       run_with_pr_json "$task_id" "$pr_json"
       ;;
     *)
