@@ -847,7 +847,7 @@ branch_cleanup_authorized: false
 EOF
 
   case "$branch" in
-    ""|"$default_branch"|main|master|develop|dev|release|production)
+    ""|"$default_branch"|main|master|develop|dev|release|release/*|production)
       stop "STOPPED_ON_PROTECTED_BRANCH" "review-loop runner must run from a PR feature branch"
       ;;
   esac
@@ -1020,6 +1020,27 @@ EOF
       stop "STOPPED_GH_NOT_READY" "failed to post @codex review"
     fi
     if poll_codex_review "$pr_number" "$head_sha" "$since_epoch"; then
+      if ! threads=$(review_threads_json "$pr_number"); then
+        stop "STOPPED_REVIEW_COMMENTS_UNAVAILABLE" "gh failed to re-read review threads before completion"
+      fi
+      classified=$(printf '%s' "$threads" | classified_threads_json "$allowed_json")
+      print_classification_summary "$classified"
+      unsafe=$(count_classification "$classified" "UNSAFE_OR_FORBIDDEN")
+      owner=$(count_classification "$classified" "OWNER_DECISION_REQUIRED")
+      out_scope=$(count_classification "$classified" "OUT_OF_SCOPE")
+      in_scope=$(count_classification "$classified" "IN_SCOPE_FIX")
+      if (( unsafe > 0 )); then
+        stop "STOPPED_UNSAFE_OR_FORBIDDEN_REVIEW_REQUEST" "unresolved review comments request forbidden or unsafe action"
+      fi
+      if (( owner > 0 )); then
+        stop "STOPPED_OWNER_DECISION_REQUIRED" "unresolved review comments require owner decision"
+      fi
+      if (( out_scope > 0 )); then
+        stop "STOPPED_OUT_OF_SCOPE_REVIEW_REQUEST" "unresolved review comments are outside current PR scope"
+      fi
+      if (( in_scope > 0 )); then
+        continue
+      fi
       complete
     else
       poll_status=$?
