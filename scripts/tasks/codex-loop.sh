@@ -389,13 +389,14 @@ repo_guard_success_for_head() {
   status_json=$(safe_gh api "repos/$repo/commits/$sha/status" 2>/dev/null || printf '{}')
   status_state=$(printf '%s' "$status_json" | json_get state 2>/dev/null || printf 'unknown')
   status_contexts=$(printf '%s' "$status_json" | json_get statuses 2>/dev/null | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))' 2>/dev/null || printf '0')
-  check_json=$(safe_gh api "repos/$repo/commits/$sha/check-runs" 2>/dev/null || printf '{"check_runs":[]}')
+  check_json=$(check_runs_json_for_head "$sha")
   required_json=$(safe_gh api "repos/$repo/branches/$default_branch/protection/required_status_checks" 2>/dev/null || printf '{}')
   check_result=$(python3 -c '
 import json
 import sys
 
 data = json.load(sys.stdin)
+complete = data.get("complete", False)
 failed = []
 pending = []
 for run in data.get("check_runs", []):
@@ -407,7 +408,7 @@ for run in data.get("check_runs", []):
         continue
     if conclusion not in ("success", "neutral", "skipped"):
         failed.append(f"{name}:{status}/{conclusion}")
-print("{}|{}|{}".format(len(data.get("check_runs", [])), len(failed), len(pending)))
+print("{}|{}|{}|{}".format("true" if complete else "false", len(data.get("check_runs", [])), len(failed), len(pending)))
 ' <<<"$check_json"
 )
   required_result=$(python3 -c '
@@ -440,15 +441,42 @@ missing = sorted(required - successful)
 print("{}|{}".format(len(required), len(missing)))
 ' "$status_json" "$check_json" "$required_json")
 
-  IFS='|' read -r check_count check_failures check_pending <<<"$check_result"
+  IFS='|' read -r check_complete check_count check_failures check_pending <<<"$check_result"
   IFS='|' read -r required_count required_missing <<<"$required_result"
-  if (( check_count > 0 && check_failures == 0 && check_pending == 0 )) &&
+  if [[ "$check_complete" == "true" ]] &&
+    (( check_count > 0 && check_failures == 0 && check_pending == 0 )) &&
     (( required_count > 0 && required_missing == 0 )) &&
     [[ "$status_state" == "success" || "$status_contexts" == "0" ]]; then
     printf 'true'
   else
     printf 'false'
   fi
+}
+
+check_runs_json_for_head() {
+  local sha=$1
+  local pages
+
+  if ! pages=$(safe_gh api --paginate --slurp "repos/$repo/commits/$sha/check-runs?per_page=100" 2>/dev/null); then
+    printf '{"complete":false,"check_runs":[]}'
+    return 0
+  fi
+
+  python3 -c '
+import json
+import sys
+
+pages = json.load(sys.stdin)
+if isinstance(pages, dict):
+    pages = [pages]
+check_runs = []
+for page in pages:
+    check_runs.extend(page.get("check_runs") or [])
+print(json.dumps({
+    "complete": True,
+    "check_runs": check_runs,
+}, separators=(",", ":")))
+' <<<"$pages" 2>/dev/null || printf '{"complete":false,"check_runs":[]}'
 }
 
 review_threads_json_for_pr() {
