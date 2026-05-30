@@ -433,6 +433,7 @@ repo_guard_success_for_head() {
 repo_guard_evidence_for_head() {
   local sha=$1
   local status_json check_json required_json status_state status_contexts check_result required_result required_query_status
+  local required_pinned_count
 
   status_json=$(safe_gh api "repos/$repo/commits/$sha/status" 2>/dev/null || printf '{}')
   status_state=$(printf '%s' "$status_json" | json_get state 2>/dev/null || printf 'unknown')
@@ -471,30 +472,47 @@ status_data = json.loads(sys.argv[1])
 check_data = json.loads(sys.argv[2])
 required_data = json.loads(sys.argv[3])
 
-successful = set()
+successful_contexts = set()
+successful_checks = set()
+successful_pinned_checks = set()
 for status in status_data.get("statuses", []):
     if status.get("state") == "success":
         context = status.get("context")
         if context:
-            successful.add(context)
+            successful_contexts.add(context)
 for run in check_data.get("check_runs", []):
     if run.get("status") == "completed" and run.get("conclusion") in ("success", "neutral", "skipped"):
         name = run.get("name")
         if name:
-            successful.add(name)
+            successful_checks.add(name)
+            app_id = (run.get("app") or {}).get("id")
+            if app_id is not None:
+                successful_pinned_checks.add((name, str(app_id)))
 
-required = set(required_data.get("contexts") or [])
+required = []
+for context in required_data.get("contexts") or []:
+    if context:
+        required.append((context, None))
 for item in required_data.get("checks") or []:
     context = item.get("context")
     if context:
-        required.add(context)
+        app_id = item.get("app_id")
+        required.append((context, str(app_id) if app_id is not None and app_id != -1 else None))
 
-missing = sorted(required - successful)
-print("{}|{}".format(len(required), len(missing)))
+missing = []
+pinned_count = 0
+for context, app_id in required:
+    if app_id is not None:
+        pinned_count += 1
+        if (context, app_id) not in successful_pinned_checks:
+            missing.append(f"{context}@app:{app_id}")
+    elif context not in successful_contexts and context not in successful_checks:
+        missing.append(context)
+print("{}|{}|{}".format(len(required), len(missing), pinned_count))
 ' "$status_json" "$check_json" "$required_json")
 
   IFS='|' read -r check_complete check_count check_failures check_pending <<<"$check_result"
-  IFS='|' read -r required_count required_missing <<<"$required_result"
+  IFS='|' read -r required_count required_missing required_pinned_count <<<"$required_result"
   python3 -c '
 import json
 import sys
@@ -508,6 +526,7 @@ check_pending = int(sys.argv[6])
 required_query_status = sys.argv[7]
 required_count = int(sys.argv[8])
 required_missing = int(sys.argv[9])
+required_pinned_count = int(sys.argv[10])
 
 statuses_ok = status_state == "success" or status_contexts == 0
 checks_ok = check_complete and check_count > 0 and check_failures == 0 and check_pending == 0
@@ -533,9 +552,10 @@ print(json.dumps({
     "branch_protection_required_checks": required_query_status if not required_known else ("none_configured" if required_count == 0 else "configured"),
     "required_count": required_count,
     "required_missing": required_missing,
+    "required_app_pinned_count": required_pinned_count,
     "stop_condition": stop_condition,
 }, separators=(",", ":")))
-' "$status_state" "$status_contexts" "$check_complete" "$check_count" "$check_failures" "$check_pending" "$required_query_status" "$required_count" "$required_missing"
+' "$status_state" "$status_contexts" "$check_complete" "$check_count" "$check_failures" "$check_pending" "$required_query_status" "$required_count" "$required_missing" "${required_pinned_count:-0}"
 }
 
 check_runs_json_for_head() {
@@ -759,10 +779,10 @@ EOF
 decide_merge_safety() {
   local task_id=$1
   local pr_json=$2
-  local number state draft base head owner head_sha scope_ok clean branch_safe
-  local guard_evidence guard_ok branch_protection_required_checks required_count required_missing guard_stop
+  local number state draft base head owner head_sha scope_ok clean branch_safe mergeable review_decision
+  local guard_evidence guard_ok branch_protection_required_checks required_count required_missing required_pinned_count guard_stop
   local review_evidence unresolved_reviews final_codex_fresh review_readiness
-  local pr_open not_draft base_main owner_ok merge_ready stop_condition owner_items
+  local pr_open not_draft base_main owner_ok mergeable_ok review_decision_ok merge_ready stop_condition owner_items
   number=$(printf '%s' "$pr_json" | json_get number 2>/dev/null || true)
   state=$(printf '%s' "$pr_json" | json_get state 2>/dev/null || true)
   draft=$(printf '%s' "$pr_json" | json_get isDraft 2>/dev/null || true)
@@ -770,12 +790,15 @@ decide_merge_safety() {
   head=$(printf '%s' "$pr_json" | json_get headRefName 2>/dev/null || true)
   owner=$(printf '%s' "$pr_json" | json_get headRepositoryOwner.login 2>/dev/null || true)
   head_sha=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || true)
+  mergeable=$(printf '%s' "$pr_json" | json_get mergeable 2>/dev/null || printf '확인 필요')
+  review_decision=$(printf '%s' "$pr_json" | json_get reviewDecision 2>/dev/null || printf '확인 필요')
   scope_ok=$(files_within_initial_safe_scope "$task_id" "$pr_json")
   guard_evidence='{}'
   guard_ok="확인 필요"
   branch_protection_required_checks="확인 필요"
   required_count="확인 필요"
   required_missing="확인 필요"
+  required_pinned_count="확인 필요"
   guard_stop="github_evidence_unavailable"
   if [[ -n "$head_sha" ]]; then
     guard_evidence=$(repo_guard_evidence_for_head "$head_sha")
@@ -783,6 +806,7 @@ decide_merge_safety() {
     branch_protection_required_checks=$(printf '%s' "$guard_evidence" | json_get branch_protection_required_checks 2>/dev/null || printf '확인 필요')
     required_count=$(printf '%s' "$guard_evidence" | json_get required_count 2>/dev/null || printf '확인 필요')
     required_missing=$(printf '%s' "$guard_evidence" | json_get required_missing 2>/dev/null || printf '확인 필요')
+    required_pinned_count=$(printf '%s' "$guard_evidence" | json_get required_app_pinned_count 2>/dev/null || printf '확인 필요')
     guard_stop=$(printf '%s' "$guard_evidence" | json_get stop_condition 2>/dev/null || printf 'github_evidence_unavailable')
   fi
   review_evidence='{}'
@@ -807,6 +831,8 @@ decide_merge_safety() {
   not_draft=$([[ "$draft" == "false" ]] && printf true || printf false)
   base_main=$([[ "$base" == "$default_branch" ]] && printf true || printf false)
   owner_ok=$([[ "$owner" == "$expected_owner" ]] && printf true || printf false)
+  mergeable_ok=$([[ "$mergeable" == "MERGEABLE" ]] && printf true || printf false)
+  review_decision_ok=$([[ "$review_decision" == "APPROVED" ]] && printf true || printf false)
   merge_ready="false"
   stop_condition="blocked_by_validation"
   owner_items="none"
@@ -816,9 +842,14 @@ decide_merge_safety() {
     stop_condition="blocked_by_review_threads"
   elif [[ "$review_readiness" == "stale_or_missing_final_codex_no_major_issues" ]]; then
     stop_condition="blocked_by_stale_or_missing_codex_review"
+  elif [[ "$mergeable_ok" != "true" ]]; then
+    stop_condition="blocked_by_mergeability"
+  elif [[ "$review_decision_ok" != "true" ]]; then
+    stop_condition="blocked_by_review_decision"
   elif [[ "$pr_open" == "true" && "$not_draft" == "true" && "$base_main" == "true" &&
     "$owner_ok" == "true" && "$branch_safe" == "true" && "$scope_ok" == "true" &&
-    "$clean" == "true" && "$guard_ok" == "true" && "$review_readiness" == "review_ready" ]]; then
+    "$clean" == "true" && "$guard_ok" == "true" && "$review_readiness" == "review_ready" &&
+    "$mergeable_ok" == "true" && "$review_decision_ok" == "true" ]]; then
     merge_ready="true"
     stop_condition="owner_decision_required"
     owner_items="owner_gated_merge_decision"
@@ -838,13 +869,18 @@ merge_safety:
   branch_protection_required_checks: $branch_protection_required_checks
   branch_protection_required_check_count: $required_count
   branch_protection_required_checks_missing: $required_missing
+  branch_protection_required_app_pinned_check_count: $required_pinned_count
   unresolved_review_threads: $unresolved_reviews
   final_codex_no_major_issues_fresh_for_latest_head: $final_codex_fresh
   review_readiness: $review_readiness
+  mergeable: $mergeable
+  mergeable_for_owner_gate: $mergeable_ok
+  review_decision: $review_decision
+  review_decision_allows_owner_gate: $review_decision_ok
   merge_ready_for_owner_gate: $merge_ready
   owner_decision_required_items: $owner_items
   forbidden_capability_needed: false
-  merge_conflicts: 확인 필요
+  merge_conflicts: $([[ "$mergeable" == "CONFLICTING" ]] && printf true || printf false)
   merge_permitted: false
   stop_condition: $stop_condition
   note: MVP evaluates merge gates but does not invoke merge; PR #85 must not auto-merge itself.
