@@ -354,7 +354,10 @@ for thread in threads:
         path = comment.get("path") or thread_path
         classification = "IN_SCOPE_FIX"
         reason = "comment appears actionable and path is in the PR changed-file scope"
-        if unsafe_re.search(body):
+        if thread.get("isOutdated"):
+            classification = "CLARIFICATION_ONLY"
+            reason = "thread is outdated and is reported without treating it as actionable on the current diff"
+        elif unsafe_re.search(body):
             classification = "UNSAFE_OR_FORBIDDEN"
             reason = "comment mentions a forbidden or unsafe action/surface"
         elif owner_re.search(body):
@@ -690,8 +693,9 @@ for item in items:
     lower = body.lower()
     commit_oid = ((item.get("commit") or {}).get("oid") or "")
     explicit_head = bool(head and (head in body or head[:10] in body or commit_oid == head))
-    fresh = explicit_head or item.get("_kind") == "issue_comment"
-    if not fresh:
+    acknowledged_fresh = explicit_head or item.get("_kind") == "issue_comment"
+    result_fresh = explicit_head
+    if not acknowledged_fresh:
         continue
     if "review" in lower or "working" in lower or "queued" in lower or "started" in lower:
         ack.append({"created_at": created, "kind": item.get("_kind"), "body": body[:160]})
@@ -702,9 +706,9 @@ for item in items:
         or "looks good" in lower
         or "lgtm" in lower
     )
-    if has_success:
+    if has_success and result_fresh:
         success.append({"created_at": created, "kind": item.get("_kind"), "body": body[:160]})
-    elif "major issue" in lower or "request changes" in lower or "needs changes" in lower:
+    elif result_fresh and ("major issue" in lower or "request changes" in lower or "needs changes" in lower):
         blocking.append({"created_at": created, "kind": item.get("_kind"), "body": body[:160]})
 
 print(json.dumps({
