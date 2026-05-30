@@ -320,7 +320,7 @@ import sys
 
 limit = int(sys.argv[1])
 items = json.load(sys.stdin)
-if not items or len(items) >= limit:
+if not items:
     print("{}")
     sys.exit(0)
 
