@@ -409,7 +409,7 @@ for item in data.get("comments") or []:
             item.get("url") or "",
         )
     )
-'
+' "$classified"
 }
 
 count_classification() {
