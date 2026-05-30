@@ -322,10 +322,10 @@ allowed = set(allowed_data.get("paths") or [])
 threads = json.load(sys.stdin)
 
 unsafe_re = re.compile(
-    r"\b(secret|token|api key|credential|cookie|auth file|\.env|branch protection|"
+    r"\b(secret|api key|credential|cookie|auth file|\.env|branch protection|"
     r"ruleset|permission|workflow permission|github setting|merge|auto-merge|"
     r"force push|force-push|force delete|delete branch|zeroshot|hermes|omx|yolo|"
-    r"full access|danger-full-access|production)\b",
+    r"full access|danger-full-access|production|inspect token|read token)\b",
     re.I,
 )
 owner_re = re.compile(r"\b(owner decision|required decision|needs owner|product decision|policy decision|approve|approval)\b", re.I)
@@ -899,7 +899,9 @@ EOF
       fi
       head_sha=$(git rev-parse HEAD)
       since_epoch=$(date +%s)
-      post_codex_review "$pr_number"
+      if ! post_codex_review "$pr_number"; then
+        stop "STOPPED_GH_NOT_READY" "failed to post @codex review"
+      fi
       if poll_codex_review "$pr_number" "$head_sha" "$since_epoch"; then
         complete
       else
@@ -969,7 +971,9 @@ EOF
     pr_json=$(pr_json_for_branch "$branch")
     head_sha=$(printf '%s' "$pr_json" | json_get headRefOid 2>/dev/null || git rev-parse HEAD)
     since_epoch=$(date +%s)
-    post_codex_review "$pr_number"
+    if ! post_codex_review "$pr_number"; then
+      stop "STOPPED_GH_NOT_READY" "failed to post @codex review"
+    fi
     if poll_codex_review "$pr_number" "$head_sha" "$since_epoch"; then
       complete
     else
