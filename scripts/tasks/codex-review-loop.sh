@@ -659,7 +659,7 @@ for item in items:
         continue
     lower = body.lower()
     explicit_head = bool(head and (head in body or head[:10] in body))
-    fresh = explicit_head or created_epoch >= since_epoch
+    fresh = explicit_head
     if not fresh:
         continue
     if "review" in lower or "working" in lower or "queued" in lower or "started" in lower:
@@ -892,7 +892,10 @@ EOF
       stop "STOPPED_OWNER_DECISION_REQUIRED" "assisted mode prepared the fix prompt and stopped before executing Codex edits"
     fi
 
-    codex exec "$(cat "$prompt_file")"
+    if ! codex exec "$(cat "$prompt_file")"; then
+      rm -f "$prompt_file"
+      stop "STOPPED_VALIDATION_FAILED" "authorized codex exec edit step failed"
+    fi
     rm -f "$prompt_file"
 
     if worktree_clean; then
