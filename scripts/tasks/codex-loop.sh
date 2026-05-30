@@ -466,6 +466,76 @@ print("{}|{}".format(len(required), len(missing)))
   fi
 }
 
+review_threads_json_for_pr() {
+  local pr_number=$1
+  local all_nodes="[]"
+  local cursor=""
+  local complete="true"
+  local page nodes page_info has_next next_cursor
+
+  while :; do
+    if ! page=$(safe_gh api graphql -f query='
+query($owner:String!, $name:String!, $number:Int!, $after:String) {
+  repository(owner:$owner, name:$name) {
+    pullRequest(number:$number) {
+      reviewThreads(first:100, after:$after) {
+        pageInfo { hasNextPage endCursor }
+        nodes { isResolved isOutdated }
+      }
+    }
+  }
+}' -F owner=ckrhehfl -F name=codex-dev-factory -F number="$pr_number" -F after="$cursor" 2>/dev/null); then
+      complete="false"
+      break
+    fi
+
+    nodes=$(python3 -c '
+import json
+import sys
+
+data = json.load(sys.stdin)
+threads = (((data.get("data") or {}).get("repository") or {}).get("pullRequest") or {}).get("reviewThreads") or {}
+print(json.dumps(threads.get("nodes") or [], separators=(",", ":")))
+' <<<"$page" 2>/dev/null || printf '[]')
+    all_nodes=$(python3 -c '
+import json
+import sys
+
+left = json.loads(sys.argv[1])
+right = json.loads(sys.argv[2])
+print(json.dumps(left + right, separators=(",", ":")))
+' "$all_nodes" "$nodes")
+    page_info=$(python3 -c '
+import json
+import sys
+
+data = json.load(sys.stdin)
+threads = (((data.get("data") or {}).get("repository") or {}).get("pullRequest") or {}).get("reviewThreads") or {}
+page_info = threads.get("pageInfo") or {}
+print("{}|{}".format("true" if page_info.get("hasNextPage") else "false", page_info.get("endCursor") or ""))
+' <<<"$page" 2>/dev/null || printf 'true|')
+    IFS='|' read -r has_next next_cursor <<<"$page_info"
+    if [[ "$has_next" != "true" ]]; then
+      break
+    fi
+    if [[ -z "$next_cursor" ]]; then
+      complete="false"
+      break
+    fi
+    cursor=$next_cursor
+  done
+
+  python3 -c '
+import json
+import sys
+
+print(json.dumps({
+    "complete": sys.argv[1] == "true",
+    "nodes": json.loads(sys.argv[2]),
+}, separators=(",", ":")))
+' "$complete" "$all_nodes"
+}
+
 review_evidence_for_pr() {
   local pr_number=$1
   local head_sha=$2
@@ -475,16 +545,7 @@ review_evidence_for_pr() {
   reviews=$(safe_gh pr view "$pr_number" --repo "$repo" --json reviews 2>/dev/null || printf '{"reviews":[]}')
   commit_json=$(safe_gh api "repos/$repo/commits/$head_sha" 2>/dev/null || printf '{}')
   head_date=$(printf '%s' "$commit_json" | json_get commit.committer.date 2>/dev/null || true)
-  threads=$(safe_gh api graphql -f query='
-query($owner:String!, $name:String!, $number:Int!) {
-  repository(owner:$owner, name:$name) {
-    pullRequest(number:$number) {
-      reviewThreads(first:100) {
-        nodes { isResolved isOutdated }
-      }
-    }
-  }
-}' -F owner=ckrhehfl -F name=codex-dev-factory -F number="$pr_number" 2>/dev/null || printf '{}')
+  threads=$(review_threads_json_for_pr "$pr_number")
 
   no_major=$(
     python3 -c '
@@ -500,11 +561,14 @@ print(json.dumps(comments + reviews, separators=(",", ":")))
 import json
 import sys
 
-data = json.load(sys.stdin)
-nodes = (((data.get("data") or {}).get("repository") or {}).get("pullRequest") or {}).get("reviewThreads", {}).get("nodes", [])
-print(sum(1 for node in nodes if not node.get("isResolved", False)))
-' <<<"$threads"
-)
+	data = json.load(sys.stdin)
+	if not data.get("complete", False):
+	    print("확인 필요")
+	    sys.exit(0)
+	nodes = data.get("nodes") or []
+	print(sum(1 for node in nodes if not node.get("isResolved", False)))
+	' <<<"$threads"
+  )
 
   cat <<EOF
 review_evidence:
