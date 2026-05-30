@@ -497,12 +497,26 @@ for path in changed:
 }
 
 validate_lightweight() {
+  local allowed_json=${1:-}
   local changed_shell
   if ! git diff --check; then
     return 1
   fi
 
-  changed_shell=$(git diff --name-only -- '*.sh')
+  changed_shell=$(
+    {
+      git diff --name-only HEAD -- '*.sh'
+      if [[ -n "$allowed_json" ]]; then
+        python3 -c '
+import json
+import sys
+for path in (json.loads(sys.argv[1]).get("paths") or []):
+    if path.endswith(".sh"):
+        print(path)
+' "$allowed_json"
+      fi
+    } | sort -u
+  )
   while IFS= read -r path; do
     [[ -z "$path" ]] && continue
     if [[ -f "$path" ]]; then
@@ -649,15 +663,16 @@ for item in items:
         continue
     if "review" in lower or "working" in lower or "queued" in lower or "started" in lower:
         ack.append({"created_at": created, "kind": item.get("_kind"), "body": body[:160]})
-    if (
+    has_success = (
         "no major issues" in lower
         or "no suggestions" in lower
         or "no further suggestions" in lower
         or "looks good" in lower
         or "lgtm" in lower
-    ):
+    )
+    if has_success:
         success.append({"created_at": created, "kind": item.get("_kind"), "body": body[:160]})
-    if "major issue" in lower or "request changes" in lower or "needs changes" in lower:
+    elif "major issue" in lower or "request changes" in lower or "needs changes" in lower:
         blocking.append({"created_at": created, "kind": item.get("_kind"), "body": body[:160]})
 
 print(json.dumps({
@@ -832,7 +847,7 @@ EOF
     fi
 
     if (( in_scope == 0 )); then
-      if ! validate_lightweight; then
+      if ! validate_lightweight "$allowed_json"; then
         stop "STOPPED_VALIDATION_FAILED" "lightweight validation failed"
       fi
       validation_passed=true
@@ -874,7 +889,7 @@ EOF
       printf 'forbidden_file_changes:\n%s\n' "$forbidden_changes"
       stop "STOPPED_FORBIDDEN_FILE_CHANGE" "local edits escaped the PR changed-file scope"
     fi
-    if ! validate_lightweight; then
+    if ! validate_lightweight "$allowed_json"; then
       stop "STOPPED_VALIDATION_FAILED" "lightweight validation failed after edits"
     fi
     validation_passed=true
