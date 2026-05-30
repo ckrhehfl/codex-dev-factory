@@ -86,10 +86,22 @@ json_codex_no_major_summary() {
   local head_sha=$1
   local head_date=$2
   python3 -c '
+from datetime import datetime
 import json
 import sys
 
 head = sys.argv[1]
+head_date_raw = sys.argv[2]
+
+def parse_time(raw):
+    if not raw:
+        return None
+    try:
+        return datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+head_date = parse_time(head_date_raw)
 items = json.load(sys.stdin)
 matches = []
 for item in items:
@@ -105,16 +117,19 @@ for item in items:
         or item.get("submittedAt")
         or ""
     )
+    created_date = parse_time(created)
     body_lower = body.lower()
     if "codex" not in author:
         continue
     if "no major issues" not in body_lower:
         continue
     explicit_head = head and (head in body or head[:10] in body)
+    after_head = bool(head_date and created_date and created_date >= head_date)
     matches.append({
         "created_at": created,
         "explicit_head": bool(explicit_head),
-        "fresh_for_latest_head": bool(explicit_head),
+        "after_latest_head": after_head,
+        "fresh_for_latest_head": bool(explicit_head or after_head),
         "body": body[:120],
     })
 print(json.dumps({
