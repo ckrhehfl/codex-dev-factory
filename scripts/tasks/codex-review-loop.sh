@@ -401,7 +401,14 @@ print("review_comment_classification:")
 for key in ("IN_SCOPE_FIX", "CLARIFICATION_ONLY", "OWNER_DECISION_REQUIRED", "OUT_OF_SCOPE", "UNSAFE_OR_FORBIDDEN"):
     print(f"  {key}: {counts.get(key, 0)}")
 for item in data.get("comments") or []:
-    print(f"  - {item.get(\"classification\")}: {item.get(\"path\") or \"unknown\"}:{item.get(\"line\") or \"unknown\"} {item.get(\"url\") or \"\"}")
+    print(
+        "  - {}: {}:{} {}".format(
+            item.get("classification"),
+            item.get("path") or "unknown",
+            item.get("line") or "unknown",
+            item.get("url") or "",
+        )
+    )
 '
 }
 
