@@ -51,5 +51,6 @@ Each proof run should preserve these facts in the PR body or final report:
 ## Stop Condition
 
 The proof is complete when the latest PR head has no major Codex review issues,
-unresolved review-thread count is zero, lightweight validation passes, and the
-operator stops before merge.
+unresolved in-scope or blocking review-thread count is zero, any owner-decision
+or out-of-scope threads are reported without being resolved, lightweight
+validation passes, and the operator stops before merge.
