@@ -561,13 +561,13 @@ print(json.dumps(comments + reviews, separators=(",", ":")))
 import json
 import sys
 
-	data = json.load(sys.stdin)
-	if not data.get("complete", False):
-	    print("확인 필요")
-	    sys.exit(0)
-	nodes = data.get("nodes") or []
-	print(sum(1 for node in nodes if not node.get("isResolved", False)))
-	' <<<"$threads"
+data = json.load(sys.stdin)
+if not data.get("complete", False):
+    print("확인 필요")
+    sys.exit(0)
+nodes = data.get("nodes") or []
+print(sum(1 for node in nodes if not node.get("isResolved", False)))
+' <<<"$threads"
   )
 
   cat <<EOF
