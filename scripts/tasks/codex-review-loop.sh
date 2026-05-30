@@ -322,12 +322,13 @@ allowed = set(allowed_data.get("paths") or [])
 threads = json.load(sys.stdin)
 
 unsafe_re = re.compile(
-    r"\b(secret|api key|credential|cookie|auth file|\.env|branch protection|"
+    r"\b(secret|api key|credential|cookie|auth file|env file|branch protection|"
     r"ruleset|permission|workflow permission|github setting|merge|auto-merge|"
     r"force push|force-push|force delete|delete branch|zeroshot|hermes|omx|yolo|"
     r"full access|danger-full-access|production|inspect token|read token)\b",
     re.I,
 )
+dot_env_re = re.compile(r"(^|[^\w/.-])\.env(?:[.\w-]*)?(?=$|[^\w.-])", re.I)
 owner_re = re.compile(r"\b(owner decision|required decision|needs owner|product decision|policy decision|approve|approval)\b", re.I)
 out_re = re.compile(r"\b(out of scope|outside scope|not in scope|separate pr|follow[- ]?up)\b", re.I)
 clarify_re = re.compile(r"\b(question|clarify|clarification|nit|optional|consider)\b", re.I)
@@ -357,7 +358,7 @@ for thread in threads:
         if thread.get("isOutdated"):
             classification = "CLARIFICATION_ONLY"
             reason = "thread is outdated and is reported without treating it as actionable on the current diff"
-        elif unsafe_re.search(body):
+        elif unsafe_re.search(body) or dot_env_re.search(body):
             classification = "UNSAFE_OR_FORBIDDEN"
             reason = "comment mentions a forbidden or unsafe action/surface"
         elif owner_re.search(body):
