@@ -504,14 +504,31 @@ for path in changed:
 
 validate_lightweight() {
   local allowed_json=${1:-}
-  local changed_shell
-  if ! git diff --check; then
+  local base_ref=${2:-}
+  local changed_shell diff_range
+
+  diff_range=()
+  if [[ -n "$base_ref" ]]; then
+    if git rev-parse --verify --quiet "origin/$base_ref" >/dev/null; then
+      diff_range=("origin/$base_ref...HEAD")
+    elif git rev-parse --verify --quiet "$base_ref" >/dev/null; then
+      diff_range=("$base_ref...HEAD")
+    fi
+  fi
+
+  if ((${#diff_range[@]})); then
+    git diff --check "${diff_range[@]}" || return 1
+  elif ! git diff --check; then
     return 1
   fi
 
   changed_shell=$(
     {
-      git diff --name-only HEAD -- '*.sh'
+      if ((${#diff_range[@]})); then
+        git diff --name-only "${diff_range[@]}" -- '*.sh'
+      else
+        git diff --name-only HEAD -- '*.sh'
+      fi
       if [[ -n "$allowed_json" ]]; then
         python3 -c '
 import json
@@ -811,7 +828,7 @@ main() {
   parse_args "$@"
   cd "$repo_root"
 
-  local branch pr_json pr_number pr_state pr_head_sha local_head allowed_json allowed_clear loop threads classified
+  local branch pr_json pr_number pr_state pr_head_sha pr_base_ref local_head allowed_json allowed_clear loop threads classified
   branch=$(current_branch)
 
   cat <<EOF
@@ -851,6 +868,7 @@ EOF
 
   pr_number=$(printf '%s' "$pr_json" | json_get number 2>/dev/null || true)
   pr_state=$(printf '%s' "$pr_json" | json_get state 2>/dev/null || true)
+  pr_base_ref=$(printf '%s' "$pr_json" | json_get baseRefName 2>/dev/null || true)
   if [[ -z "$pr_number" || "$pr_state" != "OPEN" ]]; then
     stop "STOPPED_PR_METADATA_UNAVAILABLE" "current branch PR metadata is incomplete or PR is not open"
   fi
@@ -893,7 +911,7 @@ EOF
     fi
 
     if (( in_scope == 0 )); then
-      if ! validate_lightweight "$allowed_json"; then
+      if ! validate_lightweight "$allowed_json" "$pr_base_ref"; then
         stop "STOPPED_VALIDATION_FAILED" "lightweight validation failed"
       fi
       validation_passed=true
@@ -972,7 +990,7 @@ EOF
       printf 'forbidden_file_changes:\n%s\n' "$forbidden_changes"
       stop "STOPPED_FORBIDDEN_FILE_CHANGE" "local edits escaped the PR changed-file scope"
     fi
-    if ! validate_lightweight "$allowed_json"; then
+    if ! validate_lightweight "$allowed_json" "$pr_base_ref"; then
       stop "STOPPED_VALIDATION_FAILED" "lightweight validation failed after edits"
     fi
     validation_passed=true
